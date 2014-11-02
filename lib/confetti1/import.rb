@@ -25,8 +25,13 @@ module Confetti1
           Dir.chdir @cc_veiw_path
           @git_repo = Git.open @repo_name
         end
-        @path_to_repo = File.join @cc_veiw_path, @repo_name
+        @path_to_repo = git_repo.dir.path
         @any_changes = false 
+        if File.exist?(File.join(@path_to_repo, ".gitignore")) 
+          @ignored = File.read(File.join(@path_to_repo, ".gitignore")).split("\n")
+        else
+          @ignored = []
+        end 
       end
 
       def add_all
@@ -43,7 +48,10 @@ module Confetti1
           path_to_file = File.join @cc_veiw_path, view_file
           path_to_repo_file = File.join @path_to_repo, view_file
 
+          #TODO: Not DRY way. 
+          # Git gem has :status method, but it works in another way then it described in docs 
           if File.exist? path_to_repo_file
+            next if @ignored.include? view_file
             next unless File.exist? path_to_file
             next if FileUtils.compare_file(path_to_file, path_to_repo_file)
             add_file.call(view_file, true)
@@ -51,6 +59,7 @@ module Confetti1
 
           next unless File.exist? path_to_repo_file
           add_file.call(view_file, false)
+          #--- end
         end
       end
 
