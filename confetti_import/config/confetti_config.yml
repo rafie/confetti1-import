@@ -1,0 +1,15 @@
+# General application configuration
+#----------------------------------------
+# Configure GIT
+git:
+  remote:
+    uri:
+    user:
+    password:
+
+#Clear Case configraration
+clear_case:
+  user:
+  password:
+
+
