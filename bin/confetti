@@ -1,23 +1,4 @@
 #!/usr/bin/env ruby
-
 require 'confetti1/import'
 command = ARGV.shift
-case command
-when "help"
-when "new"
-  Confetti1::Import::CLI.init(ARGV[0], ARGV[1])
-when "init"
-
-when "generate"
-end
-
-#--> Trash
-# begin
-#   ci = Confetti1::Import::GitHandler.new(ARGV[0], ARGV[1])
-#   ci.init!
-#   ci.add_all
-#   ci.commit_and_push!
-#   ci.cleanup!
-# rescue Exception => e
-#   raise e
-# end
+Confetti1::Import::CLI.new.send(command)

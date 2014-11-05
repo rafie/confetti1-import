@@ -1,6 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'confetti1/import'
-require 'irb'
-require 'irb/completion'
-IRB.start
