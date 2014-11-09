@@ -1,8 +1,8 @@
+require "confetti1/import/base"
 require "confetti1/import/version"
 require "confetti1/import/cli"
 require "confetti1/import/clear_case"
 require 'fileutils'
-require "git"
 require 'yaml'
 
 module Confetti1

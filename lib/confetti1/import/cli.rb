@@ -2,11 +2,9 @@ module Confetti1
   module Import
     class CLI 
       def init(*args)
-        path = args.first[0]
-        custome_name = args.first[1]
         app_name="confetti_import"
-        working_app_name = custome_name || app_name
-        app_pwd = path || Dir.pwd
+        working_app_name = app_name
+        app_pwd = Dir.pwd
         if File.exist? File.join(app_pwd, app_name, "config", "confetti_config.yml")
           Logger.log "Confetti exists. Exiting."
           return

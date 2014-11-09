@@ -1,0 +1,9 @@
+element * CHECKEDOUT
+
+
+element /vob1/...                      vob1_8.3_26_040314.7582                  -nocheckout
+                                                                                  
+element /vob2/...                      vob2_8.2.0.13.1                          -nocheckout
+
+
+element /vob3/...                      vob3_8.3.0.11.3                          -nocheckout
