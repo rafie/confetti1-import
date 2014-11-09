@@ -25,6 +25,10 @@ module Confetti1
 
       alias_method :c, :console
 
+      def confspec
+        puts ClearCase.new.configspec
+      end
+
       def method_missing(meth, *args, &block)
         puts "Command not found: #{meth}"
       end

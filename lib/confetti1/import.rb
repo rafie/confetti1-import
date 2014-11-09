@@ -20,6 +20,14 @@ module Confetti1
       VERSION
     end
 
+    def self.one#(vob)
+      clear_case = ClearCase.new
+      #mkview =
+      configspec#.select{|cs|cs[]}
+    end
+
+    def self.all
+    end
 
     module Logger
       def self.log(message)

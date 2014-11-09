@@ -3,15 +3,15 @@ module Confetti1
     class Base
 
       def confetti_config
-        load_git_yaml("confetti_config.yml")
+        load_yaml("confetti_config.yml")
       end
 
       def ignore
-        load_git_yaml("ignore.yml")
+        load_yaml("ignore.yml")
       end
 
       def vobs
-        load_git_yaml("vobs.yml")
+        load_yaml("vobs.yml")
       end
 
       def store_vobs(vobs_list)
@@ -27,8 +27,10 @@ module Confetti1
 
     private
 
-      def load_git_yaml(conf)
-       YAML.load_file(File.join("confetti_import", "config", conf))
+      def load_yaml(conf)
+        conf_path = File.join("config", conf)
+        #raise "Not in application" unless File.exist? conf_path
+        YAML.load_file(File.join("config", conf))
      end
 
     end

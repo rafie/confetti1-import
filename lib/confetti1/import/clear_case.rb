@@ -1,11 +1,11 @@
 module Confetti1
-  module Importv
+  module Import
     class ClearCase < Base
 
       def initialize
         #FIXME I am ugly hardcoded, fix me, please
-        @view_name = confetti_config[:clear_case][:view][:name]
-        @view_location = confetti_config[:clear_case][:view][:location]
+        @view_name = confetti_config["clear_case"]["view"]["name"]
+        @view_location = confetti_config["clear_case"]["view"]["location"]
         @view_path = File.join @view_location, @view_name  
       end
 
@@ -27,11 +27,6 @@ module Confetti1
       end
 
     private
-
-      def vobs_list
-        cs = parse_configspec
-
-      end
 
       def parse_configspec(path="#{Confetti1::Import.root}/test/test_store/mock_configspec")
         conf_spec = File.read(path)
