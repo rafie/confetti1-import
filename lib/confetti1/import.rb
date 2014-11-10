@@ -2,9 +2,10 @@ require "confetti1/import/base"
 require "confetti1/import/version"
 require "confetti1/import/cli"
 require "confetti1/import/clear_case"
-require "confetti1/import/git"
+require "confetti1/import/confetti_git"
 require 'fileutils'
 require 'yaml'
+require 'git'
 
 module Confetti1
   module Import
@@ -23,7 +24,6 @@ module Confetti1
 
     def self.one(vob)
       clear_case = ClearCase.new
-      #mkview = smth
       selected_vob = clear_case.configspec.select{|cs|cs[:vob] == vob.first}.first
       config = Base.new.confetti_config
       
@@ -32,7 +32,9 @@ module Confetti1
       vob_path = File.join(view_location, view_name, selected_vob[:vob])
 
       git_location = File.join(Dir.pwd, "vobs", selected_vob[:vob], ".git")
-      Git.new.init(git_location, vob_path)
+      
+      puts ConfettiGit.new.init(git_location, vob_path)
+
     end
 
     def self.all
