@@ -29,6 +29,10 @@ module Confetti1
         puts ClearCase.new.configspec
       end
 
+      def vob(*args)
+        Confetti1::Import.one(args.first)
+      end
+
       def method_missing(meth, *args, &block)
         puts "Command not found: #{meth}"
       end

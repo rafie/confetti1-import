@@ -10,7 +10,10 @@ module Confetti1
       end
 
       def configspec
-        out = command("ct", "catcs")
+        #out = command("ct", "catcs")
+        # Some stub
+        view_conf = confetti_config["clear_case"]["view"]
+        out = File.read(File.join(view_conf["location"], view_conf["name"], "configspec"))
         parse_configspec out
       end
 
@@ -28,8 +31,7 @@ module Confetti1
 
     private
 
-      def parse_configspec(path="#{Confetti1::Import.root}/test/test_store/mock_configspec")
-        conf_spec = File.read(path)
+      def parse_configspec(conf_spec)
         clean = conf_spec.split("\n").map{|cs| cs.gsub(/\s+/, " ")}.reject{|cs|cs.size < 2}
         preparsed = clean.map{|cs| cs.split("\s")}
         preparsed.shift
