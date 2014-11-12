@@ -1,7 +1,12 @@
 # General application configuration
 #----------------------------------------
 # Configure GIT
+
 git:
+  local: 
+    path: 'workspace/'
+    user:
+    password:
   remote:
     uri:
     user:
@@ -9,7 +14,15 @@ git:
 
 #Clear Case configraration
 clear_case:
+  view_name:
+  view_location:
   user:
   password:
+  
+# Files to be ignored in import
+ignore:
+  - lost+found/
+  - *.exe
+
 
 

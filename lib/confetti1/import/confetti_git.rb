@@ -2,13 +2,15 @@ module Confetti1
   module Import
     class ConfettiGit < Base
 
-      def initialize
-        #@ignored = ignored["ignore"]
-      end
-
-      def init(git_path, vob_path)
+      # Initialize .git folder with working tree inside CC VOB
+      # vob_path: path to sources inside VOB
+      # git_path: path to .git folder storage
+      def initialize(vob_path, git_path)
+        @ignored = ignored["ignore"]
         @git_path = git_path
-        @git_dot_folder = File.join(git_path, ".git") 
+        @vob_path = vob_path
+        @git_dot_folder = git_path 
+
         unless Dir.exist? File.join(@git_path, ".git")
           FileUtils.makedirs @git_path
           command("git", "--git-dir=#{@git_path}", "--work-tree=#{vob_path}", "init")
@@ -16,14 +18,16 @@ module Confetti1
         @git_dot_folder
       end
 
-      def exclude
-        File.open(File.join(@git_dot_folder, 'info', 'exclude'), 'w') do |f|
-          f.puts @ignored.join("\n")
-        end
+      def ignore
+        exclude
       end
 
-      def add(all=false, files=[])
-        command "git", "add", "#{all ? '.' : files.join(' ')}"
+      def add_all
+        exclude
+        
+        git_operation = labda{|op|command "git", op, "#{all ? '.' : files.join(' ')}"}
+        files_to_add
+        
       end
 
       def commit!(all=true, message="Confetti commit")
@@ -31,18 +35,43 @@ module Confetti1
       end
 
       def status
-        status_mode = lambda do |status, mode|
-          status.select{|o| o =~ /#{mode}\s+/}.map{|o| o.gsub(/#{mode}\s+/, '').gsub(/\s/, '')}
+
+        select_liles = Proc.new do |git_files, mask| 
+          git_files.select{|o| o =~ mask}.map{|o| o.gsub(mask, '')}
         end
+
+        to_be_commited = lambda{|git_files, mode| select_liles.call(git_files, /#{mode}\s\s/)}
+        to_be_added = lambda{|git_files, mode| select_liles.call(git_files, /\s#{mode}\s/)}
+        untracked = lambda{|git_files, mode| select_liles.call(git_files, /\?\?\s/)}
+        
         out = command "git", "status", "--porcelain"
         {
-          untracked:  status_mode.call(out, /\?\?/),
-          modified:   status_mode.call(out, 'M'),
-          deleted:    status_mode.call(out, 'D'),
-          renamed:    status_mode.call(out, 'R'),
-          copied:     status_mode.call(out, 'C')
+          staged: {
+            modified:   to_be_commited.call(out, 'M'),
+            deleted:    to_be_commited.call(out, 'D'),
+            renamed:    to_be_commited.call(out, 'R'),
+            copied:     to_be_commited.call(out, 'C')
+          },
+          not_staged:{
+            modified:   to_be_added.call(out, 'M'),
+            deleted:    to_be_added.call(out, 'D'),
+            renamed:    to_be_added.call(out, 'R'),
+            copied:     to_be_added.call(out, 'C')
+          },
+          new_files: {untracked: untracked}
         }
       end  
+
+    protected
+
+      def exclude
+        puts "Path to GIT: #{@git_dot_folder}"
+        puts "excluding filed:"
+        puts @ignored.join("\n")
+        File.open(File.join(@git_dot_folder, 'info', 'exclude'), 'w') do |f|
+          f.write @ignored.join("\n")
+        end
+      end
 
     end
   end

@@ -1,4 +1,6 @@
 #!/usr/bin/env ruby
+$:.unshift(File.join(File.dirname(__FILE__), "lib")
+puts File.dirname(__FILE__)
 require 'confetti1/import'
 command = ARGV.shift
 Confetti1::Import::CLI.new.send(command, ARGV)

@@ -1,3 +1,4 @@
+#require 'minitest/test'
 require 'minitest/autorun'
 require 'confetti1/import'
 require 'fileutils'
