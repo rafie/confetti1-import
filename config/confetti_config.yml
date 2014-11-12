@@ -2,27 +2,23 @@
 #----------------------------------------
 # Configure GIT
 
-git:
-  local: 
-    path: 'workspace/'
-    user:
-    password:
-  remote:
-    uri:
-    user:
-    password:
+git: 
+  path: 'workspace/vobs'
+  uri:
+  user:
+  password:
 
 #Clear Case configraration
 clear_case:
-  view_name:
-  view_location:
+  view_name: 'vtrofymyuk1'
+  view_location: 'test/mocks'
   user:
   password:
   
 # Files to be ignored in import
 ignore:
-  - lost+found/
-  - *.exe
+  - 'lost+found/'
+  - 'Release/'
 
 
 
