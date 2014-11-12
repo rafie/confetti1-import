@@ -1,4 +1,0 @@
-# Files to be ignored in import
-ignore:
-  - lost+found/
-  - *.exe
