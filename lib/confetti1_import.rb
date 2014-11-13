@@ -31,7 +31,7 @@ module Confetti1Import
     confetti_git = Git.new
     confetti_git.init! vob
     confetti_git.exclude!
-    confetti_git.commit! true
+    confetti_git.commit_a!
   end
 
 end                                                
