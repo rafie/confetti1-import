@@ -3,16 +3,18 @@ module Confetti1Import
 
     def initialize
       #FIXME I am ugly hardcoded, fix me, please
-      @view_name = confetti_config["clear_case"]["view"]["name"]
-      @view_location = confetti_config["clear_case"]["view"]["location"]
+      @view_name =  AppConfig.clear_case[:view_name]
+      @view_location =  Confetti1Import::AppConfig.clear_case[:view_location]
       @view_path = File.join @view_location, @view_name  
+
+      #FIXME: Should be deteled on real configspec
+      @tmp_configspec = File.read(File.join(@view_location, @view_name, "configspec"))
     end
 
     def configspec
       #out = command("ct", "catcs")
-      # Some stub
-      view_conf = confetti_config["clear_case"]["view"]
-      out = File.read(File.join(view_conf["location"], view_conf["name"], "configspec"))
+      #FIXME: Some stub
+      out = @tmp_configspec 
       parse_configspec out
     end
 
@@ -21,11 +23,11 @@ module Confetti1Import
     end
 
     def mkview
-      out = command("mkview", "-raw", "-name", @view_name)
+      #out = command("mkview", "-raw", "-name", @view_name)
     end
 
     def mount
-      out = command("set", "v=#{@view_path}")
+      #out = command("set", "v=#{@view_path}")
     end
 
   private

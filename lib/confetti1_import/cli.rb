@@ -1,15 +1,5 @@
 module Confetti1Import
-  class CLI 
-    def init(*args)
-      app_name="confetti_import"
-      working_app_name = app_name
-      app_pwd = Dir.pwd
-      if File.exist? File.join(app_pwd, app_name, "config", "confetti_config.yml")
-        Logger.log "Confetti exists. Exiting."
-        return
-      end
-      FileUtils.cp_r(File.join(Confetti1::Import.root, app_name), app_pwd)
-    end 
+  class CLI  
 
     def console(*args)
       require 'confetti1_import'
@@ -24,12 +14,12 @@ module Confetti1Import
 
     alias_method :c, :console
 
-    def confspec
+    def confspec(*args)
       puts ClearCase.new.configspec
     end
 
-    def vob_to_git(*args)
-      Confetti1::Import.add_vob(args.first)
+    def init_for(*args)
+      Confetti1Import.init_for(args.first)
     end
 
     def method_missing(meth, *args, &block)

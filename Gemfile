@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem "bundler", "~> 1.6.2"
+gem "bundler", "~> 1.7.4"
 gem "rake", "~> 10.0"
 gem "minitest", "~> 5.4.2"
 gem "pry", "~> 0.10.1"

@@ -16,7 +16,7 @@ clear_case:
   password:
   
 # Files to be ignored in import
-ignore:
+ignore_list:
   - 'lost+found/'
   - 'Release/'
 
