@@ -27,11 +27,24 @@ module Confetti1Import
     puts "--------------------------------------------------------------------------------------------"
   end
 
-  def init_for(vob)
-    confetti_git = Git.new
-    confetti_git.init! vob
-    confetti_git.exclude!
-    confetti_git.commit_a!
+  def init(for_what={})
+    clear_case = ClearCase.new
+    git = Git.new
+    current_configspec = clear_case.configspec
+    if for_what.empty?
+      puts "Imorting #{current_configspec.size} VOBs..."
+      clear_case.configspec.each_with_index do |cs|
+        git.init! cs[:vob]
+        git.exclude!
+        git.commit_a!
+      end
+    else
+      selected_vob = current_configspec.select{|cs| cs[:vob] == for_what}
+      puts "Oops, seems to be we've lost this VOB."; return if selected_vob.empty?
+      git.init! for_what
+      git.exclude!
+      git.commit_a!
+    end
   end
 
 end                                                

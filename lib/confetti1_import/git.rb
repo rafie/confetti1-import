@@ -34,15 +34,17 @@ module Confetti1Import
     end
 
     def commit_a!(message="Confetti commit")
-      # self.status[:new_files].each do |file|
-      #   self.add_file(file)
-      # end
       current_dir = Dir.pwd 
       Dir.chdir File.join @git_folder, @vob 
       command "git", "add ."
       command "git", "commit", "-a ", "-m\"#{message}\""
       Dir.chdir current_dir
     end
+
+    def apply_tag!(tag)
+      command "git", "tag", tag
+    end
+
 
     def status
       current_dir = Dir.pwd 

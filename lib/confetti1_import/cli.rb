@@ -18,8 +18,8 @@ module Confetti1Import
       puts ClearCase.new.configspec
     end
 
-    def init_for(*args)
-      Confetti1Import.init_for(args.first)
+    def init(*args)
+      Confetti1Import.init(args.first)
     end
 
     def method_missing(meth, *args, &block)
