@@ -36,14 +36,16 @@ module Confetti1Import
       clear_case.configspec.each_with_index do |cs|
         git.init! cs[:vob]
         git.exclude!
-        git.commit_a!
+        git.commit_a! "Commit for #{cs[:version]}"
+        git.apply_tag! cs[:version]
       end
     else
       selected_vob = current_configspec.select{|cs| cs[:vob] == for_what}
       puts "Oops, seems to be we've lost this VOB."; return if selected_vob.empty?
-      git.init! for_what
+      git.init! selected_vob
       git.exclude!
-      git.commit_a!
+      git.commit_a! "Commit for #{selected_vob[:version]}"
+      git.apply_tag! selected_vob[:version]
     end
   end
 

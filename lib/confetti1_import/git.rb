@@ -34,15 +34,14 @@ module Confetti1Import
     end
 
     def commit_a!(message="Confetti commit")
-      current_dir = Dir.pwd 
-      Dir.chdir File.join @git_folder, @vob 
-      command "git", "add ."
-      command "git", "commit", "-a ", "-m\"#{message}\""
-      Dir.chdir current_dir
+      in_repo do
+        command "git", "add ."
+        command "git", "commit", "-a ", "-m\"#{message}\""
+      end
     end
 
     def apply_tag!(tag)
-      command "git", "tag", tag
+      in_repo{command "git", "tag", tag}
     end
 
 
@@ -77,6 +76,14 @@ module Confetti1Import
     end  
 
   private
+
+    def in_repo(&block)
+      raise "No block given" unless block_given?
+      current_dir = Dir.pwd 
+      Dir.chdir File.join @git_folder, @vob 
+      yield
+      Dir.chdir current_dir
+    end
 
     def file_to_add(file_name)
       File.join Dir.pwd, @vob_working_tree, file_name
