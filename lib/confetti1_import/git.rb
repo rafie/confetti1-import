@@ -18,7 +18,7 @@ module Confetti1Import
       else
         puts "GIT repository #{@git_folder} already initialized in #{@git_vob_dot_folder}"
       end
-      @git_folder
+      @git_vob_dot_folder
     end
 
     def exclude!
@@ -26,11 +26,6 @@ module Confetti1Import
       File.open(File.join(@git_vob_dot_folder, 'info', 'exclude'), 'w') do |f|
         f << @ignored.join("\n")
       end
-    end
-
-    def add_file(file)
-      puts "Added file #{file_to_add(file)}"
-      command "git", "add", file_to_add(file)
     end
 
     def commit_a!(message="Confetti commit")
