@@ -22,9 +22,6 @@ module Confetti1Import
         end
       end
     end
-    puts "Settings -----------------------------------------------------------------------------------"
-    puts @settings.to_yaml
-    puts "--------------------------------------------------------------------------------------------"
   end
 
   def init(for_what={})
@@ -48,5 +45,10 @@ module Confetti1Import
       git.apply_tag! selected_vob[:version]
     end
   end
+
+  def self_test(git_vob)
+
+  end
+
 
 end                                                

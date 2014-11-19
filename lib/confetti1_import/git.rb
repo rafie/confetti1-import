@@ -46,34 +46,36 @@ module Confetti1Import
 
 
     def status
-      current_dir = Dir.pwd 
-      Dir.chdir File.join @git_folder, @vob 
-      select_files = Proc.new do |files, mask| 
-        files.select{|o| o =~ mask}.map{|o| o.gsub(mask, '')}
-      end
+      in_repo do
+        select_files = Proc.new do |files, mask| 
+          files.select{|o| o =~ mask}.map{|o| o.gsub(mask, '')}
+        end
 
-      to_be_commited = lambda{|git_files, mode| select_files.call(git_files, /#{mode}\s\s/)}
-      to_be_added = lambda{|git_files, mode| select_files.call(git_files, /\s#{mode}\s/)}
-      untracked = lambda{|git_files| select_files.call(git_files, /\?\?\s/)}
-      
-      out = command "git", "status", "--porcelain"
-      Dir.chdir current_dir
-      {
-        staged: {
-          modified:   to_be_commited.call(out, 'M'),
-          deleted:    to_be_commited.call(out, 'D'),
-          renamed:    to_be_commited.call(out, 'R'),
-          copied:     to_be_commited.call(out, 'C')
-        },
-        unstaged:{
-          modified:   to_be_added.call(out, 'M'),
-          deleted:    to_be_added.call(out, 'D'),
-          renamed:    to_be_added.call(out, 'R'),
-          copied:     to_be_added.call(out, 'C')
-        },
-        new_files: untracked.call(out)
-      }
+        to_be_commited = lambda{|git_files, mode| select_files.call(git_files, /#{mode}\s\s/)}
+        to_be_added = lambda{|git_files, mode| select_files.call(git_files, /\s#{mode}\s/)}
+        untracked = lambda{|git_files| select_files.call(git_files, /\?\?\s/)}
+        
+        out = command "git", "status", "--porcelain"
+        return {
+          staged: {
+            modified:   to_be_commited.call(out, 'M'),
+            deleted:    to_be_commited.call(out, 'D'),
+            renamed:    to_be_commited.call(out, 'R'),
+            copied:     to_be_commited.call(out, 'C')
+          },
+          unstaged:{
+            modified:   to_be_added.call(out, 'M'),
+            deleted:    to_be_added.call(out, 'D'),
+            renamed:    to_be_added.call(out, 'R'),
+            copied:     to_be_added.call(out, 'C')
+          },
+          new_files: untracked.call(out)
+        }
+      end
     end  
+
+    def clone
+    end
 
   private
 

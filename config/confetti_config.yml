@@ -3,7 +3,7 @@
 # Configure GIT
 
 git: 
-  path: '../vobs'
+  path: 'workspace/vobs'
   uri:
   user:
   password:
@@ -19,6 +19,25 @@ clear_case:
 ignore_list:
   - 'lost+found/'
   - 'Release/'
+
+test:
+  git: 
+    path: 'test/test_store/vobs'
+    uri:
+    user:
+    password:
+
+  #Clear Case configraration
+  clear_case:
+    view_name: 'vtrofymyuk1'
+    view_location: 'test/mocks'
+    user:
+    password:
+    
+  # Files to be ignored in import
+  ignore_list:
+    - 'lost+found/'
+    - 'Release/'
 
 
 
