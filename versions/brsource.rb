@@ -1,12 +1,18 @@
-def mcu_label_from_cspec(cspec)
+def mcu_label_from_cspec(cspec, context)
 	cspec = cspec.lines
 	mcu = cspec.grep(/[\\\/]mcu[\\\/]/i)
 	if mcu.empty?
-		puts "label *unknown* on branch #{src_br}"
-		puts "check configspec:"
-		puts
-		puts cspec
-		return nil
+		# element * label
+		mcu = cspec.grep(/\*/)
+		if mcu.empty?
+			puts "label *unknown* in #{context}"
+			puts "check configspec:"
+			puts
+			puts cspec
+			return nil
+		end
+		# mcu[0] is probably element * CHECKEDOUT
+		return mcu[1].split(/\s+/)[2]
 	end
 	
 	# element /mcu/... label
@@ -26,7 +32,7 @@ vroot = `cleartool pwv -root`.strip!
 root_ver = "configspec.txt@@\\main\\0"
 
 dest_lb = ARGV.shift
-dest_lb = mcu_label_from_cspec(`cleartool catcs`) if !dest_lb
+dest_lb = mcu_label_from_cspec(`cleartool catcs`, "current configspec") if !dest_lb
 exit if !dest_lb
 
 Dir.chdir "#{vroot}/mcu"
@@ -60,7 +66,8 @@ while true do
 	src_ver = pred
 	src_ver =~ /\\([^\\]+)\\(\d+)$/
 	src_br = $1
-	src_lb = mcu_label_from_cspec(File.read(src_ver))
+	src_lb = mcu_label_from_cspec(File.read(src_ver), "version #{src_ver}")
+	exit if !src_lb
 
 	puts "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
 
