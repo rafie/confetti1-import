@@ -45,8 +45,8 @@ while true do
 		exit
 	end
 
+	merge_flag = false
 	pred = desc_param(`cleartool describe -l #{dest_head_ver}`, /predecessor version: (.*)/)
-	
 	pred = "configspec.txt@@" + pred if pred != nil
 	if !pred || pred == root_ver
 		dest_head_ver = dest_ver_base + "\\1"
@@ -55,13 +55,14 @@ while true do
 			puts "reached root."
 			exit
 		end
+		merge_flag = true
 	end
 	src_ver = pred
 	src_ver =~ /\\([^\\]+)\\(\d+)$/
 	src_br = $1
 	src_lb = mcu_label_from_cspec(File.read(src_ver))
 
-	puts "to label #{src_lb} on branch #{src_br}"
+	puts "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
 
 	dest_ver = src_ver
 	dest_lb = src_lb
