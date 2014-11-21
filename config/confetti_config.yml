@@ -36,8 +36,8 @@ test:
     
   # Files to be ignored in import
   ignore_list:
-    - 'lost+found/'
-    - 'Release/'
+    - 'lost+found/**/*'
+    - 'Release/**/*'
 
 
 

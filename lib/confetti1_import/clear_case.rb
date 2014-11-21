@@ -4,7 +4,7 @@ module Confetti1Import
     def initialize
       #FIXME I am ugly hardcoded, fix me, please
       @view_name =  AppConfig.clear_case[:view_name]
-      @view_location =  Confetti1Import::AppConfig.clear_case[:view_location]
+      @view_location =  AppConfig.clear_case[:view_location]
       @view_path = File.join @view_location, @view_name  
 
       #FIXME: Should be deteled on real configspec
@@ -18,8 +18,8 @@ module Confetti1Import
       parse_configspec out
     end
 
-    def configspec=(args)
-      #ct edcs
+    def configspec=(cs_file)
+      command "ct", "edcs", cs_file
     end
 
     def mkview

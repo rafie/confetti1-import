@@ -1,13 +1,19 @@
+#require 'rubygems'
 require "confetti1_import/base"
 require "confetti1_import/cli"
 require "confetti1_import/clear_case"
 require "confetti1_import/git"
+require "confetti1_import/self_test"
 require 'fileutils'
 require 'yaml'
 
 module Confetti1Import
   extend self
 
+  CONFETTI_HOME = File.expand_path(File.join("..", ".."), __FILE__)
+  CONFETTI_WORKSPACE = File.join CONFETTI_HOME,"workspace" 
+
+  
   module AppConfig
     extend self
     attr_reader :settings
@@ -46,9 +52,8 @@ module Confetti1Import
     end
   end
 
-  def self_test(git_vob)
-
+  def read_versions(path_to_versions)
+    puts Dir.glob("#{path_to_versions}/*")
   end
-
 
 end                                                

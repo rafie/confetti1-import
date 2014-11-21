@@ -26,5 +26,15 @@ module Confetti1Import
       puts "Command not found: #{meth}"
     end
 
+
+    def test(*argv)
+      args = argv.flatten
+      unless args.empty?
+        Confetti1Import::SelfTest.init_correctness(argv.first)
+      else
+        puts "Please, specify VOB to test"
+      end
+    end
+
   end
 end

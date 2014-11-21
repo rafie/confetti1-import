@@ -69,7 +69,9 @@ module Confetti1Import
       end
     end  
 
-    def clone
+    def self.clone(source, dest)
+      `git clone #{source} #{dest}`
+      dest
     end
 
   private
