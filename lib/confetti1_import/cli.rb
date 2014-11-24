@@ -1,6 +1,6 @@
 module Confetti1Import
-  class CLI  
-
+  class CLI < Base
+    
     def console(*args)
       require 'confetti1_import'
       begin
@@ -30,7 +30,7 @@ module Confetti1Import
     def test(*argv)
       args = argv.flatten
       unless args.empty?
-        Confetti1Import::SelfTest.init_correctness(argv.first)
+        Confetti1Import::Base.new.init_correctness(argv.first)
       else
         puts "Please, specify VOB to test"
       end

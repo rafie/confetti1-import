@@ -1,6 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    awesome_print (1.2.0)
     byebug (3.5.1)
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
@@ -8,7 +9,6 @@ GEM
     coderay (1.1.0)
     columnize (0.8.9)
     debugger-linecache (1.2.0)
-    diff_dirs (0.1.2)
     method_source (0.8.2)
     minitest (5.4.3)
     pry (0.10.1)
@@ -22,9 +22,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  awesome_print (~> 1.2.0)
   bundler (~> 1.7.4)
   byebug (~> 3.5.1)
-  diff_dirs
   minitest (~> 5.4.2)
   pry (~> 0.10.1)
   rake (~> 10.0)

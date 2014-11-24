@@ -3,9 +3,9 @@ require "confetti1_import/base"
 require "confetti1_import/cli"
 require "confetti1_import/clear_case"
 require "confetti1_import/git"
-require "confetti1_import/self_test"
 require 'fileutils'
 require 'yaml'
+require 'awesome_print'
 
 module Confetti1Import
   extend self

@@ -16,6 +16,9 @@ clear_case:
   password:
   
 # Files to be ignored in import
+# IMPORTANT: 
+# 1) Use UNIX style path separators ('/')
+# 2) Use masks on the end of the path only ('/foleder/*.ext)
 ignore_list:
   - 'lost+found/'
   - 'Release/'
@@ -38,6 +41,7 @@ test:
   ignore_list:
     - 'lost+found/**/*'
     - 'Release/**/*'
+    - '.DS_Store'
 
 
 
