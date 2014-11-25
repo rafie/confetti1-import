@@ -6,6 +6,7 @@ require "confetti1_import/git"
 require 'fileutils'
 require 'yaml'
 require 'awesome_print'
+require 'colorize'
 
 module Confetti1Import
   extend self

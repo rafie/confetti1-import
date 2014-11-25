@@ -12,8 +12,8 @@ git:
 clear_case:
   view_name: 'vtrofymyuk1'
   view_location: 'test/mocks'
-  versions_input_folder: 'versions'
-  versions_outut_folder: 'workspace/versions'
+  versions_input_folder: 'workspace/versions'
+  versions_outut_folder: 'workspace/versions_out'
   user:
   password:
   
