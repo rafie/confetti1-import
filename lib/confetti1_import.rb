@@ -53,7 +53,7 @@ module Confetti1Import
   end
 
   def read_versions(path_to_versions)
-    puts Dir.glob("#{path_to_versions}/*")
+
   end
 
 end                                                

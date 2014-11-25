@@ -31,7 +31,9 @@ module Confetti1Import
     end
 
     def self.find_versions
-      
+      version_inpt = AppConfig.clear_case[:versions_input_folder]
+      version_out = AppConfig.clear_case[:versions_outut_folder]
+      puts Dir.glob("#{version_inpt}/**/*")
     end
 
   private

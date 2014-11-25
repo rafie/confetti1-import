@@ -12,7 +12,7 @@ git:
 clear_case:
   view_name: 'vtrofymyuk1'
   view_location: 'test/mocks'
-  versions_input_folder: 'test/mocks/versions_location/Versions'
+  versions_input_folder: 'versions'
   versions_outut_folder: 'workspace/versions'
   user:
   password:
