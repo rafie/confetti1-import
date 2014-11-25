@@ -30,6 +30,10 @@ module Confetti1Import
       #out = command("set", "v=#{@view_path}")
     end
 
+    def self.find_versions
+      
+    end
+
   private
 
     def parse_configspec(conf_spec)

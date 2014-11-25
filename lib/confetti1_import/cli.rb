@@ -36,5 +36,9 @@ module Confetti1Import
       end
     end
 
+    def find_versions(*argv)
+      ClearCase.find_versions
+    end
+
   end
 end
