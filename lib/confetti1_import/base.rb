@@ -11,7 +11,14 @@ module Confetti1Import
       
       result_glob = Dir.glob("#{cloned}/**/*").map{|rg| rg.gsub("#{test_pwd}/", "")}
       source_glob = Dir.glob("#{vob_pwd}/**/*").map{|sg| sg.gsub("#{vob_pwd}/", "")}.reject do |path|
-        next unless @ignored.select{|i| path =~ to_rxp(i)}.empty?
+        sign = false
+        @ignored.each do |ign|
+          Pathname.new(path).ascend do |pa|
+            puts "#{pa.to_s} =~ #{ign}"
+            sign = true if pa.to_s =~ Regexp.new(ign)
+          end
+        end
+        sign
       end
 
       puts "----------------------------------------------------------------------"
