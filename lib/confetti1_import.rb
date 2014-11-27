@@ -7,6 +7,7 @@ require 'fileutils'
 require 'yaml'
 require 'awesome_print'
 require 'colorize'
+require 'pathname'
 
 module Confetti1Import
   extend self

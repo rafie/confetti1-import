@@ -12,9 +12,9 @@ module Confetti1Import
     end
 
     def configspec
-      #out = command("ct", "catcs")
+      out = command("ct", "catcs")
       #FIXME: Some stub
-      out = @tmp_configspec 
+      #out = @tmp_configspec 
       parse_configspec out
     end
 
@@ -23,14 +23,14 @@ module Confetti1Import
     end
 
     def mkview
-      #out = command("mkview", "-raw", "-name", @view_name)
+      out = command("mkview", "-raw", "-name", @view_name)
     end
 
     def mount
-      #out = command("set", "v=#{@view_path}")
+      out = command("set", "v=#{@view_path}")
     end
 
-    def self.find_versions
+    def self.find_versions(vob)
       version_inpt = AppConfig.clear_case[:versions_input_folder]
       version_out = AppConfig.clear_case[:versions_outut_folder]
       input_map = []
