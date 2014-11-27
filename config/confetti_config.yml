@@ -12,13 +12,17 @@ git:
 clear_case:
   view_name: 'vtrofymyuk1'
   view_location: 'test/mocks'
-  user:
-  password:
+  versions_input_folders: 
+    - 'workspace/versions'
   
 # Files to be ignored in import
+# IMPORTANT: 
+# 1) Use UNIX style path separators ('/')
+# 2) Use masks on the end of the path only ('/foleder/*.ext)
 ignore_list:
   - 'lost+found/'
   - 'Release/'
+  - '.DS_Store'
 
 test:
   git: 
@@ -35,9 +39,6 @@ test:
     password:
     
   # Files to be ignored in import
-  ignore_list:
-    - 'lost+found/'
-    - 'Release/'
 
 
 

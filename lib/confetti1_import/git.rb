@@ -14,7 +14,7 @@ module Confetti1Import
       unless Dir.exist? @git_vob_dot_folder
         puts "Initializing GIT repository for '#{vob}' in #{@git_vob_dot_folder}"
         FileUtils.makedirs @git_vob_dot_folder
-        command("git", "--git-dir=#{@git_vob_dot_folder}", "--work-tree=#{@vob_working_tree}", "init")
+        git "--git-dir=#{@git_vob_dot_folder}", "--work-tree=#{@vob_working_tree}", "init"
       else
         puts "GIT repository #{@git_folder} already initialized in #{@git_vob_dot_folder}"
       end
@@ -30,15 +30,37 @@ module Confetti1Import
 
     def commit_a!(message="Confetti commit")
       in_repo do
-        command "git", "add ."
-        command "git", "commit", "-a ", "-m\"#{message}\""
+        git "add ."
+        git "commit", "-a ", "-m\"#{message}\""
       end
     end
 
     def apply_tag!(tag)
-      in_repo{command "git", "tag", tag}
+      in_repo{git "tag", tag}
     end
 
+    def branch(*args)
+      puts "Enter some information about GIT branch you want to create"; return if args.empty?
+      puts "Enter mode ('-a', '-d')"; return if args[:mode].is_a?(Symbol) and (![:a, :d].includes?(args[:mode]))
+      git_branch = lambda{|*args| git, "branch", args[:apply_mode], args[:branch_name]}
+      if args[mode: :a]
+        git_branch.call({apply_mode: "-a"})
+      elsif args[mode: :d]
+        git_branch.call({apply_mode: "-d"})
+      elsif !args[:name].empty? and args[:mode].empty?
+        git_branch.call({branch_name: name})
+      else
+        puts "Oops, seems to be we have missed something"
+      end
+    end
+
+    def checkout(thing)
+      git "checkout", thing
+    end
+
+    def master!
+      git "checkout", "master"
+    end
 
     def status
       in_repo do
@@ -50,7 +72,7 @@ module Confetti1Import
         to_be_added = lambda{|git_files, mode| select_files.call(git_files, /\s#{mode}\s/)}
         untracked = lambda{|git_files| select_files.call(git_files, /\?\?\s/)}
         
-        out = command "git", "status", "--porcelain"
+        git "status", "--porcelain"
         return {
           staged: {
             modified:   to_be_commited.call(out, 'M'),
@@ -69,10 +91,16 @@ module Confetti1Import
       end
     end  
 
-    def clone
+    def self.clone(source, dest)
+      git "clone", source, dest
+      dest
     end
 
   private
+
+    def git(*params)
+      commad "git", params.join("\s")
+    end
 
     def in_repo(&block)
       raise "No block given" unless block_given?

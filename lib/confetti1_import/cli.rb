@@ -1,6 +1,6 @@
 module Confetti1Import
-  class CLI  
-
+  class CLI < Base
+    
     def console(*args)
       require 'confetti1_import'
       begin
@@ -24,6 +24,20 @@ module Confetti1Import
 
     def method_missing(meth, *args, &block)
       puts "Command not found: #{meth}"
+    end
+
+
+    def test(*argv)
+      args = argv.flatten
+      unless args.empty?
+        Confetti1Import::Base.new.init_correctness(argv.first)
+      else
+        puts "Please, specify VOB to test"
+      end
+    end
+
+    def find_versions(*argv)
+      ClearCase.find_versions(argv)
     end
 
   end
