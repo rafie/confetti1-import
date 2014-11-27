@@ -32,6 +32,7 @@ module Confetti1Import
     end
   end
 
+  #TODO: Remove this, it is not actual
   def init(for_what={})
     clear_case = ClearCase.new
     git = Git.new
@@ -51,6 +52,27 @@ module Confetti1Import
       git.exclude!
       git.commit_a! "Commit for #{selected_vob[:version]}"
       git.apply_tag! selected_vob[:version]
+    end
+  end
+  #---</TODO>
+
+  def versions_to_git(vob)
+    git = Git.new
+    clear_case = ClearCase.new
+    git.itit! vob
+    working_folder = AppConfig.clear_case[:versions_input_folders]
+    Dir.glob(File.join(working_folder, "**")) do |branch|
+      branch_name = File.read(File.join(branch, 'int_branch.txt'))
+      git.branch ({name: branch_name})
+      git.checkout(branch_name)
+      Dir.glob(File.join(branch, "**")) do |version|
+        clear_case.configspec = File.join(version, "configspec.txt")
+        git.exclude!
+        version_name = version.split(/(\/)|(\\)/).last
+        git.commit_a("#{version_name}")
+        git.tag("v#{version_name}")
+      end
+      puts "$git checkout master".cyan
     end
   end
 

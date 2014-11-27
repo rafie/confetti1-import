@@ -40,5 +40,10 @@ module Confetti1Import
       ClearCase.find_versions(argv)
     end
 
+    def import_git_from(*argv)
+      vob = argv.flatten
+      Confetti1Import.versions_to_git
+    end
+
   end
 end

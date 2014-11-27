@@ -14,7 +14,7 @@ module Confetti1Import
       unless Dir.exist? @git_vob_dot_folder
         puts "Initializing GIT repository for '#{vob}' in #{@git_vob_dot_folder}"
         FileUtils.makedirs @git_vob_dot_folder
-        git "--git-dir=#{@git_vob_dot_folder}", "--work-tree=#{@vob_working_tree}", "init"
+        git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@vob_working_tree}", "init"
       else
         puts "GIT repository #{@git_folder} already initialized in #{@git_vob_dot_folder}"
       end
@@ -31,35 +31,39 @@ module Confetti1Import
     def commit_a!(message="Confetti commit")
       in_repo do
         git "add ."
-        git "commit", "-a ", "-m\"#{message}\""
+        git "commit -a -m\"#{message}\""
       end
     end
 
-    def apply_tag!(tag)
+    def tag(tag)
       in_repo{git "tag", tag}
     end
 
     def branch(*args)
-      puts "Enter some information about GIT branch you want to create"; return if args.empty?
-      puts "Enter mode ('-a', '-d')"; return if args[:mode].is_a?(Symbol) and (![:a, :d].includes?(args[:mode]))
-      git_branch = lambda{|*args| git, "branch", args[:apply_mode], args[:branch_name]}
-      if args[mode: :a]
-        git_branch.call({apply_mode: "-a"})
-      elsif args[mode: :d]
-        git_branch.call({apply_mode: "-d"})
-      elsif !args[:name].empty? and args[:mode].empty?
-        git_branch.call({branch_name: name})
-      else
-        puts "Oops, seems to be we have missed something"
+      in_repo do
+        puts "Enter some information about GIT branch you want to create"; return if args.empty?
+        puts "Enter mode ('-a', '-d')"; return if args[:mode].is_a?(Symbol) and (![:a, :d].includes?(args[:mode]))
+        git_branch = lambda{|*args| git "branch", args[:apply_mode], args[:branch_name]}
+        if args[:mode] == :a
+          git_branch.call({apply_mode: "-a"})
+        elsif args[:mode] == :d
+          git_branch.call({apply_mode: "-d"})
+        elsif !args[:name].empty? and args[:mode].empty?
+          git_branch.call({branch_name: name})
+        else
+          puts "Oops, seems to be we have missed something"
+        end
       end
     end
 
     def checkout(thing)
-      git "checkout", thing
+      in_repo do
+        git "checkout", thing
+      end
     end
 
-    def master!
-      git "checkout", "master"
+    def master
+      git "checkout master"
     end
 
     def status

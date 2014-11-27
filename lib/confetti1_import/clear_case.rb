@@ -19,7 +19,7 @@ module Confetti1Import
     end
 
     def configspec=(cs_file)
-      command "ct", "edcs", cs_file
+      command "ct set", cs_file
     end
 
     def mkview
