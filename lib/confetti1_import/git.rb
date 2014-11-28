@@ -15,6 +15,7 @@ module Confetti1Import
         puts "Initializing GIT repository for '#{vob}' in #{@git_vob_dot_folder}"
         FileUtils.makedirs @git_vob_dot_folder
         git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@vob_working_tree}", "init"
+        in_repo{git 'commit --allow-empty -m"initial commit"'}
       else
         puts "GIT repository #{@git_folder} already initialized in #{@git_vob_dot_folder}"
       end
@@ -39,31 +40,37 @@ module Confetti1Import
       in_repo{git "tag", tag}
     end
 
-    def branch(*args)
-      in_repo do
-        puts "Enter some information about GIT branch you want to create"; return if args.empty?
-        puts "Enter mode ('-a', '-d')"; return if args[:mode].is_a?(Symbol) and (![:a, :d].includes?(args[:mode]))
-        git_branch = lambda{|*args| git "branch", args[:apply_mode], args[:branch_name]}
-        if args[:mode] == :a
-          git_branch.call({apply_mode: "-a"})
-        elsif args[:mode] == :d
-          git_branch.call({apply_mode: "-d"})
-        elsif !args[:name].empty? and args[:mode].empty?
-          git_branch.call({branch_name: name})
-        else
-          puts "Oops, seems to be we have missed something"
-        end
-      end
+    def branch(branch_name)
+      puts "================================> #{branch_name}"
+      in_repo{git "branch", branch_name}
+      # args = args.flatten 
+      # fails "args are empty" if args.nil?
+      # in_repo do
+      #   puts "Enter some information about GIT branch you want to create"; return if args.empty?
+      #   puts "Enter mode ('-a', '-d')"; return if args[:mode].is_a?(Symbol) and (![:a, :d].includes?(args[:mode]))
+      #   git_branch = lambda{|*args| git "branch", args[:apply_mode], args[:branch_name]}
+      #   if args[:mode] == :a
+      #     git_branch.call({apply_mode: "-a"})
+      #   elsif args[:mode] == :d
+      #     git_branch.call({apply_mode: "-d"})
+      #   elsif !args[:name].empty? and args[:mode].empty?
+      #     git_branch.call({branch_name: name})
+      #   else
+      #     puts "Oops, seems to be we have missed something"
+      #   end
+      # end
     end
 
     def checkout(thing)
       in_repo do
-        git "checkout", thing
+        res = git "checkout", thing
       end
     end
 
     def master
-      git "checkout master"
+      in_repo do
+        git "checkout master"
+      end
     end
 
     def status
@@ -110,8 +117,9 @@ module Confetti1Import
       raise "No block given" unless block_given?
       current_dir = Dir.pwd 
       Dir.chdir File.join @git_folder, @vob 
-      yield
+      res = yield
       Dir.chdir current_dir
+      res
     end
 
     def file_to_add(file_name)

@@ -57,22 +57,33 @@ module Confetti1Import
   #---</TODO>
 
   def versions_to_git(vob)
+    puts "Initializing import.."
     git = Git.new
     clear_case = ClearCase.new
-    git.itit! vob
+    git.init! vob
+    puts "GIT repozitory initialized"
     working_folder = AppConfig.clear_case[:versions_input_folders]
+    puts "Starting versions import"
     Dir.glob(File.join(working_folder, "**")) do |branch|
       branch_name = File.read(File.join(branch, 'int_branch.txt')).chop
-      git.branch ({name: branch_name})
-      git.checkout(branch_name)
+      puts "=> git branch '#{branch_name}'"
+      puts git.branch(branch_name)
+      puts "=> git checkout '#{branch_name}'"
+      puts git.checkout(branch_name)
       Dir.glob(File.join(branch, "**")) do |version|
-        clear_case.configspec = File.join(version, "configspec.txt")
-        git.exclude!
         version_name = version.split(/(\/)|(\\)/).last
-        git.commit_a("#{version_name}")
-        git.tag("v#{version_name}")
+        puts "Loading configspec for #{version_name}"
+        clear_case.configspec=File.expand_path(File.join(version, "configspec.txt"))
+        puts "Excluding unneed files files"
+        git.exclude!
+        puts "=> git commit -a -m\"#{version_name}\""
+        puts git.commit_a!("#{version_name}")
+        puts "=> git tag v#{version_name}"
+        puts git.tag("v#{version_name}")
       end
-      puts "$git checkout master".cyan
+
+      puts "=> git checkout master".cyan
+      puts git.master
     end
   end
 

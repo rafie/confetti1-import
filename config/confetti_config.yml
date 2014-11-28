@@ -3,15 +3,15 @@
 # Configure GIT
 
 git: 
-  path: 'workspace/vobs'
+  path: '../Workspace/vobs'
   uri:
   user:
   password:
 
 #Clear Case configraration
 clear_case:
-  view_name: 'vtrofymyuk1'
-  view_location: 'test/mocks'
+  view_name: 'vtrofymyuk_view1'
+  view_location: 'M:'
   versions_input_folders: 
     - 'workspace/versions'
   
