@@ -12,9 +12,9 @@ module Confetti1Import
     end
 
     def configspec
-      out = command("ct", "catcs")
+      #out = command("ct", "catcs")
       #FIXME: Some stub
-      #out = @tmp_configspec 
+      out = @tmp_configspec 
       parse_configspec out
     end
 

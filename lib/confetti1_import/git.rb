@@ -103,7 +103,7 @@ module Confetti1Import
   private
 
     def git(*params)
-      commad "git", params.join("\s")
+      command "git", params.join("\s")
     end
 
     def in_repo(&block)

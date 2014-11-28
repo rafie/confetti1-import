@@ -43,7 +43,7 @@ module Confetti1Import
         git.init! cs[:vob]
         git.exclude!
         git.commit_a! "Commit for #{cs[:version]}"
-        git.apply_tag! cs[:version]
+        git.tag cs[:version]
       end
     else
       selected_vob = current_configspec.select{|cs| cs[:vob] == for_what}
@@ -62,7 +62,7 @@ module Confetti1Import
     git.itit! vob
     working_folder = AppConfig.clear_case[:versions_input_folders]
     Dir.glob(File.join(working_folder, "**")) do |branch|
-      branch_name = File.read(File.join(branch, 'int_branch.txt'))
+      branch_name = File.read(File.join(branch, 'int_branch.txt')).chop
       git.branch ({name: branch_name})
       git.checkout(branch_name)
       Dir.glob(File.join(branch, "**")) do |version|
