@@ -7,13 +7,13 @@ module Confetti1Import
       @view_path = File.join @view_location, @view_name  
 
       #FIXME: Should be deteled on real configspec
-      #@tmp_configspec = File.read(File.join(@view_location, @view_name, "configspec"))
+      @tmp_configspec = File.read(File.join(@view_location, @view_name, "configspec"))
     end
 
     def configspec
-      out = ct "catcs"
+      #out = ct "catcs"
       #FIXME: Some stub
-      #out = @tmp_configspec 
+      out = @tmp_configspec 
       parse_configspec out
     end
 

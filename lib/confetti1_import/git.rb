@@ -102,7 +102,7 @@ module Confetti1Import
       end
     end  
 
-    def self.clone(source, dest)
+    def clone(source, dest)
       git "clone", source, dest
       dest
     end

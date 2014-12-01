@@ -3,7 +3,7 @@
 # Configure GIT
 
 git: 
-  path: '../Workspace/vobs'
+  path: 'workspace/vobs'
   uri:
   user:
   password:
@@ -11,17 +11,16 @@ git:
 #Clear Case configraration
 clear_case:
   view_name: 'vtrofymyuk_view1'
-  view_location: 'M:'
+  view_location: 'test/mocks'
   versions_input_folders: 
     - 'workspace/versions'
   
 # Files to be ignored in import
-# IMPORTANT: 
-# 1) Use UNIX style path separators ('/')
-# 2) Use masks on the end of the path only ('/foleder/*.ext)
 ignore_list:
-  - 'lost+found/'
-  - 'Release/'
+  - 'lost+found'
+  - 'Release'
+  - 'lost+found/**/*'
+  - 'Release/**/*'
   - '.DS_Store'
 
 test:

@@ -30,7 +30,7 @@ module Confetti1Import
     def test(*argv)
       args = argv.flatten
       unless args.empty?
-        Confetti1Import::Base.new.init_correctness(argv.first)
+        Confetti1Import.correct?(argv.first)
       else
         puts "Please, specify VOB to test"
       end
