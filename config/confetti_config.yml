@@ -11,13 +11,14 @@ git:
 #Clear Case configraration
 clear_case:
   view_name: 'vtrofymyuk_view1'
-  view_location: 'test/mocks'
+  view_location: 'm:'
   versions_input_folders: 
     - 'workspace/versions'
   
 # Files to be ignored in import
 ignore_list:
   - 'lost+found'
+  - 'lost+found/**/*'
   - 'Release'
   - 'lost+found/**/*'
   - 'Release/**/*'

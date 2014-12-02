@@ -38,6 +38,8 @@ module Confetti1Import
     clear_case = ClearCase.new
     git = Git.new
     current_configspec = clear_case.configspec
+    puts "------------------------------------------->"
+    puts current_configspec
     if for_what.empty?
       puts "Imorting #{current_configspec.size} VOBs..."
       clear_case.configspec.each_with_index do |cs|

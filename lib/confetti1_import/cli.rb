@@ -14,11 +14,18 @@ module Confetti1Import
 
     alias_method :c, :console
 
-    def confspec(*args)
-      puts ClearCase.new.configspec
+    def confspec(*argv)
+      args = argv.flatten
+      puts "--> #{args.first}"
+      if args.empty?
+        ap ClearCase.new.configspec
+      else
+        ap ClearCase.new.configspec.select{|cs| cs[:vob] == args.first}
+      end
     end
 
-    def init(*args)
+    def init(*argv)
+      args = argv.flatten
       Confetti1Import.init(args.first)
     end
 
