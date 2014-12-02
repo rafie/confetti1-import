@@ -49,18 +49,17 @@ module Confetti1Import
         git.tag cs[:version]
       end
     else
-      selected_vob = current_configspec.select{|cs| cs[:vob] == for_what}
+      selected_vob = current_configspec.detect{|cs| cs[:vob] == for_what}
       puts "Oops, seems to be we've lost this VOB."; return if selected_vob.empty?
-      git.init! selected_vob
+      git.init! selected_vob[:vob]
       git.exclude!
       git.commit_a! "Commit for #{selected_vob[:version]}"
-      git.apply_tag! selected_vob[:version]
     end
   end
   #---</TODO>
 
   def correct?(vob)
-    test_pwd = File.join CONFETTI_WORKSPACE, "testing_repo", vob
+    test_pwd = File.join AppConfig.git[:path], "testing_repo", vob
     vob_pwd = File.join CONFETTI_HOME, AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name], vob
     ignored = AppConfig.ignore_list + [".git/"]
     FileUtils.makedirs test_pwd

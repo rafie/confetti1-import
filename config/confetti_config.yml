@@ -3,7 +3,7 @@
 # Configure GIT
 
 git: 
-  path: 'workspace/vobs'
+  path: '../Workspace/vobs'
   uri:
   user:
   password:
