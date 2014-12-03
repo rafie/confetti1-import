@@ -5,6 +5,7 @@ module Confetti1Import
       @git_folder = AppConfig.git[:path]
       @view_root = File.join(AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name])
       @ignored = AppConfig.ignore_list
+      @clone = AppConfig.git[:clone]
     end
 
     def init!(vob)
@@ -41,24 +42,7 @@ module Confetti1Import
     end
 
     def branch(branch_name)
-      puts "================================> #{branch_name}"
       in_repo{git "branch", branch_name}
-      # args = args.flatten 
-      # fails "args are empty" if args.nil?
-      # in_repo do
-      #   puts "Enter some information about GIT branch you want to create"; return if args.empty?
-      #   puts "Enter mode ('-a', '-d')"; return if args[:mode].is_a?(Symbol) and (![:a, :d].includes?(args[:mode]))
-      #   git_branch = lambda{|*args| git "branch", args[:apply_mode], args[:branch_name]}
-      #   if args[:mode] == :a
-      #     git_branch.call({apply_mode: "-a"})
-      #   elsif args[:mode] == :d
-      #     git_branch.call({apply_mode: "-d"})
-      #   elsif !args[:name].empty? and args[:mode].empty?
-      #     git_branch.call({branch_name: name})
-      #   else
-      #     puts "Oops, seems to be we have missed something"
-      #   end
-      # end
     end
 
     def checkout(thing)
@@ -105,6 +89,40 @@ module Confetti1Import
     def clone(source, dest)
       git "clone", source, dest
       dest
+    end
+
+    def pull(branch=nil)
+      git "pull", "#{branch.nil? ? 'origin'+branch : ''}"
+    end
+
+    def push(branch=nil)
+      git "push", "#{branch.nil? ? 'origin'+branch : ''}"
+    end
+
+    def fetch
+      git "fetch"
+    end
+
+    def correct?(repo_name)
+      cloned = File.join @clone, repo_name
+      puts "nothing to test"; return unless Dir.exist? cloned
+      vob_pwd = File.join CONFETTI_HOME, AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name], vob
+      ignored = @ignored + [".git/"]
+
+      result_glob = Dir.glob("#{cloned}/**/*").map{|rg| rg.gsub("#{cloned}/", "")}
+      source_glob = Dir.glob("#{vob_pwd}/**/*").map{|sg| sg.gsub("#{vob_pwd}/", "")}
+
+      result_list = Rake::FileList.new(result_glob){|rg| ignored.each{|i| rg.exclude i}}
+      source_list = Rake::FileList.new(source_glob){|sg| ignored.each{|i| sg.exclude i}}
+
+      res = result_list == source_list
+      if res
+        puts "Repository is imported correctly".green.bold
+      else
+        puts "Repository is imported uncorrectly".red.bold
+      end
+      
+      res
     end
 
   private

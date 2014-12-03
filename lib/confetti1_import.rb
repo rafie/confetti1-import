@@ -33,7 +33,6 @@ module Confetti1Import
     end
   end
 
-  #TODO: Remove this, it is not actual
   def init(for_what={})
     clear_case = ClearCase.new
     git = Git.new
@@ -47,6 +46,7 @@ module Confetti1Import
         git.exclude!
         git.commit_a! "Commit for #{cs[:version]}"
         git.tag cs[:version]
+        git.correct?
       end
     else
       selected_vob = current_configspec.detect{|cs| cs[:vob] == for_what}
@@ -54,30 +54,8 @@ module Confetti1Import
       git.init! selected_vob[:vob]
       git.exclude!
       git.commit_a! "Commit for #{selected_vob[:version]}"
+      git.correct?
     end
-  end
-  #---</TODO>
-
-  def correct?(vob)
-    test_pwd = File.join AppConfig.git[:path], "testing_repo", vob
-    vob_pwd = File.join CONFETTI_HOME, AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name], vob
-    ignored = AppConfig.ignore_list + [".git/"]
-
-    FileUtils.makedirs test_pwd
-    FileUtils.rm_rf test_pwd if Dir.exist? test_pwd
-    cloned = Git.new.clone(File.join(AppConfig.git[:path], vob), test_pwd)
-    result_glob = Dir.glob("#{cloned}/**/*").map{|rg| rg.gsub("#{test_pwd}/", "")}
-    source_glob = Dir.glob("#{vob_pwd}/**/*").map{|sg| sg.gsub("#{vob_pwd}/", "")}
-    result_list = Rake::FileList.new(result_glob){|rg| ignored.each{|i| rg.exclude i}}
-    source_list = Rake::FileList.new(source_glob){|sg| ignored.each{|i| sg.exclude i}}
-    FileUtils.rm_rf test_pwd
-    res = result_list == source_list
-    if res
-      puts "Repository is imported correctly".green.bold
-    else
-      puts "Repository is imported uncorrectly".red.bold
-    end
-    res
   end
 
   def import_to_git

@@ -5,6 +5,7 @@
 git: 
   path: '../Workspace/vobs'
   uri:
+  clone: '../Workspace/project'
   user:
   password:
 
