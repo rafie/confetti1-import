@@ -80,67 +80,38 @@ module Confetti1Import
     res
   end
 
-  def versions_to_git(vob)
-    puts "Initializing import.."
+  def import_to_git
     git = Git.new
     clear_case = ClearCase.new
-    git.init! vob
-    puts "GIT repozitory initialized"
     working_folder = AppConfig.clear_case[:versions_input_folders]
-    puts "Starting versions import"
-    Dir.glob(File.join(working_folder, "**")) do |branch|
-      branch_name = File.read(File.join(branch, 'int_branch.txt')).chop
-      puts "=> git branch '#{branch_name}'"
-      puts git.branch(branch_name)
-      puts "=> git checkout '#{branch_name}'"
-      puts git.checkout(branch_name)
-      Dir.glob(File.join(branch, "**")) do |version|
-        version_name = version.split(/(\/)|(\\)/).last
-        puts "Loading configspec for #{version_name}"
+    Dir.glob(File.join(working_folder, "**")) do |mcu|
+      tag_name = File.read(File.join(branch, 'int_branch.txt')).chop
+      Dir.glob(File.join(mcu, "**")) do |version|
+        puts "Applying configspec for MCU-#{version}-----------------------------------"
+        puts ""
         clear_case.configspec=File.expand_path(File.join(version, "configspec.txt"))
-        puts "Excluding unneed files files"
-        git.exclude!
-        puts "=> git commit -a -m\"#{version_name}\""
-        puts git.commit_a!("#{version_name}")
-        puts "=> git tag v#{version_name}"
-        puts git.tag("v#{version_name}")
-      end
+        puts "Reading applyed configspec"
+        configspec = clear_case = configspec
+        excluded = false
 
-      puts "=> git checkout master".cyan
-      puts git.master
-    end
-  end
-
-  def find_versions
-    version_inpt = AppConfig.clear_case[:versions_input_folder]
-    version_out = AppConfig.clear_case[:versions_outut_folder]
-    puts Dir.glob("#{version_inpt}/**/*")
-    input_map = []
-    FileUtils.mkdir_p(version_out)
-    Dir.glob("#{version_inpt}/**").each do |entry|
-      entry_name = entry.split("/").last
-      dir_path = File.read(File.join(entry, 'dir'))
-      entry_clean_name = entry_name.split("-").first
-      puts "------------------------------------ #{dir_path} #{Dir.exists?(dir_path) ? "Exists" : "Not exists"}"
-      Dir.open(dir_path).entries.reject{|ee| !(ee =~ /(\d\.)+/)}.each do |cs_folder|
-        source_cs = File.join(dir_path, cs_folder, 'configspec.txt')
-        dst_cs = File.join(entry, cs_folder)
-        FileUtils.mkdir_p dst_cs
-        begin
-          FileUtils.cp(source_cs, dst_cs)
-        rescue Errno::ENOENT
-          FileUtils.rm_rf dst_cs
-          puts "File '#{source_cs}' was not found".red.bold
-          next
+        configspec.each do |cs|
+          print "#{'Commiting sources for' + cs[:vob].ljust(50)}\r"
+          begin
+            git.init! cs[:vob]
+            excluded = true; git.exclude! unless excluded
+            git.commit_a! cs[:version]
+            git.tag tag_name
+          rescue Exception => e
+            print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'fail'.red.bold}  ]\r"
+            puts "Error:"
+            puts e.inspect
+            return
+          end
+          print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'done'.green.bold}  ]\r"
+          puts ""
         end
-        File.open(File.join(entry, 'int_branch.txt'), 'w'){ |f| f << "#{entry_name}_int_br"}
-        puts "Copied '#{source_cs}' to '#{dst_cs}'".green.bold
       end
     end
-  end
-
-  def read_versions(path_to_versions)
-
   end
 
 end                                                
