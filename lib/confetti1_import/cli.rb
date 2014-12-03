@@ -48,8 +48,7 @@ module Confetti1Import
     end
 
     def import_git_from(*argv)
-      vob = argv.flatten
-      Confetti1Import.versions_to_git vob
+      Confetti1Import.import_to_git
     end
 
   end

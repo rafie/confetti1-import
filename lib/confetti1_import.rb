@@ -85,17 +85,17 @@ module Confetti1Import
     clear_case = ClearCase.new
     working_folder = AppConfig.clear_case[:versions_input_folders]
     Dir.glob(File.join(working_folder, "**")) do |mcu|
-      tag_name = File.read(File.join(branch, 'int_branch.txt')).chop
+      tag_name = File.read(File.join(mcu, 'int_branch.txt')).chop
       Dir.glob(File.join(mcu, "**")) do |version|
         puts "Applying configspec for MCU-#{version}-----------------------------------"
         puts ""
         clear_case.configspec=File.expand_path(File.join(version, "configspec.txt"))
         puts "Reading applyed configspec"
-        configspec = clear_case = configspec
+        configspec = clear_case.configspec
         excluded = false
 
         configspec.each do |cs|
-          print "#{'Commiting sources for' + cs[:vob].ljust(50)}\r"
+          print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
           begin
             git.init! cs[:vob]
             excluded = true; git.exclude! unless excluded
