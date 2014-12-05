@@ -13,8 +13,7 @@ git:
 clear_case:
   view_name: 'vtrofymyuk_view1'
   view_location: 'm:'
-  versions_input_folders: 
-    - 'workspace/versions'
+  versions_input_folder: 'workspace/versions'
   
 # Files to be ignored in import
 ignore_list:

@@ -44,11 +44,15 @@ module Confetti1Import
     end
 
     def find_versions(*argv)
-      ClearCase.find_versions(argv)
+      Confetti1Import.find_versions
     end
 
     def import_to_git(*argv)
       Confetti1Import.import_to_git
+    end
+
+    def rm_rf(*argv)
+      FileUtils.rm_rf AppConfig.git[:path]
     end
 
   end
