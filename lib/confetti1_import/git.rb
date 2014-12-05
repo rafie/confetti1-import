@@ -1,6 +1,8 @@
 module Confetti1Import
   class Git < Base
 
+    attr_reader :vob_working_tree
+
     def initialize
       @git_folder = AppConfig.git[:path]
       @view_root = File.join(AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name])
@@ -12,18 +14,29 @@ module Confetti1Import
       @vob = vob
       @vob_working_tree = File.join @view_root, @vob
       @git_vob_dot_folder = File.join @git_folder , @vob, ".git"
+
+      unless Dir.exist? vob_working_tree
+        puts '########  DEBUG ###########################################################'
+        puts '-------- working tree not found -------------------------------------------'
+        puts vob
+        puts '---------------------------------------------------------------------------'
+        @git_vob_dot_folder
+        puts '###########################################################################'
+        return false
+      end
+
       unless Dir.exist? @git_vob_dot_folder
-        puts "Initializing GIT repository for '#{vob}' in #{@git_vob_dot_folder}"
         FileUtils.makedirs @git_vob_dot_folder
-        git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@vob_working_tree}", "init"
+        git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@vob_working_tree} init"
         in_repo{git 'commit --allow-empty -m"initial commit"'}
-      else
-        puts "GIT repository #{@git_folder} already initialized in #{@git_vob_dot_folder}"
       end
       @git_vob_dot_folder
     end
 
     def exclude!
+      exclude_path = File.join(@git_vob_dot_folder, 'info', 'exclude')
+      excluded_list = File.read(exclude_path).split(/\n/)
+      return  if @ignored == excluded_list
       puts "Excluding not needed files: #{@ignored.inspect}"
       File.open(File.join(@git_vob_dot_folder, 'info', 'exclude'), 'w') do |f|
         f << @ignored.join("\n")
@@ -125,6 +138,10 @@ module Confetti1Import
       res
     end
 
+    def current_branch
+      in_repo{git("branch").detect{|br| br =~ /^\*/}.gsub(/^\*\s/, "")}
+    end
+
   private
 
     def git(*params)
@@ -134,7 +151,7 @@ module Confetti1Import
     def in_repo(&block)
       raise "No block given" unless block_given?
       current_dir = Dir.pwd 
-      Dir.chdir File.join @git_folder, @vob 
+      Dir.chdir File.join @git_folder, @vob
       res = yield
       Dir.chdir current_dir
       res

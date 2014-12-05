@@ -57,6 +57,10 @@ module Confetti1Import
       end
     end
 
+    def mount(vob_tag="--all")
+      ct "mount", vob_tag
+    end
+
   private
 
     def ct(*params)

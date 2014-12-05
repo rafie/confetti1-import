@@ -47,7 +47,7 @@ module Confetti1Import
       ClearCase.find_versions(argv)
     end
 
-    def import_git_from(*argv)
+    def import_to_git(*argv)
       Confetti1Import.import_to_git
     end
 

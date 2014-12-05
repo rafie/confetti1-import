@@ -63,30 +63,44 @@ module Confetti1Import
     clear_case = ClearCase.new
     working_folder = AppConfig.clear_case[:versions_input_folders]
     Dir.glob(File.join(working_folder, "**")) do |mcu|
-      tag_name = File.read(File.join(mcu, 'int_branch.txt')).chop
+      branch_name = File.read(File.join(mcu, 'int_branch.txt')).strip
       Dir.glob(File.join(mcu, "**")) do |version|
         puts "Applying configspec for MCU-#{version}-----------------------------------"
         puts ""
         clear_case.configspec=File.expand_path(File.join(version, "configspec.txt"))
         puts "Reading applyed configspec"
         configspec = clear_case.configspec
-        excluded = false
+
+        mcu_vob = configspec.detect{|cs|cs[:vob] == 'mcu'}
+        tag_name = mcu_vob[:version]
 
         configspec.each do |cs|
-          print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
+          
           begin
-            git.init! cs[:vob]
-            excluded = true; git.exclude! unless excluded
-            git.commit_a! cs[:version]
-            git.tag tag_name
+            print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
+            #clear_case.mount cs[:vob]
+            raise "Cannot init" unless git.init! cs[:vob]
           rescue Exception => e
+            puts '########  DEBUG ###########################################################'
+            puts "-------- #{e.message} -----------------------------------------------"
+            puts cs
+            puts '---------------------------------------------------------------------------'
+            puts e.backtrace
+            puts '###########################################################################'
+            puts "Cannot mount #{cs[:version]}. Processing next VOB"
             print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'fail'.red.bold}  ]\r"
-            puts "Error:"
-            puts e.inspect
-            return
+            puts ""
+            next
           end
+
           print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'done'.green.bold}  ]\r"
           puts ""
+          git.branch branch_name
+          git.checkout branch_name
+          git.exclude!
+          git.commit_a! cs[:version]
+          git.tag tag_name
+
         end
       end
     end
