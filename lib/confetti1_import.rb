@@ -101,65 +101,11 @@ module Confetti1Import
           git.checkout branch_name
           git.exclude!
           git.commit_a! cs[:version]
-          git.tag tag_name
-
+          git.tag version
+        end
       end
     end
-  end
 
-  # def import_to_git
-  #   git = Git.new
-  #   clear_case = ClearCase.new
-  #   working_folder = AppConfig.clear_case[:versions_input_folder]
-  #   Dir.glob(File.join(working_folder, "**")) do |mcu|
-
-  #     puts "mcu = #{mcu}"
-  #     branch_name = File.read(File.join(mcu, 'int_branch.txt')).strip
-  #     puts "branch_name = #{branch_name}"
-
-  #     Dir.glob(File.join(mcu, "**")) do |version|
-
-  #       puts "Applying configspec for MCU-#{version}-----------------------------------"
-  
-
-  #       clear_case.configspec=File.expand_path(File.join(version, "configspec.txt"))
-  #       puts "Reading applyed configspec"
-  #       configspec = clear_case.configspec
-
-  #       mcu_vob = configspec.detect{|cs|cs[:vob] == 'mcu'}
-  #       tag_name = mcu_vob[:version]
-
-  #       configspec.each do |cs|
-  #         puts "===========> #{cs}"
-  #       #   begin
-  #       #     print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
-  #       #     #clear_case.mount cs[:vob]
-  #       #     raise "Cannot init" unless git.init! cs[:vob]
-  #       #   rescue Exception => e
-  #       #     puts '########  DEBUG ###########################################################'
-  #       #     puts "-------- #{e.message} -----------------------------------------------"
-  #       #     puts cs
-  #       #     puts '---------------------------------------------------------------------------'
-  #       #     puts e.backtrace
-  #       #     puts '###########################################################################'
-  #       #     puts "Cannot mount #{cs[:version]}. Processing next VOB"
-  #       #     print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'fail'.red.bold}  ]\r"
-  #       #     puts ""
-  #       #     next
-  #       #  end
-
-  #         # print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'done'.green.bold}  ]\r"
-  #         # puts ""
-  #         # git.branch branch_name
-  #         # git.checkout branch_name
-  #         # git.exclude!
-  #         # git.commit_a! cs[:version]
-  #         # git.tag tag_name
-
-  #       end
-  #     end
-  #   end
-  # end
 
     def find_versions
       version_inpt = AppConfig.clear_case[:versions_input_folder]
@@ -186,4 +132,5 @@ module Confetti1Import
         end
       end
     end
+  end
 end                                                
