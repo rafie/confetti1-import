@@ -47,7 +47,7 @@ module Confetti1Import
       Confetti1Import.find_versions
     end
 
-    def import_to_git(*argv)
+    def import(*argv)
       Confetti1Import.import_to_git
     end
 

@@ -67,6 +67,7 @@ module Confetti1Import
       branch_name = File.read(File.join(mcu, 'int_branch.txt')).strip
 
       Dir.glob(File.join(mcu, "**")).each do |version|
+
         next unless Dir.exist? version
         configspec_path = File.join version, 'configspec.txt'
         raise "Can not found configspec" unless File.exist? configspec_path
@@ -77,28 +78,19 @@ module Confetti1Import
         mcu_vob = configspec.detect{|cs|cs[:vob] == 'mcu'}
 
         configspec.each do |cs|
-
-          begin
-            print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
-            #clear_case.mount cs[:vob]
-            raise "Cannot init" unless git.init! cs[:vob]
-          rescue Exception => e
-            puts '########  DEBUG ###########################################################'
-            puts "-------- #{e.message} -----------------------------------------------"
-            puts cs
-            puts '---------------------------------------------------------------------------'
-            puts e.backtrace
-            puts '###########################################################################'
-            puts "Cannot mount #{cs[:version]}. Processing next VOB"
-            print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'fail'.red.bold}  ]\r"
-            puts ""
-            next
+          git.init! cs[:vob]
+          unless git.on_branch? branch_name
+            git.checkout branch_name, b: true
+          else
+            git.checkout branch_name
           end
+
+          print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
+          #clear_case.mount cs[:vob]
+          raise "Cannot init" unless git.init! cs[:vob]
 
           print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'done'.green.bold}  ]\r"
           puts ""
-          git.branch branch_name
-          git.checkout branch_name
           git.exclude!
           git.commit_a! cs[:version]
           git.tag version

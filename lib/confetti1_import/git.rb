@@ -16,12 +16,7 @@ module Confetti1Import
       @git_vob_dot_folder = File.join @git_folder , @vob, ".git"
 
       unless Dir.exist? vob_working_tree
-        puts '########  DEBUG ###########################################################'
-        puts '-------- working tree not found -------------------------------------------'
-        puts vob
-        puts '---------------------------------------------------------------------------'
         @git_vob_dot_folder
-        puts '###########################################################################'
         return false
       end
 
@@ -58,11 +53,17 @@ module Confetti1Import
       in_repo{git "branch", branch_name}
     end
 
-    def checkout(thing)
-      in_repo do
-        res = git "checkout", thing
+    def checkout(thing, b={})
+      in_repo do 
+        if b[:b]
+          git "checkout -b", thing
+        else
+          git "checkout", thing
+        end
       end
     end
+
+
 
     def master
       in_repo do
@@ -138,8 +139,12 @@ module Confetti1Import
       res
     end
 
-    def current_branch
-      in_repo{git("branch").detect{|br| br =~ /^\*/}.gsub(/^\*\s/, "")}
+    def on_branch?(branch)
+      in_repo do
+        current_branch = git("branch").detect{|br| br =~ /^\*/}.gsub(/^\*\s/, "")
+        puts "=================================> #{current_branch}"
+        current_branch == branch
+      end
     end
 
   private
@@ -151,6 +156,10 @@ module Confetti1Import
     def in_repo(&block)
       raise "No block given" unless block_given?
       current_dir = Dir.pwd 
+      puts '########################## debug ###################################'
+      puts "Git folder #{@git_folder.inspect}"
+      puts "VOB #{@vob.inspect}"
+      puts '####################################################################'
       Dir.chdir File.join @git_folder, @vob
       res = yield
       Dir.chdir current_dir
