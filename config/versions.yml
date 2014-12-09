@@ -1,0 +1,66 @@
+# versions:
+#   '8.X':
+#     - 'mcu-8.0': 'r:\Mcu_Ngp\Versions_8.X\V8.0\Versions'
+#     - 'mcu-8.2': 'r:\Mcu_Ngp\Versions_8.X\V8.2'
+#     - 'mcu-8.3': 'r:\Mcu_Ngp\Versions_8.X\V8.3'
+#     - 'mcu-8.3.1': 'r:\Mcu_Ngp\Versions_8.X\V8.3.1'
+#     - 'mcu-8.3.2': 'r:\Mcu_Ngp\Versions_8.X\V8.3.2'
+#     - 'vcgw-8.3.2': 'r:\Mcu_Ngp\Versions_8.X\VCGW8.3.2'
+
+# Main version:
+- 'mcu-7.1.2':
+- 'mcu-7.2.2':
+- 'mcu-7.5.0':
+- 'mcu-7.5.1':
+- 'ucgw-7.6.0':
+- 'ucgw-7.6.5':
+- 'ucgw-7.7.0':
+- 'mcu-8.0.0':
+- 'mcu-8.0.1':
+- 'mcu-8.1.0':
+- 'mcu-8.2.0':
+- 'mcu-8.3.0':
+- 'mcu-8.3.1':
+- 'mcu-8.3.2':
+- 'vcgw-8.3.2':
+
+# C/S:
+- 'mcu-4.5.0':
+- 'mcu-5.4.4':
+- 'mcu-5.7.1':
+- 'mcu-5.7.2':
+- 'mcu-5.7.3':
+- 'mcu-7.1.0':
+- 'mcu-7.1.1':
+- 'mcu-7.1.2':
+- 'mcu-7.2.0':
+- 'mcu-7.5.1':
+- 'mcu-7.5.6':
+- 'mcu-7.6.0':
+- 'mcu-7.6.1':
+- 'mcu-7.7.0':
+- 'mcu-7.7.1':
+- 'mcu-7.7.2':
+- 'mcu-7.7.3':
+- 'mcu-7.7.4':
+- 'mcu-7.7.5':
+- 'mcu-7.7.6':
+- 'mcu-8.2.0':
+
+# Kepler:
+- 'mcu-6.0':
+- 'mcu-6.1':
+- 'mcu-6.2':
+- 'mcu-6.5':
+
+# Main version:
+# r:\Mcu_Ngp\Versions_7.X
+# r:\Mcu_Ngp\Versions_8.X
+
+# C/S:
+# r:\Mcu_Ngp\Customer Support\Patches
+
+# Kepler:
+# r:\Mcu_Audio\Versions\Kepler\Software_Versions
+# r:\Mcu_Audio\Versions\MR1\Software_Versions
+# r:\Mcu_Audio\Versions\Alta\Software_Versions
