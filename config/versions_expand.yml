@@ -4,7 +4,4 @@ versions:
   location: r:\Mcu_Ngp\Versions_8.X\
   branches:
   - '8.1':
-      labels:
-      - 1
-      - 2
-      - 3
+      labels: ''
