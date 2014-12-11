@@ -1,7 +1,8 @@
 module Confetti1Import
   class ClearCase < Base
 
-    def initialize
+    def initialize(init_instances=true)
+      return unless init_instances
       @view_name =  AppConfig.clear_case[:view_name]
       @view_location =  AppConfig.clear_case[:view_location]
       @view_path = File.join @view_location, @view_name  
@@ -10,9 +11,13 @@ module Confetti1Import
       #@tmp_configspec = File.read(File.join(@view_location, @view_name, "configspec"))
     end
 
-    def configspec
+    def configspec(parse_file=nil)
       out=""
-      in_cs{out = ct "catcs"}
+      if parse_file
+        out = File.read(parse_file).split("\n")
+      else
+        in_cs{out = ct "catcs"}
+      end
       #FIXME: Some stub
       #out = @tmp_configspec 
       parse_configspec out
@@ -47,6 +52,11 @@ module Confetti1Import
       preparsed = clean.map{|cs| cs.split("\s")}
       preparsed.shift
       preparsed.map do |pp|
+        if pp[1].nil? # FIXME: I am ugly 
+          puts "Somthing bad in this configspec found. Ignoring this row".red.bold
+          ap pp
+          next
+        end
         {vob: pp[1].gsub(/(\.){3}|\//,""), version: pp[2]}
       end
     end

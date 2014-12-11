@@ -127,10 +127,44 @@ module Confetti1Import
   end
 
   def build_versions
-    version_map = YAML.load_file File.join CONFETTI_HOME, 'config', 'versions.yml'
-    version_map["versions"].each_value do |version|
-      puts version.first
+    versions_config = YAML.load_file File.join CONFETTI_HOME, 'config', 'versions.yml'
+    configspecs = []
+    puts
+    puts "Found #{versions_config['locations'].size} locations:"
+    puts
+    puts versions_config['locations'].join("\n")
+    puts "-".ljust(80, '-')
+    versions_config["locations"].each do |versions_location|
+      print "#{'Processing ' + versions_location.to_s.ljust(60, '.')}\r"
+      configspecs += Dir.glob(File.join(versions_location, '**', '*')).select{|v| v =~ /configspec.txt$/}
+      print "#{'Processing ' + versions_location.to_s.ljust(60, '.')}[  #{'done'.green.bold}  ]\r"
+      puts
     end #versions_map
+    puts
+    puts "Processing files and reading configspecs"
+    puts
+    versions_db = []
+    brocken = []
+    version_item = {}
+    clear_case = ClearCase.new(false)
+    configspecs.each do |configspec|
+      configspec_node = clear_case.configspec(configspec).detect{|cs| cs[:vob] =~ /mcu/ or cs[:vob] =~ /vcgw/}
+      if configspec_node.nil?
+        puts "Was now processed #{configspec}. MCU or VGCW vobs are not found".red.bold
+        brocken << configspec
+        next
+      end
+      version_item[:path] = configspec
+      version_item[:version] = configspec_node[:version]
+      version_item[:name] = configspec_node[:vob]
+      versions_db << version_item
+    end
+    #---------------------------------------------------------------------------------------------------
+    # (\d{1,}\.){4,}\d{1,}\/configspec.txt$
+    #puts ""
+    File.open(File.join(CONFETTI_HOME, 'config', 'brocken.yml'), 'w'){|f|f.write brocken.to_yaml}
+    File.open(File.join(CONFETTI_HOME, 'config', 'configspecs.yml'), 'w'){|f|f.write configspecs.to_yaml}
+    File.open(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'), 'w'){|f|f.write version_item.to_yaml}
   end
 
 end                                                

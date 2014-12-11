@@ -1,10 +1,10 @@
 locations: 
-- 'r:\Mcu_Ngp\Versions_7.X'
-- 'r:\Mcu_Ngp\Versions_8.X'
-- 'r:\Mcu_Ngp\Customer Support\Patches'
-- 'r:\Mcu_Audio\Versions\Kepler\Software_Versions'
-- 'r:\Mcu_Audio\Versions\MR1\Software_Versions'
-- 'r:\Mcu_Audio\Versions\Alta\Software_Versions'
+- 'r:\Mcu_Ngp/Versions_7.X'
+- 'r:\Mcu_Ngp/Versions_8.X'
+- 'r:\Mcu_Ngp/Customer Support/Patches'
+- 'r:\Mcu_Audio/Versions/Kepler/Software_Versions'
+- 'r:\Mcu_Audio/Versions/MR1/Software_Versions'
+- 'r:\Mcu_Audio/Versions/Alta/Software_Versions'
 # main_version:
 versions:
 - 'mcu-7.1.2'
