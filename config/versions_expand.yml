@@ -1,7 +1,0 @@
----
-versions:
-- family: 8.X
-  location: r:\Mcu_Ngp\Versions_8.X\
-  branches:
-  - '8.1':
-      labels: ''

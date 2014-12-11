@@ -5,8 +5,8 @@ locations:
 - 'r:\Mcu_Audio/Versions/Kepler/Software_Versions'
 - 'r:\Mcu_Audio/Versions/MR1/Software_Versions'
 - 'r:\Mcu_Audio/Versions/Alta/Software_Versions'
-# main_version:
 versions:
+# main_version:
 - 'mcu-7.1.2'
 - 'mcu-7.2.2'
 - 'mcu-7.5.0'

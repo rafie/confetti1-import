@@ -143,28 +143,36 @@ module Confetti1Import
     puts
     puts "Processing files and reading configspecs"
     puts
-    versions_db = []
+    versions_db = {}
     brocken = []
-    version_item = {}
-    clear_case = ClearCase.new(false)
-    configspecs.each do |configspec|
-      configspec_node = clear_case.configspec(configspec).detect{|cs| cs[:vob] =~ /mcu/ or cs[:vob] =~ /vcgw/}
+    clear_case = ClearCase.new
+    configspecs.each do |confspec|
+      configspec_node = clear_case.configspec(confspec).detect{|cs| cs[:vob] =~ /mcu/i or cs[:vob] =~ /vcgw/i or cs[:vob] =~ /ucgw/i}
       if configspec_node.nil?
-        puts "Was now processed #{configspec}. MCU or VGCW vobs are not found".red.bold
-        brocken << configspec
+        brocken << "'#{confspec}'"
         next
       end
-      version_item[:path] = configspec
-      version_item[:version] = configspec_node[:version]
-      version_item[:name] = configspec_node[:vob]
-      versions_db << version_item
+      version_item = {}
+      version_item[:path] = confspec.to_s
+      version_item[:version] = configspec_node[:version].to_s
+      version_item[:name] = configspec_node[:vob].to_s.gsub(/\W/, "")
+
+      version_family = versions_config['versions'].detect do |v|  
+        "#{version_item[:name]}-#{version_item[:version]}" =~ Regexp.new(Regexp.escape(v), Regexp::IGNORECASE)
+      end
+
+      if version_family
+        if versions_db[version_family.to_s].nil?
+          versions_db[version_family.to_s] = [version_item]
+        else
+          versions_db[version_family.to_s] << version_item
+        end
+      end
     end
-    #---------------------------------------------------------------------------------------------------
-    # (\d{1,}\.){4,}\d{1,}\/configspec.txt$
-    #puts ""
+
     File.open(File.join(CONFETTI_HOME, 'config', 'brocken.yml'), 'w'){|f|f.write brocken.to_yaml}
     File.open(File.join(CONFETTI_HOME, 'config', 'configspecs.yml'), 'w'){|f|f.write configspecs.to_yaml}
-    File.open(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'), 'w'){|f|f.write version_item.to_yaml}
+    File.open(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'), 'w'){|f|f.write versions_db.to_yaml}
   end
 
 end                                                

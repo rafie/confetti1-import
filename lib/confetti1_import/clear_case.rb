@@ -1,8 +1,7 @@
 module Confetti1Import
   class ClearCase < Base
 
-    def initialize(init_instances=true)
-      return unless init_instances
+    def initialize
       @view_name =  AppConfig.clear_case[:view_name]
       @view_location =  AppConfig.clear_case[:view_location]
       @view_path = File.join @view_location, @view_name  
@@ -18,8 +17,6 @@ module Confetti1Import
       else
         in_cs{out = ct "catcs"}
       end
-      #FIXME: Some stub
-      #out = @tmp_configspec 
       parse_configspec out
     end
 
@@ -43,23 +40,28 @@ module Confetti1Import
 
   private
 
+    def parse_configspec(conf_spec)
+      splited = conf_spec.map{|cs|cs.split("\s")}.reject{|cs| cs.empty? or cs.size < 4 or cs.detect{|ccs| ccs=~/^#/}}
+
+      splited.map{|cs| {vob: cs[1].to_s.gsub(/(\.){3}|\//,""), version: cs[2]}}
+
+      # clean = conf_spec.map{|cs| cs.gsub(/\s+/, " ")}.reject{|cs|cs.size < 2}
+      # preparsed = clean.map{|cs| cs.split("\s")}
+      # preparsed.shift
+      # preparsed.map do |pp|
+      #   if pp[1].nil? # FIXME: I am ugly 
+      #     puts "Somthing bad in this configspec found. Ignoring this row".red.bold
+      #     ap pp
+      #     next
+      #   end
+      #   {vob: pp[1].gsub(/(\.){3}|\//,""), version: pp[2]}
+      # end
+    end
+
     def ct(*params)
       command "ct", params.join("\s")
     end
 
-    def parse_configspec(conf_spec)
-      clean = conf_spec.map{|cs| cs.gsub(/\s+/, " ")}.reject{|cs|cs.size < 2}
-      preparsed = clean.map{|cs| cs.split("\s")}
-      preparsed.shift
-      preparsed.map do |pp|
-        if pp[1].nil? # FIXME: I am ugly 
-          puts "Somthing bad in this configspec found. Ignoring this row".red.bold
-          ap pp
-          next
-        end
-        {vob: pp[1].gsub(/(\.){3}|\//,""), version: pp[2]}
-      end
-    end
 
     def in_cs(&block)
       raise "No block given" unless block_given?
