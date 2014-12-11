@@ -25,8 +25,8 @@ module Confetti1Import
     end
 
     def init(*argv)
-      args = argv.flatten
-      Confetti1Import.init(args.first)
+      #args = argv.flatten
+      Confetti1Import.init
     end
 
     def method_missing(meth, *args, &block)

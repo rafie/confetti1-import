@@ -142,7 +142,6 @@ module Confetti1Import
     def on_branch?(branch)
       in_repo do
         current_branch = git("branch").detect{|br| br =~ /^\*/}.gsub(/^\*\s/, "")
-        puts "=================================> #{current_branch}"
         current_branch == branch
       end
     end

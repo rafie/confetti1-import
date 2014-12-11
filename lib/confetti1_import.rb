@@ -46,7 +46,7 @@ module Confetti1Import
         git.exclude!
         git.commit_a! "Commit for #{cs[:version]}"
         git.tag cs[:version]
-        git.correct?
+        git.correct? cs[:vob]
       end
     else
       selected_vob = current_configspec.detect{|cs| cs[:vob] == for_what}
@@ -145,11 +145,13 @@ module Confetti1Import
     puts
     versions_db = {}
     brocken = []
+    cs_yaml = []
     clear_case = ClearCase.new
     configspecs.each do |confspec|
-      configspec_node = clear_case.configspec(confspec).detect{|cs| cs[:vob] =~ /mcu/i or cs[:vob] =~ /vcgw/i or cs[:vob] =~ /ucgw/i}
+      configspec_node = clear_case.configspec(confspec).detect{|cs| cs[:vob] =~ /(mcu)|(vcgw)|(ucgw)/i}
       if configspec_node.nil?
-        brocken << "'#{confspec}'"
+        cs_yaml << clear_case.configspec(confspec)
+        brocken << confspec
         next
       end
       version_item = {}
@@ -173,6 +175,7 @@ module Confetti1Import
     File.open(File.join(CONFETTI_HOME, 'config', 'brocken.yml'), 'w'){|f|f.write brocken.to_yaml}
     File.open(File.join(CONFETTI_HOME, 'config', 'configspecs.yml'), 'w'){|f|f.write configspecs.to_yaml}
     File.open(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'), 'w'){|f|f.write versions_db.to_yaml}
+    File.open(File.join(CONFETTI_HOME, 'config', 'cs_yaml.yml'), 'w'){|f|f.write cs_yaml.to_yaml}
   end
 
 end                                                
