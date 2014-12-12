@@ -15,14 +15,14 @@ module Confetti1Import
       if parse_file
         out = File.read(parse_file).split("\n")
       else
-        in_cs{out = ct "catcs"}
+        in_directory(@view_path){out = ct "catcs"}
       end
       parse_configspec out
     end
 
     def configspec=(cs_file)
       out = ""
-      in_cs{out = ct("setcs", cs_file)}
+      in_directory(@view_path){out = ct("setcs", cs_file)}
       raise out if out =~ /^cleartool\:\sError\:/
     end
 
@@ -61,16 +61,5 @@ module Confetti1Import
     def ct(*params)
       command "ct", params.join("\s")
     end
-
-
-    def in_cs(&block)
-      raise "No block given" unless block_given?
-      current_dir = Dir.pwd 
-      Dir.chdir File.expand_path File.join @view_path
-      res = yield
-      Dir.chdir current_dir
-      res
-    end
-
   end
 end

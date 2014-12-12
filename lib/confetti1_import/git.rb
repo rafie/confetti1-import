@@ -23,7 +23,7 @@ module Confetti1Import
       unless Dir.exist? @git_vob_dot_folder
         FileUtils.makedirs @git_vob_dot_folder
         git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@vob_working_tree} init"
-        in_repo{git 'commit --allow-empty -m"initial commit"'}
+        in_directory(@vob_working_tree){git 'commit --allow-empty -m"initial commit"'}
       end
       @git_vob_dot_folder
     end
@@ -39,22 +39,22 @@ module Confetti1Import
     end
 
     def commit_a!(message="Confetti commit")
-      in_repo do
+      in_directory(@vob_working_tree) do
         git "add ."
         git "commit -a -m\"#{message}\""
       end
     end
 
     def tag(tag)
-      in_repo{git "tag", tag}
+      in_directory(@vob_working_tree){git "tag", tag}
     end
 
     def branch(branch_name)
-      in_repo{git "branch", branch_name}
+      in_directory(@vob_working_tree){git "branch", branch_name}
     end
 
     def checkout(thing, b={})
-      in_repo do 
+      in_directory(@vob_working_tree) do 
         if b[:b]
           git "checkout -b", thing
         else
@@ -66,13 +66,13 @@ module Confetti1Import
 
 
     def master
-      in_repo do
+      in_directory(@vob_working_tree) do
         git "checkout master"
       end
     end
 
     def status
-      in_repo do
+      in_directory(@vob_working_tree) do
         select_files = Proc.new do |files, mask| 
           files.select{|o| o =~ mask}.map{|o| o.gsub(mask, '')}
         end
@@ -140,7 +140,7 @@ module Confetti1Import
     end
 
     def on_branch?(branch)
-      in_repo do
+      in_directory(@vob_working_tree) do
         current_branch = git("branch").detect{|br| br =~ /^\*/}.gsub(/^\*\s/, "")
         current_branch == branch
       end
@@ -150,19 +150,6 @@ module Confetti1Import
 
     def git(*params)
       command "git", params.join("\s")
-    end
-
-    def in_repo(&block)
-      raise "No block given" unless block_given?
-      current_dir = Dir.pwd 
-      puts '########################## debug ###################################'
-      puts "Git folder #{@git_folder.inspect}"
-      puts "VOB #{@vob.inspect}"
-      puts '####################################################################'
-      Dir.chdir File.join @git_folder, @vob
-      res = yield
-      Dir.chdir current_dir
-      res
     end
 
     def file_to_add(file_name)

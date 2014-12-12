@@ -1,7 +1,17 @@
 module Confetti1Import
   class Base
   
-  private
+  protected
+
+    def in_directory(dir_to_run, &block)
+      raise "No block given" unless block_given?
+      current_dir = Dir.pwd 
+      Dir.chdir dir_to_run
+      res = yield
+      Dir.chdir current_dir
+      res
+    end
+
 
     def to_rxp(path)
       res = path
@@ -33,5 +43,7 @@ module Confetti1Import
       output = `#{cmd} #{argv.join(" ")}`
       output.split("\n")
     end
+
+
   end
 end
