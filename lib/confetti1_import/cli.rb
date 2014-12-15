@@ -42,6 +42,10 @@ module Confetti1Import
       Confetti1Import.find_versions
     end
 
+    def find_all_versions(*argv)
+      Confetti1Import.find_all_versions
+    end
+
     def build_versions(*argv)
       Confetti1Import.build_versions
     end

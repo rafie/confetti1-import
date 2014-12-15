@@ -156,7 +156,7 @@ module Confetti1Import
   end
 
 
-  def ersions
+  def build_versions
     versions_config = YAML.load_file File.join CONFETTI_HOME, 'config', 'versions.yml'
     configspecs = []
     puts
