@@ -108,7 +108,6 @@ module Confetti1Import
       entry_name = entry.split("/").last
       dir_path = File.read(File.join(entry, 'dir'))
       entry_clean_name = entry_name.split("-").first
-      puts "------------------------------------ #{dir_path} #{Dir.exists?(dir_path) ? "Exists" : "Not exists"}"
       Dir.open(dir_path).entries.reject{|ee| !(ee =~ /(\d\.)+/)}.each do |cs_folder|
         source_cs = File.join(dir_path, cs_folder, 'configspec.txt')
         dst_cs = File.join(entry, cs_folder)
@@ -176,6 +175,15 @@ module Confetti1Import
     File.open(File.join(CONFETTI_HOME, 'config', 'configspecs.yml'), 'w'){|f|f.write configspecs.to_yaml}
     File.open(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'), 'w'){|f|f.write versions_db.to_yaml}
     File.open(File.join(CONFETTI_HOME, 'config', 'cs_yaml.yml'), 'w'){|f|f.write cs_yaml.to_yaml}
+  end
+
+  def originate_versions
+    versions = YAML.load_file(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'))
+    versions.each_value do |branch|
+      branch.each do |version|
+        `ruby brsource.rb #{version['name']}-#{version['version']}`
+      end
+    end
   end
 
 end                                                
