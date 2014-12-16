@@ -124,40 +124,10 @@ module Confetti1Import
     end
   end
 
-  def find_all_versions
-    versions_config = YAML.load_file File.join CONFETTI_HOME, 'config', 'versions.yml'
-    forest_location = File.join(CONFETTI_WORKSPACE, "all_versions")
-    configspecs = []
-
-    versions_config["locations"].each do |versions_location|
-      configspecs << Dir.glob(File.join(versions_location, '**', '*')).select{|v| v =~ /configspec.txt$/}
-    end
-
-    clear_case = ClearCase.new
-    
-    configspecs.each do |confspec|
-      configspec_node = clear_case.configspec(confspec).detect{|cs| cs[:vob] =~ /(mcu)|(vcgw)|(ucgw)/i}
-      next if configspec_node.nil?
-
-      item_version = configspec_node[:version].to_s
-      item_name = configspec_node[:vob].to_s.gsub(/\W/, "")
-      version_family = versions_config['versions'].detect do |v|  
-        "#{version_item[:name]}-#{version_item[:version]}" =~ Regexp.new(Regexp.escape(v), Regexp::IGNORECASE)
-      end
-      current_version_location = File.join(forest_location, version_family, item_version)
-
-      File.open(File.join(forest_location, version_family, "int_branch.txt"), 'w'){|f|
-        f.write("#{version_family}_int_br")
-      }
-      FileUtils.mkdir_p(current_version_location)
-      FileUtils.cp confspec, File.join(current_version_location,"congigspect.txt")
-    end
-
-  end
-
 
   def build_versions
     versions_config = YAML.load_file File.join CONFETTI_HOME, 'config', 'versions.yml'
+    forest_location = File.join(Dir.getwd, "versions_forest")
     configspecs = []
     puts
     puts "Found #{versions_config['locations'].size} locations:"
@@ -178,19 +148,28 @@ module Confetti1Import
     cs_yaml = []
     clear_case = ClearCase.new
     configspecs.each do |confspec|
-      configspec_node = clear_case.configspec(confspec).detect{|cs| cs[:vob] =~ /(mcu)|(vcgw)|(ucgw)/i}
+      configspec_node = clear_case.configspec(confspec).detect do |cs|
+        cs[:vob] =~ /(mcu)|(vcgw)|(ucgw)/i
+      end
+
       if configspec_node.nil?
         cs_yaml << clear_case.configspec(confspec)
         brocken << confspec
         next
       end
       version_item = {}
-      version_item[:path] = confspec.to_s
-      version_item[:version] = configspec_node[:version].to_s
-      version_item[:name] = configspec_node[:vob].to_s.gsub(/\W/, "")
+      version_item['version'] = {
+        'path' => confspec.to_s, 
+        'version' => configspec_node[:version].to_s, 
+        'name' => configspec_node[:vob].to_s.gsub(/\W/, "")
+      }
+      version_family = versions_config['versions'].detect do |v|
+        vob_name = v[/\w{3,}/]
+        version = v[/((\w\.)+\w).+/]
 
-      version_family = versions_config['versions'].detect do |v|  
-        "#{version_item[:name]}-#{version_item[:version]}" =~ Regexp.new(Regexp.escape(v), Regexp::IGNORECASE)
+        "#{version_item['version']['version']}" =~ Regexp.new(
+          Regexp.escape("#{vob_name}_#{version}"), Regexp::IGNORECASE
+        )
       end
 
       if version_family
@@ -201,15 +180,25 @@ module Confetti1Import
         end
       end
     end
+    
+    Dir.mkdir(forest_location) unless Dir.exist? forest_location
+    versions_db.each_pair do |version_key, version_value|
+      br_dir = File.join(forest_location, version_key)
+      Dir.mkdir(br_dir)
+      File.open(File.join(br_dir, "int_branch.txt"), "w"){|f|f.write("#{version_key}_int_br")}
+      version_value.each do |vdbv|
+        version_dir = File.join(br_dir, vdbv["version"]["version"])
+        next if Dir.exists? version_dir
+        Dir.mkdir(version_dir)
+        FileUtils.cp(vdbv["version"]["path"], File.join(version_dir, "configspec.txt"))
+      end
 
-    versions_db.each do |vdb|
-      puts vdb
     end
 
-    # File.open(File.join(CONFETTI_HOME, 'config', 'brocken.yml'), 'w'){|f|f.write brocken.to_yaml}
-    # File.open(File.join(CONFETTI_HOME, 'config', 'configspecs.yml'), 'w'){|f|f.write configspecs.to_yaml}
-    # File.open(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'), 'w'){|f|f.write versions_db.to_yaml}
-    # File.open(File.join(CONFETTI_HOME, 'config', 'cs_yaml.yml'), 'w'){|f|f.write cs_yaml.to_yaml}
+    File.open(File.join(CONFETTI_HOME, 'config', 'brocken.yml'), 'w'){|f|f.write brocken.to_yaml}
+    File.open(File.join(CONFETTI_HOME, 'config', 'configspecs.yml'), 'w'){|f|f.write configspecs.to_yaml}
+    File.open(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'), 'w'){|f|f.write versions_db.to_yaml}
+    File.open(File.join(CONFETTI_HOME, 'config', 'cs_yaml.yml'), 'w'){|f|f.write cs_yaml.to_yaml}
   end
 
   def originate_versions
