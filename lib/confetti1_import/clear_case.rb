@@ -42,20 +42,7 @@ module Confetti1Import
 
     def parse_configspec(conf_spec)
       splited = conf_spec.map{|cs|cs.split("\s")}.reject{|cs| cs.empty? or cs.size < 4 or cs.detect{|ccs| ccs=~/^#/}}
-
-      splited.map{|cs| {vob: cs[1].to_s.gsub(/(\.){3}|\//,""), version: cs[2]}}
-
-      # clean = conf_spec.map{|cs| cs.gsub(/\s+/, " ")}.reject{|cs|cs.size < 2}
-      # preparsed = clean.map{|cs| cs.split("\s")}
-      # preparsed.shift
-      # preparsed.map do |pp|
-      #   if pp[1].nil? # FIXME: I am ugly 
-      #     puts "Somthing bad in this configspec found. Ignoring this row".red.bold
-      #     ap pp
-      #     next
-      #   end
-      #   {vob: pp[1].gsub(/(\.){3}|\//,""), version: pp[2]}
-      # end
+      splited.map{|cs| {vob: cs[1].to_s[/\w{3,}/], version: cs[2]}}
     end
 
     def ct(*params)

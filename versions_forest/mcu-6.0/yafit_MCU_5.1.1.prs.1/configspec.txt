@@ -1,0 +1,28 @@
+element * CHECKEDOUT
+
+element \MCU\... yafit_MCU_5.1.1.prs.1  -nocheckout
+
+element \RVFC\... RVFC_V2.74_SemFix_2 -nocheckout
+element \RV755_BSP\...  061022_BSP_2.24.3   -nocheckout
+element \DSP\...  MEDIA_MAP_INTEG_1.37_BugFix2 -nocheckout
+
+element \SECURITY\... 220106_security_0.7.6_mocana_based_rev2 -nocheckout
+
+element \MPCsys\... MPC_5.1.1.0.11 -nocheckout
+element \NBU_Megaco\... MEGACO_1.1.0.16P14 -nocheckout
+element \POMP\... pomp_5.1.1.0.11 -nocheckout
+
+element \ADAPTERS\... yafit_int_5.1.1_070107_prs.1 -nocheckout
+element \NBU_H323_STACK\... NBU_H323_STACK_GW_3_0_Build_1 -nocheckout
+element \NBU_SIP_STACK\... NBU_SIP_STACK_GW_3_0_Build_3 -nocheckout
+element \NBU_SCCP_STACK\... adap0.0.21_Flint2 -nocheckout
+
+element \NBU_Config\... liran_DeleteNodeFix -nocheckout
+element \NBU_SW_INFRA\... nbuSw_int1_190906 -nocheckout
+
+element \NBU_BOARD_INFRA\...  nbuBoard_int_5.1_131206 -nocheckout
+element \RVLOGGER\... RVLOGGER_V1.24 -nocheckout
+element \UpgradeUtility\... UU_4_3_10 -nocheckout
+
+element * /main/LATEST
+
