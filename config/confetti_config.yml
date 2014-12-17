@@ -5,40 +5,24 @@
 git: 
   path: '../Workspace/vobs'
   uri:
-  clone: '../Workspace/project'
+  clone: '../Workspace/projects'
   user:
   password:
+  # Files larger then will be ignored (kilobites)
+  ignore_size: 1000000
 
 #Clear Case configraration
 clear_case:
   view_name: 'vtrofymyuk_view1'
   view_location: 'm:'
   versions_input_folder: 'workspace/versions'
-  
+
+
 # Files to be ignored in import
 ignore_list:
-  - 'lost+found'
+  - 'lost+found/'
   - 'lost+found/**/*'
-  - 'Release'
+  - 'Release/'
   - 'lost+found/**/*'
   - 'Release/**/*'
   - '.DS_Store'
-
-test:
-  git: 
-    path: 'test/test_store/vobs'
-    uri:
-    user:
-    password:
-
-  #Clear Case configraration
-  clear_case:
-    view_name: 'vtrofymyuk1'
-    view_location: 'test/mocks'
-    user:
-    password:
-    
-  # Files to be ignored in import
-
-
-

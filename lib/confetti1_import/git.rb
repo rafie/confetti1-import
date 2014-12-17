@@ -7,54 +7,61 @@ module Confetti1Import
       @git_folder = AppConfig.git[:path]
       @view_root = File.join(AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name])
       @ignored = AppConfig.ignore_list
-      @clone = AppConfig.git[:clone]
+      @clone_path = File.expand_path AppConfig.git[:clone]
     end
 
     def init!(vob)
+
       @vob = vob
       @vob_working_tree = File.join @view_root, @vob
-      @git_vob_dot_folder = File.join @git_folder , @vob, ".git"
-
-      unless Dir.exist? vob_working_tree
-        @git_vob_dot_folder
-        return false
-      end
+      @git_vob_folder = File.expand_path(File.join(@git_folder , @vob))
+      @git_vob_dot_folder = File.join @git_vob_folder, ".git"
 
       unless Dir.exist? @git_vob_dot_folder
         FileUtils.makedirs @git_vob_dot_folder
         git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@vob_working_tree} init"
-        in_directory(@vob_working_tree){git 'commit --allow-empty -m"initial commit"'}
+        in_directory(@git_vob_dot_folder){git 'commit --allow-empty -m"initial commit"'}
       end
       @git_vob_dot_folder
     end
 
     def exclude!
-      exclude_path = File.join(@git_vob_dot_folder, 'info', 'exclude')
-      excluded_list = File.read(exclude_path).split(/\n/)
-      return  if @ignored == excluded_list
+      exclude_path = File.join(@git_vob_dot_folder, 'info')
+      if File.exists?(File.join(exclude_path,  'exclude'))
+        excluded_list = File.read(File.join(exclude_path,  'exclude')).split(/\n/)
+        return  if @ignored == excluded_list
+      else
+        FileUtils.mkdir_p(exclude_path)
+      end
       puts "Excluding not needed files: #{@ignored.inspect}"
-      File.open(File.join(@git_vob_dot_folder, 'info', 'exclude'), 'w') do |f|
+      File.open(File.join(exclude_path,  'exclude'), 'w') do |f|
         f << @ignored.join("\n")
       end
     end
 
     def commit_a!(message="Confetti commit")
-      in_directory(@vob_working_tree) do
-        git "add ."
-        git "commit -a -m\"#{message}\""
+      in_directory(@git_vob_folder) do
+        exclusive_status.each do |st_file|
+          if st_file =~ /\w/
+            git 'add', "\"#{st_file}\""
+          else
+            git 'add', st_file
+          end
+        end
+        git "commit -m\"#{message}\""
       end
     end
 
     def tag(tag)
-      in_directory(@vob_working_tree){git "tag", tag}
+      in_directory(@git_vob_folder){git "tag", tag}
     end
 
     def branch(branch_name)
-      in_directory(@vob_working_tree){git "branch", branch_name}
+      in_directory(@git_vob_folder){git "branch", branch_name}
     end
 
     def checkout(thing, b={})
-      in_directory(@vob_working_tree) do 
+      in_directory(@git_vob_folder) do 
         if b[:b]
           git "checkout -b", thing
         else
@@ -63,67 +70,20 @@ module Confetti1Import
       end
     end
 
-
-
     def master
-      in_directory(@vob_working_tree) do
+      in_directory(@git_vob_folder) do
         git "checkout master"
       end
     end
 
-    def status
-      in_directory(@vob_working_tree) do
-        select_files = Proc.new do |files, mask| 
-          files.select{|o| o =~ mask}.map{|o| o.gsub(mask, '')}
-        end
-
-        to_be_commited = lambda{|git_files, mode| select_files.call(git_files, /#{mode}\s\s/)}
-        to_be_added = lambda{|git_files, mode| select_files.call(git_files, /\s#{mode}\s/)}
-        untracked = lambda{|git_files| select_files.call(git_files, /\?\?\s/)}
-        
-        git "status", "--porcelain"
-        return {
-          staged: {
-            modified:   to_be_commited.call(out, 'M'),
-            deleted:    to_be_commited.call(out, 'D'),
-            renamed:    to_be_commited.call(out, 'R'),
-            copied:     to_be_commited.call(out, 'C')
-          },
-          unstaged:{
-            modified:   to_be_added.call(out, 'M'),
-            deleted:    to_be_added.call(out, 'D'),
-            renamed:    to_be_added.call(out, 'R'),
-            copied:     to_be_added.call(out, 'C')
-          },
-          new_files: untracked.call(out)
-        }
-      end
-    end  
-
-    def clone(source, dest)
-      git "clone", source, dest
-      dest
-    end
-
-    def pull(branch=nil)
-      git "pull", "#{branch.nil? ? 'origin'+branch : ''}"
-    end
-
-    def push(branch=nil)
-      git "push", "#{branch.nil? ? 'origin'+branch : ''}"
-    end
-
-    def fetch
-      git "fetch"
-    end
-
     def correct?(repo_name)
-      cloned = File.join @clone, repo_name
-      puts "nothing to test"; return unless Dir.exist? cloned
-      vob_pwd = File.join CONFETTI_HOME, AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name], vob
+      test_clone
+      raise "Repository is not cloned for texting" unless Dir.exist? @cloned_repository
+      vob_pwd = File.join @view_root, @vob
+
       ignored = @ignored + [".git/"]
 
-      result_glob = Dir.glob("#{cloned}/**/*").map{|rg| rg.gsub("#{cloned}/", "")}
+      result_glob = Dir.glob("#{@cloned_repository}/**/*").map{|rg| rg.gsub("#{@cloned_repository}/", "")}
       source_glob = Dir.glob("#{vob_pwd}/**/*").map{|sg| sg.gsub("#{vob_pwd}/", "")}
 
       result_list = Rake::FileList.new(result_glob){|rg| ignored.each{|i| rg.exclude i}}
@@ -133,14 +93,17 @@ module Confetti1Import
       if res
         puts "Repository is imported correctly".green.bold
       else
-        puts "Repository is imported uncorrectly".red.bold
+        puts "Repository is imported incorrectly".red.bold
+        puts "-------- Lost files -------------------------------------------------------"
+        puts (source_list - result_list).join("\n")
+        puts "---------------------------------------------------------------------------"
       end
-      
+      FileUtils.rm_rf(@cloned_repository)
       res
     end
 
     def on_branch?(branch)
-      in_directory(@vob_working_tree) do
+      in_directory(@git_vob_folder) do
         current_branch = git("branch").detect{|br| br =~ /^\*/}.gsub(/^\*\s/, "")
         current_branch == branch
       end
@@ -148,8 +111,40 @@ module Confetti1Import
 
   private
 
+    def test_clone
+      @cloned_repository = File.join @clone_path, @vob
+      git "clone", @git_vob_folder, @cloned_repository
+    end
+
+    def exclusive_status
+      output = in_directory(@git_vob_folder) do
+        res = git('status --porcelain').map{|st|st.gsub(/^(.{1,}\s)/, "")}.map do |out|
+          path_to = File.join(@vob_working_tree, out)
+          if Dir.exist?(File.join(@vob_working_tree, out)) 
+            Dir.glob(File.join(path_to, '**', '*'))
+          else
+            path_to
+          end
+        end
+
+      end
+      status = []
+      output.flatten.each do |f| 
+        if File.size(f) > AppConfig.git[:ignore_size]
+          puts "File '#{f}' is too large for import".yellow
+        elsif File.exist? f
+          status << f
+        else
+          puts "'f' if not a file or directory".red
+        end
+      end
+      status
+    end
+
     def git(*params)
-      command "git", params.join("\s")
+      in_directory(@git_vob_folder) do
+        command 'git', params.join("\s")
+      end
     end
 
     def file_to_add(file_name)

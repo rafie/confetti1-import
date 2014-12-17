@@ -44,7 +44,6 @@ module Confetti1Import
         git.init! cs[:vob]
         git.exclude!
         git.commit_a! "Commit for #{cs[:version]}"
-        git.tag cs[:version]
         git.correct? cs[:vob]
       end
     else
@@ -53,7 +52,7 @@ module Confetti1Import
       git.init! selected_vob[:vob]
       git.exclude!
       git.commit_a! "Commit for #{selected_vob[:version]}"
-      git.correct?
+      git.correct? cs[:vob]
     end
   end
 
