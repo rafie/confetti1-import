@@ -1,0 +1,29 @@
+element \mcu\...		MCU_5.4.4.0.7	                          	-nocheckout
+
+element \adapters\...		ADAPTERS_5.4.4.0.7_051210			-nocheckout
+
+element \dialingInfo\...	DIALINGINFO_5.4.4.0.7_051210 	        	-nocheckout
+
+element \pomp\...		POMP_5.4.4.0.7					-nocheckout
+
+element \MPCsys\...		MPC_5.4.4.0.7_051210				-nocheckout
+
+element \rvfc\...		RVFC_V2.80_AMCU-5				-nocheckout
+element \RV755_BSP\...      	070815_BSP_2.35                                 -nocheckout
+element \dsp\...            	MEDIA_MAP_INTEG_IVP_1.38.2_MAINT4           	-nocheckout
+element \DSP_NG\...         	070220_DPM_MAP_IVP_1.0.50.5             	-nocheckout
+element \dpm\...            	070822_DPM_1.68					-nocheckout
+element \SECURITY\...       	SECURITY_0.8.1_110407_AMCU-1                    -nocheckout
+element \NBU_Megaco\...     	MEGACO_1.1.0.16P21                         	-nocheckout
+element \NBU_H323_STACK\... 	H323_5.5.0.7_CCORE_1.2.21_zBufferCpy3_011107    -nocheckout
+element \NBU_SIP_STACK\...  	SIP_4.5.0.26_CCore_1.2.21_NotifyIdFix_160708    -nocheckout
+element \NBU_SCCP_STACK\... 	SCCP_0.21_AMCU-1                             	-nocheckout
+element \NBU_COMMON_CORE\...    COMMON_CORE_1.2.21_zBufferCpy2_011107        	-nocheckout
+element \NBU_Config\...         tal_IVP_Config_130607                       	-nocheckout
+element \NBU_SW_INFRA\...     	SW_5.4.4.0.7_051210                           	-nocheckout
+element \NBU_BOARD_INFRA\...    BOARD_5.4.4.0.7_051210		             	-nocheckout
+element \RVLOGGER\...           RVLOGGER_V1.27_AMCU-5	        		-nocheckout
+element \upgradeUtility\...     UU_4_3_10_IVP-1                                	-nocheckout
+element \NBU_BUILD\...          nbu-build_1.1-main-8                    	-nocheckout
+element \NMS_New\...            NMS_New_44_MCU_5.4.2.0_160408                	-nocheckout
+

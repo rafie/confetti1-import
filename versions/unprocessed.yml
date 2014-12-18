@@ -1,0 +1,313 @@
+---
+:unprocessed:
+- Google/7.1.2.10.13d/configspec.txt
+- Google/7.1.2.10.13a/configspec.txt
+- Google/7.1.2.10.13e/configspec.txt
+- Google/7.1.2.10.13f/configspec.txt
+- Google/7.1.2.10.13g/configspec.txt
+- Google/7.1.2.10.13h/configspec.txt
+- Google/7.1.2.10.13i/configspec.txt
+- Google/7.1.2.10.13j/configspec.txt
+- Google/7.1.2.10.13k/configspec.txt
+- Google/7.1.2.10.13L/configspec.txt
+- Google/7.1.2.10.13M/configspec.txt
+- Google/7.1.2.10.13N/configspec.txt
+- Engineering patches/7.5.1.10.15/configspec.txt
+- Engineering patches/TI/7.5.1.10.28_TI/configspec.txt
+- Engineering patches/7.5.1.10.24/configspec.txt
+- Engineering patches/7.5.1.10.5NTT/configspec.txt
+- Engineering patches/7.5.1.10.6 - Telstra/configspec.txt
+- Engineering patches/7.5.1.10.8NTT/configspec.txt
+- Engineering patches/7.5.1.10.8NTT3/configspec.txt
+- Engineering patches/7.5.1.10.8NTT4/configspec.txt
+- Engineering patches/7.5.1.10.8NTT5/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.4_CS_Hyundai1/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.4_CS_Hyundai2/configspec.txt
+- Engineering patches/Hyundai/7.5.1.17.71/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix1/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix3/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix4/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix5/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix6/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix7/configspec.txt
+- Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix8/configspec.txt
+- Engineering patches/7.5.1.10.18/configspec.txt
+- Engineering patches/7.5.1.10.13/configspec.txt
+- Engineering patches/7.5.1.10.14/configspec.txt
+- Engineering patches/7.5.1.10.7 - Telstra/configspec.txt
+- Engineering patches/7.5.1.10.9 - Telstra/configspec.txt
+- Engineering patches/7.5.1.10.22/configspec.txt
+- Engineering patches/7.5.1.10.19/configspec.txt
+- Engineering patches/7.5.1.10.16 (AVI-SPL)/configspec.txt
+- Engineering patches/7.5.1.10.21/configspec.txt
+- Engineering patches/7.5.1.10.20/configspec.txt
+- Engineering patches/ALU/7.5.1.10.81/configspec.txt
+- Engineering patches/ALU/7.5.1.10.17/configspec.txt
+- Engineering patches/ALU/7.5.1.10.82/configspec.txt
+- Engineering patches/7.5.1.10.91/configspec.txt
+- Engineering patches/7.5.1.10.8 - Telstra/configspec.txt
+- Engineering patches/7.5.1.10.23/configspec.txt
+- Engineering patches/7.5.1.10.10 - Telstra/configspec.txt
+- Engineering patches/7.5.1.10.27/configspec.txt
+- Engineering patches/7.5.1.10.25/configspec.txt
+- Engineering patches/7.5.1.10.26/configspec.txt
+- Engineering patches/7.5.1.10.28/configspec.txt
+- Engineering patches/7.5.1.10.10 - Telstra2/configspec.txt
+- Engineering patches/7.5.1.10.29/configspec.txt
+- InternalVersions/7.6.0.0.0/configspec.txt
+- InternalVersions/7.6.0.0.2/configspec.txt
+- InternalVersions/7.6.0.11.4/configspec.txt
+- temp/7.6.0.24.tmp_not_to_use/configspec.txt
+- configspec.txt
+- InternalVersions/7.6.0.0.0/configspec.txt
+- InternalVersions/7.6.0.0.2/configspec.txt
+- InternalVersions/7.6.0.11.4/configspec.txt
+- temp/7.6.0.24.tmp_not_to_use/configspec.txt
+- configspec.txt
+- Temporary/7.7.0.14.1/configspec.txt
+- Temporary/7.7.0.10.3_temp/configspec.txt
+- Temporary/7.7.0.14.3/configspec.txt
+- Temporary/7.7.0.16.3/configspec.txt
+- Temporary/7.7.0.16.5/configspec.txt
+- Temporary/7.7.0.16.4/configspec.txt
+- 7.7.0.19.1/Package/configspec.txt
+- Test/Tip_triple/configspec.txt
+- Test/TipGw_Presentation/configspec.txt
+- Test/arc/8.0.0.49.3_Brazil/configspec.txt
+- Test/TIP-GW8.0.0.15.7-superop1/configspec.txt
+- 8.0.0.136.0/Out/configspec.txt
+- 8.0.0.136.1/License/configspec.txt
+- 8.0.0.136.2/License/configspec.txt
+- 8.0.0.139.3/not_to_use/configspec.txt
+- Test/Tip_triple/configspec.txt
+- Test/TipGw_Presentation/configspec.txt
+- Test/arc/8.0.0.49.3_Brazil/configspec.txt
+- Test/TIP-GW8.0.0.15.7-superop1/configspec.txt
+- 8.0.0.136.0/Out/configspec.txt
+- 8.0.0.136.1/License/configspec.txt
+- 8.0.0.136.2/License/configspec.txt
+- 8.0.0.139.3/not_to_use/configspec.txt
+- Temp/AACintegration/6.1/configspec.txt
+- Temp/8.3.0.8.5_forTestingOnly/configspec.txt
+- VLAN/version-5.7.0.VLAN.1/configspec.txt
+- VLAN/version-5.7.0.VLAN.2/configspec.txt
+- VLAN/version-5.7.0.VLAN.3/configspec.txt
+- VLAN/version-5.7.0.VLAN.4/configspec.txt
+- Engineering patches/Hyundai/7.6.0.5.101/configspec.txt
+- Engineering patches/Hyundai/7.6.0.5.102/configspec.txt
+- Engineering patches/Hyundai/7.6.0.11.0201/configspec.txt
+- Engineering patches/IMSS/7.6.0.11.0101/configspec.txt
+- Engineering patches/Yunan Post/7.6.0.7.2Fix3/configspec.txt
+- Engineering patches/Yunan Post/7.6.0.7.2Fix4/configspec.txt
+- Engineering patches/Yunan Post/7.6.0.15.0301/configspec.txt
+- Engineering patches/7.6.0.8.0/configspec.txt
+- Engineering patches/7.6.0.8.1/configspec.txt
+- Engineering patches/7.6.0.9.0/configspec.txt
+- Engineering patches/7.6.0.10.0/configspec.txt
+- Engineering patches/7.6.0.11.0/configspec.txt
+- Engineering patches/7.6.0.13.0/configspec.txt
+- Engineering patches/7.6.0.12.0/configspec.txt
+- Engineering patches/7.6.0.14.0/configspec.txt
+- Engineering patches/7.6.0.17.0/configspec.txt
+- Engineering patches/7.6.0.15.0/configspec.txt
+- Engineering patches/7.6.0.16.0/configspec.txt
+- Engineering patches/7.6.0.18.0/configspec.txt
+- Engineering patches/7.6.0.19.0/configspec.txt
+- Engineering patches/7.6.0.20.0/configspec.txt
+- Engineering patches/7.6.1.5.0TI1/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.0.0/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.0/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.1/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.10/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.10.5/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.11/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.2/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.3/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.4/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.5/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.6/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.6_plusFeatures/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.6-tamar/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.7/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.8/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.9/configspec.txt
+- 1.0.0.x/AMCU_1.0.0.1.8_Enhanced_PM/configSpec.txt
+- 6.0.0.0.x/AMCU_6.0.0.0.12/configspec.txt
+- 6.0.0.0.x/AMCU_6.0.0.0.12-tamar-1/configspec.txt
+- 6.0.0.1.x/6.0.0.1.11/configspec.txt
+- 6.0.0.1.x/6.0.0.1.12/configspec.txt
+- 6.0.0.1.x/6.0.0.1.13/configspec.txt
+- 6.0.0.1.x/6.0.0.1.14/configspec.txt
+- 6.0.0.1.x/6.0.0.1.15/configspec.txt
+- 6.0.0.1.x/6.0.0.1.16/configspec.txt
+- 6.0.0.1.x/6.0.0.1.17/configspec.txt
+- 6.0.0.1.x/6.0.0.1.17b/configspec.txt
+- 6.0.0.1.x/6.0.0.1.18/configspec.txt
+- 6.0.0.1.x/6.0.0.1.19/configspec.txt
+- 6.0.0.1.x/6.0.0.1.19b/configspec.txt
+- 6.0.0.1.x/6.0.0.1.20/configspec.txt
+- 6.0.0.1.x/6.0.0.1.21/configspec.txt
+- 6.0.0.1.x/6.0.0.1.22/configspec.txt
+- 6.0.0.1.x/6.0.0.1.23/configspec.txt
+- 6.0.0.2.x/6.0.0.2.12/configspec.txt
+- 6.0.0.2.x/6.0.0.2.13/configspec.txt
+- 6.0.0.2.x/6.0.0.2.21/configspec.txt
+- 6.0.0.3.2x/6.0.0.3.24/configspec.txt
+- 6.0.0.3.2x/6.0.0.3.25/configspec.txt
+- 6.0.0.3.2x/6.0.0.3.26/configSpec.txt
+- 6.0.0.3.2x/6.0.0.3.27/configspec.txt
+- 6.0.0.3.2x/6.0.0.3.28/configspec.txt
+- 6.0.0.3.2x/6.0.0.3.29/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.30/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.30b/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.31/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.32/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.33/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.35/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.36/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.36b/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.37/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.38/configspec.txt
+- 6.0.0.3.3x/6.0.0.3.39/configspec.txt
+- custom/udia_AMCU_1.6_Adap_1/configspec.txt
+- custom/udia_AMCU_1.6_Adap_2/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.50/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.51/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.52/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.52a/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.53/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.54/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.55/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.56/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.57/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.58/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.59/configspec.txt
+- 6.0.0.3.5x/6.0.0.3.59a/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.60/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.60a/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.61/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.62/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.63/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.63a/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.64/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.65/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.66/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.67/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.68/configspec.txt
+- 6.0.0.3.6x/6.0.0.3.69/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.40/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.41/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.41a/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.42/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.43/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.44/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.45/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.45-rc/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.46/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.47/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.47-rc/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.48/configspec.txt
+- 6.0.0.3.4x/6.0.0.3.49/configspec.txt
+- 6.0.0.3.9x/6.0.0.3.90/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.70/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.71/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.72/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.73/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.73a/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.73b/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.73b1/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.74/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.75/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.76/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.77/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.78/configspec.txt
+- 6.0.0.3.7x/6.0.0.3.79/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.80/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.80a/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.81/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.81a/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.82/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.83/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.84/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.84a/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.84b/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.85/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.85b/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.86/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.86a/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.87/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.88/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.88a/configspec.txt
+- 6.0.0.3.8x/6.0.0.3.89/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.19/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10_RCD/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10a/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10b/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10d/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10e/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10f/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10g/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10i/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.11/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.11a/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.11b/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.12/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.13/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.13a/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.14/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.15/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.15_RCD/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.15b/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.15c/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.16/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.16a/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.17/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.18/configspec.txt
+- 6.2.0.0.x/6.2.0.0.2/configspec.txt
+- 6.2.0.0.x/6.2.0.0.3/configspec.txt
+- 6.2.0.0.x/6.2.0.0.4/configspec.txt
+- 6.2.0.0.x/6.2.0.0.5/configspec.txt
+- 6.2.0.0.x/6.2.0.0.6/configspec.txt
+- 6.2.0.0.x/6.2.0.0.6a/configspec.txt
+- 6.2.0.0.x/6.2.0.0.7/configspec.txt
+- 6.2.0.0.x/6.2.0.0.7a/configspec.txt
+- 6.2.0.0.x/6.2.0.0.8/configspec.txt
+- 6.2.0.0.x/6.2.0.0.9/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.19/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10_RCD/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10a/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10b/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10d/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10e/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10f/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10g/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.10i/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.11/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.11a/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.11b/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.12/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.13/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.13a/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.14/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.15/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.15_RCD/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.15b/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.15c/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.16/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.16a/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.17/configspec.txt
+- 6.2.0.0.1x/6.2.0.0.18/configspec.txt
+- 6.2.0.0.x/6.2.0.0.2/configspec.txt
+- 6.2.0.0.x/6.2.0.0.3/configspec.txt
+- 6.2.0.0.x/6.2.0.0.4/configspec.txt
+- 6.2.0.0.x/6.2.0.0.5/configspec.txt
+- 6.2.0.0.x/6.2.0.0.6/configspec.txt
+- 6.2.0.0.x/6.2.0.0.6a/configspec.txt
+- 6.2.0.0.x/6.2.0.0.7/configspec.txt
+- 6.2.0.0.x/6.2.0.0.7a/configspec.txt
+- 6.2.0.0.x/6.2.0.0.8/configspec.txt
+- 6.2.0.0.x/6.2.0.0.9/configspec.txt
+:not_found:
+- r:\Mcu_Ngp\Versions_8.X\VCGW-.3.2

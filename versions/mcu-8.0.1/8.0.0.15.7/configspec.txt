@@ -1,0 +1,47 @@
+element * CHECKEDOUT
+
+element /web/...                      WebMcu_8.0.0_55_230212.7724
+
+element /mvp/...                      mvp_8.0.0.15.5
+element /mpc/...                      mpc_8.0.0.15.0
+element /map/...                      map_8.0.0.15.0
+element /mf/...                       mf_8.0.0.15.2
+element /mpInfra/...                  mpInfra_8.0.0.15.2
+element /NBU_FEC/...                  ucgw_nbuFec_7.7.0.15.0
+element /NBU_RTP_RTCP_STACK/...       avatar_NBU_RTP_RTCP_STACK_8.0.0.13.0 
+element /NBU_ICE/...                  ucgw_nbuIce_7.7.0.15.0 
+
+element /mpDsp/...                    Avatar_integ_2012Feb23__8.0.0.15.6
+element /dspIntelInfra/...            Avatar_integ_2012Feb23__8.0.0.15.6
+element /dspNetraInfra/...            Avatar_integ_2012Feb23__8.0.0.15.6
+element /dspIcsVideo/...              Avatar_integ_2012Feb23__8.0.0.15.6
+element /dspInfra/...                 Avatar_integ_2012Feb23__8.0.0.15.6
+element /dspNetraVideo/...            Avatar_integ_2012Feb23__8.0.0.15.6
+element /NetraVideoCODEC/...          Avatar_integ_2012Feb23__8.0.0.15.6
+
+element /swAudioCodecs/...            ucgw_swAudioCodecs_7.7.0.4.0 
+
+element /NBU_COMMON_CORE/...          nbuCCore_4.4.8 
+element /NBU_SIP_STACK/...            nbuSip_6.0.3 
+element /NBU_H323_STACK/...           nbuH323_7.0.2 
+
+element /boardInfra/...               boardInfra_0.86.1_Avatar_16
+element /swInfra/...                  swInfra_0.112.2_Avatar_10 
+element /rvfc/...                     rvfc_2.97.2_Avatar_4 
+element /configInfra/...              configInfra_1.4.1 
+element /loggerInfra/...              loggerInfra_1.37.2_Avatar_1 
+element /nbu.contrib/...              nbu.contrib_1.4.6
+ 
+element /securityApp/...              securityApp_0.10.3
+element /bspLinuxIntel/...            120215_AVATAR_HOST_1.0.0.5.4
+element /bspLinuxARM/...              120215_NETRA_0.1.13 
+
+element /freemasonBuild/...           freemasonBuild_1.4.9
+element /nbu.tests/...                nbu.tests_1.2.0
+
+element /mcu/...                      mcu_8.0.0.15.7
+element /adapters/...                 adapter_7.49.19
+element /dialingInfo/...              vlad_dialingInfo_7.40_hp
+element /mediaCtrlInfo/...            mediaCtrlInfo_7.41.8
+element /nbu.proto.jingle-stack/...   nbu.proto.jingle-stack_1.7.3
+

@@ -126,72 +126,37 @@ module Confetti1Import
 
   def build_versions
     versions_config = YAML.load_file File.join CONFETTI_HOME, 'config', 'versions.yml'
-    forest_location = File.join(Dir.getwd, "versions")
-    configspecs = []
-    current_pwd = Dir.getwd
-    versions_config["locations"].each do |versions_location|
-      Dir.chdir(versions_location)
-      tmp_version_folder = Dir.getwd
-      configspecs << Dir.glob(File.join('**', 'configspec.txt')).map{|csdir|File.join(tmp_version_folder, csdir)}
-    end
-    Dir.chdir current_pwd
-    versions_db = {}
-    brocken = []
-    cs_yaml = []
-    clear_case = ClearCase.new
-    configspecs.flatten.each do |confspec|
-
-      configspec_node = clear_case.configspec(confspec).detect do |cs|
-        cs[:vob] =~ /(mcu)|(vcgw)|(ucgw)/i
-      end
-
-      if configspec_node.nil?
-        cs_yaml << clear_case.configspec(confspec)
-        brocken << confspec
-        next
-      end
-      version_item = {}
-      version_item['version'] = {
-        'path' => confspec.to_s, 
-        'version' => configspec_node[:version].to_s, 
-        'name' => configspec_node[:vob].to_s.gsub(/\W/, "")
-      }
-      version_family = versions_config['versions'].detect do |v|
-        vob_name = v[/\w{3,}/]
-        version = v[/((\w\.)+\w).+/]
-
-        "#{version_item['version']['version']}" =~ Regexp.new(
-          Regexp.escape("#{vob_name}_#{version}"), Regexp::IGNORECASE
-        )
-      end
-
-      if version_family
-        if versions_db[version_family.to_s].nil?
-          versions_db[version_family.to_s] = [version_item]
-        else
-          versions_db[version_family.to_s] << version_item
+    forest_location = File.expand_path(File.join(Dir.getwd, "versions"))
+    current_wd = Dir.getwd
+    wrong = {unprocessed: [], not_found:[]}
+    versions_config.each_pair do |int_branch, locations|
+      puts "-> for #{int_branch}"
+      int_branch_location = File.join(forest_location, int_branch.downcase)
+      Dir.mkdir(int_branch_location)
+      File.open(File.join(int_branch_location, 'dir'), 'w'){|f|f.write(int_branch_location)}
+      locations.each do |location|
+        begin
+          Dir.chdir location
+        rescue Errno::ENOENT => e
+          puts e.message.to_s.red
+          wrong[:not_found] << location
+          next 
+        end
+        Dir.glob(File.join('**', 'configspec.txt')).each do |cs_location|
+          splited_location = cs_location.split(/(\\)|\//)
+          if splited_location.size == 2
+            db_version_place = File.join(int_branch_location, splited_location.first)
+            Dir.mkdir(db_version_place)
+            FileUtils.cp(cs_location, File.join(db_version_place, 'configspec.txt'))
+          else
+            puts "#{cs_location} has subfolders. Processing next location".yellow
+            wrong[:unprocessed] << cs_location
+          end
         end
       end
     end
-    
-    Dir.mkdir(forest_location) unless Dir.exist? forest_location
-    versions_db.each_pair do |version_key, version_value|
-      br_dir = File.join(forest_location, version_key)
-      Dir.mkdir(br_dir)
-      File.open(File.join(br_dir, "int_branch.txt"), "w"){|f|f.write("#{version_key}_int_br")}
-      version_value.each do |vdbv|
-        version_dir = File.join(br_dir, vdbv["version"]["version"])
-        next if Dir.exists? version_dir
-        Dir.mkdir(version_dir)
-        FileUtils.cp(vdbv["version"]["path"], File.join(version_dir, "configspec.txt"))
-      end
-
-    end
-
-    File.open(File.join(CONFETTI_HOME, 'config', 'brocken.yml'), 'w'){|f|f.write brocken.to_yaml}
-    File.open(File.join(CONFETTI_HOME, 'config', 'configspecs.yml'), 'w'){|f|f.write configspecs.to_yaml}
-    File.open(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'), 'w'){|f|f.write versions_db.to_yaml}
-    File.open(File.join(CONFETTI_HOME, 'config', 'cs_yaml.yml'), 'w'){|f|f.write cs_yaml.to_yaml}
+    Dir.chdir current_wd
+    File.open(File.join(forest_location, 'unprocessed.yml'), 'w'){|f|f.write(wrong.to_yaml)}
   end
 
   def originate_versions

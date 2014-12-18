@@ -32,7 +32,7 @@ VCGW-8.3.2:
   - 'r:\Mcu_Ngp\Versions_8.X\VCGW-.3.2'
 
 
-# S:
+# C/S:
 
 MCU-4.5.0:
  - 'r:\Mcu_Ngp\Customer Support\Patches\V4\V.4.5\Release'
@@ -87,4 +87,3 @@ MCU-6.2:
  - 'r:\Mcu_Audio\Versions\Alta\Software_Versions'
 MCU-6.5:
  - 'r:\Mcu_Audio\Versions\Alta\Software_Versions'
-
