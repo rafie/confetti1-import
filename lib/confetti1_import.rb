@@ -34,17 +34,14 @@ module Confetti1Import
   end
 
   def init
-    clear_case = ClearCase.new
+    #clear_case = ClearCase.new
     git = Git.new
-    current_configspec = clear_case.configspec
-
-
-    puts "Imorting #{current_configspec.size} VOBs..."
-    git.init_view
-    clear_case.configspec.each_with_index do |cs|
-      git.exclude!
-      git.commit_a! "Commit for #Imported VOB: #{selected_vob[:vob]}-#{selected_vob[:version]}"
-    end
+    #current_configspec = clear_case.configspec
+    git.init_or_get_repository_for_view
+    git.exclude!
+    # clear_case.configspec.each_with_index do |cs|
+    #   git.commit_a! "Commit for #Imported VOB: #{selected_vob[:vob]}-#{selected_vob[:version]}"
+    # end
   end
 
   def import_to_git
