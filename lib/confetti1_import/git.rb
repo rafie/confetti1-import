@@ -6,30 +6,31 @@ module Confetti1Import
     def initialize
       @git_folder = AppConfig.git[:path]
       @view_root = File.join(AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name])
-      @ignored = AppConfig.ignore_list
+      @ignore_list = AppConfig.ignore_list
       @clone_path = File.expand_path AppConfig.git[:clone]
+      @exclude_file_size = AppConfig.git(:ignore_size)
     end
 
-    def init_view
-      @git_view_dot_folder = File.join(@git_vob_folder, '.git')
+    def init_or_get_repository_for_view
+      @git_dot_folder ||= File.join(@git_folder, '.git')
+      @exclude_file_location ||= File.join(@git_view_dot_folder, '.git', 'info', 'exclude')
       FileUtils.mkdir_p(@git_vob_folder)
-
-      git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@view_root} init"
-      in_directory(@git_vob_folder){git 'commit --allow-empty -m"initial commit"'}
+      if File.exist? @exclude_file_location
+        git "--git-dir=#{@git_dot_folder} --work-tree=#{@view_root} init"
+        in_directory(@git_folder){git 'commit --allow-empty -m"initial commit"'}
+      end
+      @git_dot_folder
     end
 
     def exclude!
-      exclude_path = File.join(@git_vob_dot_folder, 'info')
-      if File.exists?(File.join(exclude_path,  'exclude'))
-        excluded_list = File.read(File.join(aexclude_path,  'exclude')).split(/\n/)
-        return  if @ignored == excluded_list
-      else
-        FileUtils.mkdir_p(exclude_path)
+      puts "GIT repository is not initialized. Exiting."; return false; unless File.exist?(@exclude_file_location) 
+      to_exclude = []
+      in_directory(@view_root) do
+        Dir.glob(File.join('**', '*')).each do |view_file|
+          to_exclude = File.expand_path if File.size(view_file) > @exclude_file_size.to_i
+        end
       end
-      puts "Excluding not needed files: #{@ignored.inspect}"
-      File.open(File.join(exclude_path,  'exclude'), 'w') do |f|
-        f << @ignored.join("\n")
-      end
+      File.open(@exclude_file_location, 'w'){|f| f.write(to_exclude.join("\n"))}
     end
 
     def commit_a!(message="Confetti commit")
