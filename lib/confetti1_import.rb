@@ -33,26 +33,17 @@ module Confetti1Import
     end
   end
 
-  def init(for_what={})
+  def init
     clear_case = ClearCase.new
     git = Git.new
     current_configspec = clear_case.configspec
-    puts current_configspec
-    if for_what.empty?
-      puts "Imorting #{current_configspec.size} VOBs..."
-      clear_case.configspec.each_with_index do |cs|
-        git.init! cs[:vob]
-        git.exclude!
-        git.commit_a! "Commit for #{cs[:version]}"
-        git.correct? cs[:vob]
-      end
-    else
-      selected_vob = current_configspec.detect{|cs| cs[:vob] == for_what}
-      puts "Oops, seems to be we've lost this VOB."; return if selected_vob.empty?
-      git.init! selected_vob[:vob]
+
+
+    puts "Imorting #{current_configspec.size} VOBs..."
+    git.init_view
+    clear_case.configspec.each_with_index do |cs|
       git.exclude!
-      git.commit_a! "Commit for #{selected_vob[:version]}"
-      git.correct? cs[:vob]
+      git.commit_a! "Commit for #Imported VOB: #{selected_vob[:vob]}-#{selected_vob[:version]}"
     end
   end
 
@@ -96,33 +87,6 @@ module Confetti1Import
       end
     end
   end
-
-
-  def find_versions
-    version_inpt = AppConfig.clear_case[:versions_input_folder]
-    input_map = []
-    FileUtils.mkdir_p(version_out)
-    Dir.glob("#{version_inpt}/**").each do |entry|
-      entry_name = entry.split("/").last
-      dir_path = File.read(File.join(entry, 'dir'))
-      entry_clean_name = entry_name.split("-").first
-      Dir.open(dir_path).entries.reject{|ee| !(ee =~ /(\d\.)+/)}.each do |cs_folder|
-        source_cs = File.join(dir_path, cs_folder, 'configspec.txt')
-        dst_cs = File.join(entry, cs_folder)
-        FileUtils.mkdir_p dst_cs
-        begin
-          FileUtils.cp(source_cs, dst_cs)
-        rescue Errno::ENOENT
-          FileUtils.rm_rf dst_cs
-          puts "File '#{source_cs}' was not found".red.bold
-          next
-        end
-        File.open(File.join(entry, 'int_branch.txt'), 'w'){ |f| f << "#{entry_name}_int_br"}
-        puts "Copied '#{source_cs}' to '#{dst_cs}'".green.bold
-      end
-    end
-  end
-
 
   def build_versions
     versions_config = YAML.load_file File.join CONFETTI_HOME, 'config', 'versions.yml'

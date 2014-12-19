@@ -26,10 +26,6 @@ module Confetti1Import
       raise out if out =~ /^cleartool\:\sError\:/
     end
 
-    def mkview
-      out = ct "mkview -raw -name", @view_name
-    end
-
     def mount
       out = command("set", "v=#{@view_path}")
     end

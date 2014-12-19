@@ -10,25 +10,18 @@ module Confetti1Import
       @clone_path = File.expand_path AppConfig.git[:clone]
     end
 
-    def init!(vob)
+    def init_view
+      @git_view_dot_folder = File.join(@git_vob_folder, '.git')
+      FileUtils.mkdir_p(@git_vob_folder)
 
-      @vob = vob
-      @vob_working_tree = File.join @view_root, @vob
-      @git_vob_folder = File.expand_path(File.join(@git_folder , @vob))
-      @git_vob_dot_folder = File.join @git_vob_folder, ".git"
-
-      unless Dir.exist? @git_vob_dot_folder
-        FileUtils.makedirs @git_vob_dot_folder
-        git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@vob_working_tree} init"
-        in_directory(@git_vob_dot_folder){git 'commit --allow-empty -m"initial commit"'}
-      end
-      @git_vob_dot_folder
+      git "--git-dir=#{@git_vob_dot_folder} --work-tree=#{@view_root} init"
+      in_directory(@git_vob_folder){git 'commit --allow-empty -m"initial commit"'}
     end
 
     def exclude!
       exclude_path = File.join(@git_vob_dot_folder, 'info')
       if File.exists?(File.join(exclude_path,  'exclude'))
-        excluded_list = File.read(File.join(exclude_path,  'exclude')).split(/\n/)
+        excluded_list = File.read(File.join(aexclude_path,  'exclude')).split(/\n/)
         return  if @ignored == excluded_list
       else
         FileUtils.mkdir_p(exclude_path)
@@ -117,11 +110,12 @@ module Confetti1Import
     end
 
     def exclusive_status
+      @exclude_list = []
       output = in_directory(@git_vob_folder) do
         res = git('status --porcelain').map{|st|st.gsub(/^(.{1,}\s)/, "")}.map do |out|
           path_to = File.join(@vob_working_tree, out)
           if Dir.exist?(File.join(@vob_working_tree, out)) 
-            Dir.glob(File.join(path_to, '**', '*'))
+            @exclude_list << Dir.glob(File.join(path_to, '**', '*'))
           else
             path_to
           end
@@ -145,10 +139,6 @@ module Confetti1Import
       in_directory(@git_vob_folder) do
         command 'git', params.join("\s")
       end
-    end
-
-    def file_to_add(file_name)
-      File.join Dir.pwd, @vob_working_tree, file_name
     end
 
   end

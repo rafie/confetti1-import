@@ -3,7 +3,7 @@
 # Configure GIT
 
 git: 
-  path: '../Workspace/vobs'
+  path: '../confetti_repo'
   uri:
   clone: '../Workspace/projects'
   user:
