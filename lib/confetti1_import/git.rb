@@ -51,7 +51,7 @@ module Confetti1Import
       test_clone
       raise "Repository is not cloned for testing" unless Dir.exist? @cloned_repository
       result_glob = Dir.glob("#{@cloned_repository}/**/*").map{|rg| rg.gsub("#{@cloned_repository}/", "")}
-      source_glob = Dir.glob("#{vob_pwd}/**/*").map{|sg| sg.gsub("#{@view_root}/", "")}
+      source_glob = Dir.glob("#{@view_root}/**/*").map{|sg| sg.gsub("#{@view_root}/", "")}
       puts (source_glob - result_glob)
     end
 
