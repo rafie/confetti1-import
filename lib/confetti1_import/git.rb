@@ -52,7 +52,9 @@ module Confetti1Import
       raise "Repository is not cloned for testing" unless Dir.exist? @cloned_repository
       result_glob = Dir.glob("#{@cloned_repository}/**/*").map{|rg| rg.gsub("#{@cloned_repository}/", "")}
       source_glob = Dir.glob("#{@view_root}/**/*").map{|sg| sg.gsub("#{@view_root}/", "")}
-      puts (source_glob - result_glob)
+      trees_difference = source_glob - result_glob
+      exlude_list = File.read(@exclude_file_location).split("\n")
+      puts trees_difference - exlude_list
     end
 
     def on_branch?(branch)
