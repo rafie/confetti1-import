@@ -14,7 +14,7 @@ module Confetti1Import
   extend self
 
   CONFETTI_HOME = File.expand_path(File.join("..", ".."), __FILE__)
-  CONFETTI_WORKSPACE = File.join CONFETTI_HOME,"workspace" 
+  CONFETTI_WORKSPACE = File.join CONFETTI_HOME,"workspace"
 
   
   module AppConfig

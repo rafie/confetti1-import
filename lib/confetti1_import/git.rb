@@ -66,7 +66,7 @@ module Confetti1Import
 
     def test_clone
       @cloned_repository = File.join @clone_path, "cloned"
-      git "clone", @view_root, @cloned_repository
+      git "clone", @git_folder, @cloned_repository
     end
 
     def status
