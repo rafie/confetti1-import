@@ -30,6 +30,7 @@ module Confetti1Import
       to_exclude = @ignore_list
       in_directory(@view_root) do
         Dir.glob(File.join('**', '*')).each do |view_file|
+          next if
           if File.exist?(view_file) and (File.size(view_file) > @exclude_file_size.to_i)
             to_exclude << view_file
           end
@@ -50,11 +51,21 @@ module Confetti1Import
       puts "Started test"
       test_clone
       raise "Repository is not cloned for testing" unless Dir.exist? @cloned_repository
-      result_glob = Dir.glob("#{@cloned_repository}/**/*").map{|rg| rg.gsub("#{@cloned_repository}/", "")}
-      source_glob = Dir.glob("#{@view_root}/**/*").map{|sg| sg.gsub("#{@view_root}/", "")}
-      trees_difference = source_glob - result_glob
-      exlude_list = File.read(@exclude_file_location).split("\n")
-      puts trees_difference - exlude_list
+
+      result_glob = Dir.glob(File.join(@cloned_repository, '**', '*'))
+      result_files = result_glob.select{|rg|File.exist?(rg)}
+
+      source_glob = Dir.glob(File.join(@view_root, '**', '*'))
+      source_files = source_glob.select{|sg|File.exist?(sg) and (File.size(sg) < AppConfig.git[:ignore_size])}
+      
+      puts "Result size: #{result_files.size}"
+      puts "Source size: #{source_files.size}"
+
+      # diffs =  (source_glob - result_glob)
+      # puts "------------------------> #{(source_glob == result_glob).inspect}"
+      # File.open('diff_list.txt', 'w'){|f|f.write(diffs.join("\n"))}
+      # File.open('source_list.txt', 'w'){|f|f.write(source_glob.join("\n"))}
+      # File.open('result_list.txt', 'w'){|f|f.write(result_glob.join("\n"))}
     end
 
     def on_branch?(branch)

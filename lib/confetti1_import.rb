@@ -34,9 +34,7 @@ module Confetti1Import
   end
 
   def init
-    clear_case = ClearCase.new
     git = Git.new
-    current_configspec = clear_case.configspec
     git.init_or_get_repository_for_view
     git.exclude!
     git.commit_a! "Flat commit. Demo version"

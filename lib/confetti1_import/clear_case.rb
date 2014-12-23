@@ -38,7 +38,14 @@ module Confetti1Import
 
     def parse_configspec(conf_spec)
       splited = conf_spec.map{|cs|cs.split("\s")}.reject{|cs| cs.empty? or cs.size < 4 or cs.detect{|ccs| ccs=~/^#/}}
-      splited.map{|cs| {vob: cs[1].to_s[/\w{3,}/], version: cs[2]}}
+      splited.map do |cs| 
+        vob_name = cs[1].to_s[/\w{3,}/]
+        {
+          vob: vob_name, 
+          version: cs[2],
+          path: File.join(@view_path, vob_name)
+        } 
+      end
     end
 
     def ct(*params)

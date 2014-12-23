@@ -9,7 +9,7 @@ git:
   user:
   password:
   # Files larger then will be ignored (bites)
-  ignore_size: 1000000
+  ignore_size: 1000
 
 #Clear Case configraration
 clear_case:
@@ -21,8 +21,5 @@ clear_case:
 # Files to be ignored in import
 ignore_list:
   - 'lost+found/'
-  - 'lost+found/**/*'
   - 'Release/'
-  - 'lost+found/**/*'
-  - 'Release/**/*'
   - '.DS_Store'
