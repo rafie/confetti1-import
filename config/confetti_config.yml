@@ -7,3 +7,6 @@ git_path: 'm:\vtrofymyuk_view1\git'
 exclude_size: 1000000
 ignore_list:
   - ['**', 'lost+found', '**', '*']
+  - ['**', 'lost+found', '*']
+  - ['**', 'Release', 'bin', '**', '*']
+  - ['**', 'Release', 'bin', '*']

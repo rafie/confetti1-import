@@ -10,7 +10,8 @@ module Confetti1Import
       small_files = []
       ignored = []
       current_dir = Dir.getwd
-      ignore_list = AppConfig.ignore_list
+      ignore_list = ConfettiEnv.ignore_list
+      puts "Scanning view ----> #{@view_path}"
       Dir.glob(File.join(@view_path, '**', '*')).each do |view_entry|
 
         unless ignore_list.select{|il| File.fnmatch(File.join(@view_path, il), view_entry)}.empty?
@@ -18,16 +19,17 @@ module Confetti1Import
           next
         end
 
-        if File.size(view_entry) > AppConfig.git[:ignore_size]
+        if File.size(view_entry) > ConfettiEnv.exclude_size
           small_files << view_entry
         else
           big_files << view_entry
         end
 
       end
-      File.open(File.join(CONFETTI_HOME, 'config', 'small.txt'), 'w'){|f| f.write(small_files.join("\n"))}
-      File.open(File.join(CONFETTI_HOME, 'config', 'big.txt'), 'w'){|f| f.write(big_files.join("\n"))}
-      File.open(File.join(CONFETTI_HOME, 'config', 'ignored.txt'), 'w'){|f| f.write(ignored.join("\n"))}
+      File.open(File.join(ConfettiEnv.home, 'config', 'small.txt'), 'w'){|f| f.write(small_files.join("\n"))}
+      File.open(File.join(ConfettiEnv.home, 'config', 'big.txt'), 'w'){|f| f.write(big_files.join("\n"))}
+      File.open(File.join(ConfettiEnv.home, 'config', 'ignored.txt'), 'w'){|f| f.write(ignored.join("\n"))}
+      {ignored: ignored, big_files: big_files, small_files: small_files}
     end
 
 
