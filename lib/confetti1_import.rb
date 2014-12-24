@@ -13,24 +13,49 @@ require 'rake'
 module Confetti1Import
   extend self
 
-  CONFETTI_HOME = File.expand_path(File.join("..", ".."), __FILE__)
-  CONFETTI_WORKSPACE = File.join CONFETTI_HOME,"workspace"
+  # CONFETTI_HOME = File.expand_path(File.join("..", ".."), __FILE__)
+  # CONFETTI_WORKSPACE = File.join CONFETTI_HOME,"workspace"
 
-  
-  module AppConfig
+
+  # ---  Old configuration  ----------------------------------------------------------
+  # module AppConfig
+  #   extend self
+  #   attr_reader :settings
+
+  #   @settings = YAML.load_file(File.join("config", "confetti_config.yml"))
+  #   @settings.each_pair do |sk, sv|
+  #     define_method(sk.to_sym) do
+  #       unless sv.is_a? Array
+  #         sv.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
+  #       else
+  #         sv
+  #       end
+  #     end
+  #   end
+  # end
+  # ----------------------------------------------------------------------------------
+
+  module ConfettiEnv
     extend self
-    attr_reader :settings
 
-    @settings = YAML.load_file(File.join("config", "confetti_config.yml"))
-    @settings.each_pair do |sk, sv|
-      define_method(sk.to_sym) do
-        unless sv.is_a? Array
-          sv.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
-        else
-          sv
-        end
-      end
+    @@home_dir = File.expand_path(File.join("..", ".."), __FILE__)
+
+    def home
+      @@home_dir
     end
+
+    def workspace
+      File.join(@@home_dir, 'workspace')
+    end
+
+    def git_path
+      ENV["GIT_PATH"]
+    end
+
+    def view_path
+      ENV["VIEW_PATH"] || Dir.getwd
+    end
+
   end
 
   def init
