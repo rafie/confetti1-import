@@ -2,8 +2,8 @@
 #----------------------------------------
 # Configure GIT
 
-view_path: 'm:\vtrofymyuk_view1'
-git_path: 'm:\vtrofymyuk_view1\git'
+view_path: 'm:/vtrofymyuk_view1'
+git_path: 'm:/vtrofymyuk_view1\git'
 exclude_size: 1000000
 ignore_list:
   - ['**', 'lost+found', '**', '*']

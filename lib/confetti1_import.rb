@@ -1,4 +1,3 @@
-#require 'rubygems'
 require "confetti1_import/base"
 require "confetti1_import/cli"
 require "confetti1_import/clear_case"
@@ -28,11 +27,11 @@ module Confetti1Import
     end
 
     def git_path
-      ENV["GIT_PATH"] || @@default_conf['git_path']
+      ENV['GIT_PATH'] || @@default_conf['git_path']
     end
 
     def view_path
-      ENV["VIEW_PATH"] || @@default_conf['view_path']
+      ENV['VIEW_PATH'] || @@default_conf['view_path']
     end
 
     def exclude_size
@@ -43,6 +42,10 @@ module Confetti1Import
       @@default_conf['ignore_list']
     end
 
+    def clone_path
+      ENV['CLONE_PATH'] || File.join(@@home_dir, 'workspace', 'cloned')
+    end
+
   end
 
   def scan_view
@@ -51,11 +54,13 @@ module Confetti1Import
   end
 
   def init
+    clear_case = ClearCase.new
+    sorted_files_list = clear_case.scan
     git = Git.new
-    git.init_or_get_repository_for_view
-    git.exclude!
-    git.commit_a! "Flat commit. Demo version"
-    git.correct?
+    git.init
+    git.exclude!(sorted_files_list[:ignored] + sorted_files_list[:big_files])
+    git.commit(sorted_files_list[:small_files], 'Flat commit. Demo version')
+    git.correct?(sorted_files_list[:small_files])
   end
 
   #TODO: Apply new configuration
