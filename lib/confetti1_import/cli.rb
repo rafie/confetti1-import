@@ -15,7 +15,6 @@ module Confetti1Import
     alias_method :c, :console
 
     def init(*argv)
-      #args = argv.flatten
       Confetti1Import.init
     end
 

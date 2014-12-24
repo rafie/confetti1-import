@@ -13,32 +13,11 @@ require 'rake'
 module Confetti1Import
   extend self
 
-  # CONFETTI_HOME = File.expand_path(File.join("..", ".."), __FILE__)
-  # CONFETTI_WORKSPACE = File.join CONFETTI_HOME,"workspace"
-
-
-  # ---  Old configuration  ----------------------------------------------------------
-  # module AppConfig
-  #   extend self
-  #   attr_reader :settings
-
-  #   @settings = YAML.load_file(File.join("config", "confetti_config.yml"))
-  #   @settings.each_pair do |sk, sv|
-  #     define_method(sk.to_sym) do
-  #       unless sv.is_a? Array
-  #         sv.inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
-  #       else
-  #         sv
-  #       end
-  #     end
-  #   end
-  # end
-  # ----------------------------------------------------------------------------------
-
   module ConfettiEnv
     extend self
 
     @@home_dir = File.expand_path(File.join("..", ".."), __FILE__)
+    @@default_conf = YAML.load_file(File.join(@@home_dir, "config", "confetti_config.yml"))
 
     def home
       @@home_dir
@@ -49,11 +28,19 @@ module Confetti1Import
     end
 
     def git_path
-      ENV["GIT_PATH"]
+      ENV["GIT_PATH"] || @@default_conf['git_path']
     end
 
     def view_path
-      ENV["VIEW_PATH"] || Dir.getwd
+      ENV["VIEW_PATH"] || @@default_conf['view_path']
+    end
+
+    def exclude_size
+      ENV['EXCLUDE_SIZE'] || @@default_conf['exclude_size']
+    end
+
+    def ignore_list
+      @@default_conf['ignore_list']
     end
 
   end

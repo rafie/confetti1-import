@@ -2,12 +2,7 @@ module Confetti1Import
   class ClearCase < Base
 
     def initialize
-      @view_name =  AppConfig.clear_case[:view_name]
-      @view_location =  AppConfig.clear_case[:view_location]
-      @view_path = File.join @view_location, @view_name  
-
-      #FIXME: Should be deteled on real configspec
-      #@tmp_configspec = File.read(File.join(@view_location, @view_name, "configspec"))
+      @view_path = ConfettiEnv.view_path
     end
 
     def configspec(parse_file=nil)
@@ -24,14 +19,6 @@ module Confetti1Import
       out = ""
       in_directory(@view_path){out = ct("setcs", cs_file)}
       raise out if out =~ /^cleartool\:\sError\:/
-    end
-
-    def mount
-      out = command("set", "v=#{@view_path}")
-    end
-
-    def mount(vob_tag="--all")
-      ct "mount", vob_tag
     end
 
   private

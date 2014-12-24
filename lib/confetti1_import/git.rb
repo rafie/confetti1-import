@@ -1,37 +1,36 @@
 module Confetti1Import
   class Git < Base
 
-    attr_reader :vob_working_tree
-
     def initialize
-      @git_folder = File.expand_path(AppConfig.git[:path])
-      @view_root = File.join(AppConfig.clear_case[:view_location], AppConfig.clear_case[:view_name])
-      @ignore_list = AppConfig.ignore_list
-      @clone_path = File.expand_path AppConfig.git[:clone]
-      @exclude_file_size = AppConfig.git[:ignore_size]
+      @git_path        = ConfettiEnv.git_path
+      @git_dot_folder  = File.join(@git_path, '.git')
+      @exclude_file    = File.join(@git_dot_folder, 'info', 'exclude')
+      @view_path       = ConfettiEnv.view_path
+      @ignore_list     = ConfettiEnv.ignore_list
+      @exclude_size    = ConfettiEnv.exclude_size
+      @clone_path      = File.join(AppConfig.workspace, 'testing_repo')
     end
 
     def init_or_get_repository_for_view
-      @git_dot_folder ||= File.join(@git_folder, '.git')
-      @exclude_file_location ||= File.join(@git_dot_folder, 'info', 'exclude')
+
       puts "Import started.."
       unless File.exist?(@exclude_file_location)
         puts "Initialing empty git repository.."
         FileUtils.mkdir_p(@git_folder)
-        git "--git-dir=#{@git_dot_folder} --work-tree=#{@view_root} init"
-        in_directory(@git_folder){git 'commit --allow-empty -m"initial commit"'}
+        git "--git-dir=#{@git_dot_folder} --work-tree=#{@view_path} init"
+        in_directory(@git_path){git 'commit --allow-empty -m"initial commit"'}
       end
       puts "Initialized"
       @git_dot_folder
     end
 
     def exclude!
-      puts "Excluding files bigger then #{@exclude_file_size} bites"
+      puts "Excluding files bigger then #{@exclude_size} bites"
       to_exclude = @ignore_list
-      in_directory(@view_root) do
+      in_directory(@view_path) do
         Dir.glob(File.join('**', '*')).each do |view_file|
           next if
-          if File.exist?(view_file) and (File.size(view_file) > @exclude_file_size.to_i)
+          if File.exist?(view_file) and (File.size(view_file) > @exclude_size)
             to_exclude << view_file
           end
         end
@@ -43,7 +42,7 @@ module Confetti1Import
       puts "Commiting to repository"
       in_directory(@view_root) do
         git 'add .'  
-        git "commit -a -m\"#{message}\""
+        git "commit -m\"#{message}\""
       end
     end
 
@@ -56,7 +55,7 @@ module Confetti1Import
       result_files = result_glob.select{|rg|File.exist?(rg)}
 
       source_glob = Dir.glob(File.join(@view_root, '**', '*'))
-      source_files = source_glob.select{|sg|File.exist?(sg) and (File.size(sg) < AppConfig.git[:ignore_size])}
+      source_files = source_glob.select{|sg|File.exist?(sg) and (File.size(sg) < @exclude_size)}
       
       puts "Result size: #{result_files.size}"
       puts "Source size: #{source_files.size}"
@@ -79,15 +78,15 @@ module Confetti1Import
 
     def test_clone
       @cloned_repository = File.join @clone_path, "cloned"
-      git "clone", @git_folder, @cloned_repository
+      git "clone", @git_path, @cloned_repository
     end
 
     def status
-      output = in_directory(@view_root){git('status --porcelain').map{|st| st =~ /^\s\w\s/}}
+      output = in_directory(@view_path){git('status --porcelain').map{|st| st =~ /^\s\w\s/}}
     end
 
     def git(*params)
-      in_directory(@git_folder) do
+      in_directory(@git_path) do
         command 'git', params.join("\s")
       end
     end

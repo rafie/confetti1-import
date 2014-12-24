@@ -2,24 +2,8 @@
 #----------------------------------------
 # Configure GIT
 
-git: 
-  path: '../confetti_repo'
-  uri:
-  clone: '../Workspace/projects'
-  user:
-  password:
-  # Files larger then will be ignored (bites)
-  ignore_size: 1000
-
-#Clear Case configraration
-clear_case:
-  view_name: 'vtrofymyuk_view1'
-  view_location: 'm:'
-  versions_input_folder: 'workspace/versions'
-
-
-# Files to be ignored in import
+view_path: 'm:\vtrofymyuk_view1'
+git_path: 'm:\vtrofymyuk_view1\git'
+exclude_size: 1000000
 ignore_list:
-  - 'lost+found/'
-  - 'Release/'
-  - '.DS_Store'
+  - ['**', 'lost+found', '**', '*']
