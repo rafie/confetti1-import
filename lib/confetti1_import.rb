@@ -53,49 +53,50 @@ module Confetti1Import
     git.correct?
   end
 
-  def import_to_git
-    git = Git.new
-    clear_case = ClearCase.new
-    working_folder = AppConfig.clear_case[:versions_input_folder]
-    Dir.glob(File.join(working_folder, "**")).each do |mcu|
+  #TODO: Apply new configuration
+  # def import_to_git
+  #   git = Git.new
+  #   clear_case = ClearCase.new
+  #   working_folder = AppConfig.clear_case[:versions_input_folder]
+  #   Dir.glob(File.join(working_folder, "**")).each do |mcu|
 
-      branch_name = File.read(File.join(mcu, 'int_branch.txt')).strip
+  #     branch_name = File.read(File.join(mcu, 'int_branch.txt')).strip
 
-      Dir.glob(File.join(mcu, "**")).each do |version|
+  #     Dir.glob(File.join(mcu, "**")).each do |version|
 
-        next unless Dir.exist? version
-        configspec_path = File.join version, 'configspec.txt'
-        raise "Can not found configspec" unless File.exist? configspec_path
+  #       next unless Dir.exist? version
+  #       configspec_path = File.join version, 'configspec.txt'
+  #       raise "Can not found configspec" unless File.exist? configspec_path
         
-        puts "Applying configspec for #{version}"
-        clear_case.configspec = File.expand_path configspec_path
-        configspec = clear_case.configspec
-        mcu_vob = configspec.detect{|cs|cs[:vob] == 'mcu'}
+  #       puts "Applying configspec for #{version}"
+  #       clear_case.configspec = File.expand_path configspec_path
+  #       configspec = clear_case.configspec
+  #       mcu_vob = configspec.detect{|cs|cs[:vob] == 'mcu'}
 
-        configspec.each do |cs|
-          git.init! cs[:vob]
-          unless git.on_branch? branch_name
-            git.checkout branch_name, b: true
-          else
-            git.checkout branch_name
-          end
+  #       configspec.each do |cs|
+  #         git.init! cs[:vob]
+  #         unless git.on_branch? branch_name
+  #           git.checkout branch_name, b: true
+  #         else
+  #           git.checkout branch_name
+  #         end
 
-          print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
-          #clear_case.mount cs[:vob]
-          raise "Cannot init" unless git.init! cs[:vob]
+  #         print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
+  #         #clear_case.mount cs[:vob]
+  #         raise "Cannot init" unless git.init! cs[:vob]
 
-          print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'done'.green.bold}  ]\r"
-          puts ""
-          git.exclude!
-          git.commit_a! cs[:version]
-          git.tag version
-        end
-      end
-    end
-  end
+  #         print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'done'.green.bold}  ]\r"
+  #         puts ""
+  #         git.exclude!
+  #         git.commit_a! cs[:version]
+  #         git.tag version
+  #       end
+  #     end
+  #   end
+  # end
 
   def build_versions
-    versions_config = YAML.load_file File.join CONFETTI_HOME, 'config', 'versions.yml'
+    versions_config = YAML.load_file(File.join(ConfettiEnv.home, 'config', 'versions.yml'))
     forest_location = File.expand_path(File.join(Dir.getwd, "versions"))
     current_wd = Dir.getwd
     wrong = {unprocessed: [], not_found:[]}
@@ -129,13 +130,13 @@ module Confetti1Import
     File.open(File.join(forest_location, 'unprocessed.yml'), 'w'){|f|f.write(wrong.to_yaml)}
   end
 
-  def originate_versions
-    versions = YAML.load_file(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'))
-    versions.each_value do |branch|
-      branch.each do |version|
-        `ruby brsource.rb #{version['name']}-#{version['version']}`
-      end
-    end
-  end
+  # def originate_versions
+  #   versions = YAML.load_file(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'))
+  #   versions.each_value do |branch|
+  #     branch.each do |version|
+  #       `ruby brsource.rb #{version['name']}-#{version['version']}`
+  #     end
+  #   end
+  # end
 
 end                                                
