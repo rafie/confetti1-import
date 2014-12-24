@@ -1,5 +1,0 @@
-small vobs:
-adapters
-loggerInfra
-rvfc
-swInfra

@@ -45,6 +45,11 @@ module Confetti1Import
 
   end
 
+  def scan_view
+    clear_case = ClearCase.new
+    clear_case.scan
+  end
+
   def init
     git = Git.new
     git.init_or_get_repository_for_view

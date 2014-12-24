@@ -26,6 +26,10 @@ module Confetti1Import
       Confetti1Import.originate_versions
     end
 
+    def scan(*argv)
+      Confetti1Import.scan_view
+    end
+
     def method_missing(meth, *args, &block)
       puts "Command not found: #{meth}"
     end
