@@ -22,8 +22,11 @@ ignore_list - lists of ignorable files as array:
 Available environment variables
 -------------------------------
 **GIT_PATH** - overrides git_path
-**VIEW_PATH** - overrides view_path 
+
+**VIEW_PATH** - overrides view_path
+
 **EXCLUDE_SIZE** - overrides exclude_size
+
 **CLONE_PATH** - path to clone imported repository for testing. NOTE: it should not be the same as GIT_PATH or application working directory.
 
 How to run
