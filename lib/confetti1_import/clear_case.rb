@@ -48,6 +48,13 @@ module Confetti1Import
       raise out if out =~ /^cleartool\:\sError\:/
     end
 
+    def inside_view(*params, &block)
+      raise 'No block given' unless block_given?
+      in_directory(@view_path) do
+        yield
+      end
+    end
+
   private
 
     def parse_configspec(conf_spec)
