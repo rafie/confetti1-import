@@ -46,6 +46,10 @@ module Confetti1Import
       ENV['CLONE_PATH'] || File.join(@@home_dir, 'workspace', 'cloned')
     end
 
+    def handle_big
+      ENV['HANDLE_BIG']
+    end
+
   end
 
   def scan_view
@@ -58,17 +62,18 @@ module Confetti1Import
     sorted_files_list = clear_case.scan
 
     small_git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
-    big_git = Git.new(path: File.join(ConfettiEnv.git_path, 'big'))
-
-    [small_git, big_git].each do |git|
-      git.init
-      git.exclude!(sorted_files_list[:ignored])
-    end
-
+    small_git.init
+    small_git.exclude!(sorted_files_list[:ignored])
     small_git.commit(sorted_files_list[:small_files], 'A cup of coffee')
-    big_git.commit(sorted_files_list[:big_files], 'A cup of coffee with a cake')
     small_git.correct?(sorted_files_list[:small_files], 'small')
-    big_git.correct?(sorted_files_list[:big_files], 'big')
+
+    if ConfettiEnv.handle_big
+      big_git = Git.new(path: File.join(ConfettiEnv.git_path, 'big'))
+      big_git.init
+      big_git.exclude!(sorted_files_list[:ignored])
+      big_git.commit(sorted_files_list[:big_files], 'A cup of coffee with a cake')
+      big_git.correct?(sorted_files_list[:big_files], 'big')
+    end
   end
 
   def build_versions

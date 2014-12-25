@@ -29,6 +29,8 @@ Available environment variables
 
 **CLONE_PATH** - path to clone imported repository for testing. NOTE: it should not be the same as GIT_PATH or application working directory.
 
+**HANDLE_BIG** - import to GIT files bigger then EXCLUDE_SIZE
+
 How to run
 ----------
 After environment variables configuration run:
