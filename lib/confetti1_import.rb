@@ -46,6 +46,10 @@ module Confetti1Import
       ENV['CLONE_PATH'] || File.join(@@home_dir, 'workspace', 'cloned')
     end
 
+    def versions_path
+      ENV['VERSIONS_PATH'] || File.join(@@home_dir, 'workspace', 'versions')
+    end
+
   end
 
   def scan_view
@@ -140,13 +144,15 @@ module Confetti1Import
     File.open(File.join(forest_location, 'unprocessed.yml'), 'w'){|f|f.write(wrong.to_yaml)}
   end
 
-  # def originate_versions
-  #   versions = YAML.load_file(File.join(CONFETTI_HOME, 'config', 'versions_db.yml'))
-  #   versions.each_value do |branch|
-  #     branch.each do |version|
-  #       `ruby brsource.rb #{version['name']}-#{version['version']}`
-  #     end
-  #   end
-  # end
+  def originate_versions
+    Dir.glob(File.join(ConfettiEnv.versions_path, '**')).each do |branch|
+      puts "Branch--> #{File.read(File.join(branch, 'int_branch.txt'))}"
+      next unless File.directory?(branch)
+      Dir.glob(File.join(branch, '**')).each do |label|
+        puts "----> Label #{label}"
+      end
+    end 
+    
+  end
 
 end                                                
