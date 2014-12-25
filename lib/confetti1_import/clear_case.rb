@@ -14,6 +14,10 @@ module Confetti1Import
       puts "Scanning view ----> #{@view_path}"
       Dir.glob(File.join(@view_path, '**', '*')).each do |view_entry|
         next if File.directory?(view_entry)
+        unless File.exist?(view_entry)
+          puts "File #{view_entry} is not found".red.bold
+          next
+        end
         unless ignore_list.select{|il| File.fnmatch(File.join(@view_path, il), view_entry)}.empty?
           ignored << view_entry
           next
@@ -25,9 +29,12 @@ module Confetti1Import
         end
 
       end
-      # File.open(File.join(ConfettiEnv.home, 'config', 'small.txt'), 'w'){|f| f.write(small_files.join("\n"))}
-      # File.open(File.join(ConfettiEnv.home, 'config', 'big.txt'), 'w'){|f| f.write(big_files.join("\n"))}
-      # File.open(File.join(ConfettiEnv.home, 'config', 'ignored.txt'), 'w'){|f| f.write(ignored.join("\n"))}
+      puts "WARNING: #{ignored.size} files will be ignored:"
+      ignored.each{|i|print "#{i},\s"}
+      puts
+      File.open(File.join(ConfettiEnv.home, 'config', 'small.txt'), 'w'){|f| f.write(small_files.join("\n"))}
+      File.open(File.join(ConfettiEnv.home, 'config', 'big.txt'), 'w'){|f| f.write(big_files.join("\n"))}
+      File.open(File.join(ConfettiEnv.home, 'config', 'ignored.txt'), 'w'){|f| f.write(ignored.join("\n"))}
       {ignored: ignored, big_files: big_files, small_files: small_files}
     end
 

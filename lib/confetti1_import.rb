@@ -56,11 +56,19 @@ module Confetti1Import
   def init
     clear_case = ClearCase.new
     sorted_files_list = clear_case.scan
-    git = Git.new
-    git.init
-    git.exclude!(sorted_files_list[:ignored] + sorted_files_list[:big_files])
-    git.commit(sorted_files_list[:small_files], 'Flat commit. Demo version')
-    git.correct?(sorted_files_list[:small_files])
+
+    small_git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
+    big_git = Git.new(path: File.join(ConfettiEnv.git_path, 'big'))
+
+    [small_git, big_git].each do |git|
+      git.init
+      git.exclude!(sorted_files_list[:ignored])
+    end
+
+    small_git.commit(sorted_files_list[:small_files], 'A cup of coffee')
+    big_git.commit(sorted_files_list[:big_files], 'A cup of coffee with a cake')
+    small_git.correct?(sorted_files_list[:small_files], 'small')
+    big_git.correct?(sorted_files_list[:big_files], 'big')
   end
 
   def build_versions

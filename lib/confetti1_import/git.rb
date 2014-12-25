@@ -1,8 +1,9 @@
 module Confetti1Import
   class Git < Base
 
-    def initialize
-      @git_path        = ConfettiEnv.git_path
+    def initialize(args={})
+      @git_path        = args[:path] || ConfettiEnv.git_path
+
       @git_dot_folder  = File.join(@git_path, '.git')
       @exclude_file    = File.join(@git_dot_folder, 'info', 'exclude')
       @view_path       = ConfettiEnv.view_path
@@ -12,7 +13,6 @@ module Confetti1Import
     end
 
     def init
-
       puts "Import started.."
       unless File.exist?(@exclude_file)
         puts "Initialing empty git repository.."
@@ -48,9 +48,9 @@ module Confetti1Import
       end
     end
 
-    def correct?(file_list)
+    def correct?(file_list, place=nil)
       puts "Started test"
-      test_clone
+      test_clone(place)
       raise "Repository is not cloned for testing" unless Dir.exist? @cloned_repository
       small_files = file_list.map{|fl| fl.gsub(@view_path, '')}
       cloned_files = in_directory(@cloned_repository){command('git ls-files')}.map{|cl| cl.gsub(@cloned_repository, '')}
@@ -84,8 +84,8 @@ module Confetti1Import
       FileUtils.rm_rf @cloned_repository
     end
 
-    def test_clone
-      @cloned_repository = ConfettiEnv.clone_path
+    def test_clone(path=nil)
+      @cloned_repository = File.join([ConfettiEnv.clone_path, path].compact)
       git "clone", @git_dot_folder, @cloned_repository
     end
 
