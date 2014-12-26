@@ -108,14 +108,15 @@ module Confetti1Import
     puts "originating -----> #{ConfettiEnv.versions_path}"
     clear_case = ClearCase.new
     Dir.glob(File.join(ConfettiEnv.home, 'versions', '**')).each do |branch|
-      puts "Branch--> #{branch}" #" #{File.read(File.join(branch, 'int_branch.txt'))}"
+      #puts "Branch--> #{File.read(File.join(branch, 'int_branch.txt'))}"
       next unless File.directory?(branch)
       Dir.glob(File.join(branch, '**')).each do |label|
         next unless File.directory? label
+        puts File.join(label, 'configspec.txt')
         clear_case.configspec = File.join(label, 'configspec.txt')
         clear_case.inside_view do
-          brsource = `ruby #{File.join(ConfettiEnv.home, 'brsource.rb')}`
-          File.open(File.join(label, 'origin.txt'), 'w'){|f|f.write(brsource)}
+          puts `ruby #{File.join(ConfettiEnv.home, 'brsource.rb')} mcu_#{label}`
+          #File.open(File.join(label, 'origin.txt'), 'w'){|f|f.write(brsource)}
         end
       end
     end 
