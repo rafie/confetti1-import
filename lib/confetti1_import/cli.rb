@@ -31,7 +31,7 @@ module Confetti1Import
     end
 
     def scan_to_yaml(*argv)
-      Confetti1Import.scan_view_to_yaml
+      Confetti1Import.scan_to_yaml
     end
 
     def method_missing(meth, *args, &block)

@@ -57,12 +57,12 @@ module Confetti1Import
     clear_case.scan
   end
 
-  def scan_view
+  def scan_to_yaml
     clear_case = ClearCase.new
     clear_case.scan_to_yaml
   end
 
-  def init
+  def old_init
     clear_case = ClearCase.new
     sorted_files_list = clear_case.scan
 
@@ -79,6 +79,21 @@ module Confetti1Import
       big_git.commit(sorted_files_list[:big_files], 'A cup of coffee with a cake')
       big_git.correct?(sorted_files_list[:big_files], 'big')
     end
+  end
+
+  def init
+    clear_case = ClearCase.new
+    clear_case.scan_to_yaml
+    small_git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
+
+    small_git.init
+    small_git.exclude!(YAML.load_file(File.join(ConfettiEnv.home, 'config', 'ignored.yml')))
+    small_map = YAML.load_file(File.join(ConfettiEnv.home, 'config', 'small.yml'))
+    small_map.each_pair do |version, files|
+      puts " ---> commiting #{version}".green.bold
+      small_git.commit(files, version)
+    end
+    small_git.correct?(small_map.values.flatten, 'small')
   end
 
   def build_versions

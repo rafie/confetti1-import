@@ -41,7 +41,7 @@ module Confetti1Import
     def scan_to_yaml
       big_files = {}
       small_files = {}
-      ignored = {}
+      ignored = []
 
       current_dir = ConfettiEnv.home
       ignore_list = ConfettiEnv.ignore_list
@@ -49,12 +49,11 @@ module Confetti1Import
       configspec = self.configspec
 
       configspec.each do |cs|
-        current_version = "#{rand(10000)}_vob-#{cs[:vob]}-#{cs[:version]}"
+        current_version = "#{rand(10000)}_vob_#{cs[:vob]}_#{cs[:version]}"
         big_vob_files = []
         small_vob_files = []
-        ignored_vob_files = []
 
-        Dir.glob(cs[:path], '**', '*')).each do |vob_entry|
+        Dir.glob(File.join(cs[:path], '**', '*')).each do |vob_entry|
           next if File.directory?(vob_entry)
 
           unless File.exist?(vob_entry)
@@ -63,11 +62,9 @@ module Confetti1Import
           end
 
           unless ignore_list.select{|il| File.fnmatch(File.join(@view_path, il), vob_entry)}.empty?
-            ignored_vob_files << vob_entry
+            ignored << vob_entry
             next
           end
-
-          current_file
 
           if File.size(vob_entry) < ConfettiEnv.exclude_size
             small_vob_files << vob_entry
@@ -76,12 +73,11 @@ module Confetti1Import
           end
 
         end #globb
-        big_files[current_version] = big_vob_files
-        small_files[current_version] = small_vob_files
-        ignored[current_version] = small_vob_files
+        big_files.merge!(current_version => big_vob_files) unless big_vob_files.empty?
+        small_files.merge!(current_version => small_vob_files) unless small_vob_files.empty?
       end# configspec
 
-      File.open(File.join(ConfettiEnv.home, 'config', 'small.yml'), 'w'){|f| f.write(small_files.to_yaml}
+      File.open(File.join(ConfettiEnv.home, 'config', 'small.yml'), 'w'){|f| f.write(small_files.to_yaml)}
       File.open(File.join(ConfettiEnv.home, 'config', 'big.yml'), 'w'){|f| f.write(big_files.to_yaml)}
       File.open(File.join(ConfettiEnv.home, 'config', 'ignored.yml'), 'w'){|f| f.write(ignored.to_yaml)}
     end
