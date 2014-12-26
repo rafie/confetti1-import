@@ -30,6 +30,10 @@ module Confetti1Import
       Confetti1Import.scan_view
     end
 
+    def scan_to_yaml(*argv)
+      Confetti1Import.scan_view_to_yaml
+    end
+
     def method_missing(meth, *args, &block)
       puts "Command not found: #{meth}"
     end

@@ -38,6 +38,54 @@ module Confetti1Import
       {ignored: ignored, big_files: big_files, small_files: small_files}
     end
 
+    def scan_to_yaml
+      big_files = {}
+      small_files = {}
+      ignored = {}
+
+      current_dir = ConfettiEnv.home
+      ignore_list = ConfettiEnv.ignore_list
+
+      configspec = self.configspec
+
+      configspec.each do |cs|
+        current_version = "#{rand(10000)}_vob-#{cs[:vob]}-#{cs[:version]}"
+        big_vob_files = []
+        small_vob_files = []
+        ignored_vob_files = []
+
+        Dir.glob(cs[:path], '**', '*')).each do |vob_entry|
+          next if File.directory?(vob_entry)
+
+          unless File.exist?(vob_entry)
+            puts "File #{vob_entry} is not found".red.bold
+            next
+          end
+
+          unless ignore_list.select{|il| File.fnmatch(File.join(@view_path, il), vob_entry)}.empty?
+            ignored_vob_files << vob_entry
+            next
+          end
+
+          current_file
+
+          if File.size(vob_entry) < ConfettiEnv.exclude_size
+            small_vob_files << vob_entry
+          else
+            big_vob_files << vob_entry
+          end
+
+        end #globb
+        big_files[current_version] = big_vob_files
+        small_files[current_version] = small_vob_files
+        ignored[current_version] = small_vob_files
+      end# configspec
+
+      File.open(File.join(ConfettiEnv.home, 'config', 'small.yml'), 'w'){|f| f.write(small_files.to_yaml}
+      File.open(File.join(ConfettiEnv.home, 'config', 'big.yml'), 'w'){|f| f.write(big_files.to_yaml)}
+      File.open(File.join(ConfettiEnv.home, 'config', 'ignored.yml'), 'w'){|f| f.write(ignored.to_yaml)}
+    end
+
 
     def configspec(parse_file=nil)
       out=""

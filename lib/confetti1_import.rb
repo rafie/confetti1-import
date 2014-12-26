@@ -57,6 +57,11 @@ module Confetti1Import
     clear_case.scan
   end
 
+  def scan_view
+    clear_case = ClearCase.new
+    clear_case.scan_to_yaml
+  end
+
   def init
     clear_case = ClearCase.new
     sorted_files_list = clear_case.scan
