@@ -1,0 +1,89 @@
+element * CHECKEDOUT
+
+element \mcu\... 5.7.0.VLAN.4   -nocheckout
+
+element \NMS_New\... /main/LATEST
+element \nms\... nms_17_MCU_5.7.0_050409 -nocheckout
+
+element \rvfc\... RVFC_V2.81 -nocheckout
+element \dsp\... MEDIA_MAP_INTEG_1.37_BugFix4_MAINT2 -nocheckout
+
+element \RV755_BSP\... /main/LATEST
+element \bsp755\... 081103_BSP_2.35_1 -nocheckout
+
+element \DSP_NG\... /main/LATEST
+element \dspC64Audio\... 070624_DPM_MAP_1.0.49_MCU_5_1_MAINT2_BSP_2.34b_DPM_167 -nocheckout
+element \dpm\... 070822_DPM_1.67 -nocheckout
+
+element \SECURITY\... /main/LATEST
+element \securityApp\... 180208_amib_mocana_based_FINAL_Freemason -nocheckout
+
+element \MPCsys\... 	/main/LATEST
+element \mpc\... MPC_5.7.0.0.3 -nocheckout
+
+element \pomp\... 	pomp_5.7.0.VLAN.1    -nocheckout
+
+element \adapters\...   adap_Unified_mcu_5.7.0.0.12    -nocheckout
+
+element \NBU_H323_STACK\... H323_STACK_5.5.1.7b_CCore_1.3.5_AliasRegistration_281208 -nocheckout
+
+element \NBU_Megaco\... /main/LATEST
+element \megacoOld\... MEGACO_1.1.0.16P17 -nocheckout
+
+element \NBU_SIP_STACK\... SIP_4.5.0.26_CCORE_1.3.5_zBufferCpy_Dora-1_270508 -nocheckout
+element \NBU_SCCP_STACK\... mcu5.6_SCCP_1.1.0_Unified_060408 -nocheckout
+element \dialingInfo\... DI_6.0.09.09.09_Unified_8_110308 -nocheckout
+
+element \NBU_Config\... /main/LATEST
+element \configInfra\... Itay_MCU_5_6_0_0_18_IncreaseConfigPoolSize2 -nocheckout
+
+element \NBU_SW_INFRA\... /main/LATEST
+element \swInfra\... amib_MCU_12_02_08 -nocheckout
+
+element \NBU_BOARD_INFRA\... /main/LATEST
+element \boardInfra\... boardInfra_5.7.0.VLAN.1 -nocheckout
+
+element \RVLOGGER\... /main/LATEST
+element \loggerInfra\... RVLOGGER_V1.27_AMCU-3 -nocheckout
+
+element \upgradeUtility\... upgradeUtility_int_5.7.0.0.9_150109 -nocheckout
+
+element \NBU_MEDIA_CTRL_INFRA\... /main/LATEST
+element \mediaCtrlInfo\... MEDIA_CTRL_6.0.03.03.03_Unified_2_100108 -nocheckout
+
+element \NBU_COMMON_CORE\... COMMON_CORE_1.3.5_zBufferCpy_241207 -nocheckout
+
+element \freemasonBuild\... nbu-build_1.1-main-8 -nocheckout
+
+element \NBU_BUILD\... /main/LATEST
+
+
+load \mcu
+load \NMS_New
+load \upgradeUtility
+load \RVLOGGER
+load \adapters
+load \NBU_SW_INFRA
+load \swInfra
+load \NBU_BOARD_INFRA
+load \boardInfra
+load \NBU_H323_STACK
+load \NBU_SIP_STACK
+load \NBU_SCCP_STACK
+load \NBU_Megaco
+load \NBU_Config
+load \MPCsys
+load \SECURITY
+load \RV755_BSP
+load \bsp755
+load \dsp
+load \DSP_NG
+load \dpm
+load \rvfc
+load \NBU_MEDIA_CTRL_INFRA
+load \pomp
+load \NBU_COMMON_CORE
+load \dialingInfo
+load \freemasonBuild
+load \NBU_BUILD
+

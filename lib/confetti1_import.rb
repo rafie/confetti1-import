@@ -98,13 +98,13 @@ module Confetti1Import
 
   def build_versions
     versions_config = YAML.load_file(File.join(ConfettiEnv.home, 'config', 'versions.yml'))
-    forest_location = File.expand_path(File.join(Dir.getwd, "versions"))
+    forest_location = File.expand_path(File.join(ConfettiEnv.home, "versions"))
     current_wd = Dir.getwd
     wrong = {unprocessed: [], not_found:[]}
     versions_config.each_pair do |int_branch, locations|
       puts "-> for #{int_branch}"
       int_branch_location = File.join(forest_location, int_branch.downcase)
-      Dir.mkdir(int_branch_location)
+      Dir.mkdir(int_branch_location) unless Dir.exist?(int_branch_location)
       File.open(File.join(int_branch_location, 'dir'), 'w'){|f|f.write(int_branch_location)}
       locations.each do |location|
         begin
@@ -115,20 +115,24 @@ module Confetti1Import
           next 
         end
         Dir.glob(File.join('**', 'configspec.txt')).each do |cs_location|
-          splited_location = cs_location.split(/(\\)|\//)
-          if splited_location.size == 2
-            db_version_place = File.join(int_branch_location, splited_location.first)
-            Dir.mkdir(db_version_place)
+          begin
+            splited_location = cs_location.split(/(\\)|\//)
+            cs_index = splited_location.rindex{|sl|sl=~ /configspec.txt/i}
+            unless cs_index
+              puts "Wrong location: '#{cs_location}'".red.bold
+              next
+            end
+            db_version_place = File.join(int_branch_location, splited_location[cs_index-1])
+            Dir.mkdir(db_version_place) unless Dir.exist?(db_version_place)
             FileUtils.cp(cs_location, File.join(db_version_place, 'configspec.txt'))
-          else
-            puts "#{cs_location} has subfolders. Processing next location".yellow
-            wrong[:unprocessed] << cs_location
+          rescue Exception => e
+            puts "#{e.class}: #{e.message}".red.bold
+            next
           end
         end
       end
     end
     Dir.chdir current_wd
-    File.open(File.join(forest_location, 'unprocessed.yml'), 'w'){|f|f.write(wrong.to_yaml)}
   end
 
 end                                                

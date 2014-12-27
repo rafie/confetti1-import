@@ -1,0 +1,36 @@
+element * CHECKEDOUT
+
+element /MCU/... AMCU.6.0.0.2.12                             
+
+element /NBU_Config/... NBU_Config_AMCU-TAMAR_100407
+
+element /NMS_New/... MCU_NMS_AMCU-TAMAR_100407
+
+element /MPCsys/... MPCsys_AMCU-TAMAR_100407
+element /POMP/...   POMP_AMCU-TAMAR_100407
+element /DSP/...    MEDIA_MAP_AMCU-TAMAR_100407
+element /DSP_NG/... 061031_DPM_MAP_1.0.48_AAC_BugFix2
+
+element /ADAPTERS/...        ADAPTERS_pre_5.2.4.4.4_Freemason
+element /DialingInfo/...     DI_pre_5.2.4.4.4_Freemason
+element /NBU_COMMON_CORE/... COMMON_CORE_1.2.14_pre_Freemason
+element /NBU_H323_STACK/...  H323_5.5.0.7_CCORE_1.2.14_pre_Freemason
+element /NBU_SIP_STACK/...   SIP_4.5.0.18_CCORE_1.2.14_pre_Freemason
+element /NBU_SCCP_STACK/...  adap0.0.21_Flint2_NewInfra
+
+element /NBU_Megaco/... MEGACO_AMCU-TAMAR_100407
+
+element /NBU_SW_INFRA/... NBU_SW_INFRA_AMCU-TAMAR_100407
+element /RVLOGGER/...     RVLOGGER_V1.27
+element /RVFC/...         RVFC_V2.77
+element /SECURITY/...     110407_0.8.1_mocana_based__WB_stub_no_win_REV3
+
+element /NBU_BOARD_INFRA/... NBU_BOARD_INFRA_AMCU-TAMAR_100407
+element /RV755_BSP/...       061022_BSP_2.24.3_FREEMASON
+element /TAMAR_BSP/...       070401_TAMAR_0.0.1.5_2
+
+element /UpgradeUtility/... UU_4_3_10
+
+element /NBU_BUILD/... freemason-4.0.1
+
+element * /main/LATEST

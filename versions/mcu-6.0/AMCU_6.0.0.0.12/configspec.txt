@@ -1,0 +1,39 @@
+element * CHECKEDOUT
+
+element \MCU\... 		AMCU.6.0.0.0.12		 		-nocheckout
+element \RVFC\...		RVFC_V2.76				-nocheckout
+element \RV755_BSP\...		061022_BSP_2.24.3			-nocheckout
+element \DSP\...  		MEDIA_MAP_INTEG_1.37_BugFix2 		-nocheckout
+element \SECURITY\...		220106_security_0.7.6_mocana_based_rev2 -nocheckout
+element \MPCsys\... 		AMCU_10019_MPCsys_2007_02_12            -nocheckout
+element \NBU_Megaco\... 	MEGACO_1.1.0.16P14 			-nocheckout
+element \POMP\... 		POMP_AMCU_100111_210207			-nocheckout
+element \ADAPTERS\... 		ADAPTERS_5.1.10.10.10_AMCU_Kepler_7_040307         -nocheckout
+element \DialingInfo\...	DI_5.1.5.5.5_AMCU_Kepler_4_300107       -nocheckout
+element \NBU_H323_STACK\...	NBU_H323_STACK_GW_3_0_Build_1		-nocheckout
+element \NBU_SIP_STACK\...	NBU_SIP_STACK_GW_3_0_Build_3		-nocheckout
+element \NBU_SCCP_STACK\...	adap0.0.21_Flint2_NewInfra		-nocheckout
+element \NBU_Config\... 	giladl_AMCU.1.0.0.1.11_configuration_cycle_2 			-nocheckout
+element \NBU_SW_INFRA\...	0.0.53					-nocheckout
+element \NBU_BOARD_INFRA\...	NBU_BOARD_INFRA_AMCU_201206		-nocheckout
+element \RVLOGGER\...		RVLOGGER_V1.26				-nocheckout
+element \UpgradeUtility\... 	UU_4_3_10 				-nocheckout
+
+load \MCU
+load \RVFC
+load \RV755_BSP
+load \DSP
+load \SECURITY
+load \MPCsys
+load \NBU_Megaco
+load \POMP
+load \ADAPTERS
+load \DialingInfo
+load \NBU_H323_STACK
+load \NBU_SIP_STACK
+load \NBU_SCCP_STACK
+load \NBU_Config
+load \NBU_SW_INFRA
+load \NBU_BOARD_INFRA
+load \RVLOGGER
+load \UpgradeUtility
