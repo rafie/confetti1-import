@@ -1,5 +1,7 @@
 module Confetti1Import
   class ClearCase < Base
+    require_relative "brsource"
+    include Confetti1Import::Brsource
 
     def initialize
       @view_path = ConfettiEnv.view_path 

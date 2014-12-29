@@ -85,7 +85,6 @@ module Confetti1Import
     end
   end
 
-<<<<<<< HEAD
   def init
     clear_case = ClearCase.new
     clear_case.scan_to_yaml
@@ -127,6 +126,10 @@ module Confetti1Import
               puts "Wrong location: '#{cs_location}'".red.bold
               next
             end
+            unless splited_location[cs_index-1] =~ /^((\d+\.)+)(\d+)$/
+              puts "Version location has wrong format: #{splited_location}".yellow.bold
+              next
+            end
             db_version_place = File.join(int_branch_location, splited_location[cs_index-1])
             Dir.mkdir(db_version_place) unless Dir.exist?(db_version_place)
             FileUtils.cp(cs_location, File.join(db_version_place, 'configspec.txt'))
@@ -144,15 +147,14 @@ module Confetti1Import
     puts "originating -----> #{ConfettiEnv.versions_path}"
     clear_case = ClearCase.new
     Dir.glob(File.join(ConfettiEnv.home, 'versions', '**')).each do |branch|
-      #puts "Branch--> #{File.read(File.join(branch, 'int_branch.txt'))}"
       next unless File.directory?(branch)
-      Dir.glob(File.join(branch, '**')).each do |label|
-        next unless File.directory? label
-        puts File.join(label, 'configspec.txt')
-        clear_case.configspec = File.join(label, 'configspec.txt')
+      Dir.glob(File.join(branch, '**')).each do |label_path|
+        next unless File.directory? label_path
+        puts File.expand_path(File.join(label_path, 'configspec.txt'))
+        clear_case.configspec = File.expand_path(File.join(label_path, 'configspec.txt'))
+        label = label_path.split(/\/|\\/).last
         clear_case.inside_view do
-          puts `ruby #{File.join(ConfettiEnv.home, 'brsource.rb')} mcu_#{label}`
-          #File.open(File.join(label, 'origin.txt'), 'w'){|f|f.write(brsource)}
+          puts `ruby #{ConfettiEnv.home}/brsource.rb mcu_#{label}`
         end
       end
     end 
