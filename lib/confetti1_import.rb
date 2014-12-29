@@ -50,6 +50,10 @@ module Confetti1Import
       ENV['HANDLE_BIG']
     end
 
+    def versions_path
+      ENV['VERSIONS_PATH'] || File.join(@@home_dir, 'workspace', 'versions')
+    end
+
   end
 
   def scan_view
@@ -81,6 +85,7 @@ module Confetti1Import
     end
   end
 
+<<<<<<< HEAD
   def init
     clear_case = ClearCase.new
     clear_case.scan_to_yaml
@@ -133,6 +138,68 @@ module Confetti1Import
       end
     end
     Dir.chdir current_wd
+  end
+
+  def originate_versions
+    puts "originating -----> #{ConfettiEnv.versions_path}"
+    clear_case = ClearCase.new
+    Dir.glob(File.join(ConfettiEnv.home, 'versions', '**')).each do |branch|
+      #puts "Branch--> #{File.read(File.join(branch, 'int_branch.txt'))}"
+      next unless File.directory?(branch)
+      Dir.glob(File.join(branch, '**')).each do |label|
+        next unless File.directory? label
+        puts File.join(label, 'configspec.txt')
+        clear_case.configspec = File.join(label, 'configspec.txt')
+        clear_case.inside_view do
+          puts `ruby #{File.join(ConfettiEnv.home, 'brsource.rb')} mcu_#{label}`
+          #File.open(File.join(label, 'origin.txt'), 'w'){|f|f.write(brsource)}
+        end
+      end
+    end 
+    
+  end
+  
+  def import
+    git = Git.new
+    clear_case = ClearCase.new
+    # TODO: -->
+    working_folder = AppConfig.clear_case[:versions_input_folder]
+    # <--
+    Dir.glob(File.join(working_folder, "**")).each do |mcu|
+
+      branch_name = File.read(File.join(mcu, 'int_branch.txt')).strip
+
+      Dir.glob(File.join(mcu, "**")).each do |version|
+
+        next unless Dir.exist? version
+        configspec_path = File.join version, 'configspec.txt'
+        raise "Can not found configspec" unless File.exist? configspec_path
+        
+        puts "Applying configspec for #{version}"
+        clear_case.configspec = File.expand_path configspec_path
+        configspec = clear_case.configspec
+        mcu_vob = configspec.detect{|cs|cs[:vob] == 'mcu'}
+
+        configspec.each do |cs|
+          git.init! cs[:vob]
+          unless git.on_branch? branch_name
+            git.checkout branch_name, b: true
+          else
+            git.checkout branch_name
+          end
+
+          print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
+          #clear_case.mount cs[:vob]
+          raise "Cannot init" unless git.init! cs[:vob]
+
+          print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'done'.green.bold}  ]\r"
+          puts ""
+          git.exclude!
+          git.commit_a! cs[:version]
+          git.tag version
+        end
+      end
+    end
   end
 
 end                                                
