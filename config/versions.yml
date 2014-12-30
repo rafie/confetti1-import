@@ -1,24 +1,24 @@
 #Main version:
 
 
-MCU-7.1.2:
-  - 'r:\Mcu_Ngp\Versions_7.X\V7.1\Versions'
-MCU-7.2.2:
-  - 'r:\Mcu_Ngp\Versions_7.X\V7.2\Versions'
-MCU-7.5.0:
-  - 'r:\Mcu_Ngp\Versions_7.X\V7.5\Versions'
-MCU-7.5.1:
-  - 'r:\Mcu_Ngp\Versions_7.X\V7.5.1\Versions'
-UCGW-7.6.0:
-  - 'r:\Mcu_Ngp\Versions_7.X\V7.6\Versions'
-UCGW-7.6.5:
-  - 'r:\Mcu_Ngp\Versions_7.X\V7.6\Versions'
-UCGW-7.7.0:
-  - 'r:\Mcu_Ngp\Versions_7.X\V7.7\Versions'
-MCU-8.0.0: 
-  - 'r:\Mcu_Ngp\Versions_8.X\V8.0\Versions'
-MCU-8.0.1: 
-  - 'r:\Mcu_Ngp\Versions_8.X\V8.0\Versions'
+# MCU-7.1.2:
+#   - 'r:\Mcu_Ngp\Versions_7.X\V7.1\Versions'
+# MCU-7.2.2:
+#   - 'r:\Mcu_Ngp\Versions_7.X\V7.2\Versions'
+# MCU-7.5.0:
+#   - 'r:\Mcu_Ngp\Versions_7.X\V7.5\Versions'
+# MCU-7.5.1:
+#   - 'r:\Mcu_Ngp\Versions_7.X\V7.5.1\Versions'
+# UCGW-7.6.0:
+#   - 'r:\Mcu_Ngp\Versions_7.X\V7.6\Versions'
+# UCGW-7.6.5:
+#   - 'r:\Mcu_Ngp\Versions_7.X\V7.6\Versions'
+# UCGW-7.7.0:
+#   - 'r:\Mcu_Ngp\Versions_7.X\V7.7\Versions'
+# MCU-8.0.0: 
+#   - 'r:\Mcu_Ngp\Versions_8.X\V8.0\Versions'
+# MCU-8.0.1: 
+#   - 'r:\Mcu_Ngp\Versions_8.X\V8.0\Versions'
 MCU-8.2.0:
  - 'r:\Mcu_Ngp\Versions_8.X\V8.0\Versions'
  - 'r:\Mcu_Ngp\Versions_8.X\V8.2'
@@ -34,44 +34,44 @@ VCGW-8.3.2:
 
 # C/S:
 
-MCU-4.5.0:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V4\V.4.5\Release'
-MCU-5.4.4:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V5\v5.4\Development'
-MCU-5.7.1:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V5\v5.7.1\Development'
-MCU-5.7.2:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V5\v5.7.2\Development'
-MCU-5.7.3:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V5\v5.7.3\Development'
-MCU-7.1.0:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.1.0'
-MCU-7.1.1:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.1.1'
-MCU-7.1.2:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.1.2'
-MCU-7.2.0:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.2'
-MCU-7.5.1:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.5.1'
-MCU-7.6.0:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.6'
-MCU-7.6.1:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.6.1'
-MCU-7.7.0:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
-MCU-7.7.1:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
-MCU-7.7.2:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
-MCU-7.7.3:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
-MCU-7.7.4:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
-MCU-7.7.5:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
-MCU-7.7.6:
- - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
+# MCU-4.5.0:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V4\V.4.5\Release'
+# MCU-5.4.4:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V5\v5.4\Development'
+# MCU-5.7.1:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V5\v5.7.1\Development'
+# MCU-5.7.2:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V5\v5.7.2\Development'
+# MCU-5.7.3:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V5\v5.7.3\Development'
+# MCU-7.1.0:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.1.0'
+# MCU-7.1.1:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.1.1'
+# MCU-7.1.2:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.1.2'
+# MCU-7.2.0:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.2'
+# MCU-7.5.1:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.5.1'
+# MCU-7.6.0:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.6'
+# MCU-7.6.1:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.6.1'
+# MCU-7.7.0:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
+# MCU-7.7.1:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
+# MCU-7.7.2:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
+# MCU-7.7.3:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
+# MCU-7.7.4:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
+# MCU-7.7.5:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
+# MCU-7.7.6:
+#  - 'r:\Mcu_Ngp\Customer Support\Patches\V7\7.7'
 MCU-8.2.0:
  - 'r:\Mcu_Ngp\Customer Support\Patches\V8\8.2'
 MCU-8.3.1:
@@ -79,11 +79,11 @@ MCU-8.3.1:
 
 #Kepler:
 
-MCU-6.0:
- - 'r:\Mcu_Audio\Versions\Kepler\Software_Versions'
-MCU-6.1:
- - 'r:\Mcu_Audio\Versions\MR1\Software_Versions'
-MCU-6.2:
- - 'r:\Mcu_Audio\Versions\Alta\Software_Versions'
-MCU-6.5:
- - 'r:\Mcu_Audio\Versions\Alta\Software_Versions'
+# MCU-6.0:
+#  - 'r:\Mcu_Audio\Versions\Kepler\Software_Versions'
+# MCU-6.1:
+#  - 'r:\Mcu_Audio\Versions\MR1\Software_Versions'
+# MCU-6.2:
+#  - 'r:\Mcu_Audio\Versions\Alta\Software_Versions'
+# MCU-6.5:
+#  - 'r:\Mcu_Audio\Versions\Alta\Software_Versions'

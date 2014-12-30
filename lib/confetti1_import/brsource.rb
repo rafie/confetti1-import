@@ -1,14 +1,14 @@
 module Confetti1Import
   module Brsource
 
-    def find_origin(dest_lb)
+    def find_origin(mcu_version)
 
       vroot = `cleartool pwv -root`.strip!
 
       root_ver = "configspec.txt@@\\main\\0"
 
       dest_lb = mcu_version
-      dest_lb = mcu_label_from_cspec(`cleartool catcs`, "current configspec") unless dest_lb
+      dest_lb = mcu_label_from_cspec(`cleartool catcs`, "current configspec") #unless dest_lb
       exit unless dest_lb
 
       Dir.chdir "#{vroot}/mcu"
@@ -27,7 +27,7 @@ module Confetti1Import
         dest_head_ver = dest_ver_base + "\\0"
         if dest_head_ver == root_ver
           puts "reached root."
-          exit
+          return
         end
 
         merge_flag = false
@@ -38,7 +38,7 @@ module Confetti1Import
           pred = desc_param(`cleartool describe -l #{dest_head_ver}`, /Merge@.* <- (.*)/)
           if pred == nil
             puts "reached root."
-            exit
+            return
           end
           merge_flag = true
         end
@@ -46,7 +46,7 @@ module Confetti1Import
         src_ver =~ /\\([^\\]+)\\(\d+)$/
         src_br = mcu_version
         src_lb = mcu_label_from_cspec(File.read(src_ver), "version #{src_ver}")
-        exit unless src_lb
+        return unless src_lb
 
         puts "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
 
