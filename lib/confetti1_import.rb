@@ -139,7 +139,8 @@ module Confetti1Import
             puts "#{e.class}: #{e.message}".red.bold
             next
           end
-          File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| f.writeclear_case.originate(cs_location)}
+          File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| f.write(clear_case.originate(cs_location))}
+          File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
         end
       end
     end
