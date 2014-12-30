@@ -106,7 +106,7 @@ module Confetti1Import
     current_wd = Dir.getwd
 
     wrong = {unprocessed: [], not_found:[]}
-
+    clear_case = ClearCase.new
     versions_config.each_pair do |int_branch, locations|
       puts "-> for #{int_branch}"
       int_branch_location = File.join(forest_location, int_branch.downcase)
@@ -115,6 +115,7 @@ module Confetti1Import
       locations.each do |location|
         begin
           Dir.chdir location
+
         rescue Errno::ENOENT => e
           puts e.message.to_s.red
           wrong[:not_found] << location
@@ -139,8 +140,15 @@ module Confetti1Import
             puts "#{e.class}: #{e.message}".red.bold
             next
           end
-          File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| f.write(clear_case.originate(cs_location))}
-          File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
+
+          unless File.exist?(File.join(int_branch_location, 'int_branch.txt'))
+            File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| 
+              f.write(clear_case.originate(File.join(db_version_place, 'configspec.txt'), splited_location[cs_index-1]))
+            }
+            
+            File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
+          end
+
         end
       end
     end

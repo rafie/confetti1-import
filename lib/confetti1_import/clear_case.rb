@@ -108,12 +108,13 @@ module Confetti1Import
       end
     end
 
-    def originate(label_path)
-      self.configspec = File.expand_path(File.join(label_path, 'configspec.txt'))
-      label = label_path.split(/\/|\\/).last
+    def originate(cs_path, label)
+      self.configspec = cs_path
+      origin = ""
       self.inside_view do
-      origin =  `ruby #{ConfettiEnv.home}/brsource.rb mcu_#{label}`
-      puts origin
+        origin = `ruby #{ConfettiEnv.home}/brsource.rb mcu_#{label}`
+        puts origin
+      end
       origin
     end
 
