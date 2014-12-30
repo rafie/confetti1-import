@@ -1,15 +1,15 @@
 module Confetti1Import
   module Brsource
 
-    def find_origin(mcu_version)
+    def find_origin(dest_lb)
 
       vroot = `cleartool pwv -root`.strip!
 
       root_ver = "configspec.txt@@\\main\\0"
 
-      dest_lb = ARGV.shift
-      dest_lb = mcu_label_from_cspec(`cleartool catcs`, "current configspec") if !dest_lb
-      exit if !dest_lb
+      dest_lb = mcu_version
+      dest_lb = mcu_label_from_cspec(`cleartool catcs`, "current configspec") unless dest_lb
+      exit unless dest_lb
 
       Dir.chdir "#{vroot}/mcu"
       dest_ver = `cleartool find configspec.txt -version "lbtype(#{dest_lb})" -print`.strip!
@@ -18,6 +18,7 @@ module Confetti1Import
 
       puts "from label #{dest_lb} on branch #{dest_br}"
       counter = 0
+
       while true do
         counter +=1
         raise if counter > 300
@@ -45,7 +46,7 @@ module Confetti1Import
         src_ver =~ /\\([^\\]+)\\(\d+)$/
         src_br = mcu_version
         src_lb = mcu_label_from_cspec(File.read(src_ver), "version #{src_ver}")
-        exit if !src_lb
+        exit unless src_lb
 
         puts "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
 
@@ -68,7 +69,7 @@ module Confetti1Import
           puts "check configspec:"
           puts
           puts cspec
-          return nil
+          return
         end
         # mcu[0] is probably element * CHECKEDOUT
         return mcu[1].split(/\s+/)[2]
@@ -81,9 +82,9 @@ module Confetti1Import
     def desc_param(desc, regexp)
       desc = desc.lines
       param = desc.grep(regexp)[0]
-      return nil if !param
+      return  unless param
       param =~ regexp
-      $1
+      params.first
     end
   end
 end
