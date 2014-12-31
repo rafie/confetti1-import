@@ -1,8 +1,11 @@
 require "confetti1/import/base"
 require "confetti1/import/cli"
+require "confetti1/import/brsource"
 require "confetti1/import/clear_case"
 require "confetti1/import/git"
 
+require 'rubygems'
+require 'bundler/setup'
 require 'fileutils'
 require 'yaml'
 require 'awesome_print'
@@ -17,7 +20,7 @@ module Confetti1
     module ConfettiEnv
       extend self
 
-      @@home_dir = File.expand_path(File.join("..", ".."), __FILE__)
+      @@home_dir = File.expand_path(File.join("..", "..", ".."), __FILE__)
       @@default_conf = YAML.load_file(File.join(@@home_dir, "config", "confetti_config.yml"))
 
       def home

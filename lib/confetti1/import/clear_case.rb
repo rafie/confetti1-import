@@ -1,8 +1,8 @@
 module Confetti1
   module Import
     class ClearCase < Base
-      require_relative "brsource"
-      include Confetti1Import::Brsource
+      
+      include Brsource
 
       def initialize
         @view_path = ConfettiEnv.view_path 
@@ -75,10 +75,10 @@ module Confetti1
               big_vob_files << vob_entry
             end
 
-          end #globb
+          end
           big_files.merge!(current_version => big_vob_files) unless big_vob_files.empty?
           small_files.merge!(current_version => small_vob_files) unless small_vob_files.empty?
-        end# configspec
+        end
 
         File.open(File.join(ConfettiEnv.home, 'config', 'small.yml'), 'w'){|f| f.write(small_files.to_yaml)}
         File.open(File.join(ConfettiEnv.home, 'config', 'big.yml'), 'w'){|f| f.write(big_files.to_yaml)}
@@ -113,7 +113,8 @@ module Confetti1
         self.configspec = File.expand_path(File.join(label_path, 'configspec.txt'))
         label = label_path.split(/\/|\\/).last
         self.inside_view do
-        origin =  `ruby #{ConfettiEnv.home}/brsource.rb mcu_#{label}`
+          origin =  `ruby #{ConfettiEnv.home}/brsource.rb mcu_#{label}`
+        end
         puts origin
         origin
       end
@@ -135,6 +136,7 @@ module Confetti1
       def ct(*params)
         command "ct", params.join("\s")
       end
+
     end
   end
 end

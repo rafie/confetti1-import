@@ -3,7 +3,7 @@ module Confetti1
     class CLI < Base
       
       def console(*args)
-        require 'confetti1_import'
+        require 'confetti1/import'
         begin
           require 'pry'
         rescue LoadError
@@ -16,7 +16,7 @@ module Confetti1
       alias_method :c, :console
 
       def init(*argv)
-        Confetti::1Import.init
+        Confetti1::Import.init
       end
 
       def build_versions(*argv)
