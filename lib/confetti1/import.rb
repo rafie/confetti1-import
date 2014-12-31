@@ -1,7 +1,8 @@
-require "confetti1_import/base"
-require "confetti1_import/cli"
-require "confetti1_import/clear_case"
-require "confetti1_import/git"
+require "confetti1/import/base"
+require "confetti1/import/cli"
+require "confetti1/import/clear_case"
+require "confetti1/import/git"
+
 require 'fileutils'
 require 'yaml'
 require 'awesome_print'
