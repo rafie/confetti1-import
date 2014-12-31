@@ -19,7 +19,7 @@ class TestConfetti1ImportGit < Minitest::Test
     setup
     vob = "vob2"
     dot_path = @git.init! vob
-    ignore_list = Confetti1Import::AppConfig.ignore_list
+    ignore_list = Confetti1::Import::AppConfig.ignore_list
 
     @git.exclude!
     assert_equal File.read(File.join(dot_path, "info", "exclude")).split("\n"), ignore_list

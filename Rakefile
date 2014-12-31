@@ -1,14 +1,15 @@
-# require 'rake/testtask'
-# require "bundler/gem_tasks"
+require 'rake/testtask'
+require "bundler/gem_tasks"
 
-# Rake::TestTask.new do |t|
-#   t.libs << 'test'
-#   t.test_files = FileList['test/units/*_test.rb']
-#   t.verbose = true
-# end
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.test_files = FileList['test/units/*_test.rb', 'test/specs/*_spec.rb']
+  t.verbose = true
+end
 
-# desc "Run tests"
-# task :default => :test
+desc "Run tests"
+task :default => :test
+
 
 desc "Build and install gem"
 namespace :build do
