@@ -1,4 +1,4 @@
-module Confetti1Import
+module Confetti1::Import
   class Base
   
   protected
