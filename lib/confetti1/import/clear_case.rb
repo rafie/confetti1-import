@@ -35,9 +35,9 @@ module Confetti1
         puts "WARNING: #{ignored.size} files will be ignored:"
         ignored.each{|i|print "#{i},\s"}
         puts
-        File.open(File.join(ConfettiEnv.home, 'config', 'small.txt'), 'w'){|f| f.write(small_files.join("\n"))}
-        File.open(File.join(ConfettiEnv.home, 'config', 'big.txt'), 'w'){|f| f.write(big_files.join("\n"))}
-        File.open(File.join(ConfettiEnv.home, 'config', 'ignored.txt'), 'w'){|f| f.write(ignored.join("\n"))}
+        File.open(File.join(ConfettiEnv.output_path, 'small.txt'), 'w'){|f| f.write(small_files.join("\n"))}
+        File.open(File.join(ConfettiEnv.output_path, 'big.txt'), 'w'){|f| f.write(big_files.join("\n"))}
+        File.open(File.join(ConfettiEnv.output_path, 'ignored.txt'), 'w'){|f| f.write(ignored.join("\n"))}
         {ignored: ignored, big_files: big_files, small_files: small_files}
       end
 
@@ -80,9 +80,9 @@ module Confetti1
           small_files.merge!(current_version => small_vob_files) unless small_vob_files.empty?
         end# configspec
 
-        File.open(File.join(ConfettiEnv.home, 'config', 'small.yml'), 'w'){|f| f.write(small_files.to_yaml)}
-        File.open(File.join(ConfettiEnv.home, 'config', 'big.yml'), 'w'){|f| f.write(big_files.to_yaml)}
-        File.open(File.join(ConfettiEnv.home, 'config', 'ignored.yml'), 'w'){|f| f.write(ignored.to_yaml)}
+        File.open(File.join(ConfettiEnv.output_path 'small.yml'), 'w'){|f| f.write(small_files.to_yaml)}
+        File.open(File.join(ConfettiEnv.output_path, 'big.yml'), 'w'){|f| f.write(big_files.to_yaml)}
+        File.open(File.join(ConfettiEnv.output_path, 'ignored.yml'), 'w'){|f| f.write(ignored.to_yaml)}
       end
 
 
