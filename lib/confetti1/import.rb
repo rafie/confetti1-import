@@ -68,25 +68,6 @@ module Confetti1
       clear_case.scan_to_yaml
     end
 
-    def old_init
-      clear_case = ClearCase.new
-      sorted_files_list = clear_case.scan
-
-      small_git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
-      small_git.init
-      small_git.exclude!(sorted_files_list[:ignored])
-      small_git.commit(sorted_files_list[:small_files], 'A cup of coffee')
-      small_git.correct?(sorted_files_list[:small_files], 'small')
-
-      if ConfettiEnv.handle_big
-        big_git = Git.new(path: File.join(ConfettiEnv.git_path, 'big'))
-        big_git.init
-        big_git.exclude!(sorted_files_list[:ignored])
-        big_git.commit(sorted_files_list[:big_files], 'A cup of coffee with a cake')
-        big_git.correct?(sorted_files_list[:big_files], 'big')
-      end
-    end
-
     def init
       clear_case = ClearCase.new
       clear_case.scan_to_yaml
@@ -108,7 +89,7 @@ module Confetti1
       current_wd = Dir.getwd
 
       wrong = {unprocessed: [], not_found:[]}
-
+      clear_case = ClearCase.new
       versions_config.each_pair do |int_branch, locations|
         puts "-> for #{int_branch}"
         int_branch_location = File.join(forest_location, int_branch.downcase)
@@ -117,6 +98,7 @@ module Confetti1
         locations.each do |location|
           begin
             Dir.chdir location
+
           rescue Errno::ENOENT => e
             puts e.message.to_s.red
             wrong[:not_found] << location
@@ -141,35 +123,21 @@ module Confetti1
               puts "#{e.class}: #{e.message}".red.bold
               next
             end
-            File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| f.write(clear_case.originate(cs_location))}
-            File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
+
+            unless File.exist?(File.join(int_branch_location, 'int_branch.txt'))
+              File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| 
+                f.write(clear_case.originate(File.join(db_version_place, 'configspec.txt'), splited_location[cs_index-1]))
+              }
+              
+              File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
+            end
+
           end
         end
       end
       Dir.chdir current_wd
     end
-
-    # def originate_versions
-    #   puts "Originating"
-    #   clear_case = ClearCase.new
-    #   puts "--> #{File.join(ConfettiEnv.home, 'versions', '**')}"
-    #   Dir.glob(File.join(ConfettiEnv.home, 'versions', '**')).each do |branch|
-    #     next unless File.directory?(branch)
-    #     Dir.glob(File.join(branch, '**')).each do |label_path|
-    #       puts "Label path ->>>>>>>>  #{label_path}"
-    #       next unless File.directory? label_path
-    #       puts File.expand_path(File.join(label_path, 'configspec.txt'))
-    #       clear_case.configspec = File.expand_path(File.join(label_path, 'configspec.txt'))
-    #       label = label_path.split(/\/|\\/).last
-    #       clear_case.inside_view do
-    #         puts `ruby #{ConfettiEnv.home}/brsource.rb mcu_#{label}`
-    #         #clear_case.find_origin "#{label}"
-    #       end
-    #     end
-    #   end 
       
-    # end
-    
     def import
       git = Git.new
       clear_case = ClearCase.new
