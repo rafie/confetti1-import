@@ -17,7 +17,7 @@ module Confetti1
     module ConfettiEnv
       extend self
 
-      @@home_dir = File.expand_path(File.join("..", ".."), __FILE__)
+      @@home_dir = File.expand_path(File.join("..", "..", ".."), __FILE__)
       @@default_conf = YAML.load_file(File.join(@@home_dir, "config", "confetti_config.yml"))
 
       def home
