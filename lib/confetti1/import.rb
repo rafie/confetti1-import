@@ -60,6 +60,10 @@ module Confetti1
         File.join(@@home_dir, 'log') 
       end
 
+      def output_path
+        File.join(@@home_dir, 'output')
+      end
+
     end
 
     def scan_view
@@ -90,11 +94,11 @@ module Confetti1
     def build_versions
       versions_config = YAML.load_file(File.join(ConfettiEnv.home, 'config', 'versions.yml'))
       forest_location = File.expand_path(File.join(ConfettiEnv.home, "versions"))
+      wrong_locations = []
+      wrong_formats   = []
+
+
       current_wd = Dir.getwd
-
-
-
-      wrong = {unprocessed: [], not_found:[]}
       clear_case = ClearCase.new
       versions_config.each_pair do |int_branch, locations|
         puts "-> for #{int_branch}"
@@ -116,10 +120,12 @@ module Confetti1
               cs_index = splited_location.rindex{|sl|sl=~ /configspec.txt/i}
               unless cs_index
                 puts "Wrong location: '#{cs_location}'".red.bold
+                wrong_locations << cs_location
                 next
               end
               unless splited_location[cs_index-1] =~ /^((\d+\.)+)(\d+)$/
                 puts "Version location has wrong format: #{splited_location}".yellow.bold
+                wrong_formats << cs_location
                 next
               end
               db_version_place = File.join(int_branch_location, splited_location[cs_index-1])
@@ -142,49 +148,8 @@ module Confetti1
         end
       end
       Dir.chdir current_wd
-    end
-      
-    def import
-      git = Git.new
-      clear_case = ClearCase.new
-      # TODO: -->
-      working_folder = AppConfig.clear_case[:versions_input_folder]
-      # <--
-      Dir.glob(File.join(working_folder, "**")).each do |mcu|
-
-        branch_name = File.read(File.join(mcu, 'int_branch.txt')).strip
-
-        Dir.glob(File.join(mcu, "**")).each do |version|
-
-          next unless Dir.exist? version
-          configspec_path = File.join version, 'configspec.txt'
-          raise "Can not found configspec" unless File.exist? configspec_path
-          
-          puts "Applying configspec for #{version}"
-          clear_case.configspec = File.expand_path configspec_path
-          configspec = clear_case.configspec
-          mcu_vob = configspec.detect{|cs|cs[:vob] == 'mcu'}
-
-          configspec.each do |cs|
-            git.init! cs[:vob]
-            unless git.on_branch? branch_name
-              git.checkout branch_name, b: true
-            else
-              git.checkout branch_name
-            end
-
-            print "#{'Commiting sources for ' + cs[:vob].ljust(50)}\r"
-            #clear_case.mount cs[:vob]
-            raise "Cannot init" unless git.init! cs[:vob]
-
-            print "#{'Commiting sources for' + cs[:vob].ljust(50, '.')}[  #{'done'.green.bold}  ]\r"
-            puts ""
-            git.exclude!
-            git.commit_a! cs[:version]
-            git.tag version
-          end
-        end
-      end
+      File.open(File.join(ConfettiEnv.log_path, 'wrong_locations.txt')){|f|f.write(wrong_locations.join("\n"))}
+      File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt')){|f|f.write(wrong_formats.join("\n"))}
     end
 
   end   
