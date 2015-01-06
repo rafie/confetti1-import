@@ -56,6 +56,10 @@ module Confetti1
         ENV['VERSIONS_PATH'] || File.join(@@home_dir, 'workspace', 'versions')
       end
 
+      def log_path
+        File.join(@@home_dir, 'log') 
+      end
+
     end
 
     def scan_view
@@ -87,6 +91,8 @@ module Confetti1
       versions_config = YAML.load_file(File.join(ConfettiEnv.home, 'config', 'versions.yml'))
       forest_location = File.expand_path(File.join(ConfettiEnv.home, "versions"))
       current_wd = Dir.getwd
+
+
 
       wrong = {unprocessed: [], not_found:[]}
       clear_case = ClearCase.new
@@ -125,9 +131,9 @@ module Confetti1
             end
 
             unless File.exist?(File.join(int_branch_location, 'int_branch.txt'))
-              File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| 
-                f.write(clear_case.originate(File.join(db_version_place, 'configspec.txt'), splited_location[cs_index-1]))
-              }
+              # File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| 
+              #   f.write(clear_case.originate(File.join(db_version_place, 'configspec.txt'), splited_location[cs_index-1]))
+              # }
               
               File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
             end
