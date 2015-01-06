@@ -124,7 +124,7 @@ module Confetti1
       def parse_configspec(conf_spec)
         splited = conf_spec.map{|cs|cs.split("\s")}.reject{|cs| cs.empty? or cs.size < 4 or cs.detect{|ccs| ccs=~/^#/}}
         splited.map do |cs| 
-          vob_name = cs[1].to_s[/\w{3,}/]
+          vob_name = cs[1].to_s[/\w{2,}/]
           {
             vob: vob_name, 
             version: cs[2],
