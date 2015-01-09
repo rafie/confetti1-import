@@ -31,13 +31,20 @@ Available environment variables
 
 **HANDLE_BIG** - import to GIT files bigger then EXCLUDE_SIZE
 
-How to run
+How to run as from source 
 ----------
 After environment variables configuration run:
 ```ruby
 ruby confetti-import.rb init
 ```
-inside application working directory (running outside I have not tested)
+
+How to run from gem 
+1) Install GEM 'confetti1-import-0.0.1.gem' (will be available inside 'confetti-import' root folder)
+2) Inside ClearCase view run:
+```ruby
+confetti init
+``` 
+NOTE: all environment variable will work as described in **Available environment variables**
 
 Run times
 ---------
