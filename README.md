@@ -39,8 +39,9 @@ ruby confetti-import.rb init
 ```
 
 How to run from gem 
-1) Install GEM 'confetti1-import-0.0.1.gem' (will be available inside 'confetti-import' root folder)
-2) Inside ClearCase view run:
+---------
+1. Install GEM 'confetti1-import-0.0.1.gem' (will be available inside 'confetti-import' root folder)
+2. Inside ClearCase view run:
 ```ruby
 confetti init
 ``` 
