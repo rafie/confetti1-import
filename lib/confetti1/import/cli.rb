@@ -35,6 +35,10 @@ module Confetti1
         Confetti1::Import.scan_to_yaml
       end
 
+      def import
+        Confetti1::Import.import
+      and
+
       def method_missing(meth, *args, &block)
         puts "Command not found: #{meth}"
       end
