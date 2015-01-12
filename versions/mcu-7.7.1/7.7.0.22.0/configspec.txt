@@ -1,0 +1,47 @@
+element * CHECKEDOUT
+
+element /mcu/...    	            	dora_7.7.0.22.0  			-nocheckout
+
+element /web/...                	WebMcu_7.7.0_45_070212.3682    		-nocheckout 
+
+element /mpc/... 			dora_mpc_7.7.0.19.0 			-nocheckout
+element /map/... 			dora_map_7.7.0.22.0        		-nocheckout
+element /mf/...  			dora_mf_7.7.0.21.0        		-nocheckout
+
+element /mpInfra/...            	dora_mpInfra_7.7.0.21.0    	        -nocheckout
+
+element /mpDsp/...              	dora_mpDsp_7.7.0.15.0          		-nocheckout
+
+element /dsp8144Audio/...       	audio_fsl_integ_7_7_0_20_0__2011Jan23	-nocheckout
+element /dsp8144Video/...       	dsp8144Video_7.7.0.11.0_12Dec2011  	-nocheckout
+
+element /mvp/...                 	dora_mvp_7.7.0.22.0 	                -nocheckout
+
+element /adapters/...                   dora_adapters_7.7.0.21.0_Int            -nocheckout
+
+element /dialingInfo/...        	dialingInfo_7.29.1_7.7.0.21.0_Int      	-nocheckout
+element /mediaCtrlInfo/...      	mediaCtrlInfo_7.38.1_7.7.0.7.0		-nocheckout
+
+element /NBU_COMMON_CORE/...      	nbuCCore_4.4.5                 		-nocheckout
+element /NBU_H323_STACK/...       	nbuH323_7.0.0_dora-7.7.0.13.0           -nocheckout
+element /NBU_SIP_STACK/...        	nbuSip_6.0.0		                -nocheckout
+element /NBU_SCCP_STACK/...       	nbuSccp_1.1.10_dora-7.2_1.2             -nocheckout
+element /NBU_RTP_RTCP_STACK/...   	dora_NBU_RTP_RTCP_STACK_7.7.0.17.0      -nocheckout
+element /NBU_FEC/...              	dora_nbuFec_7.7.0.4.0                   -nocheckout
+element /nbu.contrib/...                nbu.contrib_1.3.3     		        -nocheckout
+
+element /configInfra/...          	configInfra_1.3.0_dora-7.5.1_1.0       -nocheckout
+element /swInfra/...              	swInfra_0.100.7_dora-7.7.0.21.0_Int    -nocheckout
+element /boardInfra/...           	boardInfra_0.75.0_dora-7.7.0.21.0_Int  -nocheckout
+element /loggerInfra/...          	loggerInfra_1.35.1                     -nocheckout
+element /rvfc/...                 	rvfc_2.88.6_dora-7.5.1.10.28	       -nocheckout
+
+element /securityApp/...          	securityApp_0.10.2                     -nocheckout
+element /securityInfra/...        	110726_SECURITY_V5.0_17                -nocheckout
+
+element /bspLinux8548/...         	120110_MAIO_0.2.47                      -nocheckout
+
+element /freemasonBuild/...       	freemasonBuild_1.2.9                   -nocheckout
+
+element /nbu.tests/...                   nbu.tests_1.2.0                   -nocheckout       
+

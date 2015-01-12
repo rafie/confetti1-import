@@ -1,0 +1,52 @@
+
+element /mcu/...                    mcu_8.0.0.11.0           	-nocheckout
+
+element /web/...                    WebMcu_8.0.0_36_151211.388	-nocheckout
+
+element /mvp/...                    mvp_8.0.0.11.0		-nocheckout
+element /mpc/...                    mpc_8.0.0.11.0              -nocheckout
+element /map/...                    map_8.0.0.11.0              -nocheckout
+element /mf/...                     mf_8.0.0.11.0               -nocheckout
+element /mpInfra/...                mpInfra_8.0.0.10.0          -nocheckout
+
+element /NBU_FEC/...         	    ucgw_nbuFec_7.7.0.15.0              -nocheckout
+element /NBU_RTP_RTCP_STACK/...     avatar_NBU_RTP_RTCP_STACK_8.0.0.10.0  -nocheckout
+element /NBU_ICE/...                ucgw_nbuIce_7.7.0.15.0              -nocheckout
+
+element /mpDsp/...         	    Avatar_integ_2011Dec06__8.0.0.0.13  -nocheckout
+element /dspIntelInfra/...          Avatar_integ_2011Dec06__8.0.0.0.13	-nocheckout
+element /dspNetraInfra/...          Avatar_integ_2011Dec06__8.0.0.0.13	-nocheckout
+element /dspIcsVideo/... 	    Avatar_integ_2011Dec06__8.0.0.0.13 	-nocheckout
+element /dspInfra/... 		    Avatar_integ_2011Dec06__8.0.0.0.13	-nocheckout
+element /dspNetraVideo/...  	    Avatar_integ_2011Dec06__8.0.0.0.13  -nocheckout
+element /NetraVideoCODEC/...	    Avatar_integ_2011Dec06__8.0.0.0.13  -nocheckout
+element /dspUCGW/...       	    ucgw_dsp_7.7.0.12.0         	-nocheckout
+element /swAudioCodecs/...          ucgw_swAudioCodecs_7.7.0.4.0       	-nocheckout
+
+element /adapters/...              vlad_adapter_7.49.14_hp				-nocheckout
+element /dialingInfo/...           vlad_dialingInfo_7.39_hp             -nocheckout
+element /mediaCtrlInfo/...         vlad_mediaCtrlInfo_7.41.4_hp         -nocheckout
+
+element /nbu.proto.jingle-stack/... nbu.proto.jingle-stack_1.7.3        -nocheckout
+
+element /NBU_COMMON_CORE/...        nbuCCore_4.4.8                    	-nocheckout
+element /NBU_SIP_STACK/...          nbuSip_6.0.3                      	-nocheckout
+element /NBU_H323_STACK/...         nbuH323_7.0.2                     	-nocheckout
+
+element /boardInfra/...             boardInfra_0.86.1_Avatar_2			-nocheckout
+element /swInfra/...                swInfra_0.112.2_Avatar_2			-nocheckout
+element /rvfc/...                   rvfc_2.97.2_Avatar1					-nocheckout
+
+element /configInfra/...            configInfra_1.4.1                   -nocheckout
+element /loggerInfra/...            loggerInfra_1.37.2                  -nocheckout
+element /nbu.contrib/...            nbu.contrib_1.4.3                   -nocheckout
+ 
+element /securityApp/...            securityApp_0.10.3               	-nocheckout
+
+element /bspLinux8548/...           101129_MAIO_0.2.40               	-nocheckout
+
+element /bspLinuxIntel/...         111211_UCGW_AVATAR_PF_COMBINED_Branch_V_5    -nocheckout
+
+element /bspLinuxARM/...            111030_NETRA_0.1.8-package       	-nocheckout
+
+element /freemasonBuild/...         freemasonBuild_1.4.8             	-nocheckout
