@@ -152,5 +152,22 @@ module Confetti1
       File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
     end
 
+    def import
+      clear_case = ClearCase.new
+      Dir.glob(File.join(versions_path, '**')).each do |version|
+        next unless File.directory? version
+        int_branch = File.read(File.join(version, 'int_branch.txt'))
+        origin = File.read(File.join(version, 'origin.txt'))
+        Dir.glob(File.join(version, '**')).each do |label|
+          clear_case.configspec = File.join(label, 'configspec.txt')
+          TODO: "Find or create branch by origin.txt"
+          TODO: "Exclude not needed files"
+          TODO: "Add needed files"
+          TODO: "Commit"
+          TODO: "Test correctness"
+        end
+      end
+    end
+
   end   
 end                                             
