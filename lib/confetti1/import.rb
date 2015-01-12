@@ -137,9 +137,9 @@ module Confetti1
             end
 
             unless File.exist?(File.join(int_branch_location, 'int_branch.txt'))
-              File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| 
+              File.open(File.join(int_branch_location, 'origin.txt'), 'w') do |f| 
                 f.write(clear_case.originate(File.join(db_version_place, 'configspec.txt'), splited_location[cs_index-1]))
-              }
+              end
               
               File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
             end
@@ -150,23 +150,6 @@ module Confetti1
       Dir.chdir current_wd
       File.open(File.join(ConfettiEnv.log_path, 'wrong_locations.txt'), 'w'){|f|f.write(wrong_locations.join("\n"))}
       File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
-    end
-
-    def import
-      clear_case = ClearCase.new
-      Dir.glob(File.join(versions_path, '**')).each do |version|
-        next unless File.directory? version
-        int_branch = File.read(File.join(version, 'int_branch.txt'))
-        origin = File.read(File.join(version, 'origin.txt'))
-        Dir.glob(File.join(version, '**')).each do |label|
-          clear_case.configspec = File.join(label, 'configspec.txt')
-          TODO: "Find or create branch by origin.txt"
-          TODO: "Exclude not needed files"
-          TODO: "Add needed files"
-          TODO: "Commit"
-          TODO: "Test correctness"
-        end
-      end
     end
 
   end   
