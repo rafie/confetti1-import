@@ -113,7 +113,7 @@ module Confetti1
         self.configspec = cs_path
         origin = ""
         self.inside_view do
-          origin = `ruby #{ConfettiEnv.home}/brsource.rb mcu_#{label}`
+          origin = self.branch
           puts origin
         end
         origin

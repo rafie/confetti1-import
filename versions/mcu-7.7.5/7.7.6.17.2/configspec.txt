@@ -14,7 +14,7 @@ element /dsp8144Audio/...       int_Dora_Integ__7.7.6.16.0__20140818__lbl  -noch
 element /dsp8144Video/...       int_Dora_Integ__7.7.6.16.0__20140818__lbl  -nocheckout
 #----------------------------------------------------------------------------------------------
 
-element /mcu/...    	            	dora_7.7.6.17.1 		        -nocheckout
+element /mcu/...    	            	dora_7.7.6.17.2 		        -nocheckout
 element /adapters/...                   dora_adap_7.7.6.15.1		        -nocheckout
 
 element /dialingInfo/...        	dialingInfo_7.7.6.15.1                	-nocheckout

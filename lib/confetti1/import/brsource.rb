@@ -1,30 +1,25 @@
 module Confetti1
   module Import
     module Brsource
-
-      def find_origin(mcu_version)
-
+      def branch(label=nil)
         vroot = `cleartool pwv -root`.strip!
 
         root_ver = "configspec.txt@@\\main\\0"
 
-        dest_lb = mcu_version
-        dest_lb = mcu_label_from_cspec(`cleartool catcs`, "current configspec") #unless dest_lb
-        exit unless dest_lb
+        dest_lb = label
+        dest_lb = mcu_label_from_cspec(`cleartool catcs`, "current configspec") if !dest_lb
+        return if !dest_lb
 
         Dir.chdir "#{vroot}/mcu"
         dest_ver = `cleartool find configspec.txt -version "lbtype(#{dest_lb})" -print`.strip!
         dest_ver =~ /\\([^\\]+)\\(\d+)$/
-        dest_br = mcu_version
+        dest_br = $1
 
         puts "from label #{dest_lb} on branch #{dest_br}"
-        counter = 0
 
         while true do
-          counter +=1
-          raise if counter > 300
           dest_ver =~ /(.*)\\\d+$/
-          dest_ver_base = mcu_version
+          dest_ver_base = $1
           dest_head_ver = dest_ver_base + "\\0"
           if dest_head_ver == root_ver
             puts "reached root."
@@ -45,9 +40,9 @@ module Confetti1
           end
           src_ver = pred
           src_ver =~ /\\([^\\]+)\\(\d+)$/
-          src_br = mcu_version
+          src_br = $1
           src_lb = mcu_label_from_cspec(File.read(src_ver), "version #{src_ver}")
-          return unless src_lb
+          return if !src_lb
 
           puts "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
 
@@ -56,9 +51,7 @@ module Confetti1
           dest_br = src_br
         end
       end
-
     private
-
       def mcu_label_from_cspec(cspec, context)
         cspec = cspec.lines
         mcu = cspec.grep(/[\\\/]mcu[\\\/]/i)
@@ -70,7 +63,7 @@ module Confetti1
             puts "check configspec:"
             puts
             puts cspec
-            return
+            return nil
           end
           # mcu[0] is probably element * CHECKEDOUT
           return mcu[1].split(/\s+/)[2]
@@ -83,10 +76,11 @@ module Confetti1
       def desc_param(desc, regexp)
         desc = desc.lines
         param = desc.grep(regexp)[0]
-        return  unless param
+        return nil if !param
         param =~ regexp
-        params.first
+        $1
       end
+
     end
   end
 end
