@@ -111,7 +111,7 @@ module Confetti1
 
           rescue Errno::ENOENT => e
             puts e.message.to_s.red
-            wrong[:not_found] << location
+            wrong_locations << location
             next 
           end
           Dir.glob(File.join('**', 'configspec.txt')).each do |cs_location|
@@ -148,8 +148,8 @@ module Confetti1
         end
       end
       Dir.chdir current_wd
-      File.open(File.join(ConfettiEnv.log_path, 'wrong_locations.txt')){|f|f.write(wrong_locations.join("\n"))}
-      File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt')){|f|f.write(wrong_formats.join("\n"))}
+      File.open(File.join(ConfettiEnv.log_path, 'wrong_locations.txt'), 'w'){|f|f.write(wrong_locations.join("\n"))}
+      File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
     end
 
   end   
