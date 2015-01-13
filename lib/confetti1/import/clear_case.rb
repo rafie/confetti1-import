@@ -107,12 +107,11 @@ module Confetti1
         end
       end
 
-      def originate(cs_path, label)
+      def originate(cs_path)
         self.configspec = cs_path
         origin = ""
         self.inside_view do
           origin = branch_source
-          puts origin
         end
         origin
       end
@@ -134,16 +133,13 @@ module Confetti1
         dest_br = $1
         out = "from label #{dest_lb} on branch #{dest_br}\n"
 
-
-        puts "from label #{dest_lb} on branch #{dest_br}"
-
         while true do
           dest_ver =~ /(.*)\\\d+$/
           dest_ver_base = $1
           dest_head_ver = dest_ver_base + "\\0"
           if dest_head_ver == root_ver
-            puts "reached root."
-            return
+            out << "reached root.\n"
+            break
           end
 
           merge_flag = false
@@ -153,8 +149,8 @@ module Confetti1
             dest_head_ver = dest_ver_base + "\\1"
             pred = desc_param(cleartool("describe -l #{dest_head_ver}"), /Merge@.* <- (.*)/)
             if pred == nil
-              puts "reached root."
-              return
+              out << "reached root.\n"
+              break
             end
             merge_flag = true
           end
@@ -162,10 +158,8 @@ module Confetti1
           src_ver =~ /\\([^\\]+)\\(\d+)$/
           src_br = $1
           src_lb = mcu_label_from_cspec(File.read(src_ver), "version #{src_ver}")
-          return if !src_lb
-          out << "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
-          puts "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
-
+          break if !src_lb
+          out << "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)\n" : "\n")
           dest_ver = src_ver
           dest_lb = src_lb
           dest_br = src_br

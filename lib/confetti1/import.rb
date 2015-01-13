@@ -108,7 +108,6 @@ module Confetti1
         locations.each do |location|
           begin
             Dir.chdir location
-
           rescue Errno::ENOENT => e
             puts e.message.to_s.red
             wrong_locations << location
@@ -138,8 +137,9 @@ module Confetti1
 
             unless File.exist?(File.join(int_branch_location, 'int_branch.txt'))
               begin
+                origin = clear_case.originate(File.join(db_version_place, 'configspec.txt'))
                 File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| 
-                  f.write(clear_case.originate(File.join(db_version_place, 'configspec.txt'), splited_location[cs_index-1]))
+                  f.write(origin)
                 }
               rescue Exception => e
                 puts e.class
@@ -150,6 +150,7 @@ module Confetti1
             end
 
           end
+          # FileUtils.rm_rf(int_branch_location) if Dir.glob(File.join(int_branch_location, "**/")).empty?
         end
       end
       Dir.chdir current_wd

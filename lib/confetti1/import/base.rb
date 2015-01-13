@@ -27,6 +27,7 @@ module Confetti1
             raise stderr.read
           end
         end
+        #puts "output: #{output}"
         output
       end
 
