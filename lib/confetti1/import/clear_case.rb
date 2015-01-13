@@ -78,7 +78,7 @@ module Confetti1
           small_files.merge!(current_version => small_vob_files) unless small_vob_files.empty?
         end# configspec
 
-        File.open(File.join(ConfettiEnv.output_path 'small.yml'), 'w'){|f| f.write(small_files.to_yaml)}
+        File.open(File.join(ConfettiEnv.output_path, 'small.yml'), 'w'){|f| f.write(small_files.to_yaml)}
         File.open(File.join(ConfettiEnv.output_path, 'big.yml'), 'w'){|f| f.write(big_files.to_yaml)}
         File.open(File.join(ConfettiEnv.output_path, 'ignored.yml'), 'w'){|f| f.write(ignored.to_yaml)}
       end
