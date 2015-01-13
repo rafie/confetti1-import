@@ -158,5 +158,14 @@ module Confetti1
       File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
     end
 
+    def import
+      clear_case = ClearCase.new
+      Dir.glob(File.join(versions_path, '**')).each do |version|
+        next unless File.directory? version
+        int_branch = File.read(File.join(version, 'int_branch.txt'))
+        puts version
+      end
+    end
+
   end   
 end                                             
