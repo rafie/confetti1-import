@@ -137,8 +137,13 @@ module Confetti1
             end
 
             unless File.exist?(File.join(int_branch_location, 'int_branch.txt'))
-              File.open(File.join(int_branch_location, 'origin.txt'), 'w') do |f| 
-                f.write(clear_case.originate(File.join(db_version_place, 'configspec.txt'), splited_location[cs_index-1]))
+              begin
+                File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| 
+                  f.write(clear_case.originate(File.join(db_version_place, 'configspec.txt'), splited_location[cs_index-1]))
+                }
+              rescue Exception => e
+                puts e.class
+                puts e.message
               end
               
               File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}

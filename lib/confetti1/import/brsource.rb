@@ -14,6 +14,8 @@ module Confetti1
         dest_ver = `cleartool find configspec.txt -version "lbtype(#{dest_lb})" -print`.strip!
         dest_ver =~ /\\([^\\]+)\\(\d+)$/
         dest_br = $1
+        out = "from label #{dest_lb} on branch #{dest_br}\n"
+
 
         puts "from label #{dest_lb} on branch #{dest_br}"
 
@@ -43,15 +45,18 @@ module Confetti1
           src_br = $1
           src_lb = mcu_label_from_cspec(File.read(src_ver), "version #{src_ver}")
           return if !src_lb
-
+          out << "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
           puts "to label #{src_lb} on branch #{src_br}" + (merge_flag ? " (*)" : "")
 
           dest_ver = src_ver
           dest_lb = src_lb
           dest_br = src_br
         end
+        out
       end
+
     private
+
       def mcu_label_from_cspec(cspec, context)
         cspec = cspec.lines
         mcu = cspec.grep(/[\\\/]mcu[\\\/]/i)

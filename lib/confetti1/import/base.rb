@@ -1,7 +1,7 @@
 module Confetti1
   module Import
     class Base
-    
+
     protected
 
       def in_directory(dir_to_run, &block)
@@ -13,9 +13,25 @@ module Confetti1
         res
       end
 
+      def raw_command(cmd, *argv)
+        cmd = "#{cmd} #{argv.join("\s")}"
+        print "Running command: ".bold
+        print cmd
+        puts
+        output = ""
+        Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
+          exit_status = wait_thr.value
+          if exit_status.success?
+            output = stdout.read 
+          else
+            raise stderr.read
+          end
+        end
+        output
+      end
+
       def command(cmd, *argv)
-        output = `#{cmd} #{argv.join(" ")}`
-        output.split("\n")
+        raw_command(cmd, argv).split("\n")
       end
       
     end
