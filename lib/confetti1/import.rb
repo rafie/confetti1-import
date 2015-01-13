@@ -82,8 +82,8 @@ module Confetti1
       small_git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
 
       small_git.init
-      small_git.exclude!(YAML.load_file(File.join(ConfettiEnv.home, 'config', 'ignored.yml')))
-      small_map = YAML.load_file(File.join(ConfettiEnv.home, 'config', 'small.yml'))
+      small_git.exclude!(YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml')))
+      small_map = YAML.load_file(File.join(ConfettiEnv.output_path, 'small.yml'))
       small_map.each_pair do |version, files|
         puts " ---> commiting #{version}".green.bold
         small_git.commit(files, version)

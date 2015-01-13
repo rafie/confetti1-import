@@ -50,6 +50,7 @@ module Confetti1
         configspec = self.configspec
 
         configspec.each do |cs|
+          puts "working with: #{rand(10000)}_vob_#{cs[:vob]}_#{cs[:version]}"
           current_version = "#{rand(10000)}_vob_#{cs[:vob]}_#{cs[:version]}"
           big_vob_files = []
           small_vob_files = []
@@ -209,7 +210,8 @@ module Confetti1
       end
 
       def ct(*params)
-        command "ct", params.join("\s")
+        raise ArgumentError.new("Cleartool arguments are nil or empty") if params.compact.empty?
+        command("ct", params.join("\s"))
       end
 
       def cleartool(*params)
