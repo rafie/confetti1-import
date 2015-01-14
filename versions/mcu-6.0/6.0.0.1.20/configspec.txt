@@ -1,0 +1,43 @@
+element * CHECKEDOUT
+
+element \MCU\...                6.0.0.1.20                                      -nocheckout
+element \RVFC\...               RVFC_2.76.1_SEMGIVE_FIX                         -nocheckout
+element \RV755_BSP\...          070308_BSP_2.32                                 -nocheckout
+element \SECURITY\...           220106_security_0.7.6_mocana_based_rev2         -nocheckout
+element \MPCsys\...             MPC_AMCU_INT_1.7                                -nocheckout
+element \NBU_Megaco\...         MEGACO_1.1.0.16P14                              -nocheckout
+element \ADAPTERS\...           ADAPTERS_5.1.17.17.17_AMCU_Kepler_12_250407     -nocheckout
+element \DialingInfo\...        DI_5.1.11.11.11_AMCU_Kepler_8_200307            -nocheckout
+element \NBU_H323_STACK\...     NBU_H323_STACK_GW_3_0_Build_1                   -nocheckout
+element \NBU_SIP_STACK\...      NBU_SIP_STACK_GW_3_0_Build_3                    -nocheckout
+element \NBU_SCCP_STACK\...     adap0.0.21_Flint2_NewInfra                      -nocheckout
+element \NBU_Config\...         giladl_AMCU.1.0.0.1.11_configuration_cycle_2    -nocheckout
+element \NBU_SW_INFRA\...       0.0.53                                          -nocheckout
+element \NBU_BOARD_INFRA\...    NBU_BOARD_INFRA_AMCU_201206                     -nocheckout
+element \RVLOGGER\...           RVLOGGER_V1.26                                  -nocheckout
+element \UpgradeUtility\...     UU_4_3_10                                       -nocheckout
+element \DPM\...                070226_DPM_1.63                                 -nocheckout
+element \DSP_NG\...             2.0.0.17                                        -nocheckout
+element \MAP\...                MAP_AMCU_INT_1.11                               -nocheckout
+element \mf\...                 ORENH_MF_AMCU_0.12.4                            -nocheckout
+
+load \MCU
+load \RVFC
+load \RV755_BSP
+load \SECURITY
+load \MPCsys
+load \NBU_Megaco
+load \ADAPTERS
+load \DialingInfo
+load \NBU_H323_STACK
+load \NBU_SIP_STACK
+load \NBU_SCCP_STACK
+load \NBU_Config
+load \NBU_SW_INFRA
+load \NBU_BOARD_INFRA
+load \RVLOGGER
+load \UpgradeUtility
+load \DSP_NG
+load \DPM
+load \MAP
+load \mf

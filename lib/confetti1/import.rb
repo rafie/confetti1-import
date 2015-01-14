@@ -53,7 +53,7 @@ module Confetti1
       end
 
       def versions_path
-        ENV['VERSIONS_PATH'] || File.join(@@home_dir, 'workspace', 'versions')
+        ENV['VERSIONS_PATH'] || File.join(@@home_dir, 'versions')
       end
 
       def log_path
@@ -103,8 +103,10 @@ module Confetti1
       versions_config.each_pair do |int_branch, locations|
         puts "-> for #{int_branch}"
         int_branch_location = File.join(forest_location, int_branch.downcase)
+
         Dir.mkdir(int_branch_location) unless Dir.exist?(int_branch_location)
         File.open(File.join(int_branch_location, 'dir'), 'w'){|f|f.write(int_branch_location)}
+
         locations.each do |location|
           begin
             Dir.chdir location
@@ -113,6 +115,7 @@ module Confetti1
             wrong_locations << location
             next 
           end
+
           Dir.glob(File.join('**', 'configspec.txt')).each do |cs_location|
             begin
               splited_location = cs_location.split(/(\\)|\//)
@@ -150,20 +153,40 @@ module Confetti1
             end
 
           end
-          # FileUtils.rm_rf(int_branch_location) if Dir.glob(File.join(int_branch_location, "**/")).empty?
         end
+        
       end
       Dir.chdir current_wd
+      puts "Cleaning up.."
+      Dir.glob(File.join(ConfettiEnv.versions_path, '**')).each do |version|
+        next unless File.directory? version
+        if Dir.glob("#{version}/**/").size <= 1
+          puts " --> #{version} has no labels and will be removed".red
+          puts "--------------------------------------------------------"
+          puts Dir.glob(File.join(version, "**", "*")).join("\n")
+          puts "--------------------------------------------------------"
+          FileUtils.rm_rf(version)
+        end
+      end
       File.open(File.join(ConfettiEnv.log_path, 'wrong_locations.txt'), 'w'){|f|f.write(wrong_locations.join("\n"))}
       File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
     end
 
     def import
       clear_case = ClearCase.new
-      Dir.glob(File.join(versions_path, '**')).each do |version|
+      Dir.glob(File.join(ConfettiEnv.versions_path, '**')).each do |version|
         next unless File.directory? version
         int_branch = File.read(File.join(version, 'int_branch.txt'))
-        puts version
+        origin_path = File.join(version, 'origin.txt')
+        if File.exist? origin_path
+          origin = File.read(origin_path)
+        else
+          puts "File #{origin_path} not found"
+        end
+        puts "------------------------------------------------------"
+        puts origin
+        puts "To #{int_branch}"
+
       end
     end
 
