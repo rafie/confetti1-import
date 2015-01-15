@@ -88,13 +88,23 @@ module Confetti1
           version_folder_name = branch.split("_").first
           self.commit_version(File.join(version_folder_name, version), tag, branch)
         when "--product"
-          TODO
+          version = arguments.shift
+          version_location = File.join(ConfettiEnv.versions_path, version)
+          version_glob = Dir.glob(File.join(version_location, '**', 'configspec.txt'))
+          raise Errno::ENOENT.new("Invalid product version") if versions_path.empty?
+          int_branch = File.read(File.join(version_location, 'int_branch.txt'))
+
+          version_glob.each do |label|
+            larr = label.split(/\\|\//)
+            tag = larr[larr.size-2]
+            self.commit_version(label, int_branch, label.split())
+          end
         else
           puts "Undefined attribute '#{command}'"
       end
     end
 
-    def commit_version(path, tag=nil branch='master')
+    def commit_version(path, tag=nil, branch='master', direct_path=nil)
       make_git = Proc.new do |type|
         raise ArgumentError.new("Only :small or :big allowed") unless (type==:small) or (type==:big)
         git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
@@ -112,8 +122,14 @@ module Confetti1
         end
       end
 
-      cs_location = File.join(versions_path, args.split("\/"), 'configspec.txt')
-      raise Errno::ENOENT.new("Configspec not found - '#{cs_location}'") unlless File.exist? cs_location
+      if direct_path
+        cs_location = File.join(versions_path, args.split("\/"), 'configspec.txt')
+      else
+        cs_location = path
+      end
+
+      raise Errno::ENOENT.new("Configspec not found - '#{cs_location}'") unless File.exist? cs_location
+
       clear_case = ClearCase.new
       clear_case.configspec = cs_location
       clear_case.scan_to_yaml
