@@ -1,5 +1,4 @@
 require "confetti1/import/base"
-require "confetti1/import/cli"
 require "confetti1/import/clear_case"
 require "confetti1/import/git"
 
@@ -66,9 +65,66 @@ module Confetti1
 
     end
 
-    def scan_view
+    def main(argv)
+      arguments = argv
+      command = arguments.shift
+      case  command
+        when "--init"
+          git = Git.new
+          git.init
+        when "--build-versions"
+          self.build_versions
+        when "--version"
+          raise ArgumentError.new("Path to version is empty") if arguments.empty?
+          self.commit_version(arguments.first)
+        when "--branch"
+          branch = arguments.shift
+          version_arg = arguments.shift
+          raise ArgumentError.new("Invalid version") unless version_arg == '--version'
+          version = arguments.shift
+          tag_arg = arguments.shift
+          raise ArgumentError.new("Invalid tag") unless version_arg == '--tag'
+          tag = arguments.shift
+          version_folder_name = branch.split("_").first
+          self.commit_version(File.join(version_folder_name, version), tag, branch)
+        when "--product"
+          TODO
+        else
+          puts "Undefined attribute '#{command}'"
+      end
+    end
+
+    def commit_version(path, tag=nil branch='master')
+      make_git = Proc.new do |type|
+        raise ArgumentError.new("Only :small or :big allowed") unless (type==:small) or (type==:big)
+        git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
+        git.checkout!(branch, '-b') unless git.branch_exist?(branch)
+        git.exclude!(YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml')))
+        files_map = YAML.load_file(File.join(ConfettiEnv.output_path, "#{type.to_s}.yml"))
+        files_map.each_pair do |version, files|
+          files_git.commit(files, version)
+        end
+        correctness = git.correct?(small_map.values.flatten, type.to_s)
+        if correctness
+          if tag
+            git.tag(tag)
+          end
+        end
+      end
+
+      cs_location = File.join(versions_path, args.split("\/"), 'configspec.txt')
+      raise Errno::ENOENT.new("Configspec not found - '#{cs_location}'") unlless File.exist? cs_location
       clear_case = ClearCase.new
-      clear_case.scan
+      clear_case.configspec = cs_location
+      clear_case.scan_to_yaml
+
+      if ConfettiEnv.handle_big
+        make_git.call(:small)
+        make_git.call(:big)
+      else
+        make_git.call(:small)
+      end
+
     end
 
     def scan_to_yaml
@@ -76,28 +132,12 @@ module Confetti1
       clear_case.scan_to_yaml
     end
 
-    def init
-      clear_case = ClearCase.new
-      clear_case.scan_to_yaml
-      small_git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
-
-      small_git.init
-      small_git.exclude!(YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml')))
-      small_map = YAML.load_file(File.join(ConfettiEnv.output_path, 'small.yml'))
-      small_map.each_pair do |version, files|
-        puts " ---> commiting #{version}".green.bold
-        small_git.commit(files, version)
-      end
-      small_git.correct?(small_map.values.flatten, 'small')
-    end
-
     def build_versions
       versions_config = YAML.load_file(File.join(ConfettiEnv.home, 'config', 'versions.yml'))
       forest_location = File.expand_path(File.join(ConfettiEnv.home, "versions"))
       wrong_locations = []
       wrong_formats   = []
-
-
+      Dir.glob(File.join(forest_location, "**")).each{|fl|FileUtils.rm_rf(fl)}
       current_wd = Dir.getwd
       clear_case = ClearCase.new
       versions_config.each_pair do |int_branch, locations|
@@ -172,23 +212,25 @@ module Confetti1
       File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
     end
 
-    def import
-      clear_case = ClearCase.new
-      Dir.glob(File.join(ConfettiEnv.versions_path, '**')).each do |version|
-        next unless File.directory? version
-        int_branch = File.read(File.join(version, 'int_branch.txt'))
-        origin_path = File.join(version, 'origin.txt')
-        if File.exist? origin_path
-          origin = File.read(origin_path)
-        else
-          puts "File #{origin_path} not found"
-        end
-        puts "------------------------------------------------------"
-        puts origin
-        puts "To #{int_branch}"
 
-      end
-    end
+    # def import
+    #   clear_case = ClearCase.new
+    #   Dir.glob(File.join(ConfettiEnv.versions_path, '**')).each do |version|
+    #     int_branch = File.read(File.join(version, 'int_branch.txt'))
+    #     origin_path = File.join(version, 'origin.txt')
+    #     Dir.glob(File.join(version, "**")).each do |label|
+    #       next unless File.directory?(label)
+    #       if Dir.glob(File.join(label, "*")).empty?
+    #         puts "Label #{label} has not configspec".red.bold
+    #         next
+    #       end
+
+    #       puts "================================================"
+    #       puts Dir.glob(File.join(label, "*"))
+
+    #     end
+    #   end
+    # end
 
   end   
 end                                             

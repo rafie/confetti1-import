@@ -14,15 +14,10 @@ module Confetti1
       end
 
       def init
-        puts "Import started.."
-        unless File.exist?(@exclude_file)
-          puts "Initialing empty git repository.."
-          puts @git_dot_folder
-          FileUtils.mkdir_p(@git_path)
-          git "--git-dir=#{@git_dot_folder} --work-tree=#{@view_path} init"
-          in_directory(@git_path){git 'commit --allow-empty -m"initial commit"'}
-        end
-        puts "Initialized"
+        return @git_dot_folder if File.directory? @git_path
+        FileUtils.mkdir_p(@git_path)
+        git "--git-dir=#{@git_dot_folder} --work-tree=#{@view_path} init"
+        #in_directory(@git_path){git 'commit --allow-empty -m"initial commit"'}
         @git_dot_folder
       end
 
@@ -72,10 +67,20 @@ module Confetti1
       end
 
       def on_branch?(branch)
-        in_directory(@view_root) do
+        in_directory(@git_dot_folder) do
           current_branch = git("branch").detect{|br| br =~ /^\*/}.gsub(/^\*\s/, "")
           current_branch == branch
         end
+      end
+
+      def branch_exist?(branch)
+        in_directory(@git_dot_folder) do
+          !!git("branch").map{|br| br.gsub(/\s|\*/, '')}.detect{|br| br == branch}
+        end
+      end
+
+      def checkout!(thing, params="")
+        git 'checkout', params, thing
       end
 
 
