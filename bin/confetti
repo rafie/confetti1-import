@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'confetti1/import'
-command = ARGV.shift
-Confetti1Import::CLI.new.send(command, ARGV)
+Confetti1::Import.main(ARGV)
