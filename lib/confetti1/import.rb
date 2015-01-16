@@ -76,7 +76,7 @@ module Confetti1
           self.build_versions
         when "--version"
           raise ArgumentError.new("Path to version is empty") if arguments.empty?
-          self.commit_version(arguments.first)
+          self.commit_version(File.join(ConfettiEnv.versions_path, arguments.first.split(/\\|\//), 'configspec.txt'))
         when "--branch"
           branch = arguments.shift
           version_arg = arguments.shift
@@ -104,10 +104,10 @@ module Confetti1
       end
     end
 
-    def commit_version(path, tag=nil, branch='master', direct_path=nil)
+    def commit_version(cs_location, tag=nil, branch='master')
       make_git = Proc.new do |type|
         raise ArgumentError.new("Only :small or :big allowed") unless (type==:small) or (type==:big)
-        git = Git.new(path: File.join(ConfettiEnv.git_path, 'small'))
+        git = Git.new(path: File.join(ConfettiEnv.git_path, type.to_s))
         git.checkout!(branch, '-b') unless git.branch_exist?(branch)
         git.exclude!(YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml')))
         files_map = YAML.load_file(File.join(ConfettiEnv.output_path, "#{type.to_s}.yml"))
@@ -120,12 +120,6 @@ module Confetti1
             git.tag(tag)
           end
         end
-      end
-
-      if direct_path
-        cs_location = File.join(versions_path, args.split("\/"), 'configspec.txt')
-      else
-        cs_location = path
       end
 
       raise Errno::ENOENT.new("Configspec not found - '#{cs_location}'") unless File.exist? cs_location
