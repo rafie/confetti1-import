@@ -104,17 +104,16 @@ module Confetti1
           version_folder_name = branch.split("_").first
           self.commit_version(File.join(version_folder_name, version), tag, branch)
         when "--product"
-          puts "TODO: this"; return
           version = arguments.shift
           version_location = File.join(ConfettiEnv.versions_path, version)
           version_glob = Dir.glob(File.join(version_location, '**', 'configspec.txt'))
-          raise Errno::ENOENT.new("Invalid product version") if versions_path.empty?
+          raise Errno::ENOENT.new("Invalid product version") if version_location.empty?
           int_branch = File.read(File.join(version_location, 'int_branch.txt'))
 
           version_glob.each do |label|
             larr = label.split(/\\|\//)
             tag = larr[larr.size-2]
-            self.commit_version(label, int_branch, label.split())
+            self.commit_version(label, tag, int_branch)
           end
         when "--cleanup-git"
           FileUtils.rm_rf(ConfettiEnv.git_path)

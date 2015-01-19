@@ -24,6 +24,8 @@ module Confetti1
           if exit_status.success?
             output = stdout.read 
           else
+            puts stdout.read
+            puts stderr.read
             raise stderr.read
           end
         end

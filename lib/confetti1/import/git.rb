@@ -33,7 +33,11 @@ module Confetti1
             puts "Adding #{file}"
             git "add \"#{file}\""
           end
-          git "commit -m\"#{message}\""
+          unless staged_files.empty?
+            git "commit -m\"#{message}\""
+          else
+            puts "Nothing to commit"
+          end
         end
       end
 
@@ -96,11 +100,18 @@ module Confetti1
 
       def test_clone(path=nil)
         @cloned_repository = File.join([ConfettiEnv.clone_path, path].compact)
+        if Dir.exist?(@cloned_repository)
+          FileUtils.rm_rf(@cloned_repository)
+        end
         git "clone", @git_dot_folder, @cloned_repository
       end
 
       def status
         output = in_directory(@view_path){git('status --porcelain').map{|st| st =~ /^\s\w\s/}}
+      end
+
+      def staged_files
+        in_directory(@view_path){git('status --porcelain').map{|st| st =~ /^\w\s\s/}}.compact
       end
 
       def git(*params)
