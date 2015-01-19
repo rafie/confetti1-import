@@ -104,6 +104,7 @@ module Confetti1
           version_folder_name = branch.split("_").first
           self.commit_version(File.join(version_folder_name, version), tag, branch)
         when "--product"
+          puts "TODO: this"; return
           version = arguments.shift
           version_location = File.join(ConfettiEnv.versions_path, version)
           version_glob = Dir.glob(File.join(version_location, '**', 'configspec.txt'))
