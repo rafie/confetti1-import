@@ -73,6 +73,10 @@ module Confetti1
         end
       end
 
+    def tag(name)
+      in_directory(@git_dot_folder){git("tag #{name}")}
+    end
+
       def branch_exist?(branch)
         in_directory(@git_dot_folder) do
           !!git("branch").map{|br| br.gsub(/\s|\*/, '')}.detect{|br| br == branch}

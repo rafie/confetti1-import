@@ -99,7 +99,7 @@ module Confetti1
           raise ArgumentError.new("Invalid version") unless version_arg == '--version'
           version = arguments.shift
           tag_arg = arguments.shift
-          raise ArgumentError.new("Invalid tag") unless version_arg == '--tag'
+          raise ArgumentError.new("Invalid tag") unless tag_arg == '--tag'
           tag = arguments.shift
           version_folder_name = branch.split("_").first
           self.commit_version(File.join(version_folder_name, version), tag, branch)
