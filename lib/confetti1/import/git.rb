@@ -17,7 +17,7 @@ module Confetti1
         return @git_dot_folder if File.directory? @git_path
         FileUtils.mkdir_p(@git_path)
         git "--git-dir=#{@git_dot_folder} --work-tree=#{@view_path} init"
-        #in_directory(@git_path){git 'commit --allow-empty -m"initial commit"'}
+        in_directory(@git_path){git 'commit --allow-empty -m"initial commit"'}
         @git_dot_folder
       end
 

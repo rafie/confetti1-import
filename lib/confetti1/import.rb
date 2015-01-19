@@ -51,6 +51,19 @@ module Confetti1
         ENV['HANDLE_BIG']
       end
 
+      def small_reposiroty
+        File.join(self.git_path, 'small') || ENV['SMALL_REPOSITORY']
+      end
+
+      def big_repository
+        File.join(self.git_path, 'big') || ENV['SMALL_REPOSITORY'] if handle_big
+      end
+
+      def git_repozitories
+
+        [self.small_reposiroty, self.big_repository].compact
+      end
+
       def versions_path
         ENV['VERSIONS_PATH'] || File.join(@@home_dir, 'versions')
       end
@@ -68,10 +81,14 @@ module Confetti1
     def main(argv)
       arguments = argv
       command = arguments.shift
+      @gits = []
       case  command
         when "--init"
-          git = Git.new
-          git.init
+          ConfettiEnv.git_repozitories.each do |repo|
+            git = Git.new(path: repo)
+            git.init
+            @gits << git
+          end
         when "--build-versions"
           self.build_versions
         when "--version"
@@ -99,6 +116,8 @@ module Confetti1
             tag = larr[larr.size-2]
             self.commit_version(label, int_branch, label.split())
           end
+        when "--cleanup-git"
+          FileUtils.rm_rf(ConfettiEnv.git_path)
         else
           puts "Undefined attribute '#{command}'"
       end
