@@ -60,7 +60,6 @@ module Confetti1
       end
 
       def git_repozitories
-
         [self.small_reposiroty, self.big_repository].compact
       end
 
@@ -118,22 +117,26 @@ module Confetti1
           end
         when "--cleanup-git"
           FileUtils.rm_rf(ConfettiEnv.git_path)
+        when "--cleanup-clone"
+          FileUtils.rm_rf(ConfettiEnv.clone_path)
+        when "--cleanup-all"
+          FileUtils.rm_rf(ConfettiEnv.git_path)
+          FileUtils.rm_rf(ConfettiEnv.clone_path)
         else
           puts "Undefined attribute '#{command}'"
       end
     end
 
     def commit_version(cs_location, tag=nil, branch='master')
-      make_git = Proc.new do |type|
-        raise ArgumentError.new("Only :small or :big allowed") unless (type==:small) or (type==:big)
-        git = Git.new(path: File.join(ConfettiEnv.git_path, type.to_s))
+      make_commit = Proc.new do |repo, type|
+        git = Git.new(path: repo)
         git.checkout!(branch, '-b') unless git.branch_exist?(branch)
         git.exclude!(YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml')))
-        files_map = YAML.load_file(File.join(ConfettiEnv.output_path, "#{type.to_s}.yml"))
+        files_map = YAML.load_file(File.join(ConfettiEnv.output_path, "#{type}.yml"))
         files_map.each_pair do |version, files|
-          files_git.commit(files, version)
+          git.commit(files, version)
         end
-        correctness = git.correct?(small_map.values.flatten, type.to_s)
+        correctness = git.correct?(files_map.values.flatten, type)
         if correctness
           if tag
             git.tag(tag)
@@ -141,18 +144,8 @@ module Confetti1
         end
       end
 
-      raise Errno::ENOENT.new("Configspec not found - '#{cs_location}'") unless File.exist? cs_location
-
-      clear_case = ClearCase.new
-      clear_case.configspec = cs_location
-      clear_case.scan_to_yaml
-
-      if ConfettiEnv.handle_big
-        make_git.call(:small)
-        make_git.call(:big)
-      else
-        make_git.call(:small)
-      end
+      make_commit.call(ConfettiEnv.small_reposiroty, 'small')
+      make_commit.call(ConfettiEnv.big_repository, 'big') if ConfettiEnv.handle_big
 
     end
 
