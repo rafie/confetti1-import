@@ -1,46 +1,31 @@
-7.1.2.8.1_P/configspec.txt
-Google/7.1.2.10.13d/configspec.txt
-Google/7.1.2.10.13a/configspec.txt
-Google/7.1.2.10.13e/configspec.txt
-Google/7.1.2.10.13f/configspec.txt
-Google/7.1.2.10.13g/configspec.txt
-Google/7.1.2.10.13h/configspec.txt
-Google/7.1.2.10.13i/configspec.txt
-Google/7.1.2.10.13j/configspec.txt
-Google/7.1.2.10.13k/configspec.txt
-Google/7.1.2.10.13L/configspec.txt
-Google/7.1.2.10.13M/configspec.txt
-Google/7.1.2.10.13N/configspec.txt
-7.1.2.8.2ALU/configspec.txt
-7.1.2.8.1T/ConfigSpec.txt
-7.1.2.8.1ALU/configspec.txt
-7.1.2.8.2T/ConfigSpec.txt
-7.1.2.10.8.cisco/configspec.txt
-7.1.2.9.2-transforDvision2Rv/configspec.txt
 7.5.0.15.1_rc1/configspec.txt
 7.5.0.18.3-xmlsock1/configspec.txt
-Engineering patches/TI/7.5.1.10.28_TI/configspec.txt
-Engineering patches/7.5.1.10.5NTT/configspec.txt
-Engineering patches/7.5.1.10.6 - Telstra/configspec.txt
-Engineering patches/7.5.1.10.8NTT/configspec.txt
-Engineering patches/7.5.1.10.8NTT3/configspec.txt
-Engineering patches/7.5.1.10.8NTT4/configspec.txt
-Engineering patches/7.5.1.10.8NTT5/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.4_CS_Hyundai1/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.4_CS_Hyundai2/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix1/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix3/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix4/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix5/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix6/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix7/configspec.txt
-Engineering patches/Hyundai/7.5.1.10.28_HyundaiFix8/configspec.txt
-Engineering patches/7.5.1.10.7 - Telstra/configspec.txt
-Engineering patches/7.5.1.10.9 - Telstra/configspec.txt
-Engineering patches/7.5.1.10.16 (AVI-SPL)/configspec.txt
-Engineering patches/7.5.1.10.8 - Telstra/configspec.txt
-Engineering patches/7.5.1.10.10 - Telstra/configspec.txt
-Engineering patches/7.5.1.10.10 - Telstra2/configspec.txt
+7.5.1.6.2s2/configspec.txt
+7.5.1.11.0_G/configspec.txt
+7.5.1.11.1_G/configspec.txt
+7.5.1.11.2_G/configspec.txt
+7.5.1.11.3_G/configspec.txt
+7.5.1.11.5_G/configspec.txt
+7.5.1.11.4_G/configspec.txt
+7.5.1.11.7_G/configspec.txt
+7.5.1.11.6_G/configspec.txt
+7.5.1.11.9_G/configspec.txt
+7.5.1.11.12_G/configspec.txt
+7.5.1.11.10_G/configspec.txt
+7.5.1.11.14_G/configspec.txt
+7.5.1.11.11_G/configspec.txt
+7.5.1.11.13_G/configspec.txt
+7.5.1.11.8_G/configspec.txt
+7.5.1.11.19_G/configspec.txt
+7.5.1.11.16_G/configspec.txt
+7.5.1.11.15_G/configspec.txt
+7.5.1.11.17_G_OLD/configspec.txt
+7.5.1.11.17_G/configspec.txt
+7.5.1.11.18_G_bug/configspec.txt
+debug lab/7.5.1.11.20_G/configspec.txt
+debug lab/7.5.1.11.21_G/configspec.txt
+debug lab/7.5.1.11.22_G/configspec.txt
+debug lab/7.5.1.11.23_G/configspec.txt
 7.6.0.5.2.tmp.do.not.use/configspec.txt
 temp/7.6.0.24.tmp_not_to_use/configspec.txt
 7.6.0.9.0_tmp/configspec.txt
@@ -101,222 +86,30 @@ Test/TIP-GW8.0.0.15.7-superop1/configspec.txt
 8.0.0.49.33_Brazil_2/configspec.txt
 8.0.0.49.33_Brazil_3/configspec.txt
 8.0.0.49.33_Brazil_4/configspec.txt
-Version 8.2.0.18.1/configspec.txt
-Version 8.2.0.19.0/configspec.txt
+Test/Tip_triple/configspec.txt
+Test/TipGw_Presentation/configspec.txt
+Test/arc/8.0.0.49.3_Brazil/configspec.txt
+Test/TIP-GW8.0.0.15.7-superop1/configspec.txt
+8.0.0.30.5.SP2/configspec.txt
+8.0.0.30.5_SP2_2/configspec.txt
+8.0.0.34.0.SP1/configspec.txt
+8.0.0.36.0.SP1/configspec.txt
+8.0.0.136.0/Out/configspec.txt
+8.0.0.136.1/License/configspec.txt
+8.0.0.136.2/License/configspec.txt
+8.0.0.39.0_DontUse/configspec.txt
+8.0.0.39.5.SP2/configspec.txt
+8.0.0.139.3/not_to_use/configspec.txt
+8.0.0.47.0_waitFor47.1/configspec.txt
+8.1.0.0.1_H263Testing/configspec.txt
+8.0.0.49.33_Brazil/configspec.txt
+8.0.0.49.5.SP2/configspec.txt
+8.0.0.49.33_Brazil_1/configspec.txt
+8.0.0.49.33_Brazil_2/configspec.txt
+8.0.0.49.33_Brazil_3/configspec.txt
+8.0.0.49.33_Brazil_4/configspec.txt
+8.2.0.4.1_24Mb_forTestingOnly/configspec.txt
 Temp/8.3.0.8.5_forTestingOnly/configspec.txt
 8.3.0.6.2_test_only/configspec.txt
+8.3.1.1.0_SP2/configspec.txt
 8.3.2.1.0_12M/configspec.txt
-version 4.5.0.0.6/configspec.txt
-Version-5.4.4.0.7/configspec.txt
-version-5.7.1.0.6/configspec.txt
-version-5.7.1.0.1/configspec.txt
-version-5.7.1.0.2/configspec.txt
-version-5.7.1.0.3/configspec.txt
-version-5.7.1.0.4/configspec.txt
-version-5.7.1.0.5/configspec.txt
-VLAN/version-5.7.0.VLAN.1/configspec.txt
-VLAN/version-5.7.0.VLAN.2/configspec.txt
-VLAN/version-5.7.0.VLAN.3/configspec.txt
-VLAN/version-5.7.0.VLAN.4/configspec.txt
-version-5.7.1.SBW.1/configspec.txt
-version-5.7.1.iView.1/configspec.txt
-version-5.7.1.0.7/configspec.txt
-version-5.7.1.0.8/configspec.txt
-version-5.7.1.0.9/configspec.txt
-version-5.7.1.0.10/configspec.txt
-version-5.7.1.hdc.1/configspec.txt
-version-5.7.1.0.11/configspec.txt
-version-5.7.1.0.12/configspec.txt
-version-5.7.1.0.13/configspec.txt
-version-5.7.1.0.14/configspec.txt
-version-5.7.1.0.15/configspec.txt
-version-5.7.1.1.11/configspec.txt
-version-5.7.1.hdc.2/configspec.txt
-version-5.7.1.2.11/configspec.txt
-version-5.7.1.1.15/configspec.txt
-version-5.7.1.2.15/configspec.txt
-version-5.7.1.0.11.LifeSize/configspec.txt
-version-5.7.1.0.11.Cisco/configspec.txt
-version-5.7.2.0.1/configspec.txt
-version-5.7.2.0.2/configspec.txt
-version-5.7.2.0.4/configspec.txt
-version-5.7.2.0.3/configspec.txt
-version-5.7.2.0.5/configspec.txt
-version-5.7.2.0.6/configspec.txt
-version-5.7.2.0.7/configspec.txt
-version-5.7.2.0.8/configspec.txt
-version-5.7.2.0.10/configspec.txt
-version-5.7.2.0.9/configspec.txt
-version-5.7.2.1.10/configspec.txt
-version-5.7.2.2.10/configspec.txt
-version-5.7.2.3.10/configspec.txt
-version-5.7.2.0.11/configspec.txt
-version-5.7.2.8.10/configspec.txt
-version-5.7.2.4.10/configspec.txt
-version-5.7.2.5.10/configspec.txt
-version-5.7.2.6.10/configspec.txt
-version-5.7.2.7.10/configspec.txt
-version-5.7.2.9.10/configspec.txt
-7.1.0.79.2_IBM_ST/configSpec.txt
-Engineering patches/Yunan Post/7.6.0.7.2Fix3/configspec.txt
-Engineering patches/Yunan Post/7.6.0.7.2Fix4/configspec.txt
-7.6.1.2.0-FixDoesNotWork/configspec.txt
-Engineering patches/7.6.1.5.0TI1/configspec.txt
-7.7.0.2.0Recorder1/configspec.txt
-7.7.0.2.0Recorder2/configspec.txt
-7.7.0.3.0 - DO NOT USE/configspec.txt
-7.7.1.28.1_AvayaPatch1/configspec.txt
-7.7.1.28.1_AvayaPatch2/configspec.txt
-7.7.1.28.1_AvayaPatch4/configspec.txt
-7.7.1.28.1_AvayaPatch3/configspec.txt
-7.7.1.35.2_Certification_Brazile/configspec.txt
-7.7.1.35.3_Certification_Brazil/configspec.txt
-7.7.1.35.4_Certification_Brazil/configspec.txt
-7.7.5.8.4UC/configspec.txt
-7.7.0.2.0Recorder1/configspec.txt
-7.7.0.2.0Recorder2/configspec.txt
-7.7.0.3.0 - DO NOT USE/configspec.txt
-7.7.1.28.1_AvayaPatch1/configspec.txt
-7.7.1.28.1_AvayaPatch2/configspec.txt
-7.7.1.28.1_AvayaPatch4/configspec.txt
-7.7.1.28.1_AvayaPatch3/configspec.txt
-7.7.1.35.2_Certification_Brazile/configspec.txt
-7.7.1.35.3_Certification_Brazil/configspec.txt
-7.7.1.35.4_Certification_Brazil/configspec.txt
-7.7.5.8.4UC/configspec.txt
-7.7.0.2.0Recorder1/configspec.txt
-7.7.0.2.0Recorder2/configspec.txt
-7.7.0.3.0 - DO NOT USE/configspec.txt
-7.7.1.28.1_AvayaPatch1/configspec.txt
-7.7.1.28.1_AvayaPatch2/configspec.txt
-7.7.1.28.1_AvayaPatch4/configspec.txt
-7.7.1.28.1_AvayaPatch3/configspec.txt
-7.7.1.35.2_Certification_Brazile/configspec.txt
-7.7.1.35.3_Certification_Brazil/configspec.txt
-7.7.1.35.4_Certification_Brazil/configspec.txt
-7.7.5.8.4UC/configspec.txt
-7.7.0.2.0Recorder1/configspec.txt
-7.7.0.2.0Recorder2/configspec.txt
-7.7.0.3.0 - DO NOT USE/configspec.txt
-7.7.1.28.1_AvayaPatch1/configspec.txt
-7.7.1.28.1_AvayaPatch2/configspec.txt
-7.7.1.28.1_AvayaPatch4/configspec.txt
-7.7.1.28.1_AvayaPatch3/configspec.txt
-7.7.1.35.2_Certification_Brazile/configspec.txt
-7.7.1.35.3_Certification_Brazil/configspec.txt
-7.7.1.35.4_Certification_Brazil/configspec.txt
-7.7.5.8.4UC/configspec.txt
-7.7.0.2.0Recorder1/configspec.txt
-7.7.0.2.0Recorder2/configspec.txt
-7.7.0.3.0 - DO NOT USE/configspec.txt
-7.7.1.28.1_AvayaPatch1/configspec.txt
-7.7.1.28.1_AvayaPatch2/configspec.txt
-7.7.1.28.1_AvayaPatch4/configspec.txt
-7.7.1.28.1_AvayaPatch3/configspec.txt
-7.7.1.35.2_Certification_Brazile/configspec.txt
-7.7.1.35.3_Certification_Brazil/configspec.txt
-7.7.1.35.4_Certification_Brazil/configspec.txt
-7.7.5.8.4UC/configspec.txt
-7.7.0.2.0Recorder1/configspec.txt
-7.7.0.2.0Recorder2/configspec.txt
-7.7.0.3.0 - DO NOT USE/configspec.txt
-7.7.1.28.1_AvayaPatch1/configspec.txt
-7.7.1.28.1_AvayaPatch2/configspec.txt
-7.7.1.28.1_AvayaPatch4/configspec.txt
-7.7.1.28.1_AvayaPatch3/configspec.txt
-7.7.1.35.2_Certification_Brazile/configspec.txt
-7.7.1.35.3_Certification_Brazil/configspec.txt
-7.7.1.35.4_Certification_Brazil/configspec.txt
-7.7.5.8.4UC/configspec.txt
-7.7.0.2.0Recorder1/configspec.txt
-7.7.0.2.0Recorder2/configspec.txt
-7.7.0.3.0 - DO NOT USE/configspec.txt
-7.7.1.28.1_AvayaPatch1/configspec.txt
-7.7.1.28.1_AvayaPatch2/configspec.txt
-7.7.1.28.1_AvayaPatch4/configspec.txt
-7.7.1.28.1_AvayaPatch3/configspec.txt
-7.7.1.35.2_Certification_Brazile/configspec.txt
-7.7.1.35.3_Certification_Brazil/configspec.txt
-7.7.1.35.4_Certification_Brazil/configspec.txt
-7.7.5.8.4UC/configspec.txt
-1.0.0.x/AMCU_1.0.0.0.0/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.0/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.1/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.10/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.10.5/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.11/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.2/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.3/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.4/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.5/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.6/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.6_plusFeatures/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.6-tamar/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.7/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.8/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.9/configspec.txt
-1.0.0.x/AMCU_1.0.0.1.8_Enhanced_PM/configSpec.txt
-6.0.0.0.x/AMCU_6.0.0.0.12/configspec.txt
-6.0.0.0.x/AMCU_6.0.0.0.12-tamar-1/configspec.txt
-6.0.0.1.x/6.0.0.1.17b/configspec.txt
-6.0.0.1.x/6.0.0.1.19b/configspec.txt
-6.0.0.3.3x/6.0.0.3.30b/configspec.txt
-6.0.0.3.3x/6.0.0.3.36b/configspec.txt
-custom/udia_AMCU_1.6_Adap_1/configspec.txt
-custom/udia_AMCU_1.6_Adap_2/configspec.txt
-6.0.0.3.5x/6.0.0.3.52a/configspec.txt
-6.0.0.3.5x/6.0.0.3.59a/configspec.txt
-6.0.0.3.6x/6.0.0.3.60a/configspec.txt
-6.0.0.3.6x/6.0.0.3.63a/configspec.txt
-6.0.0.3.4x/6.0.0.3.41a/configspec.txt
-6.0.0.3.4x/6.0.0.3.45-rc/configspec.txt
-6.0.0.3.4x/6.0.0.3.47-rc/configspec.txt
-6.0.0.3.7x/6.0.0.3.73a/configspec.txt
-6.0.0.3.7x/6.0.0.3.73b/configspec.txt
-6.0.0.3.7x/6.0.0.3.73b1/configspec.txt
-6.0.0.3.8x/6.0.0.3.80a/configspec.txt
-6.0.0.3.8x/6.0.0.3.81a/configspec.txt
-6.0.0.3.8x/6.0.0.3.84a/configspec.txt
-6.0.0.3.8x/6.0.0.3.84b/configspec.txt
-6.0.0.3.8x/6.0.0.3.85b/configspec.txt
-6.0.0.3.8x/6.0.0.3.86a/configspec.txt
-6.0.0.3.8x/6.0.0.3.88a/configspec.txt
-6.1.0.0.9a/configspec.txt
-6.1.0.0.11a/configspec.txt
-6.1.0.0.13a/configspec.txt
-6.1.0.0.19_b/configspec.txt
-6.1.0.0.19C/configspec.txt
-6.2.0.0.1x/6.2.0.0.10_RCD/configspec.txt
-6.2.0.0.1x/6.2.0.0.10a/configspec.txt
-6.2.0.0.1x/6.2.0.0.10b/configspec.txt
-6.2.0.0.1x/6.2.0.0.10d/configspec.txt
-6.2.0.0.1x/6.2.0.0.10e/configspec.txt
-6.2.0.0.1x/6.2.0.0.10f/configspec.txt
-6.2.0.0.1x/6.2.0.0.10g/configspec.txt
-6.2.0.0.1x/6.2.0.0.10i/configspec.txt
-6.2.0.0.1x/6.2.0.0.11a/configspec.txt
-6.2.0.0.1x/6.2.0.0.11b/configspec.txt
-6.2.0.0.1x/6.2.0.0.13a/configspec.txt
-6.2.0.0.1x/6.2.0.0.15_RCD/configspec.txt
-6.2.0.0.1x/6.2.0.0.15b/configspec.txt
-6.2.0.0.1x/6.2.0.0.15c/configspec.txt
-6.2.0.0.1x/6.2.0.0.16a/configspec.txt
-6.2.0.0.x/6.2.0.0.6a/configspec.txt
-6.2.0.0.x/6.2.0.0.7a/configspec.txt
-6.2.0.0.1x/6.2.0.0.10_RCD/configspec.txt
-6.2.0.0.1x/6.2.0.0.10a/configspec.txt
-6.2.0.0.1x/6.2.0.0.10b/configspec.txt
-6.2.0.0.1x/6.2.0.0.10d/configspec.txt
-6.2.0.0.1x/6.2.0.0.10e/configspec.txt
-6.2.0.0.1x/6.2.0.0.10f/configspec.txt
-6.2.0.0.1x/6.2.0.0.10g/configspec.txt
-6.2.0.0.1x/6.2.0.0.10i/configspec.txt
-6.2.0.0.1x/6.2.0.0.11a/configspec.txt
-6.2.0.0.1x/6.2.0.0.11b/configspec.txt
-6.2.0.0.1x/6.2.0.0.13a/configspec.txt
-6.2.0.0.1x/6.2.0.0.15_RCD/configspec.txt
-6.2.0.0.1x/6.2.0.0.15b/configspec.txt
-6.2.0.0.1x/6.2.0.0.15c/configspec.txt
-6.2.0.0.1x/6.2.0.0.16a/configspec.txt
-6.2.0.0.x/6.2.0.0.6a/configspec.txt
-6.2.0.0.x/6.2.0.0.7a/configspec.txt

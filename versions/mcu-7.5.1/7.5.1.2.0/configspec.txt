@@ -1,0 +1,4 @@
+element * CHECKEDOUT
+
+element /configInfra/...        	configInfra_1.3.0                          	-nocheckout
+element /loggerInfra/...             	loggerInfra_1.34.2                   		-nocheckout
