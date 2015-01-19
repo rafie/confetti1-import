@@ -106,6 +106,15 @@ module Confetti1
         when "--product"
           version = arguments.shift
           version_location = File.join(ConfettiEnv.versions_path, version)
+
+          origin = nil
+          unless arguments.empty?
+            origin_arg = arguments.shift
+            if origin_arg == "--from-tag"
+              origin = arguments.shift
+            end
+          end
+
           version_glob = Dir.glob(File.join(version_location, '**', 'configspec.txt'))
           raise Errno::ENOENT.new("Invalid product version") if version_location.empty?
           int_branch = File.read(File.join(version_location, 'int_branch.txt'))
@@ -125,6 +134,9 @@ module Confetti1
         else
           puts "Undefined attribute '#{command}'"
       end
+    end
+
+    def find_origin
     end
 
     def commit_version(cs_location, tag=nil, branch='master')
