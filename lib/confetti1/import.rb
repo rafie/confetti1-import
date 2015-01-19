@@ -112,6 +112,7 @@ module Confetti1
             origin_arg = arguments.shift
             if origin_arg == "--from-tag"
               origin = arguments.shift
+              raise ArgumentError.new("'--from-tag' can not be empty") if origin.nil?
             end
           end
 
@@ -122,7 +123,7 @@ module Confetti1
           version_glob.each do |label|
             larr = label.split(/\\|\//)
             tag = larr[larr.size-2]
-            self.commit_version(label, tag, int_branch)
+            self.commit_version(label, tag, int_branch, origin)
           end
         when "--cleanup-git"
           FileUtils.rm_rf(ConfettiEnv.git_path)
@@ -136,12 +137,17 @@ module Confetti1
       end
     end
 
-    def find_origin
-    end
 
-    def commit_version(cs_location, tag=nil, branch='master')
+    def commit_version(cs_location, tag=nil, branch='master', origin_tag=nil)
       make_commit = Proc.new do |repo, type|
         git = Git.new(path: repo)
+        unless origin_tag.nil?
+          if git.tag_exist?   
+            git.checkout(origin_tag)
+          else
+            raise ArgumentError.new("Tag '#{origin_tag}' not found in repository")
+          end
+        end
         git.checkout!(branch, '-b') unless git.branch_exist?(branch)
         git.exclude!(YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml')))
         files_map = YAML.load_file(File.join(ConfettiEnv.output_path, "#{type}.yml"))
@@ -245,26 +251,6 @@ module Confetti1
       File.open(File.join(ConfettiEnv.log_path, 'wrong_locations.txt'), 'w'){|f|f.write(wrong_locations.join("\n"))}
       File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
     end
-
-
-    # def import
-    #   clear_case = ClearCase.new
-    #   Dir.glob(File.join(ConfettiEnv.versions_path, '**')).each do |version|
-    #     int_branch = File.read(File.join(version, 'int_branch.txt'))
-    #     origin_path = File.join(version, 'origin.txt')
-    #     Dir.glob(File.join(version, "**")).each do |label|
-    #       next unless File.directory?(label)
-    #       if Dir.glob(File.join(label, "*")).empty?
-    #         puts "Label #{label} has not configspec".red.bold
-    #         next
-    #       end
-
-    #       puts "================================================"
-    #       puts Dir.glob(File.join(label, "*"))
-
-    #     end
-    #   end
-    # end
 
   end   
 end                                             
