@@ -77,6 +77,14 @@ module Confetti1
 
     end
 
+    module Logger
+      extend self
+      def log(message="")
+        puts message
+        File.open(File.join(ConfettiEnv.log_path, 'confetti.log'), 'a'){|f|f.puts "-------[#{Time.now}]---------\n#{message}"}
+      end
+    end
+
     def main(argv)
       arguments = argv
       command = arguments.shift
@@ -191,7 +199,7 @@ module Confetti1
           begin
             Dir.chdir location
           rescue Errno::ENOENT => e
-            puts e.message.to_s.red
+            Logger.log e.message.to_s.red
             wrong_locations << location
             next 
           end
@@ -225,8 +233,8 @@ module Confetti1
                   f.write(origin)
                 }
               rescue Exception => e
-                puts e.class
-                puts e.message
+                Logger.log e.class
+                Logger.log e.message
               end
               
               File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
@@ -243,7 +251,7 @@ module Confetti1
         if Dir.glob("#{version}/**/").size <= 1
           puts " --> #{version} has no labels and will be removed".red
           puts "--------------------------------------------------------"
-          puts Dir.glob(File.join(version, "**", "*")).join("\n")
+          Logger.log Dir.glob(File.join(version, "**", "*")).join("\n")
           puts "--------------------------------------------------------"
           FileUtils.rm_rf(version)
         end

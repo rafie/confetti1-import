@@ -190,7 +190,7 @@ module Confetti1
             puts "label *unknown* in #{context}"
             puts "check configspec:"
             puts
-            puts cspec
+            Logger.log cspec
             return nil
           end
           # mcu[0] is probably element * CHECKEDOUT
