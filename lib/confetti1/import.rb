@@ -152,7 +152,7 @@ module Confetti1
 
 
     def commit_version(cs_location, tag=nil, branch='master', origin_tag=nil)
-      make_commit = Proc.new do |repo, type|
+      make_commit = Proc.new do |repo, type, testing|
         git = Git.new(path: repo)
         unless origin_tag.nil?
           if git.tag_exist?(origin_tag) 
@@ -161,13 +161,13 @@ module Confetti1
             raise ArgumentError.new("Tag '#{origin_tag}' not found in repository")
           end
         end
+        ignored = YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml'))
         git.checkout!(branch, '-b') unless git.branch_exist?(branch)
-        git.exclude!(YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml')))
+        git.append_exclude(ignored)
         files_map = YAML.load_file(File.join(ConfettiEnv.output_path, "#{type}.yml"))
-        files_map.each_pair do |version, files|
-          git.commit(files, version)
-        end
-        correctness = git.correct?(files_map.values.flatten, type)
+        git.exclusive_commit(files_map.concat(ignored))
+        testing_files = YAML.load_file(File.join(ConfettiEnv.output_path, "#{testing}.yml"))
+        correctness = git.correct?(testing_files, branch)
         if correctness
           if tag
             git.tag(tag)
@@ -179,8 +179,8 @@ module Confetti1
       clear_case.configspec = cs_location
       clear_case.scan_to_yaml
 
-      make_commit.call(ConfettiEnv.small_reposiroty, 'small')
-      make_commit.call(ConfettiEnv.big_repository, 'big') if ConfettiEnv.handle_big
+      make_commit.call(ConfettiEnv.small_reposiroty, 'big', 'small')
+      make_commit.call(ConfettiEnv.big_repository, 'small', 'bit') if ConfettiEnv.handle_big
 
     end
 
