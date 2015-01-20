@@ -77,9 +77,14 @@ module Confetti1
         end
       end
 
-    def tag(name)
-      in_directory(@git_dot_folder){git("tag #{name}")}
-    end
+      def tag(name)
+        in_directory(@git_dot_folder){git("tag #{name}")}
+      end
+
+      def tag_exist?(tag)
+        tags = git("tag -l")
+        tags.detect{|t| t==tag}
+      end
 
       def branch_exist?(branch)
         in_directory(@git_dot_folder) do
@@ -90,6 +95,8 @@ module Confetti1
       def checkout!(thing, params="")
         git 'checkout', params, thing
       end
+
+
 
 
     private
