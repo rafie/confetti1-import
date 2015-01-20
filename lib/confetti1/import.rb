@@ -75,12 +75,17 @@ module Confetti1
         File.join(@@home_dir, 'output')
       end
 
+      def silent_log
+        ENV['SILENT_LOG']
+      end
+
     end
 
     module Logger
       extend self
       def log(message="")
         puts message
+        return if  ConfettiEnv.silent_log
         File.open(File.join(ConfettiEnv.log_path, 'confetti.log'), 'a'){|f|f.puts "-------[#{Time.now}]---------\n#{message}"}
       end
     end
@@ -169,6 +174,10 @@ module Confetti1
           end
         end
       end
+
+      clear_case = ClearCase.new
+      clear_case.configspec = cs_location
+      clear_case.scan_to_yaml
 
       make_commit.call(ConfettiEnv.small_reposiroty, 'small')
       make_commit.call(ConfettiEnv.big_repository, 'big') if ConfettiEnv.handle_big
