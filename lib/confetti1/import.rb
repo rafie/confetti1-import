@@ -142,8 +142,8 @@ module Confetti1
       make_commit = Proc.new do |repo, type|
         git = Git.new(path: repo)
         unless origin_tag.nil?
-          if git.tag_exist?   
-            git.checkout(origin_tag)
+          if git.tag_exist?(origin_tag) 
+            git.checkout!(origin_tag)
           else
             raise ArgumentError.new("Tag '#{origin_tag}' not found in repository")
           end
