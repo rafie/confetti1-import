@@ -1,13 +1,14 @@
-require "confetti1/import/base"
-require "confetti1/import/clear_case"
-require "confetti1/import/git"
+require_relative "import/base"
+require_relative "import/clear_case"
+require_relative "import/git"
 
 require 'fileutils'
 require 'yaml'
-require 'awesome_print'
-require 'colorize'
 require 'pathname'
-require 'rake'
+
+# require 'awesome_print'
+# require 'colorize'
+# require 'rake'
 
 module Confetti1
   module Import
@@ -68,7 +69,7 @@ module Confetti1
       end
 
       def log_path
-        File.join(@@home_dir, 'log') 
+        File.join(@@home_dir, 'log')
       end
 
       def output_path
@@ -83,9 +84,9 @@ module Confetti1
 
     module Logger
       extend self
-      def log(message="")
+      def log(message = "")
         puts message
-        return if  ConfettiEnv.silent_log
+        return if ConfettiEnv.silent_log
         File.open(File.join(ConfettiEnv.log_path, 'confetti.log'), 'a'){|f|f.puts "-------[#{Time.now}]---------\n#{message}"}
       end
     end
@@ -155,7 +156,7 @@ module Confetti1
       make_commit = Proc.new do |repo, type, testing|
         git = Git.new(path: repo)
         unless origin_tag.nil?
-          if git.tag_exist?(origin_tag) 
+          if git.tag_exist?(origin_tag)
             git.checkout!(origin_tag)
           else
             raise ArgumentError.new("Tag '#{origin_tag}' not found in repository")
@@ -210,7 +211,7 @@ module Confetti1
           rescue Errno::ENOENT => e
             Logger.log e.message.to_s.red
             wrong_locations << location
-            next 
+            next
           end
 
           Dir.glob(File.join('**', 'configspec.txt')).each do |cs_location|
@@ -238,20 +239,20 @@ module Confetti1
             unless File.exist?(File.join(int_branch_location, 'int_branch.txt'))
               begin
                 origin = clear_case.originate(File.join(db_version_place, 'configspec.txt'))
-                File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f| 
+                File.open(File.join(int_branch_location, 'origin.txt'), 'w'){|f|
                   f.write(origin)
                 }
               rescue Exception => e
                 Logger.log e.class
                 Logger.log e.message
               end
-              
+
               File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
             end
 
           end
         end
-        
+
       end
       Dir.chdir current_wd
       puts "Cleaning up.."
@@ -269,5 +270,5 @@ module Confetti1
       File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
     end
 
-  end   
-end                                             
+  end
+end
