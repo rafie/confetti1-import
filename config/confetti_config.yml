@@ -2,8 +2,8 @@
 #----------------------------------------
 # Configure GIT
 
-view_path: 'm:/vtrofymyuk_view1'
-git_path: 'C:\Users\rvint.GLOBAL\Workspace\Workspace\git'
+# view_path: 'm:/rafie_view2'
+git_path: 'd:\tmp\git'
 exclude_size: 1000000
 ignore_list:
   - ['**', 'lost+found', '**', '*']
