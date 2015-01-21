@@ -1,0 +1,55 @@
+element * CHECKEDOUT
+
+element \mcu\...                    ucgw_7.6.5.4.3           -nocheckout                                                           
+                                                                 
+element \web\...                    WebMcu_7.6.0_39_270311.8361       -nocheckout
+
+element \mvp\...			ucgw_mvp_7.6.5.4.3			-nocheckout
+element \mpc\...		        ucgw_mpc_7.6.5.4.3			-nocheckout
+element \map\...		        ucgw_map_7.6.5.4.3			-nocheckout
+element \mf\...	                          ucgw_mf_7.6.5.4.3			-nocheckout
+element \mpDsp\...		        ucgw_mpDsp_7.6.5.4.0			-nocheckout
+element \mpInfra\...    	    	ucgw_mpInfra_7.6.5.4.0			-nocheckout
+element \NBU_FEC\...    	    	ucgw_nbuFec_7.6.5.4.0			-nocheckout
+element \NBU_RTP_RTCP_STACK\...		ucgw_NBU_RTP_RTCP_STACK_7.6.5.4.2	-nocheckout
+element \NBU_ICE\...		    	ucgw_nbuIce_7.6.5.4.1			-nocheckout
+
+
+element /dsp8144Audio/...           audio_fsl_integ_07_05_00_14      -nocheckout
+element /dsp8144Video/...           dsp8144Video_7.5.0.17.0_150810   -nocheckout
+
+element /dspIntelInfra/...          iland_UCGW_integ__046	     -nocheckout
+element /dspUCGW/...                ucgw_dsp_7.6.0.23.0	             -nocheckout
+
+element /adapters/...               ucgw_7.6.5_adapters_7.47.13                  -nocheckout
+
+element /dialingInfo/...            ucgw7.6.5_dialingInfo_7.33.1           -nocheckout
+
+element /mediaCtrlInfo/...          mediaCtrlInfo_7.41.2             -nocheckout
+
+element /NBU_SCCP_STACK/...         nbuSccp_1.3.0                    -nocheckout
+element /nbu.proto.jingle-stack/... nbu.proto.jingle-stack_1.6.9     	-nocheckout
+
+
+
+element /NBU_COMMON_CORE/...	   ucgw7.6.5_nbuCCore_4.4.4			-nocheckout
+element /NBU_SIP_STACK/...         ucgw7.6.5_nbuSip_4.5.5                     -nocheckout
+element /NBU_H323_STACK/...        ucgw7.6.5_nbuH323_4.3.3                    -nocheckout
+
+element /boardInfra/...            boardInfra_0.83.2_ucgw-7.6_2.1   -nocheckout
+
+element /swInfra/...               swInfra_0.107.0                  -nocheckout
+element /configInfra/...           configInfra_1.4.0                -nocheckout
+element /loggerInfra/...           loggerInfra_1.36.0               -nocheckout
+element /rvfc/...                  rvfc_2.90.5                           -nocheckout
+element /nbu.contrib/...           nbu.contrib_1.3.3                -nocheckout
+
+element /securityApp/...           securityApp_0.10.1               -nocheckout
+element /securityInfra/...         110301_SECURITY2_V5.0_13         -nocheckout
+
+element /bspLinux8548/...          101129_MAIO_0.2.40               -nocheckout
+element /bspLinuxIntel/...         110404_UCGW_1.0.0.3.8            	-nocheckout
+
+element /freemasonBuild/...        freemasonBuild_1.4.3             -nocheckout
+
+
