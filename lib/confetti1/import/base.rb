@@ -15,17 +15,15 @@ module Confetti1
 
       def raw_command(cmd, *argv)
         cmd = "#{cmd} #{argv.join("\s")}"
-        print "Running command: ".bold
-        print cmd
-        puts
+        Logger.log "#{'Running command:'} #{cmd}"
         output = ""
         Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
           exit_status = wait_thr.value
           if exit_status.success?
             output = stdout.read 
           else
-            puts stdout.read
-            puts stderr.read
+            Logger.log stdout.read
+            Logger.log stderr.read
             raise stderr.read
           end
         end

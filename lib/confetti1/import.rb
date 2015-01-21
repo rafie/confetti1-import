@@ -75,6 +75,19 @@ module Confetti1
         File.join(@@home_dir, 'output')
       end
 
+      def silent_log
+        ENV['SILENT_LOG']
+      end
+
+    end
+
+    module Logger
+      extend self
+      def log(message="")
+        puts message
+        return if  ConfettiEnv.silent_log
+        File.open(File.join(ConfettiEnv.log_path, 'confetti.log'), 'a'){|f|f.puts "-------[#{Time.now}]---------\n#{message}"}
+      end
     end
 
     def main(argv)
@@ -106,6 +119,16 @@ module Confetti1
         when "--product"
           version = arguments.shift
           version_location = File.join(ConfettiEnv.versions_path, version)
+
+          origin = nil
+          unless arguments.empty?
+            origin_arg = arguments.shift
+            if origin_arg == "--from-tag"
+              origin = arguments.shift
+              raise ArgumentError.new("'--from-tag' can not be empty") if origin.nil?
+            end
+          end
+
           version_glob = Dir.glob(File.join(version_location, '**', 'configspec.txt'))
           raise Errno::ENOENT.new("Invalid product version") if version_location.empty?
           int_branch = File.read(File.join(version_location, 'int_branch.txt'))
@@ -113,7 +136,7 @@ module Confetti1
           version_glob.each do |label|
             larr = label.split(/\\|\//)
             tag = larr[larr.size-2]
-            self.commit_version(label, tag, int_branch)
+            self.commit_version(label, tag, int_branch, origin)
           end
         when "--cleanup-git"
           FileUtils.rm_rf(ConfettiEnv.git_path)
@@ -127,16 +150,24 @@ module Confetti1
       end
     end
 
-    def commit_version(cs_location, tag=nil, branch='master')
-      make_commit = Proc.new do |repo, type|
+
+    def commit_version(cs_location, tag=nil, branch='master', origin_tag=nil)
+      make_commit = Proc.new do |repo, type, testing|
         git = Git.new(path: repo)
-        git.checkout!(branch, '-b') unless git.branch_exist?(branch)
-        git.exclude!(YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml')))
-        files_map = YAML.load_file(File.join(ConfettiEnv.output_path, "#{type}.yml"))
-        files_map.each_pair do |version, files|
-          git.commit(files, version)
+        unless origin_tag.nil?
+          if git.tag_exist?(origin_tag) 
+            git.checkout!(origin_tag)
+          else
+            raise ArgumentError.new("Tag '#{origin_tag}' not found in repository")
+          end
         end
-        correctness = git.correct?(files_map.values.flatten, type)
+        ignored = YAML.load_file(File.join(ConfettiEnv.output_path, 'ignored.yml'))
+        git.checkout!(branch, '-b') unless git.branch_exist?(branch)
+        git.append_exclude(ignored)
+        files_map = YAML.load_file(File.join(ConfettiEnv.output_path, "#{type}.yml"))
+        git.exclusive_commit(files_map.concat(ignored))
+        testing_files = YAML.load_file(File.join(ConfettiEnv.output_path, "#{testing}.yml"))
+        correctness = git.correct?(testing_files, branch)
         if correctness
           if tag
             git.tag(tag)
@@ -144,8 +175,12 @@ module Confetti1
         end
       end
 
-      make_commit.call(ConfettiEnv.small_reposiroty, 'small')
-      make_commit.call(ConfettiEnv.big_repository, 'big') if ConfettiEnv.handle_big
+      clear_case = ClearCase.new
+      clear_case.configspec = cs_location
+      clear_case.scan_to_yaml
+
+      make_commit.call(ConfettiEnv.small_reposiroty, 'big', 'small')
+      make_commit.call(ConfettiEnv.big_repository, 'small', 'bit') if ConfettiEnv.handle_big
 
     end
 
@@ -173,7 +208,7 @@ module Confetti1
           begin
             Dir.chdir location
           rescue Errno::ENOENT => e
-            puts e.message.to_s.red
+            Logger.log e.message.to_s.red
             wrong_locations << location
             next 
           end
@@ -207,8 +242,8 @@ module Confetti1
                   f.write(origin)
                 }
               rescue Exception => e
-                puts e.class
-                puts e.message
+                Logger.log e.class
+                Logger.log e.message
               end
               
               File.open(File.join(int_branch_location, 'int_branch.txt'), 'w'){|f| f.write("#{int_branch}_int_br")}
@@ -225,7 +260,7 @@ module Confetti1
         if Dir.glob("#{version}/**/").size <= 1
           puts " --> #{version} has no labels and will be removed".red
           puts "--------------------------------------------------------"
-          puts Dir.glob(File.join(version, "**", "*")).join("\n")
+          Logger.log Dir.glob(File.join(version, "**", "*")).join("\n")
           puts "--------------------------------------------------------"
           FileUtils.rm_rf(version)
         end
@@ -233,26 +268,6 @@ module Confetti1
       File.open(File.join(ConfettiEnv.log_path, 'wrong_locations.txt'), 'w'){|f|f.write(wrong_locations.join("\n"))}
       File.open(File.join(ConfettiEnv.log_path, 'wrong_formats.txt'), 'w'){|f|f.write(wrong_formats.join("\n"))}
     end
-
-
-    # def import
-    #   clear_case = ClearCase.new
-    #   Dir.glob(File.join(ConfettiEnv.versions_path, '**')).each do |version|
-    #     int_branch = File.read(File.join(version, 'int_branch.txt'))
-    #     origin_path = File.join(version, 'origin.txt')
-    #     Dir.glob(File.join(version, "**")).each do |label|
-    #       next unless File.directory?(label)
-    #       if Dir.glob(File.join(label, "*")).empty?
-    #         puts "Label #{label} has not configspec".red.bold
-    #         next
-    #       end
-
-    #       puts "================================================"
-    #       puts Dir.glob(File.join(label, "*"))
-
-    #     end
-    #   end
-    # end
 
   end   
 end                                             

@@ -21,36 +21,30 @@ module Confetti1
         @git_dot_folder
       end
 
-      def exclude!(file_list)
-        puts "Excluding files bigger then #{@exclude_size} bites"
-        to_exclude = file_list
-        File.open(@exclude_file, 'w'){|f| f.write(to_exclude.join("\n"))}
+      def append_exclude(file_list)
+        File.open(@exclude_file, 'a'){|f| f.puts(file_list.join("\n"))}
       end
 
-      def commit(file_list, message)
+      def exclusive_commit(ignore_list, message=nil)
         in_directory(@git_dot_folder) do
-          file_list.each do |file|
-            puts "Adding #{file}"
-            git "add \"#{file}\""
+          File.open(File.join(@git_dot_folder, 'info', 'exclude'), 'w'){|f|f.write(ignore_list.join("\n"))}
+          git 'add --all'
+          ignore_list.each do |ign|
+            next unless File.exist?(ign)
+            git "rm --cached \"#{ign}\""
           end
+          commit_mess = "commit_#{rand(99999999999)}" if message.nil?
           unless staged_files.empty?
-            git "commit -m\"#{message}\""
+            git "commit -m\"#{commit_mess}\""
           else
             puts "Nothing to commit"
           end
         end
       end
 
-      def commit_a!(message)
-        in_directory(@git_dot_folder) do
-          git 'add .'
-          git "commit -m\"#{message}\""
-        end
-      end
-
-      def correct?(file_list, place=nil)
+      def correct?(file_list, branch='master')
         puts "Started test"
-        test_clone(place)
+        test_clone(branch, nil)
         raise "Repository is not cloned for testing" unless Dir.exist? @cloned_repository
         small_files = file_list.map{|fl| fl.gsub(@view_path, '')}
         cloned_files = in_directory(@cloned_repository){command('git ls-files')}.map{|cl| cl.gsub(@cloned_repository, '')}
@@ -59,8 +53,10 @@ module Confetti1
         puts "Small size: #{small_files.size}"
         puts "Cloned size: #{cloned_files.size}"
 
-        escaped_small_files = small_files.map{|sf|sf.gsub(/\/|\\/, '')}.sort
-        escaped_cloned_files = cloned_files.map{|cf|cf.gsub(/\/|\\/, '')}.sort
+        escaped_small_files = small_files.map{|sf|sf.gsub(/\/|\\/, "\/")}.sort
+        escaped_cloned_files = cloned_files.map{|cf|cf.gsub(/\/|\\/, "\/")}.sort
+        File.open(File.join(ConfettiEnv.output_path, 'view_files.txt'), 'w'){|f| f.write(escaped_small_files.join("\n"))}
+        File.open(File.join(ConfettiEnv.output_path, 'cloned_files.txt'), 'w'){|f| f.write(escaped_cloned_files.join("\n"))}
         correctness = escaped_small_files==escaped_cloned_files
         if correctness
           puts "Version imported correctly".green.bold
@@ -77,9 +73,14 @@ module Confetti1
         end
       end
 
-    def tag(name)
-      in_directory(@git_dot_folder){git("tag #{name}")}
-    end
+      def tag(name)
+        in_directory(@git_dot_folder){git("tag #{name}")}
+      end
+
+      def tag_exist?(tag)
+        tags = git("tag -l")
+        tags.detect{|t| t==tag}
+      end
 
       def branch_exist?(branch)
         in_directory(@git_dot_folder) do
@@ -92,18 +93,21 @@ module Confetti1
       end
 
 
+
+
     private
 
       def clean_up!
         FileUtils.rm_rf @cloned_repository
       end
 
-      def test_clone(path=nil)
+      def test_clone(branch, path)
         @cloned_repository = File.join([ConfettiEnv.clone_path, path].compact)
         if Dir.exist?(@cloned_repository)
           FileUtils.rm_rf(@cloned_repository)
         end
         git "clone", @git_dot_folder, @cloned_repository
+        in_directory(@cloned_repository){git "checkout #{branch}"}
       end
 
       def status

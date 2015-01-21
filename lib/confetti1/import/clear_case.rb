@@ -6,42 +6,9 @@ module Confetti1
         @view_path = ConfettiEnv.view_path 
       end
 
-      def scan
+      def scan_to_yaml
         big_files = []
         small_files = []
-        ignored = []
-        current_dir = Dir.getwd
-        ignore_list = ConfettiEnv.ignore_list
-        puts "Scanning view ----> #{@view_path}"
-        Dir.glob(File.join(@view_path, '**', '*')).each do |view_entry|
-          next if File.directory?(view_entry)
-          unless File.exist?(view_entry)
-            puts "File #{view_entry} is not found".red.bold
-            next
-          end
-          unless ignore_list.select{|il| File.fnmatch(File.join(@view_path, il), view_entry)}.empty?
-            ignored << view_entry
-            next
-          end
-          if File.size(view_entry) < ConfettiEnv.exclude_size
-            small_files << view_entry
-          else
-            big_files << view_entry
-          end
-
-        end
-        puts "WARNING: #{ignored.size} files will be ignored:"
-        ignored.each{|i|print "#{i},\s"}
-        puts
-        File.open(File.join(ConfettiEnv.output_path, 'small.txt'), 'w'){|f| f.write(small_files.join("\n"))}
-        File.open(File.join(ConfettiEnv.output_path, 'big.txt'), 'w'){|f| f.write(big_files.join("\n"))}
-        File.open(File.join(ConfettiEnv.output_path, 'ignored.txt'), 'w'){|f| f.write(ignored.join("\n"))}
-        {ignored: ignored, big_files: big_files, small_files: small_files}
-      end
-
-      def scan_to_yaml
-        big_files = {}
-        small_files = {}
         ignored = []
 
         current_dir = ConfettiEnv.home
@@ -50,11 +17,6 @@ module Confetti1
         configspec = self.configspec
 
         configspec.each do |cs|
-          puts "working with: #{rand(10000)}_vob_#{cs[:vob]}_#{cs[:version]}"
-          current_version = "#{rand(10000)}_vob_#{cs[:vob]}_#{cs[:version]}"
-          big_vob_files = []
-          small_vob_files = []
-
           Dir.glob(File.join(cs[:path], '**', '*')).each do |vob_entry|
             next if File.directory?(vob_entry)
 
@@ -69,15 +31,13 @@ module Confetti1
             end
 
             if File.size(vob_entry) < ConfettiEnv.exclude_size
-              small_vob_files << vob_entry
+              small_files << vob_entry
             else
-              big_vob_files << vob_entry
+              big_files  << vob_entry
             end
 
-          end #globb
-          big_files.merge!(current_version => big_vob_files) unless big_vob_files.empty?
-          small_files.merge!(current_version => small_vob_files) unless small_vob_files.empty?
-        end# configspec
+          end
+        end
 
         File.open(File.join(ConfettiEnv.output_path, 'small.yml'), 'w'){|f| f.write(small_files.to_yaml)}
         File.open(File.join(ConfettiEnv.output_path, 'big.yml'), 'w'){|f| f.write(big_files.to_yaml)}
@@ -190,7 +150,7 @@ module Confetti1
             puts "label *unknown* in #{context}"
             puts "check configspec:"
             puts
-            puts cspec
+            Logger.log cspec
             return nil
           end
           # mcu[0] is probably element * CHECKEDOUT
