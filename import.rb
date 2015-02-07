@@ -25,31 +25,34 @@ command :'build-versions' do |c|
 	end
 end
 
-command  do |c|
+command :'import-version' do |c|
+	c.option '--version VER'
+	c.option '--branch BRA'
+	c.option '--product PROD'
 	c.action do |args, options|
 	end
 end
 
-command :import do |c|
+command :'import-product' do |c|
 	c.option '--version VER'
+	c.option '--branch BRA'
+	c.option '--product PROD'
 	c.action do |args, options|
-		raise ArgumentError.new("Path to version is empty") if arguments.empty?
+
+		product = Product.new(options.product)
+		ccase_view = ClearCase::View.new(Config.clearcase_view)
+		ccase_view.configspec = product
+		Version.	
 		self.commit_version(File.join(ConfettiEnv.versions_path, options.version, 'configspec.txt'))
 	end
 end
 
-command  do |c|
+command :scan do |c|
 	c.action do |args, options|
 	end
 end
 
-command  do |c|
-	c.action do |args, options|
-	end
-end
 
-command  do |c|
-	c.action do |args, options|
-	end
-end
-
+# import --version mcu-7.6.1/7.6.1.4.0
+# import --branch mcu-7.6.1_int --version 7.6.1.2.0 --tag mcu_7.6.1.2.0
+# import --product mcu-7.6.1 --from-tag mcu_7.5.1.10.8
