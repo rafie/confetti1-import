@@ -1,0 +1,48 @@
+element * CHECKEDOUT
+
+element /mcu/...                	7.5.0.11.0					-nocheckout
+
+element /configInfra/...        	configInfra_1.2.0                          	-nocheckout
+element /web/...                	WebMcu_7.5_33_160610.7460                	-nocheckout
+
+element /mpc/...                	mpc_7.5.0.11.1                              	-nocheckout
+element /map/...                	map_7.5.0.11.0                               	-nocheckout
+element /mf/...                 	mf_7.5.0.11.0                               	-nocheckout
+element /mpInfra/...            	mpInfra_7.5.0.11.0                           	-nocheckout
+
+element /dspC64Audio/...        	dspC64Audio_2.0.1.34_dora-7.2_1.0               -nocheckout
+element /dpm/...                	dpm_1.1.8_dora-7.2_1.0                          -nocheckout
+element /mpDsp/...              	mpDsp_7.5.0.11.0                                -nocheckout
+
+element /dsp8144Audio/...       	audio_fsl_integ_07_01_02_04                     -nocheckout
+element /dsp8144Video/...       	dsp8144Video_7.5.0.8.0_100510                   -nocheckout
+
+element /mvp/...                	mvp_7.5.0.11.1                          	-nocheckout
+
+element /adapters/...          		adapters_7.35.0					-nocheckout
+
+element /dialingInfo/...        	dialingInfo_7.28.0	         		-nocheckout
+element /mediaCtrlInfo/...      	mediaCtrlInfo_7.38.0       			-nocheckout
+
+
+element /NBU_COMMON_CORE/...    	nbuCCore_4.1.7                        		-nocheckout
+element /NBU_H323_STACK/...      	nbuH323_4.1.6                               	-nocheckout
+element /NBU_SIP_STACK/...           	nbuSip_4.1.8                                 	-nocheckout
+element /NBU_SCCP_STACK/...           	nbuSccp_1.1.10_dora-7.2_1.2                    	-nocheckout
+element /NBU_RTP_RTCP_STACK/...       	nbuRtpRtcp_4.1.7                             	-nocheckout
+
+element /NBU_FEC/...                 	nbuFec_7.5.0.11.0                           	-nocheckout
+
+element /swInfra/...                 	swInfra_0.99.3                         		-nocheckout
+
+element /boardInfra/...               	boardInfra_0.71.1                     		-nocheckout
+
+element /loggerInfra/...             	loggerInfra_1.34.2                   		-nocheckout
+element /rvfc/...                     	rvfc_2.88.5                          		-nocheckout
+
+element /securityApp/...               	securityApp_0.9.6                       	-nocheckout
+element /securityInfra/...            	100613_SECURITY2_V5.0_5                         -nocheckout
+
+element /bspLinux8548/...            	100613_MAIO_0.2.10               		-nocheckout
+
+element /freemasonBuild/...           	freemasonBuild_1.2.8                  		-nocheckout

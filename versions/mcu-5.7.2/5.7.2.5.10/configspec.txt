@@ -1,0 +1,83 @@
+element * CHECKEDOUT
+
+element \mcu\... 5.7.2.5.10 -nocheckout
+
+element \NMS_New\... /main/LATEST
+element \nms\... nms_2_MCU_5.7.2_160610 -nocheckout
+
+element \rvfc\... rvfc_5.7.1.0.3_Compile -nocheckout
+element \dsp\... MEDIA_MAP_INTEG_1.37_BugFix4_MAINT2 -nocheckout
+
+element \RV755_BSP\... /main/LATEST
+element \bsp755\... 100427_BSP_2.39.2 -nocheckout
+
+element \DSP_NG\... /main/LATEST
+element \dspC64Audio\... 070624_DPM_MAP_1.0.49_MCU_5_1_MAINT2_BSP_2.34b_DPM_167 -nocheckout
+element \dpm\... 070822_DPM_1.67 -nocheckout
+
+element \SECURITY\... /main/LATEST
+element \securityApp\... 180208_amib_mocana_based_FINAL_Freemason -nocheckout
+
+element \mpc\... mpc_5.7.2.0.10 -nocheckout
+
+element \pomp\... 	pomp_5.7.2.0.5    -nocheckout
+
+element \adapters\...   adapters_5.7.2.0.10    -nocheckout
+
+element \NBU_H323_STACK\... H323_STACK_5.5.1.7i_CCore_1.3.5_011009 -nocheckout
+
+element \NBU_Megaco\... /main/LATEST
+element \megacoOld\... MEGACO_1.1.0.16P21 -nocheckout
+
+element \NBU_SIP_STACK\... SIP_4.5.0.26_CCORE_1.3.5_zBufferCpy_Dora-1_270508 -nocheckout
+element \NBU_SCCP_STACK\... sccp_5.7.1.0.3_Compile -nocheckout
+element \dialingInfo\... dialingInfo_5.7.2.0.10 -nocheckout
+
+element \NBU_Config\... /main/LATEST
+element \configInfra\... configInfra_5.7.1.0.3_Compile -nocheckout
+
+element \swInfra\... swInfra_5.7.2.0.10 -nocheckout
+
+element \boardInfra\... boardInfra_5.7.2.0.10 -nocheckout
+
+element \RVLOGGER\... /main/LATEST
+element \loggerInfra\... RVLOGGER_V1.27_AMCU-3 -nocheckout
+
+element \upgradeUtility\... upgradeutility_5.7.1.0.7 -nocheckout
+
+element \mediaCtrlInfo\... mediaCtrlInfo_5.7.2.0.10 -nocheckout
+
+element \NBU_COMMON_CORE\... COMMON_CORE_1.3.5_zBufferCpy_241207 -nocheckout
+
+element \freemasonBuild\... nbu-build_1.1-main-8 -nocheckout
+
+element \NBU_BUILD\... /main/LATEST
+
+
+load \mcu
+load \NMS_New
+load \upgradeUtility
+load \RVLOGGER
+load \adapters
+load \swInfra
+load \boardInfra
+load \NBU_H323_STACK
+load \NBU_SIP_STACK
+load \NBU_SCCP_STACK
+load \NBU_Megaco
+load \NBU_Config
+load \mpc
+load \SECURITY
+load \RV755_BSP
+load \bsp755
+load \dsp
+load \DSP_NG
+load \dpm
+load \rvfc
+load \mediaCtrlInfo
+load \pomp
+load \NBU_COMMON_CORE
+load \dialingInfo
+load \freemasonBuild
+load \NBU_BUILD
+

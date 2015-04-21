@@ -1,0 +1,79 @@
+element * CHECKEDOUT
+
+element \mcu\...		7.1.0.72.1					-nocheckout
+
+element \configInfra\...        configInfra_1.1.6                               -nocheckout
+element \web\...                WebMcu_7.1_30_230909.1827                       -nocheckout
+
+element \mpc\...                MPC_INT_7.1.0.72.0                              -nocheckout
+element \map\...                MAP_INT_7.1.0.71.0p1                            -nocheckout
+element \mf\...                 MF_UNIFIED_INT_7.1.0.71.0p1                     -nocheckout
+element \mpInfra\...            MPINFRA_INT_7.1.0.71.0p1                        -nocheckout
+element \dspC64Audio\...        2.0.1.34_New_Vob_Names                          -nocheckout
+element \dpm\...                081113_DPM_1.1.8                                -nocheckout
+element \dspInfra\...           DSPINFRA_AUDIO_INT_7.1.0.71.0p1                 -nocheckout
+element \dsp8144Audio\...       audio_fsl_integ_7_1_04                          -nocheckout
+
+element \mvp\...                MVP_INT_7.1.0.72.0                            -nocheckout
+
+element \adapters\...           ADAPTERS_7.0.27.27.27_2_130909                  -nocheckout
+
+element \dialingInfo\...        DI_7.0.27.27.27_1_130909                        -nocheckout
+element \mediaCtrlInfo\...      MEDIA_CTRL_7.0.27.27.27_1_130909                -nocheckout
+element \NBU_COMMON_CORE\...    COMMON_CORE_1.3.5_MAIO_Build7_020809            -nocheckout
+
+element \NBU_H323_STACK\...     H323_STACK_5.5.1.7h_CCore_1.3.5_070809          -nocheckout
+
+element \NBU_SIP_STACK\...      SIP_4.5.0.26d_CCore_1.3.5_010909                -nocheckout
+element \NBU_SCCP_STACK\...     SCCP_1.1.1_Unified_9_230609                     -nocheckout
+
+element \swInfra\...            swInfra_0.91.0                                  -nocheckout
+
+element \boardInfra\...         boardInfra_0.58.1                               -nocheckout
+
+element \loggerInfra\...        loggerInfra_1.33.0                              -nocheckout
+element \rvfc\...               rvfc_2.85.3                                     -nocheckout
+
+element \securityApp\...        securityApp_0.9.2_small_FS_1                    -nocheckout
+element \securityInfra\...      090716_SECURITY2_V2.2_Linux_HW_SEC_support      -nocheckout
+
+
+element \bsp8548\...            090908_BSP8548_2.1_0_3                          -nocheckout
+element \bsp8144\...            090512_CW3.2_SDOS020400_Ver2.8                  -nocheckout
+
+element \bspLinux8548\...       090923_MAIO_0.1.17                              -nocheckout
+
+element \freemasonBuild\...     freemasonBuild_1.1.28                           -nocheckout
+#element \freemasonBuild\...     freemasonBuild_1.2.0-rc9                        -nocheckout
+
+load \adapters
+load \dialingInfo
+load \mcu
+load \NBU_COMMON_CORE
+load \NBU_H323_STACK
+load \NBU_SCCP_STACK
+load \NBU_SIP_STACK
+load \boardInfra
+load \bsp8548
+load \configInfra
+load \dpm
+load \dspC64Audio
+load \dspInfra
+load \freemasonBuild
+load \loggerInfra
+load \map
+load \mpInfra
+load \mf
+load \mpc
+load \web
+load \rvfc
+load \securityApp
+load \swInfra
+load \mediaCtrlInfo
+load \securityInfra
+load \bspLinux8548
+load \bsp8144\utils\memTest\mem.bin
+load \bsp8144\SRC\srioTester\srioTest_noRionet.bin
+load \mvp\Release
+load \dsp8144Audio
+

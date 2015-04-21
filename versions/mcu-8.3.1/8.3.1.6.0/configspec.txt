@@ -1,0 +1,52 @@
+element * CHECKEDOUT
+
+element /web/...                      WebMcu_8.3.1_SP1_2_200514.4358             -nocheckout
+                                                                                  
+element /nbu.media/...                mp_8.2.0.13.1                              -nocheckout
+
+element /mvp/...                      mp_8.3.1.6.0                               -nocheckout   
+element /map/...                      mp_8.3.1.6.0                               -nocheckout   
+element /mf/...                       mp_8.3.1.6.0                               -nocheckout   
+element /mpc/...                      mp_8.3.1.6.0                               -nocheckout    
+element /mpInfra/...                  mp_8.3.1.6.0                               -nocheckout   
+
+element /swAudioCodecs/...            mp_8.3.0.5.1                               -nocheckout   
+
+element /NBU_FEC/...                  mp_8.3.1.5.0                               -nocheckout   
+element /NBU_RTP_RTCP_STACK/...       mp_8.3.0.8.5                               -nocheckout   
+element /NBU_ICE/...                  mp_8.3.0.7.0                               -nocheckout    
+
+element /dspNetraVideo/...            Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout    
+element /dspIntelInfra/...            Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout
+element /dspNetraInfra/...            Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout
+element /dspInfra/...                 Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout    
+element /dspIcsVideo/...              Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout    
+element /mpDsp/...                    Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout    
+element /NetraVideoCODEC/...          Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout
+element /dspNetraAudio/...            Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout    
+element /swVideoCodecs/...            Avatar_integ_2014June09__8.3.1.5.0.0        -nocheckout
+
+element /NBU_COMMON_CORE/...          nbuCCore_4.4.13                            -nocheckout
+element /NBU_SIP_STACK/...            nbuSip_6.0.15                              -nocheckout
+element /NBU_H323_STACK/...           nbuH323_7.0.9                              -nocheckout
+
+element /nbu.infra/...                nbu.infra_mcu-8.0_3.0                      -nocheckout
+
+element /boardInfra/...               nbu.infra_mcu-8.0_5.63                     -nocheckout
+element /swInfra/...                  nbu.infra_mcu-8.3.1.1                      -nocheckout
+element /rvfc/...                     nbu.infra_mcu-8.0_3.11                     -nocheckout
+element /loggerInfra/...              nbu.infra_mcu-8.0_8.2                      -nocheckout   
+element /configInfra/...              nbu.infra_mcu-8.0_5.1                      -nocheckout   
+element /nbu.contrib/...              nbu.contrib_mcu-8.3.1.3.0                  -nocheckout
+element /nbu.tests/...                nbu.tests_1.7.4_2                          -nocheckout
+                                                                                 
+element /bspLinuxIntel/...            140513_AVATAR_HOST_1.0.0.7.10              -nocheckout
+element /bspLinuxARM/...              140508_NETRA_1.0.6                         -nocheckout
+
+element /freemasonBuild/...           freemasonBuild_1.4.18rc2                   -nocheckout
+
+element /mcu/...                      mcu_8.3.1.6.0                              -nocheckout
+element /adapters/...                 adapter_7.49.111.8.3                       -nocheckout
+element /dialingInfo/...              dialingInfo_7.51                           -nocheckout
+element /mediaCtrlInfo/...            mediaCtrlInfo_7.42.11                      -nocheckout
+
