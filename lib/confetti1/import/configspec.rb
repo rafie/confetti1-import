@@ -16,8 +16,5 @@ module Confetti1
 			@@vobs_arr
 		end
     end
-	
-	c=ConfigSpec.new("C:/Users/rvint/testmig/confetti1-import/versions/mcu-8.3.0/8.3.0.11.8/configspec.txt")
-	puts c.vobs.length
   end
 end
