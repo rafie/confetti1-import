@@ -1,0 +1,60 @@
+element * CHECKEDOUT
+
+element /web/...                      WebVcgw_8.3.2v_3_241114.9786                -nocheckout
+
+
+element /nbu.products/...             nbu.products_8.3.2.1                       -nocheckout                                                                      
+element /nbu.media/...                mp_8.3.2.101.0                             -nocheckout
+
+element /mvp/...                      mp_8.3.2.103.18                            -nocheckout   
+element /map/...                      mp_8.3.2.103.15                            -nocheckout   
+element /mf/...                       mp_8.3.2.103.15                            -nocheckout   
+element /mpc/...                      mp_8.3.2.103.15                            -nocheckout    
+element /mpInfra/...                  mp_8.3.2.103.15                            -nocheckout   
+                                                                               
+element /swAudioCodecs/...            mp_8.3.2.103.14                            -nocheckout   
+                                                                               
+element /NBU_FEC/...                  mp_8.3.2.103.15                             -nocheckout   
+element /NBU_RTP_RTCP_STACK/...       mp_8.3.2.103.15                             -nocheckout   
+element /NBU_ICE/...                  mp_8.3.2.103.15                             -nocheckout    
+
+element /nbu.dsp/...                  nbu.dsp_M8.3.2.1                           -nocheckout
+
+   
+element /dspNetraVideo/...            VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout    
+element /dspIntelInfra/...            VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout
+element /dspNetraInfra/...            VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout
+element /dspInfra/...                 VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout    
+element /dspIcsVideo/...              VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout    
+element /mpDsp/...                    VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout    
+element /NetraVideoCODEC/...          VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout
+element /dspNetraAudio/...            Avatar_integ_2014Aug21__8.3.2.1.0.0        -nocheckout    
+element /swVideoCodecs/...            VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout
+element /dspApps/...                  agrinblat_Avatar_Integ__8.3.2.100.0.7__20141204_1908__lbl    -nocheckout
+element /swVideoCodecs/...            VCGW_Integ_8.3.2.100.0.7__2014Dec02_lbl    -nocheckout
+
+element /NBU_COMMON_CORE/...          nbuCCore_1.5.60_8.3.2.2                    -nocheckout
+element /NBU_SIP_STACK/...            nbuSip_6.0.0.9_8.3.2.2                     -nocheckout
+element /NBU_H323_STACK/...           nbuH323_7.0.0.7_8.3.2.2                    -nocheckout          
+                                                                                
+element /nbu.infra/...                nbu.infra_mcu-8.0_3.0                     
+
+element /boardInfra/...               nbu.infra.board_8.3.2.15                   -nocheckout
+element /swInfra/...                  nbu.infra.swInfra_8.3.2.14                 -nocheckout
+element /rvfc/...                     nbu.infra.rvfc_8.3.2.5                     -nocheckout
+
+element /loggerInfra/...              nbu.infra.logger_8.3.2.6                   -nocheckout
+element /configInfra/...              nbu.infra.config_8.3.2.5                   -nocheckout     
+element /nbu.contrib/...              nbu.contrib_8.3.2.3                        -nocheckout
+element /nbu.tests/...                nbu.tests_8.3.2.1                          -nocheckout
+                                                                                 
+element /bspLinuxIntel/...            141201_AVATAR_HOST_1.0.0.6.6_dual_kernel_2.6.32.59_2.6.32.12_shellshock_patch_V3       -nocheckout
+element /bspLinuxARM/...              140508_NETRA_1.0.6                         -nocheckout       
+
+element /freemasonBuild/...           freemasonBuild_1.4.23                      -nocheckout                      
+
+element /mcu/...                      vcgw_8.3.2.105.16
+element /adapters/...                 adapter_vc8.3.2.6      
+element /dialingInfo/...              dialingInfo_vc8.3.2.3                     
+element /mediaCtrlInfo/...            mediaCtrlInfo_vc8.3.2.5
+

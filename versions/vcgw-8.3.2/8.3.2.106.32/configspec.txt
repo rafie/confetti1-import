@@ -1,0 +1,57 @@
+element * CHECKEDOUT
+
+element /web/...                      WebVcgw_8.3.2v_7_030215.2172               -nocheckout
+
+
+element /nbu.products/...             nbu.products_8.3.2.5                       -nocheckout
+element /nbu.media/...                mp_8.3.2.101.0                             -nocheckout
+
+element /mvp/...                      mp_8.3.2.106.31                            -nocheckout   
+element /map/...                      mp_8.3.2.106.31                            -nocheckout   
+element /mf/...                       mp_8.3.2.106.31                            -nocheckout   
+element /mpc/...                      mp_8.3.2.106.31                            -nocheckout    
+element /mpInfra/...                  mp_8.3.2.106.31                            -nocheckout   
+                                                                          
+element /swAudioCodecs/...            mp_8.3.2.103.17                            -nocheckout 
+element /NBU_FEC/...                  mp_8.3.2.106.31                            -nocheckout   
+element /NBU_RTP_RTCP_STACK/...       mp_8.3.2.106.31                            -nocheckout   
+element /NBU_ICE/...                  mp_8.3.2.106.31                            -nocheckout    
+
+element /nbu.dsp/...                  nbu.dsp_M8.3.2.1                           -nocheckout
+   
+element /dspApps/...                  obiton_8.3.2.106.31_candidate_016_1    -nocheckout 
+element /dspNetraVideo/...            obiton_8.3.2.106.31_candidate_016_1    -nocheckout    
+element /dspIntelInfra/...            obiton_8.3.2.106.31_candidate_016_1    -nocheckout
+element /dspNetraInfra/...            obiton_8.3.2.106.31_candidate_016_1    -nocheckout
+element /dspInfra/...                 obiton_8.3.2.106.31_candidate_016_1    -nocheckout    
+element /dspIcsVideo/...              obiton_8.3.2.106.31_candidate_016_1    -nocheckout    
+element /mpDsp/...                    obiton_8.3.2.106.31_candidate_016_1    -nocheckout
+element /NetraVideoCODEC/...          obiton_8.3.2.106.31_candidate_016_1    -nocheckout
+element /dspNetraAudio/...            obiton_8.3.2.106.31_candidate_016_1    -nocheckout    
+element /swVideoCodecs/...            obiton_8.3.2.106.31_candidate_016_1    -nocheckout
+
+element /NBU_COMMON_CORE/...          nbuCCore_1.5.60_8.3.2.2                    -nocheckout
+element /NBU_SIP_STACK/...            nbuSip_6.0.0.9_8.3.2.2                     -nocheckout
+element /NBU_H323_STACK/...           nbuH323_7.0.0.7_8.3.2.2                    -nocheckout
+                                                                                
+element /nbu.infra/...                nbu.infra_mcu-8.0_3.0                     
+
+element /boardInfra/...               nbu.infra.board_8.3.2.25                   -nocheckout
+element /swInfra/...                  nbu.infra.swInfra_8.3.2.23                 -nocheckout
+element /rvfc/...                     nbu.infra.rvfc_8.3.2.5                     -nocheckout
+
+element /loggerInfra/...              nbu.infra.logger_8.3.2.6                   -nocheckout
+element /configInfra/...              nbu.infra.config_8.3.2.5                   -nocheckout     
+element /nbu.contrib/...              nbu.contrib_8.3.2.3                        -nocheckout
+element /nbu.tests/...                nbu.tests_8.3.2.1                          -nocheckout
+                                                                                 
+element /bspLinuxIntel/...            141201_AVATAR_HOST_1.0.0.6.6_dual_kernel_2.6.32.59_2.6.32.12_shellshock_patch_V3       -nocheckout
+element /bspLinuxARM/...              140508_NETRA_1.0.6                         -nocheckout       
+
+element /freemasonBuild/...           freemasonBuild_1.4.23                      -nocheckout                      
+
+element /mcu/...                      vcgw_8.3.2.106.32                          -nocheckout
+element /adapters/...                 adapter_vc8.3.2.18                         -nocheckout
+element /dialingInfo/...              dialingInfo_vc8.3.2.3                      -nocheckout
+element /mediaCtrlInfo/...            mediaCtrlInfo_vc8.3.2.6                    -nocheckout
+
