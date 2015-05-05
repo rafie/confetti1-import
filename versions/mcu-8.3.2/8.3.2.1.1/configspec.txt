@@ -1,15 +1,12 @@
 element * CHECKEDOUT
 
-element /web/...                      WebMcu_8.3.2_2_180814.2586                 -nocheckout
-                                                                                  
-element /nbu.media/...                mp_8.2.0.13.1                              -nocheckout
-
-element /mvp/...                      mp_8.3.2.1.1                               -nocheckout   
-element /map/...                      mp_8.3.2.1.1                               -nocheckout   
+ 
 element /mf/...                       mp_8.3.2.1.1                               -nocheckout   
-element /mpc/...                      mp_8.3.2.1.1                               -nocheckout    
+    
 element /mpInfra/...                  mp_8.3.2.1.1                               -nocheckout   
 
-element /swAudioCodecs/...            mp_8.3.2.1.0                               -nocheckout   
+element /swAudioCodecs/...            mp_8.3.2.1.0                               -nocheckout
+
+   
 
 

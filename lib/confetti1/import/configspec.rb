@@ -28,28 +28,35 @@ class ConfigSpec
 	end
 	
 	def applyToView(viewName)
+		@vobs_arr.each do |vob|
+			unless File.directory?("m:/#{viewName}#{vob}")
+				vn=vob
+				vn[0]="\\"
+				puts "VOB #{vn} must be mounted...please wait..."
+				cmd = System.command("cleartool mount #{vn}")
+				unless cmd.ok?
+					raise "Mounting error, import failed!" 
+				end
+				#system("cleartool mount #{vn}")
+				puts "VOB #{vn} mounted"
+			end
+		end
 		@view_name=viewName
-		system("cleartool setcs -tag #{viewName} #{@cspecfile}")
+		cmd = System.command("cleartool setcs -tag #{viewName} #{@cspecfile}")
 	end
 	
 	def migrate(repo)
-		@vobs_arr.each do |vob|
-		unless File.directory?("m:/#{@view_name}#{vob}")
+		@vobs_arr.each do |vob|		
 			vn=vob
-			vn[0]="\\"
-			system("cleartool mount #{vn}")
-		end
-		vn=vob
-		vn[0]="/"
-		puts "Adding VOB #{vob}"
-		repo.add("m:/#{@view_name}#{vob}")
-		puts "VOB #{vob} added"				
-	
+			vn[0]="/"
+			puts "Adding VOB #{vob}"
+			repo.add("m:/#{@view_name}#{vob}")
+			puts "VOB #{vob} added"	
 			# git --git-dir=d:\view\.git --work-tree=m:\view
-		
+		end
 		puts "committing version..."
 		repo.commit("migrated from clearcase")
-	end
+		puts "version imported successfully"
 	end
 end
 	
@@ -72,11 +79,17 @@ class GitRepo
 	end
 	
 	def add(dir)
-		system("git --git-dir=#{@repoLocation}/.git --work-tree=m:/#{@viewName} add #{dir}")
+		cmd = System.command("git --git-dir=#{@repoLocation}/.git --work-tree=m:/#{@viewName} add #{dir}")
+		unless cmd.ok?
+				raise "git add #{dir} failed. Import stopped." 
+		end
 	end
 	
 	def commit(message)
-		system("git --git-dir=#{@repoLocation}/.git commit -m \"#{message}\"")
+		cmd = System.command("git --git-dir=#{@repoLocation}/.git commit -m \"#{message}\"", :nolog)
+		unless cmd.ok?
+			raise "Mounting error, import failed!" 
+		end
 	end
 	
 	def add_ignore_list
