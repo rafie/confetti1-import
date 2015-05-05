@@ -1,17 +1,36 @@
+require 'commander/import'
+require 'json'
 require_relative 'configspec.rb'
+
 module Confetti1
 module Import
 
 
-#repo = GitRepo.create("C:/git","ddavar_view2")
-# system("git --git-dir=d:\view\.git --work-tree=m:\view init
-#repo.add_ignore_list("C:/Users/ddavar/Desktop/confetti1-import-didier/config/confetti_config.yml")
+program :name, "import"
+program :version, '1.0'
+program :description, 'migration'
 
-puts IO.readlines(File.expand_path(File.join("..", "..", "..","..","exclude"), __FILE__))
-#cs=ConfigSpec.is(cspec_file)
-cspec = ConfigSpec.is("C:/Users/ddavar/Desktop/confetti1-import-didier/versions/mcu-8.3.2/8.3.2.1.3/configspec.txt")
-#cspec.applyToView("ddavar_view2")
-#cspec.migrate(repo)
-
-end
-end
+	command :create do |c|
+		conf=File.read(File.expand_path(File.join("..", "..", "..","..","migrationparams.json"), __FILE__))
+		my_hash = JSON.parse(conf)
+		gitRepoFolder = my_hash["gitRepoFolder"]
+		viewName = my_hash["viewName"]
+		versionsForestLocation = my_hash["versionsForestLocation"]
+		repo = GitRepo.create(gitRepoFolder,viewName)	
+		repo.add_ignore_list()
+	end
+	
+	
+	command :version do |c|		
+		c.option '-v', '--VER VERSION', String, 'Specify a version eg:mcu-7.6.1/7.6.1.1.0' # Option aliasing
+		conf=File.read(File.expand_path(File.join("..", "..", "..","..","migrationparams.json"), __FILE__))
+		my_hash = JSON.parse(conf)
+		gitRepoFolder = my_hash["gitRepoFolder"]
+		viewName = my_hash["viewName"]
+		versionsForestLocation = my_hash["versionsForestLocation"]
+		cspec = ConfigSpec.is("#{versionsForestLocation}/#{options.VER}/configspec.txt")
+		cspec.applyToView("viewName")
+		cspec.migrate(repo)
+	end #command
+end #Import
+end #Confetti1

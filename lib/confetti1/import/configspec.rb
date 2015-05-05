@@ -1,5 +1,6 @@
 require 'yaml'
 require 'Bento'
+require 'fileutils'
 
 module Confetti1
 module Import
@@ -11,13 +12,15 @@ class ConfigSpec
 	members :cspecfile, :vobs_arr, :view_name
 	
 	def is(cspecfile)
-		@cspecfile=cspecfile
-		out = File.read(cspecfile).split("/element \/|element \\/")
-		@vobs_arr = Array.new(out.length)
+		@cspecfile=cspecfile		
+		out = IO.readlines(cspecfile)
+		out.reject! { |c| c[0,7]!="element" }
 		out.shift
-		out.each_with_index {|val, index| @@vobs_arr[index]=val.squeeze(" ").split(" ")[1] }
-		@@vobs_arr.reject!(&:nil?).reject!(&:empty?)
+		@vobs_arr = Array.new(out.length)
 		
+		out.each_with_index {|val, index| @vobs_arr[index]=val.squeeze(" ").split(" ")[1].chomp('...').chop }
+		@vobs_arr
+				
 	end
 	
 	def vobs
@@ -25,15 +28,18 @@ class ConfigSpec
 	end
 	
 	def applyToView(viewName)
-		Dir.chdir("M:/#{viewName}") do
-			system("cleartool setcs #{@cspecfile}")
-		end
+		@view_name=viewName
+		system("cleartool setcs -tag #{viewName} #{@cspecfile}")
 	end
+	
 	def migrate(repo)
-		@vobs.each do |vob|
-			repo.add("m:/#{@view_name}/#{vob}")
+
+		@vobs_arr.each do |vob|
+			repo.add("m:/#{@view_name}#{vob}")
+			puts "VOB #{vob} added"
 			# git --git-dir=d:\view\.git --work-tree=m:\view
 		end
+		puts "committing version..."
 		repo.commit("migrated from clearcase")
 	end
 end
@@ -45,10 +51,10 @@ class GitRepo
 	constructors :create
 	members :repoLocation, :viewName
 
-	def create(repoLocation,viewName)
-		@repoLocation=repoLocation
-		@viewName=viewName
-		system("git --git-dir=#{repoLocation}.git --work-tree=m:/#{viewName}")
+	def create(repoLocation, viewName)
+		@repoLocation = repoLocation
+		@viewName = viewName
+		system("git --git-dir=#{repoLocation}/.git --work-tree=m:/#{viewName} init")
 	end
 	
 	def add(dir)
@@ -56,18 +62,16 @@ class GitRepo
 	end
 	
 	def commit(message)
-		system("git commit-m \"#{message}\"")
+		system("git --git-dir=#{@repoLocation}/.git commit -m \"#{message}\"")
 	end
 	
-	def add_ignore_list(pathToYAMLIgnoreListFile)
-		data=YAML.load(File.read(pathToYAMLIgnoreListFile));
-		File.open("#{@repoLocation}/.git/info/exclude", 'a') do |file|
-			data[ignore_list].each.do |item|				  
-				file.write(item) #TODO: manipulate ignore string
-			end
-		end
-		
+	def add_ignore_list
+		file_path = File.expand_path(File.join("..", "..", "..","..","exclude"), __FILE__)
+		destination_folder = "#{@repoLocation}/.git/info/"
+		FileUtils.cp_r(file_path, destination_folder, :remove_destination => true)
+#		FileUtils.cp(file_path, destination_folder)
 	end
+	
 end
 
 #(1)
