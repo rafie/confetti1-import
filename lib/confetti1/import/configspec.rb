@@ -33,14 +33,23 @@ class ConfigSpec
 	end
 	
 	def migrate(repo)
-
 		@vobs_arr.each do |vob|
-			repo.add("m:/#{@view_name}#{vob}")
-			puts "VOB #{vob} added"
-			# git --git-dir=d:\view\.git --work-tree=m:\view
+		unless File.directory?("m:/#{@view_name}#{vob}")
+			vn=vob
+			vn[0]="\\"
+			system("cleartool mount #{vn}")
 		end
+		vn=vob
+		vn[0]="/"
+		puts "Adding VOB #{vob}"
+		repo.add("m:/#{@view_name}#{vob}")
+		puts "VOB #{vob} added"				
+	
+			# git --git-dir=d:\view\.git --work-tree=m:\view
+		
 		puts "committing version..."
 		repo.commit("migrated from clearcase")
+	end
 	end
 end
 	
@@ -48,9 +57,14 @@ end
 class GitRepo
 	include Bento::Class
 
-	constructors :create
+	constructors :is, :create
 	members :repoLocation, :viewName
 
+	def is(repoLocation, viewName)
+		@repoLocation = repoLocation
+		@viewName = viewName
+	end
+	
 	def create(repoLocation, viewName)
 		@repoLocation = repoLocation
 		@viewName = viewName
