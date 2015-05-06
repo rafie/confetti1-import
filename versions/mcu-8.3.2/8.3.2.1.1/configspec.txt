@@ -2,10 +2,7 @@ element * CHECKEDOUT
 
  
 element /mf/...                       mp_8.3.2.1.1                               -nocheckout   
-    
-element /mpInfra/...                  mp_8.3.2.1.1                               -nocheckout   
 
-element /swAudioCodecs/...            mp_8.3.2.1.0                               -nocheckout
 
    
 

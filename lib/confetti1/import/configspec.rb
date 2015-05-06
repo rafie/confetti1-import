@@ -9,11 +9,13 @@ class ConfigSpec
 	include Bento::Class
 
 	constructors :is
-	members :cspecfile, :vobs_arr, :view_name
+	members :cspecfile, :vobs_arr, :view_name, :vers
 	
 	def is(cspecfile)
-		@cspecfile=cspecfile		
-		out = IO.readlines(cspecfile)
+		#@cspecfile=cspecfile	
+		@vers=cspecfile
+		@cspecfile=File.expand_path(File.join("..", "..", "..","..","versions",cspecfile,"configspec.txt"), __FILE__)
+		out = IO.readlines(@cspecfile)
 		out.reject! { |c| c[0,7]!="element" }
 		out.shift
 		@vobs_arr = Array.new(out.length)
@@ -54,8 +56,8 @@ class ConfigSpec
 			puts "VOB #{vob} added"	
 			# git --git-dir=d:\view\.git --work-tree=m:\view
 		end
-		puts "committing version..."
-		repo.commit("migrated from clearcase")
+		puts "committing version #{@vers}..."
+		repo.commit("migrated from clearcase",@vers)
 		puts "version imported successfully"
 	end
 end
@@ -85,10 +87,12 @@ class GitRepo
 		end
 	end
 	
-	def commit(message)
-		cmd = System.command("git --git-dir=#{@repoLocation}/.git commit -m \"#{message}\"", :nolog)
+	def commit(message,tag)
+		#cmd = System.command("git --git-dir=#{@repoLocation}/.git commit -m \"#{message}\"", :nolog)		
+		cmd = System.command("git --git-dir=#{@repoLocation}/.git commit -m \"#{message}\"")
+		System.command("git --git-dir=#{@repoLocation}/.git tag #{tag}")
 		unless cmd.ok?
-			raise "Mounting error, import failed!" 
+			raise "Commit error, import failed!" 
 		end
 	end
 	
@@ -96,31 +100,10 @@ class GitRepo
 		file_path = File.expand_path(File.join("..", "..", "..","..","exclude"), __FILE__)
 		destination_folder = "#{@repoLocation}/.git/info/"
 		FileUtils.cp_r(file_path, destination_folder, :remove_destination => true)
-#		FileUtils.cp(file_path, destination_folder)
+
 	end
 	
 end
-
-#(1)
-#repo = GitRepo.create(...)
-## system("git --git-dir=d:\view\.git --work-tree=m:\view init
-#repo.add_ignore_list(yaml_ignore_list)
-
-#(2)
-#view.setcs(cspec_file)
-#cspec = Configspec.new(file)
-#cspec.vobs.each do |vob|
-#	repo.add("m:/#{view}/#{vob}")
-	# git --git-dir=d:\view\.git --work-tree=m:\view
-#end
-#repo.tag("...")
-
-
-
-
-# command line:
-#import create-repo --where DIR
-#import version --cpsec FILE --repo GIT-DIR --name VER
 
   
 end # Import
