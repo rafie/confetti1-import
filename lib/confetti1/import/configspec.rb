@@ -48,13 +48,19 @@ class ConfigSpec
 	end
 	
 	def migrate(repo)
-		@vobs_arr.each do |vob|		
-			vn=vob
-			vn[0]="/"
-			puts "Adding VOB #{vob}"
-			repo.add("m:/#{@view_name}#{vob}")
-			puts "VOB #{vob} added"	
-			# git --git-dir=d:\view\.git --work-tree=m:\view
+		ignore = File.read(File.join(repo.location,".git", "info", "exclude"))
+
+		@vobs_arr.each do |vob|	
+			unless ignore.include? vob	
+				vn=vob
+				vn[0]="/"
+				puts "Adding VOB #{vob}"
+				repo.add("m:/#{@view_name}#{vob}")
+				puts "VOB #{vob} added"	
+				# git --git-dir=d:\view\.git --work-tree=m:\view
+			else
+				puts "VOB #{vob} skipped"
+			end
 		end
 		puts "committing version #{@vers}..."
 		repo.commit("migrated from clearcase",@vers)
@@ -73,7 +79,9 @@ class GitRepo
 		@repoLocation = repoLocation
 		@viewName = viewName
 	end
-	
+	def location
+		@repoLocation
+	end
 	def create(repoLocation, viewName)
 		@repoLocation = repoLocation
 		@viewName = viewName
@@ -103,8 +111,35 @@ class GitRepo
 
 	end
 	
-end
+end #GitRepo
 
-  
+class Project
+	include Bento::Class
+	constructors :is
+	members :name, :path, :arr_ver
+
+	def is(name)
+		@name = name
+		@path=File.expand_path(File.join("..", "..", "..","versions",@name))
+	end
+	
+	def versions
+		
+		Dir.chdir(@path) do
+			@arr_ver=Dir["*"].reject{|o| not File.directory?(o)}
+		end
+		@arr_ver
+	end
+	def migrate(repo,viewname)
+		system("git --git-dir=#{repo}/.git branch #{@name}")
+		system("git --git-dir=#{repo}/.git ckeckout #{@name}")
+		versions.each do |ver|
+			cspec = ConfigSpec.is("#{@name}/ver") #mcu-8.3.2\8.3.2.1.1
+			cspec.applyToView(viewname)
+			cspec.migrate(repo)
+		end 
+	end
+	
+end  #Project
 end # Import
 end # Confetti

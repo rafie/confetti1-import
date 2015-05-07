@@ -63,6 +63,36 @@ command :version do |c|
 	end
 end
 
+command :project do |c|
+	c.syntax = 'import project [options]'
+	c.summary = ''
+	c.description = ''
+	c.example 'description', 'command example'
+	c.option '--proj PROJECT', String, 'Specify a project eg:mcu-7.6.1'
+	c.option '--gitdir DIR',String, 'Git repository Location'
+	c.option '--viewname VIEWNAME',String, 'original clearcase view'
+
+	c.action do |args, options|
+		t1 = Time.now
+		proj = options.proj
+		gitRepoFolder = ENV['GITDIR'] if ENV['GITDIR']
+		gitRepoFolder = options.gitdir if options.gitdir
+		raise ("no git folder specified") if !gitRepoFolder
+		viewName = ENV['VIEWNAME'] if ENV['VIEWNAME']
+		viewName = options.viewname if options.viewname
+		raise ("no view name specified") if !viewName		
+		p = Confetti1::Import.Project(proj)
+		puts p.versions
+		t2 = Time.now
+		t3=t2-t1
+		h=(t3/3600).to_i
+		t3=t3-(h*3600)
+		m=(t3/60).to_i
+		t3=t3-(m*60)
+		#puts "migration duration : #{h} hour(s), #{m} minutes and #{t3} seconds"
+	end
+end
+
 # end #Import
 # end #Confetti1
 
