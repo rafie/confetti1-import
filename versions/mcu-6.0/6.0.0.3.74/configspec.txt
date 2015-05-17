@@ -1,0 +1,56 @@
+element * CHECKEDOUT
+
+element \mcu\...                6.0.0.3.74                    -nocheckout
+element \configInfra\...        configInfra_1.0.0-amcu-13.2   -nocheckout
+element \nms\...                NMS_New_45_MCU_6.0.0_220408   -nocheckout
+
+element \mpc\...                MPC_AMCU_INT_3.33         -nocheckout
+element \map\...                MAP_AMCU_INT_3.42         -nocheckout
+element \mf\...                 AMCU_MF_6.0.0.3.43        -nocheckout
+element \megacoOld\...          MEGACO_AMCU-7             -nocheckout
+element \dspC64Audio\...        2.0.1.33_AMCU-1           -nocheckout
+element \dpm\...                070624_DPM_1.1.5_AMCU-2   -nocheckout
+
+element \adapters\...           ADAPTERS_5.2.24.24.24_AMCU_Kepler_29_180308_AMCU-4    -nocheckout
+element \dialingInfo\...        DI_5.2.24.24.24_AMCU_Kepler_13_180308_AMCU-1          -nocheckout
+element \NBU_COMMON_CORE\...    COMMON_CORE_1.2.21_zBufferCpy2_011107_AMCU-5          -nocheckout
+element \NBU_H323_STACK\...     H323_5.5.0.7_CCORE_1.2.21_zBufferCpy3_011107_AMCU-1   -nocheckout
+element \NBU_SIP_STACK\...      SIP_4.5.0.26_CCORE_1.2.21_NotifyBugFix_310308_AMCU-1  -nocheckout
+element \NBU_SCCP_STACK\...     SCCP_0.21_AMCU-2                                      -nocheckout
+
+element \swInfra\...            swInfra_0.70.1                 -nocheckout
+element \boardInfra\...         NBU_BOARD_INFRA_AMCU_26        -nocheckout
+element \loggerInfra\...        RVLOGGER_V1.27_AMCU-7          -nocheckout
+element \rvfc\...               RVFC_V2.80_AMCU-7              -nocheckout
+element \securityApp\...        SECURITY_0.8.1_110407_AMCU-2   -nocheckout
+
+element \bsp755\...             070815_BSP_2.35_AMCU-1        -nocheckout
+element \bsp8548\...            080415_TAMAR_1.7_4_9_AMCU-1   -nocheckout
+
+element \upgradeUtility\...     UU_4_3_12_5_TAMAR       -nocheckout
+element \freemasonBuild\...     freemasonBuild_1.1.10   -nocheckout
+
+load \adapters
+load \dialingInfo
+load \mcu
+load \NBU_COMMON_CORE
+load \NBU_H323_STACK
+load \NBU_SCCP_STACK
+load \NBU_SIP_STACK
+load \boardInfra
+load \bsp755
+load \bsp8548
+load \configInfra
+load \dpm
+load \dspC64Audio
+load \freemasonBuild
+load \loggerInfra
+load \map
+load \megacoOld
+load \mf
+load \mpc
+load \nms
+load \rvfc
+load \securityApp
+load \swInfra
+load \upgradeUtility

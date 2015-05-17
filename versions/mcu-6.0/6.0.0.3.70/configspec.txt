@@ -1,0 +1,67 @@
+element * CHECKEDOUT
+
+element \MCU\...                6.0.0.3.70                                      -nocheckout
+element \NBU_Config\...         NBU_Config_AMCU-12                              -nocheckout
+element \nms\...                NMS_New_42_MCU_6.0.0_110308_AMCU-1              -nocheckout
+
+element \MPCsys\...             MPC_AMCU_INT_3.30                               -nocheckout
+element \MAP\...                MAP_AMCU_INT_3.39                               -nocheckout
+element \mf\...                 AMCU_MF_6.0.0.3.40                              -nocheckout
+element \NBU_Megaco\...         MEGACO_AMCU-6                                   -nocheckout
+
+element \DSP_NG\...             2.0.1.33                                        -nocheckout
+element \DPM\...                070624_DPM_1.1.5_AMCU-1                         -nocheckout
+
+element \ADAPTERS\...           ADAPTERS_5.2.24.24.24_AMCU_Kepler_29_180308_AMCU-1     -nocheckout
+element \DialingInfo\...        DI_5.2.24.24.24_AMCU_Kepler_13_180308           -nocheckout
+element \NBU_COMMON_CORE\...    COMMON_CORE_1.2.21_zBufferCpy2_011107_AMCU-4    -nocheckout
+element \NBU_H323_STACK\...     H323_5.5.0.7_CCORE_1.2.21_zBufferCpy3_011107    -nocheckout
+element \NBU_SIP_STACK\...      SIP_4.5.0.26_CCORE_1.2.21_zBufferCpy3_011107    -nocheckout
+element \NBU_SCCP_STACK\...     SCCP_0.21_AMCU-1                                -nocheckout
+
+element \swInfra\...            0.0.68a_AMCU                                    -nocheckout
+element \boardInfra\...         NBU_BOARD_INFRA_AMCU_22                         -nocheckout
+element \rvfc\...               RVFC_V2.80_AMCU-5                               -nocheckout
+element \RVLOGGER\...           RVLOGGER_V1.27_AMCU-5                           -nocheckout
+element \SECURITY\...           SECURITY_0.8.1_110407_AMCU-1                    -nocheckout
+
+element \bsp755\...             070815_BSP_2.35                                 -nocheckout
+element \TAMAR_BSP\...          080317_TAMAR_1.7_4_5                            -nocheckout
+
+element \UpgradeUtility\...     UU_4_3_12_5_TAMAR                               -nocheckout
+element \NBU_BUILD\...          nbu-build_1.1-main-8                            -nocheckout
+
+element \NBU_BOARD_INFRA\... /main/LATEST
+element \NBU_SW_INFRA\...    /main/LATEST
+element \NMS_New\...         /main/LATEST
+element \RV755_BSP\...       /main/LATEST
+
+load \ADAPTERS
+load \DPM
+load \DSP_NG
+load \DialingInfo
+load \MAP
+load \MCU
+load \MPCsys
+load \NBU_BUILD
+load \NBU_COMMON_CORE
+load \NBU_Config
+load \NBU_H323_STACK
+load \NBU_Megaco
+load \NBU_SCCP_STACK
+load \NBU_SIP_STACK
+load \RVLOGGER
+load \SECURITY
+load \TAMAR_BSP
+load \UpgradeUtility
+load \boardInfra
+load \bsp755
+load \mf
+load \nms
+load \rvfc
+load \swInfra
+
+load \NBU_BOARD_INFRA
+load \NBU_SW_INFRA
+load \NMS_New
+load \RV755_BSP
