@@ -82,6 +82,9 @@ class GitRepo
 	def location
 		@repoLocation
 	end
+	def vn
+		@viewName
+	end
 	def create(repoLocation, viewName)
 		@repoLocation = repoLocation
 		@viewName = viewName
@@ -91,7 +94,8 @@ class GitRepo
 	def add(dir)
 		cmd = System.command("git --git-dir=#{@repoLocation}/.git --work-tree=m:/#{@viewName} add #{dir}")
 		unless cmd.ok?
-				raise "git add #{dir} failed. Import stopped." 
+				System.command("git --git-dir=#{@repoLocation}/.git reset")
+				raise "git add #{dir} failed. Import cancelled and rolledback to last commit." 
 		end
 	end
 	
@@ -100,7 +104,8 @@ class GitRepo
 		cmd = System.command("git --git-dir=#{@repoLocation}/.git commit -m \"#{message}\"")
 		System.command("git --git-dir=#{@repoLocation}/.git tag #{tag}")
 		unless cmd.ok?
-			raise "Commit error, import failed!" 
+			System.command("git --git-dir=#{@repoLocation}/.git reset")
+			raise "Commit error, import cancelled and rolledback to last commit" 
 		end
 	end
 	
@@ -130,16 +135,20 @@ class Project
 		end
 		@arr_ver
 	end
-	def migrate(repo,viewname)
-		system("git --git-dir=#{repo}/.git branch #{@name}")
-		system("git --git-dir=#{repo}/.git ckeckout #{@name}")
+	def migrate(repo)
+		puts ("will execute git --git-dir=#{repo.location}/.git branch #{@name}")
+		system("git --git-dir=#{repo.location}/.git branch #{@name}")
+		puts ("will execute git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
+		#todo : wait until the branch dir is created
+		system("git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
+		
 		versions.each do |ver|
-			cspec = ConfigSpec.is("#{@name}/ver") #mcu-8.3.2\8.3.2.1.1
-			cspec.applyToView(viewname)
+			cspec = ConfigSpec.is("#{@name}/#{ver}") #mcu-8.3.2\8.3.2.1.1
+			cspec.applyToView(repo.vn)
 			cspec.migrate(repo)
 		end 
 	end
 	
-end  #Project
+end  #Projectf
 end # Import
 end # Confetti

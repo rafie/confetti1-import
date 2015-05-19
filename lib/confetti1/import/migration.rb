@@ -59,7 +59,7 @@ command :version do |c|
 		t3=t3-(h*3600)
 		m=(t3/60).to_i
 		t3=t3-(m*60)
-		puts "migration duration : #{h} hour(s), #{m} minutes and #{t3} seconds"
+		puts "Version #{pversion} migration duration : #{h} hour(s), #{m} minutes and #{t3} seconds"
 	end
 end
 
@@ -82,19 +82,21 @@ command :project do |c|
 		viewName = options.viewname if options.viewname
 		raise ("no view name specified") if !viewName		
 		p = Confetti1::Import.Project(proj)
-		puts p.versions
+		repo = Confetti1::Import.GitRepo(gitRepoFolder, viewName)
+		p.migrate(repo)
 		t2 = Time.now
 		t3=t2-t1
 		h=(t3/3600).to_i
 		t3=t3-(h*3600)
 		m=(t3/60).to_i
 		t3=t3-(m*60)
-		#puts "migration duration : #{h} hour(s), #{m} minutes and #{t3} seconds"
+		puts "Project #{proj} migration duration : #{h} hour(s), #{m} minutes and #{t3} seconds"
 	end
 end
 
 # end #Import
 # end #Confetti1
+
 
 # set IMPORT_GIT=d:\git
 # set IMPORT_VIEW=m:\view1
