@@ -1,14 +1,12 @@
 require 'commander/import'
 require 'json'
-require_relative 'configspec.rb'
-#require 'byebug'
+require_relative 'migration_classes.rb'
 
 program :name, "import"
 program :version, "1.1"
 program :description, 'migration'
 
-command :create do |c|
-	
+command :create do |c|	
 	c.syntax = 'import create'
 	c.summary = 'Create a new project version'
 	c.description = ''
@@ -93,21 +91,3 @@ command :project do |c|
 		puts "Project #{proj} migration duration : #{h} hour(s), #{m} minutes and #{t3} seconds"
 	end
 end
-
-# end #Import
-# end #Confetti1
-
-
-# set IMPORT_GIT=d:\git
-# set IMPORT_VIEW=m:\view1
-# import create --git-dir d:\git
-
-# import version --version mcu-7.6.1/7.6.1.1.0 --view m:\view1 --git-dir d:\git
-
-# set IMPORT_GIT=d:\git
-# set IMPORT_VIEW=m:\view1
-# import version --version mcu-7.6.1/7.6.1.1.0
-# import version --version mcu-7.6.1/7.6.1.2.0
-# import version --version mcu-7.6.1/7.6.1.3.0
-
-# import project --name mcu-7.6.1
