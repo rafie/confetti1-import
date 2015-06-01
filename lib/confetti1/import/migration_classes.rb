@@ -32,11 +32,13 @@ class ConfigSpec
 				vn=vob
 				vn[0]="\\"
 				puts "VOB #{vn} must be mounted...please wait..."
+				Log.write_log("VOB #{vn} must be mounted...please wait...")
 				cmd = System.command("cleartool mount #{vn}")
 				unless cmd.ok?
-					raise "Mounting error, import failed!" 
+					Log.error_log("Mounting error, import failed!" )					
 				end				
 				puts "VOB #{vn} mounted"
+				Log.write_log("VOB #{vn} mounted")
 			end
 		end
 		@view_name=viewName
@@ -45,20 +47,24 @@ class ConfigSpec
 	
 	def migrate(repo)
 		ignore = File.read(File.join(repo.location,".git", "info", "exclude"))
-		puts @vers
+		#File.open(yourfile, 'w') { |file| file.write("your text") }
 		vt1 = Time.now
 		@vobs_arr.each do |vob|	
 			unless ignore.include? vob	
 				vn=vob
 				vn[0]="/"
-				puts "Adding VOB #{vob}"
+				print "Adding VOB #{vob}..."
+				Log.write_log("Adding VOB #{vob}...")
 				repo.add("m:/#{@view_name}#{vob}")
-				puts "VOB #{vob} added"			
+				puts "VOB #{vob} added"
+				Log.write_log("VOB #{vob} added")
 			else
 				puts "VOB #{vob} skipped"
+				Log.write_log("VOB #{vob} skipped")
 			end
 		end
 		puts "committing version #{@vers}..."
+		Log.write_log("committing version #{@vers}...")
 		repo.commit("migrated from clearcase",@vers)
 		vt2 = Time.now
 		vt3=vt2-vt1
@@ -67,6 +73,7 @@ class ConfigSpec
 		m=(vt3/60).to_i
 		vt3=vt3-(m*60)
 		puts "version #{@vers} imported successfully. Duration : #{h} hour(s), #{m} minutes and #{vt3} seconds"
+		Log.write_log("version #{@vers} imported successfully. Duration : #{h} hour(s), #{m} minutes and #{vt3} seconds")
 	end
 end
 	
@@ -98,7 +105,7 @@ class GitRepo
 		cmd = System.command("git --git-dir=#{@repoLocation}/.git --work-tree=m:/#{@viewName} add #{dir}")
 		unless cmd.ok?
 				System.command("git --git-dir=#{@repoLocation}/.git reset")
-				raise "git add #{dir} failed. Import cancelled and rolledback to last commit." 
+				Log.error_log("git add #{dir} failed. Import cancelled and rolledback to last commit." )
 		end
 	end
 	
@@ -106,8 +113,9 @@ class GitRepo
 		cmd = System.command("git --git-dir=#{@repoLocation}/.git commit -m \"#{message}\"")		
 		unless cmd.ok?
 		puts "commit failed...rollback running..."
+		Log.write_log("commit failed...rollback running...")
 			System.command("git --git-dir=#{@repoLocation}/.git reset")
-			raise "Commit error, import cancelled and rolledback to last commit" 
+			Log.error_log("Commit error, import cancelled and rolledback to last commit" )
 		end
 		System.command("git --git-dir=#{@repoLocation}/.git tag #{tag}")
 	end
@@ -141,8 +149,10 @@ class Project
 	
 	def migrate(repo,origin: nil)
 		puts ("will execute git --git-dir=#{repo.location}/.git branch #{@name} #{origin}" )
+		Log.write_log("will execute git --git-dir=#{repo.location}/.git branch #{@name} #{origin}")
 		system("git --git-dir=#{repo.location}/.git branch #{@name}")
 		puts ("will execute git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
+		Log.write_log("will execute git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
 		system("git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
 		
 		versions.each do |ver|
@@ -153,5 +163,22 @@ class Project
 	end
 	
 end  #Projectf
+
+class Log
+	
+	def self.write_log(message)
+		File.open('C:/Temp/confetti-migration.log', 'a') { |file| file.puts(Time.now.inspect + " " + message) }
+	end
+	def self.error_log(message)
+		begin
+			raise message 
+		rescue Exception => e
+		  self.class.write_log(e.message)
+		  self.class.write_log(e.backtrace.join("\n"))
+		ensure
+		  puts "error, see c:/temp/confetti-migration.log for details"
+		end
+	end
+end
 end # Import
 end # Confetti
