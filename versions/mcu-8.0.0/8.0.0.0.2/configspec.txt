@@ -16,7 +16,7 @@ element /NBU_ICE/...                ucgw_nbuIce_7.6.0.20.3              	-nochec
 element /mpDsp/...                 	Avatar_integ_2011Aug21__8.0.0.0.8            -nocheckout
 element /dspUCGW/...                ucgw_dsp_7.6.0.20.2	             			-nocheckout
 element \dspIntelInfra\... 	    	Avatar_integ_2011Aug21__8.0.0.0.8			-nocheckout
-element \dspIcsVideo\... 	    	Avatar_integ_2011Aug21__8.0.0.0.8	#		-nocheckout
+element \dspIcsVideo\... 	    	Avatar_integ_2011Aug21__8.0.0.0.8			-nocheckout
 element \dspInfra\... 		   		Avatar_integ_2011Aug21__8.0.0.0.8			-nocheckout
 element \dspNetraVideo\... 	    	Avatar_integ_2011Aug21__8.0.0.0.8  			-nocheckout
 
@@ -44,5 +44,4 @@ element /bspLinux8548/...           101129_MAIO_0.2.40               -nocheckout
 element /freemasonBuild/...         freemasonBuild_1.4.3             -nocheckout
 
 element \bspLinuxIntel\...   	    110714_AVATAR_HOST_0.0.0.2.5
-element \bspLinuxIntel\...   	    /main/LATEST
-element \bspLinuxARM\...  	    110714_NETRA_0.1.5                -nocheckout
+element \bspLinuxARM\...  	        110714_NETRA_0.1.5                -nocheckout

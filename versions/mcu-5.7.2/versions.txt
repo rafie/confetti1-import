@@ -1,0 +1,3249 @@
+--------------------------------------------------------------
+5.7.2.8.10 - 5.7.2.9.10 15/09/2011
+--------------------------------------------------------------
+MCU:
+	QC-9112 - Incident #8192-12569: Incorrect icon displayed in conference control page of 
+					iView when stopping presentation during the cascaded meeting 
+					at Yunnan Post in China
+--------------------------------------------------------------
+5.7.2.7.10 - 5.7.2.8.10 05/09/2011
+--------------------------------------------------------------
+MCU & ADAPTERS:
+	QC-6632 - [IOT][Solution-regression][H323]"Black video" on TBG C90 no matter dial in or out. C90 opens H263-XGA-4fps towards the MCU which is a really strange behavior
+--------------------------------------------------------------
+5.7.2.6.10 - 5.7.2.7.10 09/08/2011
+--------------------------------------------------------------
+MCU:
+	8192-11871: Check for more generic name of the Codian GW
+--------------------------------------------------------------
+5.7.2.5.10 - 5.7.2.6.10 07/07/2011
+--------------------------------------------------------------
+MCU & POMP:
+	8192-11871: Classic MCU always crash if G.729 Rx / G.722 Tx against Codian GW
+--------------------------------------------------------------
+5.7.2.4.10 - 5.7.2.5.10 07/07/2011
+--------------------------------------------------------------
+MCU:
+	QC-7938 - video problem in HDSW when the conference is 1.5M and one EP is joining
+	in 768kb.
+--------------------------------------------------------------
+5.7.2.3.10 - 5.7.2.4.10 06/07/2011
+--------------------------------------------------------------
+MCU:
+	Incident #8192-12392: Elite5230 MCU (SN:1048080080) encountered reboot 
+	             issue during the conference frequently at Yunnan Post in China.
+	file: H243NotificationListener.cpp \NotifyNewNeighbor()
+
+--------------------------------------------------------------
+5.7.2.2.10 - 5.7.2.3.10 8/12/2010
+--------------------------------------------------------------
+MCU:
+	RVrep00082838 - Exception on tEcTask after performing Mute all
+			24576-7146: IMSS/TELMEX - Classic MCU crashes and reboots when cascaded with Elite MCU with different QOS parameters  L1&2/24*7/AR
+
+--------------------------------------------------------------
+5.7.2.1.10 - 5.7.2.2.10 19/10/2010
+--------------------------------------------------------------
+MCU:
+	RVrep00082131 - Cisco SR 615036069 - Customer: 
+		North Wales Police - Issue: More than 4 SCCP endpoints unable to join H323 conference (+1 H323
+
+--------------------------------------------------------------
+5.7.2.0.10 - 5.7.2.1.10 10/10/2010
+--------------------------------------------------------------
+MCU:
+	New advanced command 
+		ivrconferencedigitstimeout <integer> ( by default 20 )
+			Change timeout for digit collection of conference number in IVR
+
+--------------------------------------------------------------
+5.7.2.0.9 - 5.7.2.0.10 3/10/2010
+--------------------------------------------------------------
+swInfra
+	Fixed bug in memory pool.
+
+Compiled next VOBs and was moved labels:
+	- swInfra( swInfra_5.7.2.0.10 )
+	- dialingInfo( dialingInfo_5.7.2.0.10 )
+	- mediaCtrlInfo( mediaCtrlInfo_5.7.2.0.10 )
+	- mpc( mpc_5.7.2.0.10 )
+	- adapters ( adapters_5.7.2.0.10 )
+	- boardInfra( boardInfra_5.7.2.0.10 )
+--------------------------------------------------------------
+5.7.2.0.8 - 5.7.2.0.9 14/9/2010
+--------------------------------------------------------------
+MCU:
+	RVrep00082042 - 16384-7107: MCU rebooting and unstable
+	
+Compiled next VOBs and was moved labels:
+	- swInfra( swInfra_5.7.2.0.7 )
+	- adapters ( adapters_5.7.2.0.7 )
+	- boardInfra( boardInfra_5.7.2.0.7 )
+	- mediaCtrlInfo( mediaCtrlInfo_5.7.2.0.7 )
+	- dialingInfo( dialingInfo_5.7.2.0.7 )
+	- mpc( mpc_5.7.2.0.7 )
+
+--------------------------------------------------------------
+5.7.2.0.7 - 5.7.2.0.8 1/9/2010
+--------------------------------------------------------------
+MCU:
+	Merge of RVrep00081896.
+	RVrep00081310 – 153107 - DF586 - No video between EPs on devided encrypted conference on 2 MVPs.
+	RVrep00082001 - Fix for Name mismatch in new presenter notification – this prevented the SDS to display the current presenter.
+	RVrep00080690 - There is No presentation in VC240 After change the Presenter without Stop the presentation
+MVP:
+	New MVP MVP-5.7.2.0.5
+--------------------------------------------------------------
+5.7.2.0.6 - 5.7.2.0.7 12/7/2010
+--------------------------------------------------------------
+MCU:
+	Reject MPC CloseAck fix. 
+	Added ranges for MTU size advanced command.
+
+MPC:
+	Reject MPC CloseAck fix. Return to previou label mpc_5.7.2.0.1
+
+swInfra:
+	Change FILO to FIFO for memory pools.
+
+Compiled next VOBs after swInfra changes:
+	- swInfra( swInfra_5.7.2.0.7 )
+	- adapters ( adapters_5.7.2.0.7 )
+	- boardInfra( boardInfra_5.7.2.0.7 )
+	- mediaCtrlInfo( mediaCtrlInfo_5.7.2.0.7 )
+	- dialingInfo( dialingInfo_5.7.2.0.7 )
+	- mpc( mpc_5.7.2.0.7 )
+	- mcu ( 5.7.2.0.7 )
+
+--------------------------------------------------------------
+5.7.2.0.5 - 5.7.2.0.6 30/6/2010
+--------------------------------------------------------------
+MCU:
+	Changed default MTU size to 1360
+
+	Added Mixed CP/Switching Cascaded Conference
+		New hidden advanced  command servicecascadingmode
+		If value is 0 supported simple cascading mode, otherwise 1 supported full cascading mode.  
+		Default value is (1) Full cascading mode.
+
+	RVrep00080603	MCU open SD Call instead of HD with XT1000 in Encryption call
+	16384-6822	"DateAndTime" field not compliant with SNMPv2-TC
+
+--------------------------------------------------------------
+5.7.2.0.4 - 5.7.2.0.5 16/6/2010
+--------------------------------------------------------------
+MCU:
+	XT1000 H.239 issue - Don’t send presentation to current presenter
+	Add the ability to configure FPS other than 5 when using XGA for H.239
+
+
+	
+Adapters:
+	- new advanced command to set  sip stack buff sizes to enable large invite messages-
+	  sendReceiveBufferSize will be configurable (default 4096) - AC - mc:sipsetmaxsndrcvbufsize 
+	  MAX_SDP_BODY_LENGTH  = 4000 
+	
+	RVrep00079959 (16384-6674) – fix a case in which video channel is not opened towards the EP.
+	RVrep00080238(24576-6165)/RVrep00079784(16384-6693)/RVrep00080239(16384-6767) – Fix MCU crash on SD calls with ScopiaDesktop.
+	RVrep00079197 (16384-6275) - Mixed SD HD Outgoing Call : Data sharing problem with ISDN terminal during meeting. (best effort)
+	RVrep00077763 (8192-9937) - PolyCom HDX 6000 not getting presentation from SD
+	RVrep00079393 (24576-6050) – merge a fix for bug which was found at the POMP in version 5.4
+	RVrep00078780(151980)/RVrep00078619(151846) - Allow sending VFU request in SIP even when the call is not yet in steady state. RVrep00078417 (151801) – Cross-site scripting errors in IPVC-3515-MCU (Cisco MCU-12).
+	RVrep00080435 - No video on VIVR calls from OCS/LCS in solution mode
+	RVrep00078327 (24576-5540) – add the option to set higher default volume level through A.C. – mc:channelinitvolumelevel <value> (between -5 to 5)
+pomp:
+	merge fix from 5.4.4.0.5 that fixed resource leak when call are disconnected before ack is received in MPC.	
+
+BSP:
+	new Label 100427_BSP_2.39.2
+--------------------------------------------------------------
+5.7.2.0.3 - 5.7.2.0.4 25/3/2010
+--------------------------------------------------------------
+MCU:
+	- Adding support to IBM sametime. In order for it to work the folowing advanced commands should be used:
+	  1. mc:calltypeoverride 1
+	  2. mc:sendintrainterval <service_num> <duration in seconds>
+	- RVrep00077763 - Can't open H.239/XGA towards HDX6000
+	
+Adapters:
+	- increase the sip stack sizes to enable large invite messages-
+	  MAX_SDP_BODY_LENGTH  = 2500 (same as elite)
+	  sendReceiveBufferSize = 4096
+	- RVrep00078780/RVrep00078619 - Allow sending VFU request in SIP even when the call is not yet in steady state.
+
+BSP:
+	new Label 100309_BSP_2.38.
+	
+MVP:
+	- new version 5.7.2.0.3 to support IBM-ST (add support for RTP aggregated/Fragmented NALUs).
+
+--------------------------------------------------------------
+5.7.2.0.2 - 5.7.2.0.3 17/02/2010
+--------------------------------------------------------------
+MEGACO:
+	New label MEGACO_1.1.0.16P21 - fix RVrep00077215
+
+MPC:
+	New label mpc_5.7.2.0.1 - fix RVrep00077215
+	
+MVP:
+	New MVP MVP-5.7.2.0.2
+--------------------------------------------------------------
+5.7.2.0.1 - 5.7.2.0.2 04/11/2010
+--------------------------------------------------------------
+
+MCU:
+	Fixed UpgradePack bug
+	Connecting to a conference with moderator PIN – change to be enabled by default.
+
+	RVrep00077258 - Change H245 ports range doesn't affect the MCU
+	RVrep00077206 - Can not Initiate Audio Only Conference
+	RVrep00076969 - [Presentation] G50 and PCS1 doesn’t get presentation from the XG-80 while H.239 is already active
+	RVrep00077246 – TLV 1U crashed with GCC exception on 2010-01-06 15:03:53.15
+	RVrep00075844 - [GA7.1] EC history calls list is inconsistant with the GCCs calls list (PID=0000 issue)
+	RVrep00074684 – CSCtb93311 CUVC ignores SIP bit rate change
+	RVrep00075520 - No timer available for MCU PIN IVR and timing out with "wrong PIN code" – change default value to 45 seconds.
+	RvRep0077271 – AAC betweens 5.7 and 7.0.
+
+MEGACO:
+	New Label MEGACO_1.1.0.16P20
+
+	
+
+
+
+5.7.1.0.15 - 5.7.2.0.1 04/11/2010
+--------------------------------------------------------------
+
+MCU:
+	RVrep00076007 - iVIEW conf control does not refresh properly
+	RVrep00076707 - FR - remove conf ID from display at EP
+	RVrep00076936 - 24576-5582:The Slave conference's Endpoints lost Video in cascading HD Switch Conference with MCU_5_7_1_0_11_RV
+	RVrep00073641 - when user in waiting room it hears the tone prompt when other participant join or leave the conference
+	RVrep00073794 - H239 opened on Master in advance, can't be seen on Slave after cascading between them!(H239 channel was closed by Master)
+	RVrep00074885 - Layout_Display_Changed_Notification floods the XML
+	RVrep00075734 -DORA XML IOT
+	24576-5699 - Fix HD cascading problem
+	1080p asymetric cascading with Dora
+	BroadSoft IOT (merge from 5.7.1.0.16 version for Broadsoft).
+	Added PConfType to participant_info message
+	New advanced command h245portfrom & h245portto [1024-65535]
+	New advanced command ivrpasswordtimeout INTEGER - required reset !
+
+
+ADAPTERS:
+	H245 port range advanced command
+
+WEB:
+	new label nms_1_MCU_5.7.2_281209
+	
+BOARDINFRA:
+	Added freemason
+
+MVP:
+	New label 5.7.2.0.1
+
+
+5.7.1.0.14 - 5.7.1.0.15 04/11/2009
+--------------------------------------------------------------
+MCU: set label "5.7.1.0.15"
+	1. merge of "yafit_mcu_5.7.1.0.14_Downgrade2SdCall", Use HoldResume to downgrade
+	   the call from HD to SD, use in HD/CP service when Ep is SD. for both SIP and H323
+
+ADAPTERS:
+	1. merge of "yafit_adap_5.7.1.0.14_Downgrade2SdCall": , Use HoldResume to downgrade
+	   the call from HD to SD, use in HD/CP service when Ep is SD.for both SIP and H323
+	2. merge of "assafb_MCU_5.7.1.0.13_based_H323_DisplayUser_NullTermination_H323_aliases"
+	   Use neew stack and API for the H323 adapters allows disabling the publication of all services in admission reject
+	   Display string and UserInfo were exposed to the possibility of not being null terminated - fixed.
+
+H323STACK: use new label H323_STACK_5.5.1.7i_CCore_1.3.5_011009
+	1. New stack and API for the H323 adapters allows disabling the publication of all services in admission reject
+
+
+
+
+
+5.7.1.0.13 - 5.7.1.0.14 04/09/2009
+--------------------------------------------------------------
+MCU: set label "5.7.1.0.14"
+ 1. merge of label " amib_7.0.1.4": add new_presenter_notification 	
+ 2. Rvrep00073699 label "yafit_5.7.1.0.14_InOutBandDtmf"
+ 3. RVrep00072990
+ 4. SIP: Avoid replacing HD channels with SD channels. gccCallLeg.cpp
+				
+
+
+ADAPTERS:set label "Adapters_5.7.1.0.14_01OCT2009"
+ 1. merge of label: "amirlev_CC_Adapters_5.7.1.0.12_20Aug09_300809"
+    In general we try to avoid (as much as possible) from adding new “#includes” to Adapters VOB.
+    change description:
+	CSipAdapRegMngr.cpp – Remove “#include <CSipAdapConfigurationParams.h>” – There was no need to add it
+	Move “#define REG_MNGR_DEF_EXPIRE_VALUE” from ”CSipAdapRegMngr.h” to “SipAdapCommon.h” and rename it to  “ADAP_SIP_REG_MNGR_DEF_EXPIRE_VALUE”
+
+	CSipAdapRegClient.cpp  enables removing  “#include <CSipAdapRegMngr.h>”
+	CSipAdapRegMngr.h
+	CSipAdapStackAPI.cpp
+	SipAdapterMessages.cpp – enables removing  “#include <CSipAdapRegMngr.h>”
+
+MPC: set label "mpc_5.7.1.0.6_newCompile"
+ 1. Recompile !!!
+
+5.7.1.0.12 - 5.7.1.0.13 30/08/209
+--------------------------------------------------------------
+MCU: 
+	1. improve fix of 5.7.1.0.7 related to channel_Status_Notification adding the field XMLTAG_VIDEO_ROLE
+		only when the channel is video.
+	2. RVrep00074072 - ALU Break out session mute/un-mute issue
+	3. Fix Audio only fallback logic – MCU will not offer video cap in case of fallback to audio only due to lack of resources.
+	4. pivotal #150601 - make sure not to renegotiate for SD caps in case H.264 is not offered at all (SIP calls).
+	
+POMP:
+	1. RVrep00073778 - Haier no audio (merge from 5.7.0.0.24).
+
+Adapters: 
+	1. RVrep00073182 merge of "assafb_MCU_5.7.1_based_codec_properties_update"
+
+WEB:
+	New label nms_6_MCU_5.7.1_310809
+	1. RVrep00074165 - no option for Korean Auto Attendant Display Message
+	
+5.7.1.0.11 - 5.7.1.0.12 19/08/209
+--------------------------------------------------------------
+
+MCU:
+	fix previouse wrong merge of "ronny_dora_h.239_130409"
+	file NewEc/Command/participantListCommand.cpp
+	RVrep00073777 - cannot make 64kbps video conferences
+
+Adapters:
+	Clean AdapterSip DB after early media call
+	"Adapters_5.7.1.0.12_20Aug09"
+
+MVP: use MVP version 5.7.1.0.7
+
+MEGACO:
+	This version fix the megaco reserved-port 49152
+	MegacoOld\... MEGACO_1.1.0.16P18 
+        
+	•Open dummy UDP port on 65534 instead of 49152 - relevant for MVP side 
+	•Fix WIN32 compilation problems
+
+Mpc:	"mpc_5.7.1.0.6"
+	•Open dummy UDP on port 65300 instead of 0 (in this case common-core VOB chose 49152) – relevant for  MCU side
+	•Fix WIN32 compilation problems
+
+
+--------------------------------------------------------------
+5.7.1.0.10 - 5.7.1.0.11 03-08-2009
+
+MCU:
+   1.Update version number 
+   2.Waiting room channels were Unmuted.
+     files: gccChannelVideoIn.cpp and gccChannelAudioIn.cpp:
+     function DoMute(void *prm) perform SetMuted() regardless of result 
+      from RemoveFromMediaProcessor();
+
+
+ADAPTERS:
+   1. RVrep00072873: when rcv 200OK on REGISTER message, read the "expires" header timeout from the 200OK
+      and update the regClient on the new value for the comming registration.
+
+
+--------------------------------------------------------------
+5.7.1.0.9 - 5.7.1.0.10 20-07-2009
+
+MCU:
+   1. moderator menu - Add option for terminate conference
+   2. Support new AUdio file "FirstParticipantModerator" - 
+	direct moderator login feature which is enabled by mc:directmoderatorlogin
+   2. RVrep00068108 - VIVR - support "PleaseHold" message
+   3. merge of label gregoryl_5.7.1.0.9_fix
+	3.1.	RVrep00072622 - Unmute all participants message is not heard
+	3.2.	Fixed conference wrong number in Video IVR ( bug after memory reduction ).
+   4. merge of yuvals_For_5.7.1.0.10_label
+	RVrep00072620 – No video in incoming SIP calls
+	RVrep00072528 -  incorrect BW is displayed in the WEB
+   5. Win32 - the group <rvMpStandAloneVariables> is excluded
+      VxWOrks - exclude all the group<rvMpStandAloneVariables> objects except for <rvMpTotalNumOfPorts> 
+WEB: 
+   new label <nms_5_MCU_5.7.1_200709>
+	• CC: display the total BW on top bar (as in MCU 7.0)
+	• RVrep00072264 – Block the option to enable AAC-LC in services which are lower than 96kbps.
+
+Pomp:	label<pomp_5.7.1.0.9>
+	update version to 5.7.1.0.9
+	update ANMNG_MAX_MSGES to 74 instead of 64
+
+AudioMsgUtility:
+	Label: AMU_2_0_6_MCU_5_7_1_200709
+	VOB: audioMsgUtilily
+
+Adapters: 
+	Set Level of Qos to Debug4
+--------------------------------------------------------------
+5.7.1.0.8 - 5.7.1.0.9 07-07-2009
+MCU:
+	1. RVrep00072491 Added timer in AutoAttend for conference number waiting
+	2. RVrep00072492 Fixed bug with participant number in cascading
+	3. RVrep00072496 Fixed resource calculation for Desktop conferences
+	4. RVrep00072458 Fixed crush in Big conferences ( 250 participants )	
+	5. RVrep00072310 Fixed BW calculation in the conference control
+	6. RVrep00072452 SNMP: exclude unsupported objects, to allow propare "Walk" operation in browser.
+	7. Add to the csLog the new functions:
+		FileInterfaceDumpRamDisk "DEV1:MCU.VAL"
+		FileInterfaceDumpFlash((enFilesType_t)1);
+MVP: 5.7.1.0.6
+
+--------------------------------------------------------------
+5.7.1.0.7 - 5.7.1.0.8 01-07-2009
+
+MCU:5.7.1.0.8
+	1. merge of label:5.7.1.0.8 is yuval_mcu_label_for_5.7.1.0.8
+		1.1	mc: autoattendantconfcreationmode <0|1> - new advanced command. When disabled the VIVR won't prompt for creating new conference. default is enabled (1).
+		1.2	RVrep00072287 - Fix a bug in the SIP lock-down mechanism which resulted in no audio on SIP offer out calls.
+	2. merge of label: gregoryl_5.7.1.0.7_fixes
+		2.1 Memory changes:
+			MCU capacity by default is 72calls, due to DTMF detection enabled
+			When MCU activated H323 & SIP protocols ==> available 6MB free.
+			When disable DTMF detection( IVR only ), max capacity up to 96calls.
+			Because H323 & sip adapters must be allocate 2x5 Mb  and  GCC must be allocate 5-6 mb.
+			Since we had only 6mb. Some structures was optimized for additional 15-20 mb.
+		2.2 Changed max conferences from 96 to 48 
+		2.3 RVrep00067868 Disabled HD if frame rate less 15
+		2.4 SNMP support send CLEAR severity
+		2.5 Rvrep000 gccPolicyManager.cpp TestIfOutputCanBeDowngradedToMatchOutChan check capability and type of channel match before downgrade
+	3. merge f label: yafit_5.7.1.0.7_ChanNotify_AudioCodec
+		3.1 VIVR no slide, implement the NotifyChannelStatus func' extra field added in 5.7.1.0.7 also to DTMFAutoAttend.cpp+.h 
+		3.2 Rvrep00070792 - Audio codec erase from service does not take effect.
+	4. Bug fix: function <StartVFUTimer> need to perform <StopVFUTimer> instead of <StopFlowCtrlTimer>
+	5. RVrep00072099: calling by sip with a BR lower than the service, limits all the next calls in the same conference to the same low BR                   
+
+POMP:pomp_5.7.1.0.8    
+	1. Change call weight calculation in order to allow 32 switched-video calls on Scopia100.
+
+Mpc:mpc_5.7.1.0.5 
+	1. Merge fix for broadreach which resulted in MVP crash in case of swap IO failure.
+
+--------------------------------------------------------------
+5.7.1.0.6 - 5.7.1.0.7      3-06-09
+MVP: use MVP version 5.7.1.0.4
+MCU:
+	1. Fixed Devision upgrade utility package
+	2. Changed sipadapsessiontimerconfig advanced command. Remove resreshReqType parameter
+	3. RVrep00068363 - MCU service with 'force PIN protection' does not provide decent error message when EP tries to establish ad-hoc conf  without PIN
+                           Missing Q931 code in dialing info.
+	4. Added new EP policy HDDisabled ( for VSX 8000 )
+	5. Fix bat files of "mcu\bin\UpgradePack", not to create the INVISION output, create WakeUp Utility
+	6. fix ini files of "mcu\bin\UpgradePack", for the WakeUp utility creation, and seperation of the WakeUp.fls burn from Upgrade Utility.
+	7. Add to XML Notification channel_Status_Notification the field XMLTAG_VIDEO_ROLE
+	8. send XML Notification channel_Status_Notification<false> when channel is disconnected
+	9. Remove "gilad" Debug print outs
+	10 merge of Rvrep00068912 according to label "assafb_MCU_5.7.1.0.7_aethra_caps_downsized "
+	11 Delayed MP connection notification
+	12 RVrep00071858 & RVrep00071861 - Problems with iViewSuite communicating on the signalling IP of MCU instead of management IP
+	13 RVrep00071860 & RVrep00071849 - SDS BW not working according to MCU service.
+	14 Added support dynamic logger
+	15 Added support Session timer to SNMP & changed advanced command ( removed parameter "support" )
+	16 Added support SNMP for Signalling QOS.
+	17 Fixed bug with SD mute/unmute/block/unblock [ testtrack 19589 ]
+	18 Addadvance command to Ignore Early Media in SIP <sipignoreearlymedia true/false> by default it is false.
+		meaning early media is not ignorred
+	19 In case of outgoing SIP call when OCS/LCS is configured set the call definition to SD on the beginning
+	   of the call in order to avoid renegotiation later. gccCallLegOut.cpp
+
+ADAPTERS: 
+	1. merge of Rvrep00068912 according to label "assafb_MCU_5.7.1.0.7_aethra_caps_downsized "
+	2. changed TOS logger message, added qos value to print
+	3. Addadvance command to Ignore Early Media in SIP <sipignoreearlymedia true/false> by default it is false.
+		meaning early media is not ignorred
+
+POMP:
+	1. merge of POMP label "pomp_5.7.1.DSP":Delayed MP connection notification
+
+UpgradeUtility:
+	1. Add the option is Silent mode to enter sNum (Serial number) and pNum (Product number). to allow full MTP upgrade in silent mode.
+	   How to Exclude/Inclue files
+	   - According to UpgradeContent.ini get fileNumber to exclude ModuleFiles14="Wakeup_MTP.fls": use -exclude 14 for Wakeup.fls
+           - The command line should be as follows:
+	   "-s -a 172.27.50.12 -r RVGET2 -w RVSET2 -exclude 14 -lic 1O4S4-E0000-00000-1XTF9-TCYQ0-1MJ1M-S1DIC -snum 0000000000 –pnum 12345 -outdir D:\views\yafit_5.7.1.0.6_view\upgradeUtility\Source\Debug"
+
+H323 Stack: use new label " H323_STACK_5.5.1.7ed_CCore_1.3.5_FacilityPatch_150609"
+WEB: new label "nms_20_MCU_5.7.1_180609"
+	1. Session timeout
+	2. QoS - Control
+
+
+--------------------------------------------------------------
+5.7.1.0.5 - 5.7.1.0.6      27-05-09
+
+MCU:Label 5.7.1.0.6
+	1. Merge of 5.7.0.VLAN.5
+	2. Set advance command <substructmaxaudiobitratefromvideocap> default value to Disable, 
+		so the Audio br will not be substruct from video br, by default.
+
+	3. XML - Added support of "None" value for DROP_REASON
+
+boardInfra:label boardInfra_5.7.1.0.6
+	1. Merge of boardInfra_5.7.0.VLAN.1
+
+pomp:label pomp_5.7.1.0.6
+	1. Merge of pomp_5.7.0.VLAN.1
+
+WEB: new WEB label nms_17_MCU_5.7.0_050409
+
+MVP: use version 5.7.1.0.3
+
+--------------------------------------------------------------
+5.7.1.0.4 - 5.7.1.0.4      27-05-09
+
+MCU:Label 5.7.1.0.5
+	1. Fix Mute/Unmute for Audio In channel.
+
+--------------------------------------------------------------
+5.7.1.0.3 - 5.7.1.0.4      25-05-09
+
+mcu:
+	Encryption – EncryptionRequired will be from now Strong_Encryption_Required.
+	WakeUp Seperation       – delete the option to select the WakeUp from the Upgrade Utility
+				- Uncheck the WakeUp option in the MTP utility
+				- Create a WakeUp Utility per vendor
+	RVrep00071583 - BreakOut Session – add the field “AnnounceSessionMove” to the XML message < Set_Part_To_BOS_Request > to decide if to play the BOS movement operation.
+	KoreanTextOverlay – Use a new Korean.fls file.
+	PartyName - Fixed how a SIP participant name is decided to be sent to the XML recipient 
+			in cases when PartName is not supplied from the GCC. 
+VOB names: 
+	replace MPCSys with mpc
+		Compilation changes in mpc, pomp, adapters,mcu
+swinfra:
+	pivotal#24576-4519 SD client hang when invite en endpoint with this format "701800655496***998877636872#”.
+	found out to be memory issue in String class .
+
+MVP version: The version uses MVP version 5.7.0.0.5
+
+
+--------------------------------------------------------------
+5.7.1.0.2 - 5.7.1.0.3      14-05-09
+ 
+ The version uses MVP version 5.7.0.0.4
+
+ This version include merges of several fixes:
+ 
+ General changes in compilation:
+	mpc, rvfc, pomp, adapters, dialingInfo, 
+	configInfra, swInfra, boardInfra, mediaCtrlInfo
+
+ MCU:
+	1. Added support for DORA cascading XML version
+	2. Added support for Expand participant info.
+	3. merge of label <yuvals_mcu_content_for_5.7.1.0.3>
+		3.1 Merge latest changes of the FlowCtrl mechanism from DISA.
+		3.2 cross products
+			RVrep00067203
+			RVrep00066878
+			RVrep00067060
+			RVrep00063362
+			RVrep00062866
+			RVrep00062657
+			RVrep00068274
+			RVrep00067842
+			RVrep00064059
+			RVrep00067035
+	4. merge of label <yafit_5.7.0.1.2merge_h239fromDora>
+		4.1 merge of label ronny_dora_h.239_130409
+		4.2 Add advance command for the h.239 merge
+	5. Add XML TB3 slide type to be treated as TB2 slide in XML
+	6. merge of label <assafb_MCU_5.7.1.0.3_delivery>
+		6.1 RVrep00068747/RVrep00067868 - Added demoting option from H.264 HD to H.264 SD in the receive channel
+		6.2 Added TOS to H323 signalling/control.  
+			Controlled by advanced command: mc:h323tospriority with parameter priority in the range of: 0-63
+		6.3	SIP lock-down: Reinviting with a reduced audio cap-set to match remote
+		6.4	Infrastructure for SIP sharpness to motion preference 
+			(the use-case is preferring H.263 4CIF to H.264 CIF even if H.264 has priority).  
+			Using existing command used for H.323
+		6.5	New DTMF format added: binary 2833 dtmf in INFO messages.  Represented to application as 
+			other out-of-band DTMF received through INFO.
+		6.6	SDP session id is now unique per session.
+		6.7	Illegal assignment in template reader fixed
+		6.8	Unsupported (dangerous) and inefficient use of CPP type-information, replaced by trusted getter.
+		6.9	Minor changes: Some function input checks added (like NULL checks), 
+			and some missing variable initializations added.  Removed some compilation warnings, some logs and comments phrasing fixed, added a few minor trace-level logs.
+
+ ADAPTERS:
+	1. merge of label <yuvals_adapters_5.7.1.0.1_gTalkFix_and_CrossProducts>
+		RVrep00070456 - Support extracting of destination address from 
+	                the ‘destinationAddress’ field in case ‘calledPartyNumber’ is empty.
+		Rvrep-cross products:
+		RVrep00067363
+		RVrep00067301
+		RVrep00067061
+		RVrep00067288
+		RVrep00066692
+	2. merge of label <assafb_MCU_5.7.1.0.3_delivery>
+		2.1 Added rv755.bat in ADAPTERS\build to just build ADAPTERS and not always rebuild.  
+			Use it only while making frequent versions while developing, use regular build batch once before delivery.
+		2.2 several Adapter related changes according to section#6 on MCU vob
+
+ NBU_H323_STACK:
+	1. Use the label <H323_STACK_5.5.1.7d_CCore_1.3.5_gTalk_070509>
+		RVrep00070456 - Support extracting of destination address from 
+		                the ‘destinationAddress’ field in case ‘calledPartyNumber’ is empty.
+
+--------------------------------------------------------------
+5.7.1.0.1 - 5.7.1.0.2      27-04-09
+ MCU:
+	- mc:prefersharpnesstomotion  - new advanced command. When set to 0 the MCU will opt for the best video resolution regardless of video codec priority as configured in the service.
+		- Usage: mc:prefersharpnesstomotion <service number> [0|1]
+		- Default: 0 (disabled, same behavior as today).
+		- mc:prefersharpnesstomotion <service number> -1: displays the current setting for the service.
+	- RVrep00068109 - mc:autoattendantpincodemode - new advanced command. When disabled (0) the MCU will not prompt for PIN code during conference creation through VIVR.
+		- Usage: mc: autoattendantpincodemode [0|1] (no parameter will display the current setting).
+		- Default: 1 (enabled, same behavior as today).
+	- mc: xmlshortencascpartinfo - new advanced command. When set to 1 short form of participant info messages will be used between cascaded MCU's.
+		- usage: mc: xmlshortencascpartinfo [0|1]
+		- Default: 0 (long form,  same behavior as today).
+	- XML changes to support cascading to version 7.0 (Dora).
+	- XML enhancements to support 250 participants in cascaded conference.
+	- RVrep00068107 - Video and Audio out channels can be mute via XML API.
+
+ NBU_MEDIA_CTRL_INFRA:
+	- new label MEDIA_CTRL_6.0.03.03.03_DORA_INT_260409.
+
+--------------------------------------------------------------
+5.7.0.0.20 - 5.7.1.0.1      22-03-09
+ MCU:
+	- RVrep00068362 : XMLConnection fix by ADI. 
+	- OCS VFU timer added by GREGORY.
+	- RVrep00063237: SIP session timers. OECD: Problems with SIP endpoint connections into MCU never disconnected 
+	                 (intermittent - non reproducible every time) 
+--------------------------------------------------------------
+ 5.7.0.0.19 - 5.7.0.0.20     17-03-09
+ MCU:
+	- Merged the latest changes to the flowCtrl mechanism from DISA version 5.5.5.0.15.
+	- mc:h245tunneling - advanced command that enables/disables the H.245 tunneling that was removed from the web configuration.
+ WEB:
+  	- New label nms_15_MCU_5.7.0_170309 - rebuild in order to fix the windows version that was broken on 5.7.0.0.13
+--------------------------------------------------------------
+ 5.7.0.0.18 - 5.7.0.0.19     08-03-09
+ MCU:
+	- Added support for DORA changes of XML boolean values (True/true False/false).
+	- RVrep00069519: The "24 video calls limit" for HD/SD CP (CIF;384k) was exceeded! Actual result is 30 video calls.
+	- RVrep00069547: IBM - Version 5.7:  Problem with SIP call to a bridge that requires moderator to enter "*" key to join meeting. 
+	- RVrep00069522: Cisco CSCsx30769 -- standard SQL injection attack can be used to create a meeting with out forcing the user to login.
+--------------------------------------------------------------
+--------------------------------------------------------------
+ 5.7.0.0.17 - 5.7.0.0.18     02-03-09
+ MCU:
+	- RVrep00068362: solve issue in the XML that caused a crash upon nmap scan
+	- RVrep00069473: No Welcome slide is showed when Dialing In from LS to MCU in SIP.
+--------------------------------------------------------------
+MCU:
+    - Limit 24 ports on HD/SD CP conferences even when 48 are available.
+    - Adding new ProductID for of scopia Desktop version 7.0.
+
+--------------------------------------------------------------
+ 5.7.0.0.16 - 5.7.0.0.17     26-02-09
+--------------------------------------------------------------
+MCU:
+    - Limit 24 ports on HD/SD CP conferences even when 48 are available.
+    - Adding new ProductID for of scopia Desktop version 7.0.
+
+--------------------------------------------------------------
+ 5.7.0.0.15 - 5.7.0.0.16     22-02-09
+--------------------------------------------------------------
+MCU:
+    - Added new feature "HD for cascading"
+
+--------------------------------------------------------------
+ 5.7.0.0.13 - 5.7.0.0.15     17-02-09
+--------------------------------------------------------------
+MCU:
+    - CANCELED : Upgrade utility changed, added DUMMY MCU for 5.6 & 5.7.
+    - CANCELED : *2 for two pools LayoutInfo & ParticipantInfo.
+
+--------------------------------------------------------------
+ 5.7.0.0.12 - 5.7.0.0.13     16-02-09
+--------------------------------------------------------------
+MCU:
+    - DISA workflow control merge.
+    - NMAP crash fixed.
+    - Upgrade utility changed, added DUMMY MCU for 5.6 & 5.7.
+
+
+NBU_BOARD_INFRA:
+    - CISCO: MS certificate crash fixed.
+
+NMS:
+    - CISCO: MS certificate crash fixed ( new label nms_13_MCU_5.7.0_150209 ).
+
+
+
+
+--------------------------------------------------------------
+ 5.7.0.0.11 - 5.7.0.0.12     10-02-09
+--------------------------------------------------------------
+MCU:
+	- Adding back the option to configure the welcome slide colors.
+NMS:
+	- new label nms_11_MCU_5.7.0_090209 - Adding back the option to configure the welcome slide colors.
+MPCSys:
+	- new label MPC_5.7.0.0.3 - support configuring slides colors.
+Adapters:
+	- Support the new 323 stack API for registering aliases.
+NBU_H323_STACK
+        - new label H323_STACK_5.5.1.7b_CCore_1.3.5_AliasRegistration_281208. 
+        - contains new API for registering aliases.
+        - fix a bug when receiving Empty capability set.
+Megaco:
+	- new label MEGACO_1.1.0.16P17 - port protection against nmap attacks.
+          
+--------------------------------------------------------------
+ 5.7.0.0.10 - 5.7.0.0.11     04-02-09
+--------------------------------------------------------------
+MCU
+	- HD TV mode - add 3 new values for applying HD TV mode. The advanced command is now:
+	  - mc:hdtvmode <Serivce number> [0-3]
+	  - default value is 0 (disabled)
+	  - TV mode check box must be checked for the service as well.
+
+--------------------------------------------------------------
+ 5.7.0.0.9 - 5.7.0.0.10      26-01-09
+--------------------------------------------------------------
+MCU
+	- Fixed RVrep00068543 - IOT issue with the GW when using Encryption that caused main video channel not to be opened from the GW
+	  towards the MCU.
+--------------------------------------------------------------
+ 5.7.0.0.8 - 5.7.0.0.9       15-01-09
+--------------------------------------------------------------
+ADAPTERS:
+        - CANCELLED Merging SIP lockout mechanism from kepler.
+
+MCU:
+	- CANCELLED Merging SIP lockout mechanism from kepler.
+	- Added new help files for UPGRADE UTILITY.
+	- Changed setup build files per vendor.
+
+UPGRADE UTILITY
+	- Fixed help files per vendor mechanism.
+
+--------------------------------------------------------------
+ 5.7.0.0.7 - 5.7.0.0.8       06-01-09
+--------------------------------------------------------------
+MCU:
+        - Adding support for negotiation of SD capabilities in case remote side doesn't support HD. Currently works only for H.323.
+        - Merging SIP lockout mechanism from kepler.
+	- Fixed RVrep00067814. Changing voice activation behavior inlecture mode for Board Controller.
+
+ADAPTERS:
+                - Merging SIP lockout mechanism from kepler.
+
+--------------------------------------------------------------
+ 5.7.0.0.6 - 5.7.0.0.7       29-12-08
+--------------------------------------------------------------
+MCU:
+	- RVrep00067594 - Exception in the EC task during cascading conference
+	- Merge with Kepler. Notification filter. ( mc:notificationfilterstate )
+	- Subsrtuct Max Audio BW from VIDEO capabilities ( mc:substructmaxaudiobitratefromvideocap )
+	- Fixed some printouts.
+
+ADAPTERS:
+	-  RVrep00067595 - No incoming video when calling from H.323 EP to MCU through CUCM SIP trunk
+
+--------------------------------------------------------------
+ 5.7.0.0.5 - 5.7.0.0.6       16-12-08
+--------------------------------------------------------------
+MCU:
+	- Fixed RVrep00065931 - In HD Switching service, after closing the Presentation channel, the FlowControl is ignored
+	- Fixed RVrep00049606 - Can't create a conference/make calls when Register conference ID is marked
+
+POMP:
+	- New label pomp_5.7.0.0.4
+
+UPGRADE UTILITY
+	- New Label upgradeUtility_int_5.7.0.0.4_221208
+        
+--------------------------------------------------------------
+ 5.7.0.0.4 - 5.7.0.0.5       15-12-08
+--------------------------------------------------------------
+MCU:
+	- Fixed RVrep00067050 - MCU v5.7 HD VA mode reboot ( LCS/OCS & H.263 ) 
+        
+--------------------------------------------------------------
+ 5.7.0.0.3 - 5.7.0.0.4       27-11-08
+--------------------------------------------------------------
+WEB:
+	New label nms_7_MCU_5.7.0_271108:
+        - Fixed and issue which caused the audio codecs to disappeared sometimes.
+        
+--------------------------------------------------------------
+ 5.7.0.0.2 - 5.7.0.0.3       25-11-08
+--------------------------------------------------------------
+MCU: 
+
+	- Dvision OEM support - Fix 'MCU Identifier' field.
+	- RVrep00066662 - The string "enter the conference id…”is heard twice during the IVR session.
+	- RVrep00066741 - upgarde utility dodn't show the right version.
+	- DTMF forwarding - working again
+	- cECCallBackAbs make sure to stop timer when object is destroyed.
+	- mcuCommands.cpp - update the advnced commands description.
+
+upgradeUtility:
+	New label upgradeUtility_int_5.7.0.0.3_251108:
+	- Fix bug that no logo appears for Radvision upgrade package.
+
+WEB:
+	New label nms_5_MCU_5.7.0_231108:
+        - Add support for XGA presentation
+	- Change default resolution of H.264 presentation to 720p for HD/CP HD/SW services.
+	  For desktop rate the default remains CIF.
+	  
+bsp755:
+	New label 081103_BSP_2.35_1:
+	- SIC driver support.
+
+--------------------------------------------------------------
+ 5.7.0.0.1 - 5.7.0.0.2       18-11-08
+--------------------------------------------------------------
+MCU: 
+
+	- Dvision OEM support - no name is displayed for the vendor.
+
+boardInfra:
+	New label boardInfra_int_5.7.0.0.2_181108:
+	- Dvision OEM support - remove online help URL
+
+upgradeUtility:
+	New label upgradeUtility_int_5.7.0.0.2_181108:
+	- Dvision OEM support - no logo for the upgrade utility
+
+WEB:
+	New label nms_4_MCU_5.7.0_131108:
+        - Dvision OEM support - no logo
+	- change 264 presentation default frame rate to 5fps.
+
+
+--------------------------------------------------------------
+ 5.6.1.0.16 - 5.7.0.0.1       06-11-08
+--------------------------------------------------------------
+MCU: 
+
+	- TV Mode for HD – controlled by an advanced command:
+	  - mc:hdtvmode[enabled/disabled]
+	  - default value – disabled
+	  - if enabled then TV mode is applied (if checked) on HD as well.
+	- VFU filtering mechanism – controlled by advanced command
+	  - mc: vfufilterbypolicy [enabled/disabled]
+	  - default value – disabled
+	  - when enabled the VFU requests from Scopia Desktop will not be filtered.
+	- Video Mute – save mute attribute of a channel even when it is closed.
+	- Allow presentation channel to be opened even when there’s no main video channel (solve the issue with Scopia Desktop on HDSW conferences).
+
+
+Pomp:
+	New label pomp_int_5.7.0.0.1_111208:
+	- Add Dvision OEM support
+
+boardInfra:
+	New label boardInfra_int_5.7.0.0.1_111208:
+	- Add Dvision OEM support
+
+upgradeUtility:
+	New label upgradeUtility_int_5.7.0.0.1_111208:
+	- Add Dvision OEM support
+
+WEB:
+	New label nms_2_MCU_5.7.0_051108:
+	- Support 720p presentation for SD services.
+	- remove H.245 tunneling check box.
+
+
+--------------------------------------------------------------
+ 5.6.1.0.15 - 5.6.1.0.16       23-10-08
+--------------------------------------------------------------
+MCU: 
+	- 480p cascaded conferences - solve a bug which causes video cascaded channels of 480p conferences to
+          be opened in 480p instead of CIF.
+	- Merge notification filtering mechanism from Kepler- new advanced command was added:
+          mc:notificationfilterstate [0-2] - default value is 0 (all notifications are sent).
+	- default mode of SubModeCtrl was changed to 'disabled' - SubModeCtlr inactive.
+
+Adapters:
+	New label adap_Unified_mcu_5.6.1.B.14 - refine the delay mechanism to work only for RE-INVITE messages.
+
+WEB:
+	New label nms_6_MCU_5.6.1_221008 - Fix Haier related issues.
+
+--------------------------------------------------------------
+ 5.6.1.0.14 - 5.6.1.0.15       07-10-08
+--------------------------------------------------------------
+MCU: 
+	Update version number.
+	Lecture Mode Enhancements
+		mcu\GCC\Media\FlatMode\gccMediaVideoLayout.h
+		mcu\GCC\Media\FlatMode\gccMediaVideoLayout.cpp
+
+--------------------------------------------------------------
+ 5.6.1.0.13 - 5.6.1.0.14       06-10-08
+--------------------------------------------------------------
+New MVP version 5.6.1.0.5
+
+MCU: update version number.
+	Label " 5.6.1.0.14"
+	1.Replace the file MCU\bin\UpgradePack\AWK.exe
+	2. Merge of label: 5.6.1.NSS_VFU.11
+		files:
+	Mcu/GCC/Common/gccInterfaceParamFactory.cpp
+	Mcu/Gcc/gccConf.cpp; gccConfAbs.cpp
+	MCU/Gcc/Export/gccApi.h;gccGeneralInterface.h;gccListenerAbs.h;gccParam.h 
+	Mcu/Gcc/Include/Common/gccInterfaceParamFactory.h
+	Mcu/Gcc/Include/Conference/gccConfAbs.h
+	Mcu/Gcc/Include/Media/gccConfMediaManagerBase.h
+	Mcu/Gcc/Main/gccApi.cpp	
+	Mcu/Gcc/Media/Falt/gccConfMediaManagerFlat.cpp;gccConfMediaManagerFlat.h;gccMediaVIdeoLayout.cpp;gccMedaiVideoLayout.h
+		gccMediaVideoLayoutFlat.cpp;gccMediaVideoLayoutNonFlat.cpp;gccMediaVideoLayoutPomp.cpp	
+	Mcu/Gcc/Media/gccConfMediaManager.cpp
+	Mcu/NewEc/Commands/setLayoutNoSelfSeeOffCOmmand.cpp;setLayoutNoSelfSeeOnCOmmand.cpp
+	Mcu/NewEc/Common/ecCOnferenceConvertor.cpp;ecCOnferenceConvertor.h;exConferenceHelper.cpp;ecConferenceHelper.h
+	Mcu/NewEc/Export/globalId.h;icommandFactory.h;iCommandVisiter.h
+	Mcu/NewEc/Factories/CommandPool/ecCommandPoolCommandFactory.cpp;ecCommandPoolCommandFactory.h
+	Mcu/NewEc/Factories/seperatePool/ecSeperatePoolCommandFactory.cpp;ecSeperatePoolCommandFactory.h
+	Mcu/XML/EventHandler/xmlEcCommandVisitor.cpp;xmlEcCommandVisitor.h
+	Mcu/XML/MsgHandlers/xmlMsgHandlerFactory.cpp;xmlMsgHandlerFactory.h;xmlMsgHandlerAllocator.h;
+		xmlMsgHandlerPool.cpp;xmlMsgHandlerPool.h
+	Mcu/Xml/ParseBuilder/xmlTagDefs.cpp;xmlTagDefs.h
+New files: 
+	MCU/Gcc/Export/gccParamBoolean.h; gccParamUInt32.h
+	Mcu/NewEc/CallBack/activeSpeakerIndicationCommand.cpp;activeSpeakerIndicationCommand.h
+	Mcu/NewEc/commands/cascadeActiveSpeakerIndicationCommand.cpp;cascadeSetLayoutNSSDisableCommand.cpp;
+		cascadeSetLayoutNSSEnableCommand.cpp;setRemoteLayoutNoSelfSeeStateCommand.cpp;setRemoteLayoutNoSelfSeeStateCommand.h
+	Mcu/NewEc/Common/globalId.cpp
+	Mcu/NewEc/Export/cascadeActiveSpeakerIndicationCOmmand.h; cascadeSetLayoutNSSDisableCommand.h;cascadeSetLayoutNSSEnableCommand.h
+	Mcu/XML/MsgHandlers/xmlCascActiveSpeakerIndicatorMsgHandler.cpp;xmlCascActiveSpeakerIndicatorMsgHandler.h
+		xmlCascSetLayoutNSSDisableMsgHandler.cpp;xmlCascSetLayoutNSSDisableMsgHandler.h
+		xmlCascSetLayoutNSSEnableMsgHandler.cpp;xmlCascSetLayoutNSSEnableMsgHandler.h
+
+	3. Merge of Adi changes for Haier
+		files:
+	MCU/common/McuCommand.h
+	Mcu/Config/Mcu.asn (compile also NBU_CONFIG)
+	Mcu/Gcc/Channel/gccChannelVideoOut.cpp 
+	Mcu/GCC/Common/GccAdvCommand.cpp; GccconferenceTemplateAbs.cpp; 
+		gccConfigDefs.cpp; gccFlatConferenceTemplate.cpp
+	Mcu/Gcc/gccConfAbs.cpp
+	MCU/Gcc/Export/gccAdvCommand.h;mcuSizeDefs.h
+	Mcu/Gcc/Include/Channel/gccChannelVIdeoOut.h
+	Mcu/Gcc/Include/Common/gccConferenceTemplateAbs.h;gccConfDefs.h;gccFlatConferenceTemplate.h
+	Mcu/Gcc/Include/Conference/gccConfAbs.h
+	Mcu/Gcc/Include/Main/gccTemplateReader.h;gccTemplateWriter.h
+	Mcu/Gcc/Include/Media/gccConfMediaManager.h;gccConfMediaManagerBase.h;gccVideoLayout.h
+	Mcu/Gcc/Main/gccConfigMaintenance.cpp;gccTemplateReader.cpp;gccTemplateWriter.cpp
+	Mcu/Gcc/Media/Falt/gccConfMediaManagerFlat.cpp;gccConfMediaManagerFlat.h;gccMediaVIdeoLayout.cpp;gccMedaiVideoLayout.h
+	Mcu/Gcc/Media/gccConfMediaManager.cpp;gccVideoLayout.cpp
+	Mcu/Main/McuCommand.cpp
+
+Adapters: New Label "adap_Unified_mcu_5.6.1.0.14"
+	according to adapters label: " " 
+	Solving the dirty database bug: modify the function CSipMedia::CloneMedia 
+        so that it will create the caps with copy constructors instead of using the 
+        assignemnt operator.
+
+
+--------------------------------------------------------------
+ 5.6.1.vIVR.11 - 5.6.1.0.13       02-10-08
+--------------------------------------------------------------
+MCU: update version number.
+	Label " 5.6.1.0.13"
+	1.avoid reboot upon Telent Task suspend (usually it will be due to nmap scanning)
+	file:VxStatus.cpp function:mcuGetIsTaskSuspendStatus
+Adapters:	
+	1. The fix is done according to merge of Adapters label: gilads_adapters_AMCU-MR1_b7_mediaLinesNotClean
+	Resolve issue of Cisco: vIVR SIP Empty Invite, call gets disconected
+	avoid forwarding the duplication of msg <eCallCtrlMsgMediaRcvdFromRemote>
+        received from stack to SipCallCtrlSM.
+	first time received due to Ack+SDP second time due to COnnect from Stack.
+	file:CSIPAdapStackApi.cpp/CSipAdapStackAPI::handleStateChangeMsgWithInfo
+        avoid sending "eCallSigMsgStateChangeConnected" to Sip CallCtrlSM
+	Label "adap_Unified_mcu_5.6.1.vIVR.13"
+	To view changes compare with label of version 5.6.1.Tlmx.11
+	Adapters\sip\CSipadapCall.cpp
+	Adapters\sip\CSipadapStackApi.cpp
+	Adapters\sip\CSipadapStackApi.h
+	Adapters\sip\CSipadapMedia.cpp
+
+--------------------------------------------------------------
+ 5.6.1.Tlmx.11 - 5.6.1.vIVR.11        25-09-08
+This version should not be used!!!
+--------------------------------------------------------------
+MCU: update version number " 5.6.1.vIVR.11"
+Adapters:
+	Resolve issue of Cisco: vIVR SIP Empty Invite, call gets disconected
+	avoid forwarding the duplication of msg <eCallCtrlMsgMediaRcvdFromRemote>
+        received from stack to SipCallCtrlSM.
+	first time received due to Ack+SDP second time due to COnnect from Stack.
+	file:CSIPAdapStackApi.cpp/CSipAdapStackAPI::handleStateChangeMsgWithInfo
+	Label "adap_Unified_mcu_5.6.1.vIVR.11"
+--------------------------------------------------------------
+ 5.6.1.0.11 - 5.6.1.Tlmx.11        24-09-08
+--------------------------------------------------------------
+This version is temporary version for Telmex customer.
+To overcome the changes of H323 stack logic, in the past for every GateKeeper registration request, 
+the stack used to update the registration list (may be new Alias due to new conference created)
+The new Stack <H323 stack version RV_H323_STACK_VERSION "5.5.1.6"> 
+used since mcu 5.6 the logic changed, to send always the first registration request 
+list according to the first registration list requested by adapters. 
+Meaning creating and deleting conferences does not influense the registrationRequest List.
+
+MCU: Label: "5.6.1.Tlmx.11"
+	* Update version number
+
+NBU_H323_STACK: Label "Telmex_h323_5.5.1.6_alias_reg_fix"
+	* special fix for Telmex company, in the file <cmAutoRasEp.c>
+		for every registration request rcv from adapters
+		Update the registration list.
+	
+
+--------------------------------------------------------------
+ 5.6.1.0.10 - 5.6.1.0.11        14-09-08
+--------------------------------------------------------------
+MCU: Label: 5.6.1.0.11
+	1. MCU does not offer HD in SIP: HD service for H264
+	FIle: gccChannelResolver.cpp\CreateChanVideoCapsFlat()
+
+--------------------------------------------------------------
+ 5.6.1.0.9 - 5.6.1.0.10        11-09-08
+--------------------------------------------------------------
+MCU: Label: 5.6.1.0.10
+
+WEB:  New WEB complete the previouse fix of Rvrep00065562
+	Label: nms_5_MCU_5.6.1_110908
+
+--------------------------------------------------------------
+ 5.6.1.0.8 - 5.6.1.0.9        10-09-08
+--------------------------------------------------------------
+
+MCU: Label 5.6.1.0.9
+	1. update version number
+	2. use new POMP version "pomp_5.6.1.0.3 "
+MVP:
+	Use new MVP "5.6.1.0.4"
+
+	DSP Label: ‘DSP_C64_V5.6.1.02’
+	Version: ‘00.05.61.02’
+
+	Host changes:
+	*	None (based on 5.6.1.0.1)
+
+	DSP changes: 
+	*	fix Cisco TP dropping frames due to TS skew (RVrep00064284) compensate 
+		for more than one TS advance on a 30msec slot.
+
+	Resolved Bugs: 		
+	* 	00064284-TP Setup - RTP Timestamp problem from MVP to Cisco CTMS
+
+WEB:New Web version Label: nms_4_MCU_5.6.1_100908
+	VOB: nms
+	RVrep00065562	Checking/Unchecking the HDCP checkbox in the MCU Settings tab - 
+			doesn't request the Upload operation!
+
+
+--------------------------------------------------------------
+ 5.6.1.0.7 - 5.6.1.0.8        09-09-08
+--------------------------------------------------------------
+
+MCU: Label 5.6.1.0.8
+	1. Merge fix 16384-3691 Moderator PIN feature request (from 5.6.1.ITL.5)
+		added new avanced command mc:directmoderatorlogin 0/1
+	2. This version can be used also for ITALTEL: the CISCO HoldResume is working in this version as well.
+
+--------------------------------------------------------------
+ 5.6.1.0.6 - 5.6.1.0.7        07-09-08
+--------------------------------------------------------------
+
+MCU: Label 5.6.1.0.7
+	1. ITALEL: when conecting to AutoAttewnd conference using PBX (re-invite changes the media IP)
+                   need to make sure te IVR wellcome Audio file is played again on the new IP Channel.
+		File changes:
+			gccCallLeg.cpp - check if need o play Audio file of Auto Attend
+			gccCallLeg.h - add mbVideoIVRCall
+			gccMain.cpp - version updtae
+
+--------------------------------------------------------------
+ 5.6.1.0.5 - 5.6.1.0.6        26/08/08
+--------------------------------------------------------------
+
+MCU: Label 5.6.1.0.6
+	1. merge files which contains changes for supporting of 32 cascading connections (bank of China)from 5.5.3.CP.3: 
+	   ecConfigurationManager.cpp, ecSeparatePoolInfoFactory.cpp.
+	
+--------------------------------------------------------------
+ 5.6.1.Csc.5 - 5.6.1.0.5        19/08/08
+--------------------------------------------------------------
+
+MCU: Label 5.6.1.0.5
+	1.Update version number file:gccMain.cpp
+	2. Fix Rvrep#00065407 due to GLP.2 merge the H239 did not worked on HD/CP service
+		file: gccMediaVideoLayOutNonFlat.cpp/CGccMediaVideoLayoutNonFlat::CreateVideoOutput
+
+
+--------------------------------------------------------------
+ 5.6.1.0.4 - 5.6.1.Csc.5        18/08/08
+--------------------------------------------------------------
+
+MCU: Label 5.6.1.Csc.5
+	1.Update version number file:gccMain.cpp
+
+ADAPTERS:Label adap_Unified_mcu_5.6.1.0.5
+	1. Improve the merge of gilads_adapters_AMCU_b86a_DelayMediaFix2 for CUCM
+		Add handle of re-Invite in state : eSipCallCtrlRcvdMediaFromRemoteState
+
+--------------------------------------------------------------
+ 5.6.1.0.3 - 5.6.1.0.4        13/08/08
+--------------------------------------------------------------
+
+MCU: Label 5.6.1.0.4
+	1.Update version number file:gccMain.cpp
+	2.Cross Product Bug: RVrep00065227 - roll-back for RVrep00063609 file: gccCallLegIn.cpp
+	3.Rvrep00065235 fix advanced command check validity. file:gccAdvCommand.cpp
+	4.RVrep00064645 - more fixes.
+		bool  CGccMediaVideoLayout::FitGeometry(CGccMediaVisualObject& visulObj,CVideoGeometry * geoMax,CVideoGeometry *privateOldGeo)
+		bool  CGccMediaVideoLayoutFlat::EnableNoSelfSee(bool enable)
+		bool CGccMediaVideoLayoutFlat::CancelNoSelfSee(void)
+		bool CGccMediaVideoLayoutNonFlat::EnableNoSelfSee(bool enable)
+
+	5.use mcu\bin\UpgradePack\MTP_AETHRA\Projects\UploadContent.ini. of label 5.6.1.0.1.
+
+ADAPTERS:Label adap_Unified_mcu_5.6.1.0.4
+	1. Fix RVrep00065275 ITALTEL: HoldResume,Out call from MCU, the Ep reply first with 
+		Progress[SDP] and then with 200Ok[SDP]
+	file: CsipAdapCall.cpp
+	2. merge of gilads_adapters_AMCU_b86a_DelayMediaFix2 for CUCM
+	files:
+	CSipAdapCall.cpp
+	CSipAdapCall.h
+	CSipAdapCallControlSM.cpp
+	CSipAdapCallControlSM.h
+	CSipAdapInternalAPI.cpp
+	CSipAdapInternalAPI.h
+	CSipMedia.cpp
+	CSipMedia.h
+
+
+--------------------------------------------------------------
+ 5.6.1.0.2 - 5.6.1.0.3        29/07/08
+--------------------------------------------------------------
+
+MCU: Label 5.6.1.0.3
+	Update version number
+
+Adapters: Label adap_Unified_mcu_5.6.1.0.3
+	Merge of RVrep#00060763: some Endpoints does not like the character '=' in the UserAgent string
+--------------------------------------------------------------
+ 5.6.1.0.1 - 5.6.1.0.2        29/07/08
+--------------------------------------------------------------
+MCU 
+
+Label 5.6.1.0.2
+1. Added advanced commands:
+----------------------------------------------------------------------------------------------------------
+Command				Parameters	Default value	Description
+----------------------------------------------------------------------------------------------------------
+mc: sipupdatemediaaddress	1-Enable\	0-Disable
+				0-Disabled			SIP: remote to change 
+								Media Ip Address in Active call
+----------------------------------------------------------------------------------------------------------
+mc: h323changemanualtcsmsd	1-Enabled\	0- Disable
+				0-Disabled			H323: force MCU to send first 
+								TCS and only then MSD ACK
+----------------------------------------------------------------------------------------------------------
+mc: 4cifmaxframerate		Frame Rate 	15 fr		Sets the 4CIF Frame Rate value
+----------------------------------------------------------------------------------------------------------
+mc: setswdynamicfrps		ServiceNumber,
+				FrameRate:15/30,
+				PicSize:1-720p/
+					2-1080p	FrameRate=30,
+						PicSize=720p	Sets the FrameRate and the 
+								PictureSize for Service SwitchingDynamic
+
+----------------------------------------------------------------------------------------------------------
+Advancedsecuritymode		enable\		Disable
+				disable				Enable Security Mode
+----------------------------------------------------------------------------------------------------------	
+
+2. patch fixes:
+
+Merge from 5.5.3.CP.3
+----------------------------------------------------------------------------------------------------------	
+	RVrep00064234-Scratchy Audio is heard at an Ep
+	Rvrep00064519-Display negative time printouts at the POMP log
+	Feature-Support 32X 1.5MB HD switched participants+Support 32 cascading connections
+	RVrep00059000/ Rvrep00048419- change the Advanced configuration menu
+----------------------------------------------------------------------------------------------------------	
+Merge from 5.5.7.0.1
+	Rvrep00064452-Bank of Canada project. Manual TCS & MSD to support CME
+----------------------------------------------------------------------------------------------------------	
+merge from 5.5.5.0.7
+	Rvrep00064828-Support strong password.Telnet advanced command <advancedsecuritymode >
+----------------------------------------------------------------------------------------------------------	
+merge from 5.5.3.LYT.3
+	RVrep00064645-Active Speaker location in 10/13 party layouts
+----------------------------------------------------------------------------------------------------------	
+merge from Itay_MCU_5_6_0_0_19_AutoswitchNSSHdFix/MCU
+	RVrep00063878-HDSW with Auto switch ,NSS enable - one  EP see himself in the auto 
+			switch cycle  ,second EP see the same EP all the time.
+----------------------------------------------------------------------------------------------------------	
+merge from 5.5.3.CIF.1
+	Rvrep00061904-MCU sends QCIF on a CIF supported call
+----------------------------------------------------------------------------------------------------------	
+merge from 5.5.3.ITL.10
+	RVrep00061969-MCU Interop with Avaya - no audio sent to Avaya from MCU
+	Rvrep00063666-Avaya Phone joining MCU conference doesn't hear the first jingle
+	Rvrep00063667-Problem with audio messages not being heard so cannot respond to enter PIN
+	RVrep00063668-Avaya in conf when inviiting by DTMF another Avaya no audio between them
+			 - okay if inviting CISCO phone
+----------------------------------------------------------------------------------------------------------	
+Merge from 5.5.3.GLP.2
+	RVrep00061876-Dynamic HD/SD Switching: Call Center. First call determines if the SW 
+			conf will be SD/HD, H.264/H.263, 1080/720/4CIF
+----------------------------------------------------------------------------------------------------------	
+merge from 5.5.3.
+	Rvrep00062512-Advanced SIP invitation on limited BW results with full conference BW outgoing call.
+----------------------------------------------------------------------------------------------------------	
+merge from 5.3.3.0.6
+	Rvrep00053488-Wrong layout code XML messages
+----------------------------------------------------------------------------------------------------------	
+No fix required: No more max participants are shown at the WEB.
+	CSCsj53608-Services page max parties calculations incorrect
+----------------------------------------------------------------------------------------------------------	
+SOlved using the DISA merge
+	CSCsq67634-Password expiration does not affect admin user
+----------------------------------------------------------------------------------------------------------	
+
+New MIB files: Updated MIB 4.2.7.1 files for MCU 5.6.1
+
+	1. Change permission of leaf rvUserPasswordTimeToExpire from read-only to read-write.
+	2. New MIB objects are added under “rvUnitGeneral” node (OID: 1.3.6.1.4.1.903.1.1):
+	3. rvPasswordToken (OID: 1.3.6.1.4.1.903.1.1.45, DisplayString,  RW)
+	4. rvPasswordStatus (OID: 1.3.6.1.4.1.903.1.1.46, DisplayString, RO)
+	5. New MIB object is added under “rvUsersCfgTable” node (OID: 1.3.6.1.4.1.903.1.5.3):
+	6. rvUserPasswordState (OID: 1.3.6.1.4.1.903.1.5.3.1.11, INT, RO)
+	7. New trap events IDs are added to the “rvTraps.mib”:
+	8. userAccountAdded   (209),
+	9. userAccountDeleted  (210)
+
+
+boardInfra <NBU_BOARD_INFRA>
+	Label NBU_BOARD_5.6.1_DISA_CLI_CP3
+
+POMP 
+	Label pomp_5.6.1.0.2 
+
+ADAPTERS 
+	Label adap_Unified_mcu_5.6.1.0.2
+
+Web 
+	New WEB version “nms_3_MCU_5.6.1_290708”
+	1. Performance improvement (merge from 5.5.4 - nms_4_MCU_5.5.4_230608)
+	2. DISA support (merge from 5.5.5)
+	3. Removing “Dynamic” option from video codec when vendor is CISCO
+	4. RVrep00063836: SCCP with all ports  - the  SCCP service doesn't change  the SCCP reserved ports after the reset
+
+
+MVP
+	New 5.6.1.0.2
+
+--------------------------------------------------------------
+ 5.6.0.0.25 - 5.6.1.0.1        09/07/08
+--------------------------------------------------------------
+MCU:
+	AmiB:
+	        1. Reverted Waiting Room implementation for HD Switching back to original implemenation (see RVrep00064672).
+		2. Reverted SCCP welcome room Slide (for Cisco Defaults) to original slide format.
+Web:
+	new Web version (including fix for RVrep00064651).
+
+--------------------------------------------------------------
+ 5.6.0.0.23 - 5.6.0.0.24        06/07/08
+--------------------------------------------------------------
+MCU:
+	AmiB:
+		1. New feature: Waiting Room turned into Slide
+		2. New feature: Waiting Room is released when moderator takes chair (merged from CS)
+		3. RVrep00063953 - Calling a non-protected Conf with password fails (but only with SD clients -otherwise it works). - medium
+		4. RVrep00064448 - OCS and waiting room: no video on the communicator - medium  - NOT VERIFIED YET
+		5. RVrep00064135- HDCP video when HD EP connects through a conference that is in Waiting Room
+	
+	YuvalS:
+		1. RVrep00064098 - No Audio when calling Polycom endpoints (in Audio Only Scenarios) - and lots of empty DTMF notifications 
+
+--------------------------------------------------------------
+ 5.6.0.0.22 - 5.6.0.0.23        26/06/08
+--------------------------------------------------------------
+MCU:
+	AmiB:
+		1. Added AdvCmd for the enabling/disabling of Sub Mode Control (SMC). default = enabled, mc:enablesubmodecontrol
+	YuvalS:
+		1. Fixed (RVrep00063230): TBG 1000 / TBG6000B/D connect to the mcu using the VIVR with bad video quality / or no video in channels 
+
+Compiled Configuration.
+--------------------------------------------------------------
+ 5.6.0.0.21 - 5.6.0.0.22        19/06/08
+--------------------------------------------------------------
+MCU:
+	AmiB:
+		1. Fixed RVrep00063445
+		2. Merged Adi's fix for the Pomp - RVrep00064261 (MP is lost with no reason)
+
+Pomp recompiled. 
+
+--------------------------------------------------------------
+ 5.6.0.0.20 - 5.6.0.0.21        16/06/08
+--------------------------------------------------------------
+MCU:
+	Yuval:
+		1. Fix RVrep00064186.
+
+--------------------------------------------------------------
+ 5.6.0.0.19 - 5.6.0.0.20        12/06/08
+--------------------------------------------------------------
+MCU:
+	Yuval:
+		1. Change definition of HD minimal bit rate to 500kbps.
+		2. RVrep00063926 - setting SIP default values when upgrading to 5.6.0.0.20.
+		3. RVrep00064034 - Don't offer HD channels in SDP if there are no resources for it.
+		4. RVrep00062587 - merge this bug fix.
+	Danny:
+
+		1. RVrep00063723 - The MCU Crashed. when create a 140 -160 ports conference.
+		2. RVrep00062112 - [bigConf]Exception  in rvSemaphore::take(int)+28 : semTake ()  while running Big-setup.
+	Ami:
+		1. RVrep00063948 Cascaded Part List Cmd leaked, causing further leakage and ultimately - crashing the MCU. 
+
+Adapters:
+    New label ADAPTERS_6.0.15.15.15_Unified_15_110608
+
+POMP:
+	Danny:
+		1. Merge RVrep00063804 and RVrep0006368 - both were FECC related issues.
+
+--------------------------------------------------------------
+ 5.6.0.0.18 - 5.6.0.0.19        03/06/08
+--------------------------------------------------------------
+MCU:
+	Yuval:
+		1. Add Polycom VS512 to the list of EP which doesn't support 'Hold-Resume'.
+		2. Add NULL pointers protection in CGccCallLeg::PrioritizeRemoteSimultCapsAndCodecs().
+		3. RVrep00062171 - Merge this cross product issue.
+		4. RVrep00063925 - merge support for LCS/OCS from version 5.5.2.0.5.
+	Itay:
+
+		1. Merged bug RVrep00061376 to NBU_Config. Increased configuration memory pool size.
+		2. Bugs Fixes:
+		    	- 61881 - Cascading - Doesn't see all slave EPs in the Auto switch cycle 
+			- 63695 - When changing the GK I have to disable the Auto attendant num
+			- 63692 - Cannot create new confernce using CC - error No available resources. layoutInfo reached pool limit
+	Ami:
+		1. Bugs Fixes: RVrep00063609, RVrep00063808. 
+
+NMS:
+    New label NMS_55_MCU_5.6.0_290508
+
+MPCSys:
+    New label MPC_5.6.0.0.25
+
+NBU_SIP_STACK:
+    New label SIP_4.5.0.26_CCORE_1.3.5_2InvitesCrashFix_280508
+
+
+
+
+--------------------------------------------------------------
+ 5.6.0.0.17 - 5.6.0.0.18
+--------------------------------------------------------------
+
+MCU:
+	Yuval:
+		1. Fixing the encryption issue, RVrep00060810.
+		2. Fix RVrep00063536.
+		3. Add protection so 4CIF won't be used for H.264. This is related to RVrep00063244 and RVrep00063245 (but doesn't
+		   answer the question why we have downgraded the EP to 4CIF from 720p in the first place).
+	Itay:
+
+		1. fixed bug where noselfsee value of 2 (OFF) was interpreted as ON from configuration.
+		2. Bugs Fixes:
+		    - 63211 - changed the cclogger default log location to: c:\cclogger_<MCU IP address>, and log level to "Advanced"
+			- 63051 - setvfureqinterval and sendintrainterval adv cmds "GET" with no parameters now give more meaningful printouts
+			- 62020 - when conference with TTL is destroyed, the about to be destroyed message was not playing
+
+	Danny:
+		1. Bug fix: RVrep00060281 - DTMF is not available in SIP “Full Invite” working with GW 324M
+
+	Ami:
+		1. Bugs Fixes: RVrep00063493, RVrep00063314, RVrep00063443, RVrep00063445, RVrep00063231, RVrep00063661 
+
+POMP:
+	Danny:
+		1. Adding DTMF detection sensitivity variables to configuration, and adding an advanced command for set / get.
+		   DTMF variables are - PowerScale and MinSignalLevel.
+		   Advanced command: Mp:SetDTMFDetectionValues <PowerScale> <MinSignalValue>
+		2. Discarding incoming packets of comfort noise (PT = 13), and deleting annotying printouts.
+		3. Merging fix for RVrep00057150 from IVP - The fix is to open ports in round robin manner instead of First Free.
+		4. Merging issue [No RVrep number] from fix in version 4.4 (Adi and Gregory):
+		   Since stream type is set after first media packet, there si a possible scenario with fast Open/Close channel by endpoint, in which the 
+		   stream type may be "unknown" when when trying to close the channel.
+		   Fix: If stream not Audio && not Video && not FECC, we assume Audio and close.
+	
+NMS:
+    New label NMS_52_MCU_5.6.0_220508
+
+MPCSys:
+    New label MPC_5.6.0.0.24
+
+Adapters:
+    New label ADAPTERS_6.0.13.13.13_Unified_13_250508
+
+
+--------------------------------------------------------------
+ 5.6.0.0.16 - 5.6.0.0.17     14/05/2008
+--------------------------------------------------------------
+
+General:
+
+1. Added support H243 names for GW.
+2. Making DTMF detection sensitivity variables global to enable change on the fly (POMP).
+3. Enlarging Auto-Attend second timeout to 5 seconds (was 2 seconds).
+4. Merging Cross Product bugs from other teams - See below.
+5. Bugs Fixes - See below.
+
+
+
+* MCU:
+
+	
+	Cross Products merged from other versions:
+		- 63426 - Presentation will not start from an ISDN EP configured to DuoVdo only mode.                
+		- 63077 - Tandberg Classic dialing through GW 5.5.2 to MCU 5.5 H.239 problems.
+
+
+	Bugs Fixes:
+	
+	- 63406 - The ISDN GW call from TBG EPs to MCU - fails to connect.
+	
+	- 63463 - BrightVision was deliberately disabled for the time being.
+	
+	- 61714 - NSS button should not be gone when SD clients join.
+
+	- 60568 - CROSS PRODUCT - Casacding chain topology  ----- Xml writer suspend.
+
+	- 63507 - CROSS PRODUCT - Wrong pointer handling in the code.
+
+	- 63483 - CROSS PRODUCT - MCU reset with the exception on the Audio.
+
+
+	- Compiled.
+
+
+
+* NMS_New:
+
+	- New label:
+	
+		- Adding logs to the WebServer and the CC.
+
+
+	- Not compiled.
+
+
+
+* POMP:
+
+	- Bug fix 63507 - Wrong pointer handling in the code (In the MCU bug fix list).
+	
+	- Bug fix 63483 - MCU reset with the exception on the Audio (In the MCU bug fix list).
+
+	- Making DTMF detection sensitivity variables global to enable change on the fly.
+
+
+	- Compiled.
+
+
+
+* MVP:	New version 5.6.0.0.53
+	
+
+	- Fixes:
+		
+		- mute -> un-mute bug.
+
+
+
+--------------------------------------------------------------
+ 5.6.0.0.15 - 5.6.0.0.16     06/05/2008
+--------------------------------------------------------------
+
+ Yuval:
+  - Fixing the following issues: RVrep00063203, RVrep00062605
+  - Enhance the EP policy mechanism.
+  - Configure "LifeSize Room" and "LifeSize Express" not to send MSD during resume.
+ Ami:
+RVrep00063220	Adding CSMode to Adapters show stack adv. Commands		
+RVrep00062434	[msrv] Layout pools are leaking after 2 days H.323 stress of 9312/H.264 calls – taken from IVP (cross)		
+RVrep00063120	HDSwitching services have the "ShowTOL" button on the CC.		
+RVrep00062764	When TOL is disabled @ the service, the show-TOL button on the conference is shown (but not responsive)		
+RVrep00060562 	The command 'sysIsClean' shows that the system is clean while there's conference on the MCU (change to McuIsClean)		
+
+Danny:
+Merge of some Cross Product bugs:
+RVrep00056740
+RVrep00057009
+RVrep00057114
+RVrep00057833
+RVrep00061202
+RVrep00058670
+RVrep00061497
+RVrep00061511
+RVrep00061072
+RVrep00059917
+RVrep00061902
+RVrep00060573
+RVrep00059745
+RVrep00059667
+RVrep00059201
+RVrep00059599
+
+RVrep00062969 - When conferences are not allowed to be CREATED via dial, the auto-attendant button text changed from "0 - Join / Create" to "0 - Join".
+RVrep00062510 - IVR - AO  EP doesn't returned to the main menu when dialing to service that doesn't exist.
+RVrep00062590 - No IVR message to" failed to create conference" slide.
+Pomp:
+RVrep00062915 Bothering ERROR message "ValidMixer() Found InValid Handle" - this error makes log analyze difficult
+RVrep00062068 MP MAIN warning message when entering to the CC IVR
+
+Itay:
+RVrep00062385 - <Layout_Display_Changed_Notification> is now sent with actual LID and videorole.              
+RVrep00057785 - cascading of the participant info is now enabled in all directions.                
+RVrep00062885 - Enable logging to another port for use by ATT.
+
+
+MCU:
+  - Recompiled.
+
+  - Configurations were recompiled.
+
+Pomp:
+  - Recompiled.
+
+Adapters:
+  - New label natan_MCU5.6_ADAPTERS_6.0.12.12.12_Unified_11.1_290408
+
+NMS_New:
+  - New label NMS_47_MCU_5.6.0_050508	
+
+--------------------------------------------------------------
+ 5.6.0.0.14 - 5.6.0.0.15     30/04/2008
+--------------------------------------------------------------
+
+MCU
+
+ Yuval:
+  - Fixing the following 323 IOT issues: #61023, #62439, #61526, #62703
+  - Fixing a NULL pointer access condition in the GCC when calling Adapter's API function 'CallClose': #63182
+
+ Itay:
+  - new fls for the IVR messages.
+
+Adapters
+  - New label natan_MCU5.6_ADAPTERS_6.0.12.12.12_Unified_11_290408
+
+NMS_New
+  - NMS_New_45_MCU_5.6.0_290408
+
+--------------------------------------------------------------
+ 5.6.0.0.13 - 5.6.0.0.14     24/04/2008
+--------------------------------------------------------------
+
+General:
+
+1. Full support for the debug logger (See instructions how to work with CC logger in the attached file).
+2. The VOBS freemasonBuild and NBU_BUILD were added to the configspec in order to have a FreeMason environment.
+3. Bug Fixes - See below.
+
+
+
+* MCU:
+
+	
+	- 62813 - Leadtek Ip phone - doesn’t open video channels after transfer when the conference using H.264 codec.
+	
+	- 62486 - no in-band detection of DTMF.
+	
+	- 62184 - In-band DTMF detection doesn't work.
+	
+	- 60039 - DTMF is not available in all TBG MXP’s when dialing out SIP "Full Invite" in a few MCU Services only.
+	
+	- 59947 - No DTMF from TBG MXP 95/3000/1700 Dialing SIP “Full Invite” at desktop Video Service 128k only.
+	
+	- 61417 - [VIVR] When entering an Auto-Attend conf, the Audio playback is cut momentarily.
+	
+	- 62560 - Vivr -  conference list slide display 4 conference instead of 5.
+	
+	- 61410 - CROSS PRODUCT - [msrv] The CPU Usage in the MCU is not accurate (CROSS - reported and resolved originally by Mony).
+	
+	- 62318 - MCU Code fix: Create new notification when call is transfer instead of call disconnected.
+	
+	- 60697 - CROSS PRODUCT - Add human-readable timestamp for all the traps in the log.
+	
+	- 62284 - CROSS PRODUCT - XML module has printf's.
+	
+	- 62802 - When the Conf Desc is very long, no name is displayed in the conf-list slide!
+	
+	- 62946 - Add DTMF inband detection to VIVR Conferences.
+	
+	- 62951 - Add support for iCM new messages.
+	
+	- 62365 - MCU should publish the signaling port via XML.
+	
+	- 62550 - Mcu configured to DTMF only during IVR - doesn't recive DTMF from polycom EPs ( same as RVrep00062946).
+	
+	- 63002 - IVR: voice message please enter a conference ID followd by a pound sign is delayed, heard after 1-2mins.
+	
+	- 63008 - No new welcome slide  $conferenece description"" in Desktop rate default service.
+
+
+	- Compiled.
+
+
+
+* NMS_New:
+
+	- New label:
+	
+		- General 
+		
+			Admin:
+			- DISA mode: "Read only" users need to be able to change their own passwords		
+			- Updated video slides strings (the strings with reason will be represented in 2 rows instead of 1)
+			- Bug fixes
+			CC:
+			 - Full support for the debug logger (See instructions how to work with CC logger in the attached file)
+
+		- Fixes:
+
+			- 62026 - CROSS PRODUCT - HDSW service  - the custom layout can display cp layouts  in the conference view instead of only single screen + Err layout
+			
+			- 58185 - CROSS PRODUCT - It is possible to disable all the protocols in the MCU
+			
+			- No number (Should be opened by Adi N / Eyal Franco) - CROSS PRODUCT - Spanish: Text field for reserved ports doesn’t appear on the "Services ->Management and Security ->Port Reservation & Limits" dialog
+
+	- Not compiled.
+
+
+
+* ADAPTERS:
+
+	- Label ADAPTERS_6.0.11.11.11_Unified_10_230408 got from Adapters group.
+
+	- Compiled on freeMason on our integration PC and labeled with a new label.
+
+
+
+* NBU_BOARD_INFRA:
+
+	- Got new label from Ami - See configspec.
+
+	- Not compiled.
+
+
+
+* POMP:
+
+	- Bug fix - DTMF 2833 with Tandberg MXP does not work. (In the MCU bug fix list).
+
+	- Compiled.
+
+
+
+* MPCSys:
+	
+	- New label from MPC group (Mark Appel) - See configspec.
+
+	- Not compiled.
+
+
+
+* MVP:	New version 5.6.0.0.42
+	
+	- Host changes:
+		-	Menu buttons are aligned
+		-	The font file in the upgrade utility is installed by default.
+
+	- DSP Changes: 
+		-	scalar pixel aspect ratio support deals with different pixel aspect ratio on mixed (SD/HD) conference.
+			Solves the LS at 384kbps complain.
+		-	increase panel images number to 16 support VIVR menu with bullets as images.
+
+	- Fixes:
+		
+		- 00061585	(Dynamic 480p ) - life size that connect to hd cp 768kbps with AAC conf  receive resolution 480p instead of 720p
+		
+		- 00061614	Dial in via Aethera and get black screen instead of slides
+		
+		- 00062599	In VIVR the menu numbers are not in the center of the black button
+		
+		- 00062874	Ghost-text is shown on slides.
+		
+		- 00062954	The advanced command of disable/enable 480p doesn't work properly
+
+
+
+
+--------------------------------------------------------------
+ 5.6.0.0.12 - 5.6.0.0.13     16/04/2008
+--------------------------------------------------------------
+MCU:
+dev added MCU-side support for BrightVision
+
+RVrep00062836	Prevent potential MPC issues: Init MPC Callback struct at the GCC
+RVrep00062573	When Confs are not allowed to be CREATED via dial-in, VIVR conf cannot be reached.	
+RVrep00062584 	" Endpoint not supported " slide doesn't display when trying to connect using the VIVR EP that doesn't support re-negotiation
+RVrep00062738	Call disconnects when dialing isdn from EP to conference Using GW320
+RVrep00062676	IVR doesn't work  through GW in peer to peer mode - channels doesn't open
+RVrep00059474	Cascading ----AS stoped work in the slave EPs after locking and release (VA --- drag the asterisks ) slave EP	
+RVrep00062554	New advCoammand: allowDynamicHdPicSize	
+RVrep00061883	it seems that you must wait for the woman in the IVR to finish talking BEFORE you can enter the conference PIN
+
+Configuration changed to support new adavnced command and BV.
+New Web label: NMS_New_38_MCU_5.6.0_150408
+MPC changed to label:MPC_5.6.0.0.20
+MCU Recompiled.
+
+--------------------------------------------------------------
+ 5.6.0.0.11 - 5.6.0.0.12     09/04/2008
+--------------------------------------------------------------
+
+MCU
+ Danny:
+  - Enabling Qualivision to H.264 (DSP video coding manipulations is still disabled in H.264). 
+  - New VFU request printouts and statistics.
+  - On transfer failure, we signal the "EP does not support transfer" reason. 
+  - Auto-Attend video slides text change. 
+  - Fixing the description of an empty conference.
+  - Fixing Bug #62589.
+
+ Itay:
+  - When creating a cascading conference, the sub-frame of the slave conference on the master writes the name of the EP whose video is active on the slave in the text overlay instead of the slave MCU name.
+  - Separates a call’s name from its text overlay for a neighbor call (also for a local call, but currently they are always kept with the same value).
+  - Add a new hidden advanced commands:
+  - enabling/disabling the feature: cascadedisplayendpointname.
+  - ccloggerstate [0\1] - enable disable the feature.
+  - ccloggerlocation [fileLocation] the file location can be too long.
+  - ccloggerconfig [LogLevel][maxFileSize][maxDirectortSize] – configure the 3 parameters from 1 advanced command.
+  - Removed the hdencoderminimalframerate advanced command (the base setting and getting of the configuration parameter remains but there is no outside command to set/get it).
+  - Removed the “Stretch” option from the HdAspectRatio advanced command.
+  - Adds a new overrideTol tag in the Layout_display_changed_command in the XML.
+  - Fix issues #61552, #62429, #58061
+
+ Ami:
+  - Fixing the following issues: #61582, #62541, #62363, #62315, #62501, #62497
+
+ Yuval:
+  - Fixing the following issues: #62401, #59541.
+  - Update batch files for the new VOB's name.
+
+Pomp:
+ Danny:
+  - Adding DTMF detectors info to MP_PrintChanInStatistics()
+ 
+ Adi:
+  - merged the TP normalization logic to the POMP.
+
+NMS:
+  - New label NMS NMS_New_37_MCU_5.6.0_070408.
+
+MPC:
+ - New label MPC_5.6.0.0.19
+
+Adapters:
+ - New label mcu5.6_ADAPTERS_6.0.10.10.10_Unified_9_060408
+
+NBU_SCCP_STACK:
+ - New label mcu5.6_SCCP_1.1.0_Unified_060408
+
+upgradeUtility:
+ - New label UU_4_3_16_MCU (new logos)
+
+--------------------------------------------------------------
+ 5.6.0.0.10 - 5.6.0.0.11     02/04/2008
+--------------------------------------------------------------
+
+MCU
+ Danny:
+  - When conference creation fails, instead of displaying error slide and disconnect, 
+    we display an error slide and go back to conference list.
+  - Back option on PIN code state.
+  - Auto-Attend configuration changes - strings that were hard coded are now read from configuration.
+  - Defining all undefined transition states in SM (preventing WARNING printouts).
+  - Description of new conferences created by the Auto-Attend will be as follows:
+      -  On the Video IVR conference list: Ad-hoc conference (<conference number>).
+      -  On Web conference control: Ad-hoc conference.
+  - Enlarging Auto-Attend timers to wait for channel connection.
+  - Change in internal MCU logic: Auto-Attend default service prefix “None”, 
+    will be indicated by the string “None” (and not by an empty string)
+
+ Ami:
+  - Fixing the following issues: #62261, #62132, #61660, #62160, #62012.
+
+ Yuval:
+  - Fixing the following issues: #62397, #62401.
+  - Enhancing the Windows environment:
+    - No need to press 'f' on the first run of NewUpdateRuns.bat.
+    - NewUpdateRuns.bat copies a default configuration file for the windows version.
+    - NewUpdateRuns.bat copies the web folder.
+
+NMS:
+  - New label NMS_New_35_MCU_5.6.0_020408.
+
+
+--------------------------------------------------------------
+ 5.6.0.1.9 - 5.6.0.0.10	    26/03/2008
+--------------------------------------------------------------
+
+
+MCU
+ Danny:
+  - Adding support for the new look&feel of the VIVR.
+
+ Ami:
+  - Fixing the following issues: #61555, #60777, #61578, #60853, #60854.
+
+NMS:
+  - New label NMS_New_31_MCU_5.6.0_250308.
+
+MPCSys:
+  - New label MPC_5.6.0.0.18
+
+DPM:
+  - new label 070822_DPM_1.67
+
+DSP:
+  - new label MEDIA_MAP_INTEG_1.37_BugFix4_MAINT2
+
+DSP_NG:
+  - new label 070624_DPM_MAP_1.0.49_MCU_5_1_MAINT2_BSP_2.34b_DPM_167
+
+RVFC: 
+  new label RVFC_V2.81
+
+--------------------------------------------------------------
+ 5.6.0.0.9 - 5.6.0.1.9 	    20/03/2008
+--------------------------------------------------------------
+
+
+MCU
+ Yuval:
+  - rebuild of 5.6.0.0.9 due to some problems which were probably caused 
+    by unclean build envuironment.
+
+--------------------------------------------------------------
+ 5.6.0.0.8 - 5.6.0.0.9 	    19/03/2008
+--------------------------------------------------------------
+
+
+MCU
+ Danny:
+  - Merge fixes / features from 5.5.3.
+  - Fixing problem of upgrading from 5.5 to 5.6 (Fixing MCU upgrade schemes).
+
+ Yuval:
+  - Fixing the following issues: #61790, #61764, #60429, #61579, #60753, #61914 
+  - Merge the NSS new button logic.
+  - Merge solution for cross product issue #61650
+
+ Ami:
+  - Fixing the following issues: #61850, #61875, #60782
+  - handling “\n” strings in slides from the configuration file
+
+NMS:
+  - New label NMS_New_27_MCU_5.6.0_180308.
+
+--------------------------------------------------------------
+ 5.6.0.0.7 - 5.6.0.0.8 	    13/03/2008
+--------------------------------------------------------------
+
+
+MCU
+ Danny:
+  - Updating the text messages for the video IVR slides
+  - RVrep00061603 - MCU has a problem with setting text for video message “Enter PIN code”.
+  - Fix a bug In AutoAttend - when a user creates a new conference, the conference is being
+    created, but immediately terminated 
+  - In upgrade / MTP process - Using newer wakeup versions, and changing the upgrade schemesWhen
+    upgrading from a version older than 5.5 we had to change the scheme because the old wakeup does
+    not support application bigger than 5M, and the MCU5.6 application is bigger than 5M.
+
+ Yuval:
+  - Add the callback for the Sub-mode Ctrl which the MPC calls (it was not merged by mistake for the previous version).
+
+ Ami:	
+dev added adv cmd that governs whether Logo is shown on IVR confs (AutoAttendantShowVendorLogo)
+dev renamed adv cmd that governs whether IVR service is shown (AutoAttendantDisplayService)
+dev Lecture Mode
+dev added adv cmd for intra generation
+dev XML APIs for VIVR in Solution mode
+dev prints for potential GCC hash leak (RVrep00061711)
+
+NMS:
+  - New label NMS_New_23_MCU_5.6.0_110308.
+ 
+Adapters
+  - New ADAPTERS label ADAPTERS_6.0.09.09.09_Unified_8_110308.
+  - New DialingInfo label DI_6.0.09.09.09_Unified_8_110308.
+
+--------------------------------------------------------------
+ 5.6.0.0.6 - 5.6.0.0.7 	    3/03/2008
+--------------------------------------------------------------
+Added support for Sub-Mode Ctrl.
+Added support for 480p static encoder.
+RVrep00060882 - Default config didn't burn properly.
+Added support for IVR Messages.
+
+recompiled MCU Configuration
+New Web Version
+New MPC version
+New Adapters Version 
+--------------------------------------------------------------
+ 5.6.0.0.5 - 5.6.0.0.6 	    19/02/2008
+--------------------------------------------------------------
+RVrep00060603	(c.p. for new adapters) SIP:new adapters pass the
+		entire dialstring to the GCC (and not just the prefix)
+		dialstring is now trimmed.
+RVrep00060863	same issue as (RVrep00060603) for AutoAttend.
+RVrep00060792  	same issue as (RVrep00060603) for Pass-protected confs.-recompiled MCU
+--------------------------------------------------------------
+ 5.6.0.0.4 - 5.6.0.0.5 	    18/02/2008
+--------------------------------------------------------------
+-changed SCCP stack label
+-changed SECURITY label (for Freemason support)
+-recompiled MCU
+--------------------------------------------------------------
+ 5.6.0.0.1 - 5.6.0.0.4 	    13/02/2008
+--------------------------------------------------------------
+Integration version with the following:
+-Sub Mode Control
+-VIVR
+-Isolation-like mode for VIVR (with XML support)
+-Merged Snapshot per participant from Noa's label
+-new Adapters label
+-Reverted back to previous security label (080307_0.8.1_mocana_based_FINAL)
+-NB_SW_INFRA was recompiled (fix for adapters)
+-MPC label: MPCsys_5.6.0.0.9
+-New Web Version (NMS_New_13_MCU_5.6.0_110208)
+
+--------------------------------------------------------------
+ 5.6.0.0.0 - 5.6.0.0.1 	    07/01/2008
+--------------------------------------------------------------
+merged into Danny's base the following:
+
+- Lily's package of fixes (from V 5.5.0.0.51 to 5.5.2.0.3) in MCU,Pomp
+RVrep00059796 Fix for RVrep00058904
+RVrep00059750 "assert" statements in the XML code
+took fixes from 5.5.2.0.4:
+	dev		Notify when CQU is on to the MPC with dedicated flag
+	dev		Change time interval for active speaker (from 3 to 1)
+	dev		add scopia desktop h.323 name identication for "Desktop Server"
+
+	* Pomp: 
+	dev		take info prints only from RVrep00059461
+	RVrep00059580	Jitter is Full -- if invited E-Conf to conference with G.729
+
+-new adapters, H323 stack, SIP stack
+-new MPC from Mark
+-new NBU configuration
+-new Megaco (16)
+-new Common Core
+-new Media_Ctrl_Infra
+
+
+--------------------------------------------------------------
+ 5.5.0.0.50 - 5.5.0.0.51    01/11/2007
+--------------------------------------------------------------
+
+RVrep00058461 In symmetrical layout the active speaker is moved instead of the  frame
+RVrep00058506 SIP & SR service - We open H.264 channel with level 2 instead of 1.2
+RVrep00058311 When dragging HD/SD EP to the big SF - the SD EPs see different participant in the big SF from what HD EPs see
+dev 	      When a flow control request from the MPC fails (SIP) we don’t change the channel bit rate
+dev  	      In no self see we never downgrade the HD layout from 2 to 1
+dev           new advanced command  - “cslog” for the customer support, starting with “start” & stopping with “stop”
+
+RVrep00058406 Repeated WARNINGs in ADAPTERS - removed
+RVrep00057728 Sccp----ERROR    XML        |CConvertToString::GetProtocolTypeStr – FAILED
+
+RVrep00058556 Message no. 18 (Moderator menu) in Japanese is cut
+dev 	      DTMFMsgLen.xls added to source control (mcu\newec\ivr)
+
+dev 	      Moved annoying "GetTimerManager" print from loglevel4 to logLevel5
+RVrep00058462 HDSW service turned to HDCP service did not have Qualivision
+
+* MCU:
+	Compiled.
+* Adapters:
+	Compiled.
+* Web:
+	New Web version.
+--------------------------------------------------------------
+ 5.5.0.0.49 - 5.5.0.0.50    26/10/2007
+--------------------------------------------------------------
+RVrep00058447 	Unprotected pointer in CGccConfMediaManagerFlat::PlayAudioMessageToConf
+dev	Changed the Waiting Room message interval to 12 secs (was 10).
+dev 	Waiting room message is no longer played immediately upon creation of adhoc (waiting room) conf.
+
+* MCU:
+	Compiled.
+
+--------------------------------------------------------------
+ 5.5.0.0.46 - 5.5.0.0.49    25/10/2007
+--------------------------------------------------------------
+Bug fixes, new adv cmmands: mp:ReduceVolumeMode and mc:h323terminaltypecode 
+
+RVrep00058336	Encryption Best-Effort - When channels are encrypted, we don't reach the expected capacity	
+RVrep00058314	a bug fix for North Dakota DO Health (50451), MCU used to reduce the volume of out channels of 
+		16Khcodec(722, 722.1, AAC_LC). This is now controlled by advanced command, 
+		with default of disable (not reduced). 
+		Advanced command: mp:ReduceVolumeMode. (Gets “enable” / “disable”)
+RVrep00057933	Problem when selecting layout , in older version , that doesn't exist in version 5.5.0.0.44
+RVrep00056576	Configuration: new service of type HD-Switching:videoMonitorEnable = 0 (not 1 as it is today).
+RVrep00058132	H239 doesn't work with Aethra X5
+Dev		Documentation notes, add Aethra EP description string.
+RVrep00058196	iCM crash during scheduling fully loaded conference and exception on MCU
+RVrep00058155	Sometimes when connecting PL HD calls , the layout of some calls doesn't open
+RVrep00058080	Active Speaker in CP13 doesn't go to the largest SF that is in the center
+RVrep00058042	Layout 10 (second and fourth from left to right) >>>location AS frame incorrect
+Dev		Support for flow control request from the MPC on in channel
+Dev		Reduce HdMinimalRate back to 512
+RVrep00058382	Receiving long sim cap from X5 causes string memory overrun
+Dev		Conferences with 720p will always use 4CIF for cascading, ignoring the remote conference capabilities	
+RVrep00058282	Missing notifications for Calls connecting and leaving Pin-Protected Confs
+RVrep00057723	Participants list does not correctly handle multiple responses in quick succession
+RVrep00058201	Waiting room IVR is played upon conf creation (if is in WR) and every 10 sec (was 15).
+RVrep00058216	First Part message was played when in Waiting room
+RVrep00058207	Added missing snapshot updates
+RVrep00058238	Added missing snapshot updates
+RVrep00058384	Removed RVShoss from the code
+dev		Change HD layout building – when dragging participant to a sub frame, this participant should stay in the layout
+RVrep00054888	Service setting to Mute all on join conference results in cascaded conference no audio between MCU's (fixed a while ago, never reported)
+RVrep00053488 	layout display chaged notification was missing "role"-tag values	
+Rvrep00047958	There are no 'T.120 viewer' buttons in the conference control web.
+RVrep57870 / 57855	Array full error after adding multiple EPs (MCU with 4 MVPs)
+RVrep58830	RtpMap/fmtp/ptime fall out of synchronization when not all codecs are included in SDP 
+RVrep58334 	Terminal type for master-slave determination is now configurable from application 
+
+* MCU:
+	Compiled.
+* Pomp:
+	Compiled.
+* Adapters:
+	Compiled.
+* Mpc:
+	Compiled by Eyal S.
+* Configuration:
+	Compiled.
+* Configuration files:
+	Replaced.
+* Web:
+	New Web version.
+* MVP: 
+	new MVP version (31)
+
+
+
+--------------------------------------------------------------
+ 5.5.0.0.45 - 5.5.0.0.46    11/10/2007
+--------------------------------------------------------------
+Bug fixes, new adv cmmand (first participant sees Black instead of selfsee).
+
+RVrep00057984	Issue with LifeSize v.3 & Presentation
+RVrep00057954	Can't Create above 12 audio only conference on MCU12 [Same thing 24 conference for MCU24] (Also in Video)
+RVrep00058105	As part of the req for MCU supporting TSBU TP demands it's desirable that the first caller will not get a 		video feedback. The behavior is configurable.
+	
+RVrep00057984	SIP IOT: Dial in from VSX7000 opens QCIF, Dial out SIP to VSX7000 opens CIF
+RVrep00057987	SIP IOT: Dial out High Rate to VSX7000 doesn't open Video channels
+RVrep00058125	Some of the printouts of the command AdapHelp is in DEBUG2 and some in INFO
+RVrep00057670	[IOT] Polycom HDX at 512kbps doesn't do 720p but trited as HD
+RVrep00056937	TBG95MXP doesn't receive H239 [HD switching]
+RVrep00056942	TBG HD doesn't receive H239 [DuoVideoEnabled]
+RVrep00056944	TBG did not receive H239 [cascading]
+Dev		Minimal rate for HD was upgraded to 650kbps instead of 512kbps 
+Dev		Change capabilities type check for GetSpecificType to GetType (for Encryption)
+RVrep00057852	Call Disconnection time was not printed correctly
+RVrep00057558	the VA (*) could not have been dragged in certain geometries
+Dev		LifeSize endpoints were not identified as terminals upon connection (workaround)
+RVrep00057823	CC-Refresh Interval Adv Command did not filter input
+RVrep00057067 	Take Chair requests now differentiate between "chair taken" and "wrong password" (re-merged) (requires 		additional web support)
+Dev		Configuration files were fixed (again).
+Dev		Japanese font file was replaced in the UU
+
+* MCU:
+	Compiled.
+* Adapters:
+	Compiled.
+* Mpc:
+	Compiled by Eyal S.
+* Configuration:
+	Compiled.
+* Configuration files:
+	Replaced.
+* Web:
+	New Web version.
+* MVP: 
+	new MVP version (5.5.0.0.29)
+
+--------------------------------------------------------------
+ 5.5.0.0.44 - 5.5.0.0.45    02/10/2007
+--------------------------------------------------------------
+Bug fixes.
+
+
+* MCU:	
+	dev Handle mbps & static mbps in H.264 capabilities 
+	dev Update the MCP with the mbps & smbps for the HD encoder 
+	dev Remove some prints
+	dev WebCC default refresh rate set back to 10 secs
+	RVrep00057843 - No video channel from MCU to Aethra
+	RVrep00057298 - In service with static layout, the layout doesn't open with the layout we choose 
+	RVrep00051105 - Failed SIP call is routed to the ECS (from IVP) 
+	dev issue from CS, Fix for inviting from the web with bit-rate different than default (from CS) 
+	RVrep00057114 - [Exception] in "Xml Reader" (AssignCStringAndCheck) - Changed mMpPrefrences to be an array instead of a pointer (from Kepler)
+	RVrep00057878 - MCU's 12,24 are called (by default) INVISION instead of "SCOPIA"
+	- Compiled.
+	Rvrep00057488 - MCU: Restore Factory Default CLI Command Does Not Work (from CS)
+
+* Pomp: 
+	dev "no signal was added to the mixer" print - changed loglevel
+	RVrep00057863 merged from CS: MISS State - Cannot reach full MCU capacity
+	- Compiled.
+
+
+* Adapters:
+	RVrep00057754 - TBG500 doesn't receive video and audio 
+	RVrep00055845 - Sony 1600 dont open video channels
+	Rvrep00052727 - ASSERT in Adapters in DH on stress tests (from Kepler)
+	- Compiled.
+
+* Mpc:  
+	- Compiled by Eyal S.
+
+* MVP: 
+	-New MVP version (5.5.0.0.28)
+
+* Configuration Files:
+	-Services' Names were changed
+
+* Web:
+	-New Web Version:
+	Rename service types according to "PRD_HD_Transcoding_A23.doc" 
+	Performance improvement: 
+	-          Create "Settings" screens only when screen is entered 
+
+	-          Create "Protocols->SIP" and "Protocols->SCCP" screens only when screen is entered 
+
+	WebServer: adding printSocketList() in sock.c 
+
+
+
+--------------------------------------------------------------
+ 5.5.0.0.43 - 5.5.0.0.44    25/09/2007
+--------------------------------------------------------------
+Bug fixes, lipsynch feature, mute slave's video feature
+
+dev Correcting logic for min bit rate for HD 
+dev Support for changes in MPC’s interface for conference video info 
+dev New Feature: Overcoming lip-sync problems in HD endpoints
+dev “Mute/Unmute slave's video” feature (Adi Nathan's)
+RVrep 00047281 - Active Speaker Border after Mute/UnMute video
+RVrep 00057288 - VSX7000 doesn't receive video/audio, but MCU "thinks" it doesn [only happens in dial out SIP]
+RVrep 00057080 - VSX7000 doesn't receive video when connecting using SIP [High Rate]
+RVrep 00056645 - Sip "empty invite"----------mcu  stopped  receive audio channel
+RVrep 00057651 - Asymmetric payload types in SIP with Aethra and Polycom vsx 7000
+RVrep 00057737 - Tandberg 1000 doesn't recieve video in H323 , HDCP service
+RVrep 00057850  - csFifo buffers are not restarted when outgoing G.711 channels are closed (POMP)
+
+* MCU:	- Compiled.
+
+* Pomp: 
+	- Compiled.
+* Mpc:  
+	- Compiled by Eyal S.
+dev Fix HD fragmentation bug – happens when close ACK received in the middle of swap process
+dev Support Audio/Video delay notifications – for lipsync
+dev Add IO sorting statistics including failure reasons (added to ‘MpcShowResources’ information)
+RVrep00057826 Don’t use handles of blocked IOs – resolve bug 
+MVP Hunting:
+    Add case scenario for HD-CP conference (find most free MVP regardless of reserved ports)    
+    SD logic remains the same as for MCU5.3
+
+* MVP: 
+	-New MVP version.
+
+* Configuration:
+	- Pomp Configuration Changed and compiled.
+
+--------------------------------------------------------------
+ 5.5.0.0.42 - 5.5.0.0.43    23/09/2007
+--------------------------------------------------------------
+web	Reverted back to avoid bug with (*).
+
+
+* MCU:
+	- Compiled.
+
+
+--------------------------------------------------------------
+ 5.5.0.0.41 - 5.5.0.0.42    20/09/2007
+--------------------------------------------------------------
+dev 	Critical bug fix with cascading
+
+
+* MCU:
+	- Compiled.
+
+--------------------------------------------------------------
+ 5.5.0.0.40 - 5.5.0.0.41    19/09/2007
+--------------------------------------------------------------
+General:
+Bug fixes, new Web warnings, new Web CC refresh mechanism,Bundle support.
+
+bugFixes (Various VOBs):
+dev	Set default value of Adv. Command setwebccrefreshinterval to 2, also fixed the minimum allowed value to 2	
+dev	XML modifications for faster CC									
+dev	Resources Vector disregards reserved ports calculation
+dev			various	HDCP enable/disable logic
+RVrep00057165		DTMF CC timeout enlarged for DTMF-invite								
+RVrep00057274		Issue with PIN protected confs in reconnection (SDS)							
+RVrep56835		Reset while active Calls->Causes web problems							
+RVrep00057567		Sip dial out  --- doesnt see life size/TBG hd video (black screen)					
+RVrep00057259		[In Channel SM] No transition of AddToMP for state OfferingPreCtrl
+RVrep00057591		Sip dial out ---- connect polycom hd Ep after a 1 min the Ep reset
+RVrep00057465 		Night Load Test, after tDcsAdapt suspend Watch 
+			Dog Calling Reboot Marked with RVrep00057465 at mcuVxStatus.cpp.
+RVRep57187/57523	H.264 level=5.1 issue solved (from Aethra IOT) (MCU and NBU_MEDIA_CTRL_INFRA)
+RVRep56909		The w480p shall include another resolution (NBU_MEDIA_CTRL_INFRA)
+RVRep56785		Sip Adapter contains incorrect version number (ADAPTERS)			
+RVrep56855		ConnectedReport in adapters showed all OP even when NA							
+									
+
+
+* MCU:
+	- Compiled.
+	
+* MPC:
+	- New MPC.
+	- Compiled by Eyal.S
+	
+* WEB: 
+	- new Web label, further support for "enable HDCP" and HDCP "mandatory".
+
+* ADAPTERS:
+	- Compiled.
+
+* MVP:	
+	- New MVP 5.5.0.0.24 
+
+* DEFAULT CONFIGURATION:
+	- New Config files.
+
+* NBU_MEDIA_CTRL_INFRA:
+	- Compiled.
+
+* NBU_BOARD_INFRA:
+	- Support for Bundling.
+	- Compiled by Lily.
+
+--------------------------------------------------------------
+ 5.5.0.0.39 - 5.5.0.0.40	11/09/2007
+--------------------------------------------------------------
+General:
+bug fixes, welcome slide support, "enable HDCP","HDCP-mandatory" features and Dynamic RTP support.
+	
+
+BugFixes (Various VOBs):
+	- RVrep00056816	Add support for bearer cap at the connect message	
+	- RVrep00057078 (Cross)	When VSX7000 connectes with SIP, incoming audio is dropped 
+	- RVrep00056757	(CROSS) RVrep00056757 - Sip "FULL invite" --- EP Sony PCS - Stoped sending audio to mcu
+	- RVrep00056135	GKI un-undersood ERRORS: Extracting the current gk ep identifier [].
+		cmEvRASTimeout - Unsupported Transaction[5]
+	- RVrep00056875	Welcome slide - the MCU sends wrong resolution to the MPC on the private encoder
+	- RVrep00055302	SIP offer out in HDCP - SD endpoints think they receive 720p
+	- RVrep00056849 Service hd cp- ep opened 720p to both way leads to lose of resources and strange video
+	- RVrep00057206 MCU doesn't receive video from Polycom iPower (PictureTel)
+	- RVrep00055472 IOT problem with T-150 with H.264 optional parameters
+	- RVrep00057060	Error message while drag EP to the participant layout
+	- RVrep00057215	[Cascading] Should use H.263 only when cascading two HDCP conference
+	- RVrep00057292	MCU MCU query for HD encoder even after having more than 16 calls causing 					        errors in MPCquery for HD encoder even after having more than 16 calls causing errors in MPC
+	- RVrep00056925	Cisco boards in GW mode would not cascade properly				
+Dev:
+	- Support for HDCP enable and HDCP Mandatory
+	- Dynamic RTP support
+	- Replaced IVRs for non-Cisco board
+
+* MCU:
+	- Compiled.
+
+	
+* MPC:
+	- New MPC.
+	- Support for "enable HDCP" (affects Resource Vector).
+	- Support for Dynamic RTP.
+	- Compiled by Eyal.S
+	
+* WEB: 
+	- new Web label, support for "enable HDCP" and HDCP "mandatory".
+	- Welcome Slide enabled.
+	
+* MIB: 
+	- new MIB files, support for "enable HDCP" and HDCP "mandatory".
+	- Compiled.
+
+* Configuration
+	- Support for "enable HDCP" and HDCP "mandatory".	
+	- Compiled.	
+	
+* ADAPTERS:
+	- RVrep00056816 - Support for GW HDCP interop.
+	- Support for Dynamic RTP.
+	- Compiled.
+* POMP
+	- Compiled.
+* MVP:	
+	- New MVP 5.5.0.0.23 
+	- Welcome Slide support.
+	- get it at: \\storage\NBU\MP\Versions\Development\5.5_versions\5.5.0.0.23
+
+--------------------------------------------------------------
+ 5.5.0.0.38 - 5.5.0.0.39	05/09/2007
+--------------------------------------------------------------
+General:
+bug fixes and SDS modifications.
+
+* MCU:	
+	- RVrep00057189 - If H263 is on highest priority, all HD EPs receive black video [720p High Rate]
+	- RVrep00057070 - No incoming video from TBG MXP when using Desktop rate [only TBG MXP, only Desktop]
+	- RVrep00057291 - Out-channel WEB statistics may be incorrect for SW service
+	- RVrep00057290 - HD-CP stress - Gcc exception when closing Prolab
+	- RVrep00057313 - MCU Reboot after regular HD conference - GCC suspend 
+	- RVrep00056840 - HD - TBG MXP990 Sharpness Stations 172.26.36.32 send black screen
+	- Dev 		- added support for SDS presentation-only EP
+	- RVrep00057394 - SW MCU crashes when notifications are enabled
+	- RVrep00057066 - TOL duration ignores service's definition
+	- RVrep00057382 - New conf notification does not indicate that conf is password protected
+	- Dev		- EpType was overwritten by mistake. Affects SDS.	
+	- New Cisco IVR files.
+	- Compiled.
+* ADAPTERS:
+	- Dev - Fixed bug that caused responding to a ReInvite with the invited participant’s SDP instead of the MCU’s
+	- Compiled.
+* MVP:	
+	- new version available: \\storage\NBU\MP\Versions\Development\5.5_versions\5.5.0.0.22
+--------------------------------------------------------------
+ 5.5.0.0.37 - 5.5.0.0.38	30/08/2007
+--------------------------------------------------------------
+
+General:
+Cross product merge from other teams, and more bug fixes.
+
+
+
+* MCU:
+
+	
+	- Development - mp_mixer.c - Refine mixers mapping printout (Nir).
+
+	- 56740 - xml reader exception. Merged From AMCU 6.0.0.3.37.
+
+	- 55932 - QOS is different that configured in voice calls in dial-in. Merged from AMCU 6.0.0.3.37.
+
+	- 56374 / 56604 - Gcc is not clean cap. when the service is 20ms and the media is 60ms. Enhance PM: A field is not 
+					  initiated. Merged from AMCU 6.0.0.3.34.
+
+	- 53584 - WHEN the service in mcu is configured to audio packet size t= 20 can not hear media. Merged From AMCU 
+			  6.0.0.3.32.
+
+	-  55276 - [Log] PM: Failed updating call 7008f - call not found. Merged From AMCU 6.0.0.3.31.
+
+	- Compiled.
+
+
+
+* NMS_New:
+
+	- New label with the following fixes:
+
+		- RVrep00050245: online CCM servers IPs are not shown @ the web.
+		- RVrep00053381: when you enable NTP relevant message box is not displayed.
+		- RVrep00057115: In the service 3 G Layout Setting, button X (CANCEL) doesn't work.
+		- RVrep00057119: In the service 3 G Layout Setting, button CANCEL performs SAVE.
+		- Web server: fix exception when not valid certificate is imported (bug from NMS_New_MCU_5.5.0.0_25_030707).
+
+
+
+* ADAPTERS:
+
+	- Development - Fix DuoVideo - Merged from version 5.3.3.0.1 - ADAPTERS.
+
+	- Compiled.
+
+
+
+* POMP:
+
+	- 49984 - DTMF doesn't seem to work (ARCVR_AUs: Should Not be Reached !!!) - (Nir). POMP Only.
+
+	- Compiled.
+
+
+
+
+* MPCSys:
+	
+	- New label from MPC group (Eyal Sadovsky) - See configspec. Fixes:
+		
+		- Support Fragmentation management in Resource-Manager (This fix will only affect with the next MVP version).
+
+
+
+* MVP:	Not upgraded. Works with version 5.5.0.1.20 (A new MVP version will be published later).
+
+
+
+
+--------------------------------------------------------------
+ 5.5.0.0.36 - 5.5.0.0.37	22/08/2007
+--------------------------------------------------------------
+
+General:
+Cross product merge from other teams, and more bug fixes.
+
+
+
+* MCU:
+
+	- Development - ecCallBackManager.cpp - false instead of NULL in destructor.
+
+	- Development - gccMediaVideoLayout.cpp - (CGccMediaVideoLayout::~CGccMediaVideoLayout()) - 
+					validity checks.
+
+	- Development - Will not try to set name for invalid channels - gccConfMediaManagerFlat.cpp 
+					(CGccConfMediaManagerFlat::SetChannelName) + CP of my own - return (status == RV_Success) instead 
+					of RV_TRUE;
+
+	- Development - tEcTask Suspend - Adding sanity in CEcConferenceAbs::~CEcConferenceAbs().
+
+	- Development - Removed unnecessary prints - gccConfAbs.cpp (CGccConfAbs::EventResultTermination).
+
+	- Development - tGccTask Suspend - Fix merged from 5.4.0.0.29 - Added NULL Protection - CGccCallLegOut.cpp: AdapterStopAllOffers & AdapterOffer
+
+	- 51030 - DTMF connect - wrong enum in state machine: Merging the fix from 5.2.0.0.20 + CP 
+			  of my own - fixing the same problem in another transition.
+
+	- Fix for 50899 (When using DTMF audio stops) - Merged from 5.2.0.0.21.
+
+	- 50742 - Verify Channel belongs to the call before disconnecting it - Merged from 5.2.0.0.21. 
+
+	- 57009 - Error Message - CXmlSocket(0x7178908) - shutdown() Failed. Error = S_errno_ENOTSUP, errno = 35 - Merged from 5.4.0.0.47.
+
+	- 57013 - tEcTask crashes under stress tests - Merged from 5.4.0.0.47.
+
+	- 56902 - encoder of active call (input SD and output HD) is closed but not released
+
+	- 56927 - SD Output is closed too soon for HD EP
+
+	- Development - (CP) Add gccPrintStatsTemplate command – this command prints the templates of all active conferences.
+				gccConfAbs.h, gccConfAbs.cpp – add PrintTemplate.
+				gccDb.h, gccDb.cpp - add PrintConfTemplate.
+				gccPrintStats.h, gccPrintStats.h – add gccPrintStatsTemplate.
+				gccConferenceTemplateAbs.h, gccConferenceTemplateAbs.cpp, gccFlatConferenceTemplate.h, gccFlatConferenceTemplate.h – add PrintStats to template’s structures.
+
+	- Compiled.
+
+
+
+* NMS_New:
+
+	- New label with the following fixes:
+
+		- RVrep00056884: The "hdsupoort30fpshighres" advanced command takes place only after refresh to the web
+		- RVrep00056754: The order of the image size is not correct in Scopia desktop service and high rate service
+		- RVrep00056735: Disable 3G layout for "Desktop Video" service
+		- RVrep00056624: SIP adapter crashes when adapter is disabled-enabled.
+		- RVrep00056807: H323 Adapter appears to be disabled in the web - when its not.
+		- RVrep00056776: Enabling H323 Protocol, the MCU Resets without Prior Indication/asking the user
+		- RVrep00056859:  Reset never completes on the web even though the board does boot (mostly happens after changing of adapters's settigns). Fixed adapters implementation
+
+
+
+* RV755_BSP:
+
+	- New label with the following fixes:
+	
+		- Paralleling of common APIs with TAMAR to allow clear compilation of FreeMason.
+		- Proper files of Freemason integrated into the VOB.
+		- Small fixes to fileserver.
+		- For the sake of MVP, fast ARP and logMsg control.
+
+
+
+* DPM:
+
+	- Got new label (compiled with new RV755_BSP label).
+
+
+
+* DSP:
+
+	- Got new label (compiled with new DPM label).
+
+
+
+* MPCSys:
+	
+	- New label from MPC group (Eyal Sadovsky) - See configspec. Fixes:
+		
+		- 56870 - Handle partial allocation of reserved ports.
+		- 56798 - Fix Resource leak problems in HD (with and without SD).
+		- Handle Un-complete Swap operation (close call before swap finished).
+		- Handle Release Operation called after Close-ACK (didn’t clean RM table) – cross product bug.
+
+
+
+
+* MVP:	Version 5.5.0.1.20.
+
+
+--------------------------------------------------------------
+ 5.5.0.0.35 - 5.5.0.0.36	16/08/2007
+--------------------------------------------------------------
+
+General:
+This version collected all changes from versions 5.5.0.0.33 - 5.5.0.0.35 (which were not merged 
+into 5.5 integration branch)and put them on 5.5 integration branch. 
+It also includes 
+	- More bug fixes (some of them are cross products collected form other teams) - See below.
+	- IVR messages - Renaming and changing (mostly "moderator" instead of "chair").
+
+
+* MCU:
+
+	- 55462 - The MCU is closing the in-band detection after the participant joins to a PIN conference.
+			  Fixed by CS team. 
+			  Merged from version 5.1.2.CscIcm.3.
+
+	- 56613 - GCC suspend at CGccChannelAudioIn::FindMixer. 
+			  Fixed by CS team.
+			  Merged form version 4.4.0.0.23.
+	
+	- 56325 - Cannot cascade SIP ad-hoc.
+			  Fixed by CS team.	
+			  Merged form version 4.4.0.0.21.
+	
+	- 56833 - Night Stress ---Gcc-----suspend.
+			  Fixed by Oded.
+
+	- Development - Adding some empty transition into some state machines in order to clean up some 
+				    SM warnings.
+				    Files: gccChannelIn.cpp; gccChannelOut.cpp; gccConfTokenManager.cpp; 
+						   gccStateManager.cpp; gccCallLeg.cpp
+					Label: 5.5.0.0.35_oded
+					Base Label: 5.5.0.0.35
+
+	- Development: Added Watch Dog task to check system status and reboot on Suspend - 
+				   mcuVxWorksMain.cpp, mcuVxStatus.cpp/.h 
+
+	- Fix from Yafit: Fix H239 in cascading, race condition between 2 EPs from different Conferences.
+
+	- Compiled.
+
+
+* ADAPTERS:
+
+	- Move to 5.5 integration branch.
+
+	- Compiled.
+
+
+* NBU_MEDIA_CTRL_INFRA:
+
+	- Move to 5.5 integration branch.
+	
+	- Compiled.
+
+
+* POMP:
+
+	- Move to 5.5 integration branch.
+	
+	- Compiled
+
+
+* MPCSys:
+
+	- New label from MPC group (Eyal Sadovsky) - See configspec:
+	1) Fix MPC Suspend (occur when MPC has active conference with fragmented IOs and MVP disconnect) – resolve bug RVrep00056846
+	2) Resource leak when input is SD and Output is HD – resolve bugs RVrep00056714, RVrep00056856
+
+
+
+* MVP:	New version 5.5.0.0.19.
+
+
+--------------------------------------------------------------
+ 5.5.0.0.34 - 5.5.0.0.35	13/08/2007
+--------------------------------------------------------------
+
+* Add extended fonts - simakai, TradChin, Korean, Hgrsmp (JapanFont)
+* RVrep00056781 - Win MCU loses 1 audio resource in each conference
+* RVrep00056808 - SCCP ---- doesnt work
+* RVrep00056783 - [AudioOnly] Incoming Audio channel doesn't open from Sony G50
+* RVrep00056628 - Resource Query on audio only service causing a crash
+* MPC - Add Logs for IO operations to catch possible leaks
+
+--------------------------------------------------------------
+ 5.5.0.0.33 - 5.5.0.0.34	09/08/2007
+--------------------------------------------------------------
+
+* Cascading - decoder in slave will not crop the image
+* RVrep00056654  - There is no Scopia desktop service (85) after buring config file
+* RVrep00056627  - Default Services: "Last Mile" Changes (according to PM) 
+* RVrep00056608  - Change Default Service Name: Standard Rate Video Service ---> Desktop Video 
+* RVrep00056750  - 'Block' Welcome Screen: from Configuration & from WEB 
+* RVrep00056536 - Dynamic Layout: When Reaching Max Layout - HD Encoder Omits 1 participant
+* RVrep00056752 (CP) - OECD Reports no Audio problem when using G.722.1 with 
+                       SIP MCU v5.1.2 Reg4 patch (based on adapters_5.3.2.0.1)
+
+--------------------------------------------------------------
+ 5.5.0.0.32 - 5.5.0.0.33	07/08/2007
+--------------------------------------------------------------
+
+* RVrep00056406 - Choose layout that dosent mark in the 
+                  dynamic layout--------dynamic layout stoped work
+* RVrep00056263 - night test stress , suspend : tGcc Task Init_8CGccM 
+* RVrep00055656 - Block Support of 4-CIF 30fps 
+                  (might cause un-expected results in MVP)             
+* RVrep00056606 - infraPrintStats will print only Actually 'Named' pools.
+                  infraPrintStatsFull will print ALL POOLS
+* RVrep00056595 - MCU: CallLegFactoryPool is not clean; Trouble closing conference.
+* RVrep00056521 - Encryption-----MCU don't open channels (sometimes it works/doesn't work)
+* RVrep00049439 (CP) - Audio Only service with G.728 - Does not reach full capacity 
+                  due to lack of G.722 XCoders
+* RVrep00050391 (CP) - Scopia 100/24: 9 Calls out of 36 Connect without Audio
+* RVrep00049509 (CP) - SCCP Reserved Ports=12 but only 9 calls connect
+* RVrep00056638 (CP) - In service will all codec accept G728, not enough transcoders 
+                  are allocate for AAC
+* RVrep00056693 - (Noa should open one) - Some MIB issue around GW / 
+                  rvVNPCommonCfgPolicyEventsClearAllow 
+* RVrep00056134 - ADVANCED WEB Logs:   ERROR epilSend: SNMP_Decode_Packet failed. 
+* RVrep00056565 - MCU don't recive polycom hd video with 1m call rate
+* RVrep00055915 - Wrong layout------for 2 sec when connecting eps
+* RVrep00055648 - Advanced Command: hdminimalrate - Does NOT work as expected
+
+--------------------------------------------------------------
+ 5.5.0.0.31 - 5.5.0.0.32	01/08/2007
+--------------------------------------------------------------
+
+
+General:
+This version is updated with all bug fixes from Scopia Desktop 5.3.1.0.4, and important bug fixes from 
+the custumer support recent versions.
+
+
+
+
+* MCU:
+
+	- Merge from Nir:
+		- Licensing and resource vector fixes (MCU, POMP, MPC).
+
+	- Merge from TP:
+		- Fixing problems in code that the uses the proxy mechanism to send messages to tasks:
+		1. Not releasing param when needed.
+		2. Not checking if param is NULL.
+
+	- Merge from Oded / Lily:
+		- CS and SDS fixes - See below.
+		- New defult configuration.
+		- MCU.asn changed (new mMCU configuration).
+		- In SIP offer out - Receive remote UA before channel list (UpdateRemoteInfo)
+		- Bug fix for 55969
+		- Bugs 56201, 56235 - failed to release call when call was idle (due to
+                                      reallocation mechanism)
+		- Bug fix for 56471 - attach channel to decoder even if bitrate doesn't match
+		- Bug fix 55303 - Sip cascading
+
+	- Compiled.
+
+
+
+* ADAPTERS:
+
+	- CS and SDS fixes - See below.
+	
+	- In SIP offer out - Receive remote UA before channel list (UpdateRemoteInfo)
+
+	- Compiled.
+
+
+* NBU_MEDIA_CTRL_INFRA:
+
+	- Change the w480p resolution
+
+	- Compiled.
+
+
+
+* NBU_BOARD_INFRA:
+
+	- CS and SDS fixes - See below.
+	- Compiled
+
+
+
+* NBU_Config:
+
+	- Compiled
+
+
+
+* POMP:
+
+	- CS and SDS fixes - See below.
+
+	- Compiled
+
+
+* MPCSys:
+
+	- New label from MPC group (Eyal Sadovsky) - See configspec.
+	
+
+* DSP:
+
+	- New label form Audio group (Sharon) - See configspec.
+
+
+
+
+* MVP:	New version 5.5.0.0.17.
+
+
+
+** CS fixes **
+==============
+
+-->
+Adapters (SIP) support RFC1630. Replace in the URL the %23 with its ASCII value #.
+
+-->
+SIP adapter: Patch for ZTE, in the SIP adapters chane the SDP lines to suite the ZTE special requirments. 
+Using 2 global flags: 
+1. sdpTotalBw Set total bw according to global flag(0-nothing 1-AS:bw 2-CT:bw). Default is AS
+2. sdpVideoBw Set video bw according to global flag(0-nothing 1-AS:bw 2-TIAS:bw). Default is AS. 
+3. Remove the MaxBr from the fmtp video line not relevant for H264
+
+-->
+In MCU V5: T120Min and Max port is set according to Min/MaxCallsInConf. Because it has no reference in the WEB. 
+This solve loss of T120 when inviting several participant in one string (1002**1001) or through ICM.
+MCU Label is: yafit_5.1.1.T120.1
+
+--> 
+1. This is the second patch for the Weather Bureau. In this patch I fixed the Mute-Un-Mute problem in cascading.
+2. PCF + AdvCmd
+
+-->
+H.239 cascading fix done for version 4 - Label yafit_4.4.0.0.20_H239Cascading
+
+
+
+
+** SDS fixes ** (A few of them were taken from CS by SDS team)
+==============================================================
+
+-->
+Added the hidden advanced command for setting the audio delay (also known as NDdealy): mp:DelayAudioInput [0…480] (without 
+any parameters; return the current configuration). 
+
+
+-->
+56086 (CP) - [ScoipaDesktop] Video not showing Issue after stop and start video from SD client 
+(we used to always assume our second video channel is presentation)
+
+
+-->
+Added the automatic restart mechanism (MCU will restart automatically after crashing). 
+
+-->
+55075(CP)Root bug: the CC shows root for a specific conf (XML Socket problems)
+
+
+-->
+55449(CP)EC Cascaded Callback Leak.
+
+-->
+gcc suspend: when changing the protocols using the NMS [Same as 55743]
+Same as issue 55473 that was resolved by Kepler team
+
+-->
+SDS new client - support in XML
+
+-->
+[CROSS] CC - polycom vsx - fix bug [RVrep00054827]
+
+-->
+[CROSS] Adi's fixes - stuck updates. [RVrep00054058, RVrep00054750].
+
+-->
+[CROSS] Merge EC exception fix from audio MCU: Check allocation failure
+
+-->
+[CROSS] Partial fix for resource leak in POMP.
+[RVrep00055232] Merge from TP: 
+Error in CloseCall on MPC - ALL MPC handles should be initiated with RV_MPC_NULL_HNDL 
+
+-->
+Merge from CS [vers. 5.1.2.0.3 & 5.1.2.Reg.4]: Add advanced command "sipmaxregclients": to set the Sip max registers clients. 
+This change is only AdvCmd. The rest is in the ADAPTERS.
+
+-->
+Merge from CS [vers. 5.1.2.0.3 & 5.1.2.Reg.4]:	
+[CROSS] SNMP - limiting trap messages size, merge from the GW 3.0 - Rani Vitale (GW)
+
+-->
+[CROSS] EC - Fix the Server Cascading Connection SM (ecServerCascadingConnection.cpp/h)
+
+-->
+* Merge from CS [vers. 5.1.2.0.3 & 5.1.2.Reg.4]: Merge adapters label - Yafit
+- SIP registrar fixes.
+- Support H263 4CIF in SIP.
+- a solution to out of resources issue. Add information in printing the AdapShowStack.
+
+-->
+NBU_BOARD_INFRA: [RVrep00055325]
+[CROSS] Merged fix from CS (happened to a customer in Italy, MOJ):
+ SNMP issue: task stuck on semtake()
+
+-->
+Enlarging the pool for XML Message Handlers from 1400 to 2000 since it was getting fullwhen connecting 3 Notification Listeners. 
+When enlarged, it reached 1495 concurrent allocations.
+The general CRc<> mechanism is not robust - it leaves too much work (Reallocate() / Release())in the hands of the user of the reference count, rather than handling it automatically. The above problemis an example for the problems that the current CRc<> implementation could cause - the CRc<SomeInfo>object is Allocated in the EC and then passed to the XML, relying that it will be Released manually after the XML Handler Sends the appropriate message. 
+When there was a problem to allocate the Message Handler,the CRc<SomeInfo> was not released. 
+
+-->
+Bug fix 56418 - Info objects leak after EventHandler pool ran out.
+
+--------------------------------------------------------------
+ 5.5.0.0.31 - 5.5.0.1.31
+--------------------------------------------------------------
+
+* Merge changes from 5.5.0.3.30 into 5.5.0.0.31
+* Fix RVrep00056286 - notifying resolution to the web
+
+--------------------------------------------------------------
+ 5.5.0.0.30 - 5.5.0.0.31	18/07/2007
+--------------------------------------------------------------
+
+General:
+This version is aligned with the most updated infra labels (RVFC / RVLOGGER / RV755_BPS / NBU_SW_INFRA) - See configspec.
+	- RVFC / RVLOGGER / RV755_BSP / DSP / DSP_NG / DPM / UpgradeUtility / MPCSys - label taken from other groups.
+	- NBU_SW_INFRA - Based on nbuSw_int1_190906 and merged from Adi's label (nbuSw_int1_190906_CscIcm.2) and from Nadav's label (0.0.54).
+
+* MCU:
+
+	- Merge from Nir:
+		- Extended fonts.
+		- Network mask deotted form i inst menu.
+
+	- Merge from Oded / Lily:
+		- Add sip stack log to the main file log.
+		- Add specifeic print for not supporting AMR codec (audio).
+		- Correct bug in capability factory - destruct cap before removing from pool.
+		- Change error log messages for allocation failure to advanced.
+		- Changes in PM after code review.
+		- Add more resolutions for the web statistics.
+
+	- Compiled.
+
+* ADAPTERS:
+
+	- Move to new SIP stack - allow reading '*' in SDP
+	
+	- Memory leak when receiving more than 12 codecs per media line in SDP. 
+	  The max num of codecs we support was increased to 20 and the memory leak was fixed.
+	
+	- Receiving MAXBR in the middle of the line (For example: a=fmtp:34 MAXBR=3200 QCIF=1) caused parsing failure. 
+
+	- Compiled.
+
+* NBU_MEDIA_CTRL_INFRA:
+
+	- New resolutions for display.
+
+	- Compiled.
+
+* NBU_SW_INFRA:
+
+	- Merged and compiled.
+
+* NBU_SCCP_STACK:
+
+	- Compiled
+
+* NBU_BOARD_INFRA:
+
+	- Compiled
+
+* NBU_Config:
+
+	- Compiled
+
+* POMP:
+
+	- Compiled
+
+* MVP:	New version 5.5.0.0.15.
+
+--------------------------------------------------------------
+ 5.5.0.2.30 - 5.5.0.3.30
+--------------------------------------------------------------
+
+* fix Bug 55449 - cascading leak
+* Do not try to release IO's in HD switching
+* Transfer custom resolutions + width&height to the web
+* Change some error prints
+* 'enable' Welcome Slide 
+* Fix RVrep00055639 - task suspend: XML WRITER THEADC - Single Dynamic layout -16
+   * Increase mMediumBufferMemPool - to hold 45,000 (old value: 40,000)
+   * Increase message (CXmlNotifLayoutDisplayChangedMsgHandler) length - to 45,000 (old value: 40,000)
+* Fix some minor VxWorks warnings 
+* Fix RVrep00055654 - Support NMS's new "Auto" - With new MIB
+
+Adapters:
+=========
+* Add report 51162 - Add extended MCU's info to the SIP header
+* Fix RVrep00056137 - (A) NEGETIVE rtpc port --- Followed with --- (B) ERRRO CH323AdapStackAPI – cmChannelOff() Failed!
+* Fix RVrep00055706 - Log ERROR: CH323AdapStackAPI - cmChannelOff() Failed! 
+* Fix some minor VxWorks warninigs 
+
+MediaCtrlInfra
+==============
+* Correct width&height to resolution method
+
+MPCsys & POMP
+=============
+* MCU capacity changes
+
+--------------------------------------------------------------
+ 5.5.0.1.30 - 5.5.0.2.30
+--------------------------------------------------------------
+
+* Add sip stack log to the main file log
+* Add specifeic print for not supporting AMR codec (audio)
+* Correct bug in capability factory - destruct cap before removing from pool
+* Change error log messages for allocation failure to advanced
+* Changes in PM after code review
+* Add more resolutions for the web statistics
+
+Adapters
+========
+* Move to new SIP stack - allow reading '*' in SDP
+* Memory leak when receiving more than 12 codecs per media line in SDP. 
+  The max num of codecs we support was increased to 20 and the memory leak was fixed.
+* Receiving MAXBR in the middle of the line (For example: a=fmtp:34 MAXBR=3200 QCIF=1) caused parsing failure. 
+
+MediaCtrlInfra
+==============
+* New resolutions for display
+
+--------------------------------------------------------------
+ 5.5.0.0.30 - 5.5.0.1.30
+--------------------------------------------------------------
+
+* Merge changes from 5.5.0.0.21
+
+--------------------------------------------------------------
+ 5.5.0.0.30
+--------------------------------------------------------------
+
+********* A MERGED VERSION *********
+	
+	MERGING - 
+
+	- DSIA VERSION (HTTS, SECURITY PHASE 1, SECURITY PHASE 2, T.140, H.243, STILL IMAGE)
+	- HD CP VERSION (5.5.0.0.20) WHICH INCLUDES THE LATEST SDS VERSION (5.3.0.0.10)
+
+--------------------------------------------------------------
+ 5.5.0.0.20 - 5.5.0.0.21
+--------------------------------------------------------------
+
+* Fix bug 55436 - fix hash table size for video profile
+* Fix bug 55167 - fix OutputFlatMultiTranscoded pool leak
+* Fix bug 55103 - fix visual object building for HD's
+* Fix bug 55166 - fix Video capability leak in OutputFlatMultiTranscoding
+* Making some error logs more sepecific 
+* Getting rid of VX warnings in GCC (~100 )
+* Fix bug 54753 - "720p Support 30 fps" in MCU-24 should be Ignored by GCC on MCU-12
+
+--------------------------------------------------------------
+ 5.5.0.0.19 - 5.5.0.0.20
+--------------------------------------------------------------
+
+* Query for encoder & decoder using QueryMaxIOResourceFlat
+* Bug RVrep00055129 fixed - was asking for h264 720p decoder
+* Add SysIsClean support (from Kepler)
+* Remove setting max layout as in the service while in dynamic view
+
+--------------------------------------------------------------
+ 5.5.0.0.18 - 5.5.0.0.19
+--------------------------------------------------------------
+
+* Merge from 5.3.0.0.10
+* Add validity check for media manager's outputs
+
+* Bug 55055 fixed - Fix unreleasing of channel notify selected message (in small param pool)
+* Bug RVrep00055073 fixed - call with only audio caps do not release HD encoder
+
+POMP
+====
+* Added AAC support for Cisco
+* Added jitter fixes for ND
+
+--------------------------------------------------------------
+ 5.5.0.0.17 - 5.5.0.0.18
+--------------------------------------------------------------
+* Fix encryption bug - use staticCastEncapsulatedCapability
+* Fix bug with cascading channel capability (prevent releasing capabiltiy)
+* Add prints for geometry table & geometry changes
+* Enlarge MAX_CAPS_STR to 280 (for encryption+h264)
+* Fix bug RVrep00054058 - from patch version 5.1.2.ND.8
+* The max displayed geometry while dynamic view is taken from
+  service max geometry and not from dynamic layouts list
+
+Adapters:
+========
+* Fix bug in h.264 cap for encryption
+
+WEB
+===
+* Moved to version NMS_New_MCU_5.5.0_16
+
+--------------------------------------------------------------
+ 5.5.0.0.16 - 5.5.0.0.17
+--------------------------------------------------------------
+* SIP basic calls
+* Fix bug in switching 720p auto
+* Tornado warnings cleanup
+* Fix bug when web admin show dynamic layouts - show only one 
+  layout for each layout size
+* Correction for MPC resource questioning (SCCP issue)
+
+Limitations:
+============
+* SIP cascading doesn't work
+* Many SIP scenarios in HDCP doesn't work
+* No HD SW with H.263
+
+--------------------------------------------------------------
+ 5.5.0.0.15 - 5.5.0.0.16
+--------------------------------------------------------------
+MCU
+===
+* merge from 5.3.0.0.8:
+	* Cross Product bug fix - Enlarge mEcConferenceInit pool in EC [ecConfigurationManager.cpp]
+	* Cross Product bug fix - Memory leak - excluding uneeded MIBS.(radvisMib.mak)
+	* Cross Product fix - Timers Leak. (RVrep00054490 / RVrep00054447)
+* h239duovideo is disabled by default (=h239 ‘only mode’ enabled) 
+* fix in “default layout” 
+
+POMP
+====
+* merge form Scopia desktop - label - nir_pomp_HapiCrash:
+	* Cross Product stability fix - RVrep00054363 - [mapCommTask ----suspend]:
+	  Bug caused due to crash in the HAPI task since it was using invalid handles.
+	  Validity checks were added for such usage of handlers.
+	  Since this function is real-time to enable error messages in case 
+	  of validity failures set: bXcbkPrintError = 1
+	* All windows compilation warnings were removed.
+* Label - odeds_pomp_5_5_HDCP_v3
+
+Web
+===
+ADMIN:
+* "High Definition Switched Video" service: add option "Auto" to "Frame Rate" combo. 
+* 4CIF@30 fps is not supported. 
+CC:
+* Available geometry ""full info" tag support. 
+* Cosmetic changes in layouts. 
+
+MediaCtrlInfra
+==============
+* change prints debug level
+
+--------------------------------------------------------------
+ 5.5.0.0.14 - 5.5.0.0.15
+--------------------------------------------------------------
+
+* HD encoder can be set only to 30/15/7.5 frame rate
+* Advanced command for mbps & smbps for switching 720p @ 15fps
+* Layouts sub frames reorganization
+
+MediaCtrlInfra
+==============
+* Change print
+
+Adapters
+=======
+* Change config.val to version 5.5
+
+WEB
+===
+* Fix CC images bugs 
+* Web sever: remove log prints “WEB ERROR: websPageOpen failed” 
+
+--------------------------------------------------------------
+ 5.5.0.0.13 - 5.5.0.0.14
+--------------------------------------------------------------
+
+* Added new Layouts
+* New web
+* Added support for 480p@30fps
+Bugs fixed:
+* cascading bug fixed
+* RVrep00053832 - MCU fails in encryption
+
+Adapters
+=======
+* Remove debug prints for H.239
+
+MediaCtrlInfra
+==============
+* Add support for 1080p resolution
+
+DSP
+===
+* New audio DSP
+
+POMP
+====
+* Compiled for new DSP label
+
+--------------------------------------------------------------
+ 5.5.0.0.12 - 5.5.0.0.13
+--------------------------------------------------------------
+
+* Merge with XML changes (HD encoder reservation)
+* Merge with configuration changes
+* New web
+* Unsupported layouts removed
+
+--------------------------------------------------------------
+ 5.5.0.0.11 - 5.5.0.0.12
+--------------------------------------------------------------
+
+* H.239 fix - add role support to GCC capabilities & channel resolver
+* Move patch from ChannelResolver to call leg special method
+* Add logic to select preferred codecs & simultaneous set
+* bugs correction
+
+Adapters
+========
+* Enhanced policy manager added
+
+--------------------------------------------------------------
+ 5.5.0.0.10 - 5.5.0.0.11
+--------------------------------------------------------------
+
+* Fix OLC's frame rate (mbps) while downgrading 480p channel to CIF (cascading)
+* Aethra beta version
+* patch for Aethra - all HD switching is with 720p@15fps
+
+--------------------------------------------------------------
+ 5.5.0.0.9 - 5.5.0.0.10
+--------------------------------------------------------------
+
+* Fix simultaneous capability set selection (for Aethra)
+
+--------------------------------------------------------------
+ 5.5.0.0.8 - 5.5.0.0.9
+--------------------------------------------------------------
+
+* Retry call allocation mechanism
+* MPC VxWorks bug fixed
+
+--------------------------------------------------------------
+ 5.5.0.0.7 - 5.5.0.0.8
+--------------------------------------------------------------
+
+* Support for new MPC reservation method mode
+* Removed TODO's
+* POMP recompiled
+* H.263 4CIF frame rate moved from #define to variable (CIF4_MAX_OUT_FRAME_RATE)
+
+VxWorks version fails !!!
+
+--------------------------------------------------------------
+ 5.5.0.0.6 - 5.5.0.0.7
+--------------------------------------------------------------
+
+* Decrease one sub frame for HD in no-self-see in dynamic view
+* Allow no-self-see when there is only one HD
+* Change Hd encoder frame rate according to min channel
+* Support for pre-reservation of HD encoder
+* Unite receive & transmit capabilities for H.264 presentation
+* When level 1b is selected - use level 1 instead
+
+--------------------------------------------------------------
+ v20 - 5.5.0.0.6
+--------------------------------------------------------------
+
+* Move all HDCP changes from AMCU 1.0.0.0.11 to be based on MCU 5.3.0.0.1
+* Add EPM to MCU 5.3.0.0.1
+
+Adapters
+========
+* Move all HDCP changes from AMCU Adapters to MCU 5.3.0.0.1 Adapters
+* (no DialingInfo)
+
+MediaCtrlInfra
+==============
+* Remove usage of AMCU's mcuDebugInfra.h
+
+Limitations
+===========
+* Adapters do not support EPM
+
+--------------------------------------------------------------
+ v19 - v20
+--------------------------------------------------------------
+* support for MPC 5.5.0.0.6 
+* standard service bug fix 
+* minor changes in H.264 
+
+--------------------------------------------------------------
+ - v7
+--------------------------------------------------------------
+* HDCP
+* Support for 264 optional parameters
+* High capacity support
+
+Problems:
+* HD encoder works only with 30 fps
+* No VxWorks yet
+* BR optional parameter - ignored for IOT issues
+
+--------------------------------------------------------------
+5.5.0.0.2 - 5.5.0.0.3   28/3/07 
+--------------------------------------------------------------
+* add support for min bit rate for the shared encoder
+* add support in config file (pictureSizeHd) for openning an HD decoder for each call
+* use the swap resources command
+
+--------------------------------------------------------------
+5.5.0.0.0 - 5.5.0.0.2   27/3/07 
+--------------------------------------------------------------
+* The base HDCP feature including all MM & PM
+* No web support
+

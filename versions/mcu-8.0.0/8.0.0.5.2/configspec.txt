@@ -33,20 +33,16 @@ element /NBU_SIP_STACK/...          nbuSip_6.0.2                      -nocheckou
 element /NBU_H323_STACK/...         nbuH323_7.0.2                     -nocheckout
 
 element /boardInfra/...             boardInfra_0.84.5_Avatar_2	-nocheckout
-
-element /swInfra/...              swInfra_0.111.3_Avatar_3	 -nocheckout
-
+element /swInfra/...                swInfra_0.111.3_Avatar_3	 -nocheckout
 element /configInfra/...            configInfra_1.4.0                -nocheckout
 element /loggerInfra/...            loggerInfra_1.37.1               -nocheckout
 element /rvfc/...                   rvfc_2.97.1                      -nocheckout
 element /nbu.contrib/...            nbu.contrib_1.4.1                -nocheckout
- 
+
 element /securityApp/...            securityApp_0.10.1               -nocheckout
 
 element /bspLinux8548/...           101129_MAIO_0.2.40               -nocheckout
-
 element /bspLinuxIntel/...   	    111023_AVATAR_HOST_0.0.0.2.5_1
-element /bspLinuxIntel/...   	    /main/LATEST
-element /bspLinuxARM/...  	    110714_NETRA_0.1.5                -nocheckout
-element /freemasonBuild/...         freemasonBuild_1.4.6             -nocheckout
+element /bspLinuxARM/...  	        110714_NETRA_0.1.5                -nocheckout
 
+element /freemasonBuild/...         freemasonBuild_1.4.6             -nocheckout

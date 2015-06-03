@@ -1,0 +1,64 @@
+element * CHECKEDOUT
+
+element \mcu\... 4.5.0.0.4 -nocheckout
+
+element \rvfc\... RVFC_V2.81 -nocheckout
+
+element \RV755_BSP\... /main/LATEST
+element \bsp755\... 070815_BSP_2.35 -nocheckout
+
+element \DSP_NG\... /main/LATEST
+element \dsp\... MEDIA_DIAB_INTEG_0.19_BUG_ID_59957_DEBUG_INFO -nocheckout
+
+element \SECURITY\... /main/LATEST
+element \securityApp\... 180208_amib_mocana_based_FINAL_Freemason -nocheckout
+
+element \MPCsys\... /main/LATEST
+element \mpc\... MPC_4.5.0.0.1 -nocheckout
+
+element \NBU_Megaco\... /main/LATEST
+element \megacoOld\... MEGACO_1.1.0.16P1 -nocheckout
+
+element \pomp\... POMP_4.5.0.0.4 -nocheckout
+
+element \adapters\... Adapters_4.5.0.0.2 -nocheckout
+
+element \NBU_H323_STACK\... adap4.2.0.15_12 -nocheckout
+
+element \NBU_SIP_STACK\... adap2.1.1.4_1_MS7 -nocheckout
+
+element \NBU_SCCP_STACK\... adap_sccp_4.5.0.0.1 -nocheckout
+
+element \NBU_Config\... /main/LATEST
+element \configInfra\... 0.1.1_Sized -nocheckout
+
+element \NBU_SW_INFRA\... /main/LATEST
+element \swInfra\... swinfra_4.5.0.0.1 -nocheckout
+
+element \NBU_BOARD_INFRA\... /main/LATEST
+element \boardInfra\... boardInfra_4.5.0.0.1 -nocheckout
+
+element \RVLOGGER\... /main/LATEST
+element \loggerInfra\... RVLOGGER_V1.27_AMCU-3 -nocheckout
+
+element \upgradeUtility\... UU_4_3_16_MCU -nocheckout
+
+load \mcu
+load \upgradeUtility
+load \RVLOGGER
+load \adapters
+load \NBU_SW_INFRA
+load \NBU_BOARD_INFRA
+load \NBU_H323_STACK
+load \NBU_SIP_STACK
+load \NBU_SCCP_STACK
+load \NBU_Megaco
+load \NBU_Config
+load \MPCsys
+load \SECURITY
+load \RV755_BSP
+load \bsp755
+load \dsp
+load \DSP_NG
+load \rvfc
+load \pomp

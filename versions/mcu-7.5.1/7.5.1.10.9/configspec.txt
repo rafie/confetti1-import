@@ -1,11 +1,8 @@
-
 element * CHECKEDOUT
 
 element /mcu/...        		.../Itayb_7.5.1.10.9_wintest_br/LATEST
 element /mcu/...          		7.5.1.10.9				-mkbranch Itayb_7.5.1.10.9_wintest_br
 element /mcu/... 			.../dora-7.5.1_int_br/LATEST		-mkbranch Itayb_7.5.1.10.9_wintest_br
-element /mcu/...          		/main/LATEST   				-mkbranch Itayb_7.5.1.10.9_wintest_br
-
 
 element /web/...                	WebMcu_7.5.1_14_301110.6107             -nocheckout
 
