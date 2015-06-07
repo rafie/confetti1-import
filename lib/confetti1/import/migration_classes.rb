@@ -53,6 +53,7 @@ class Version
 		Log.write_log("committing version #{@version_name}...")
 		repo.commit("migrated from clearcase",@tag)
 		vt2 = Time.now
+		# TODO: something like Time.at(vt2-vt1).gmtime.strftime("%H:%M:%S.%L")
 		t=vt2-vt1
 		mm, ss = t.divmod(60)           
 		hh, mm = mm.divmod(60)          
