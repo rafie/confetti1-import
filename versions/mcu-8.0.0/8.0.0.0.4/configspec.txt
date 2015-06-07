@@ -45,9 +45,7 @@ element /nbu.contrib/...           nbu.contrib_1.4.1                -nocheckout
 element /securityApp/...           securityApp_0.10.1               -nocheckout
 #element /securityInfra/...         110301_SECURITY2_V5.0_13         -nocheckout
 
-
 element \bspLinuxIntel\...   	    110714_AVATAR_HOST_0.0.0.2.5
-element \bspLinuxIntel\...   	    /main/LATEST
 element \bspLinuxARM\...  	    110714_NETRA_0.1.5                -nocheckout
 
 element /dspIcsVideo/... 	    	Avatar_integ_2011Aug21__8.0.0.0.8			-nocheckout

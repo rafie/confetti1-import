@@ -45,10 +45,9 @@ element /nbu.contrib/...            nbu.contrib_1.4.1                -nocheckout
 element /securityApp/...            securityApp_0.10.1               -nocheckout
 
 element /bspLinux8548/...           101129_MAIO_0.2.40               -nocheckout
-
 element /bspLinuxIntel/...          111108_AVATAR_HOST_0.0.0.2.11	-nocheckout
 element /bspLinuxIntel/...          111103_UCGW_1.0.0.3.9_avatar_layer2	-nocheckout
-element /bspLinuxIntel/...   	    /main/LATEST
 element /bspLinuxARM/...            111030_NETRA_0.1.8-package       -nocheckout
+
 element /freemasonBuild/...         freemasonBuild_1.4.7             -nocheckout
 

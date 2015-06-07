@@ -35,7 +35,6 @@ element \securityInfra\...      090716_SECURITY2_V2.2_Linux_HW_SEC_support      
 
 element \bsp8548\...        	.../mcuint_090919_BSP8548_2.1_0_5_br/LATEST
 element \bsp8548\...            090919_BSP8548_2.1_0_5                          -nocheckout
-element \bsp8548\...            /main/LATEST         				-nocheckout
 
 element \bsp8144\...            090512_CW3.2_SDOS020400_Ver2.8                  -nocheckout
 
