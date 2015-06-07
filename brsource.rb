@@ -31,7 +31,10 @@ vroot = `cleartool pwv -root`.strip!
 
 root_ver = "configspec.txt@@\\main\\0"
 
-dest_lb = ARGV.shift
+
+dest_lb = mcu_label_from_cspec(File.read(ARGV.shift.gsub('\\','/') + "/configspec.txt"), "current configspec")
+
+
 dest_lb = mcu_label_from_cspec(`cleartool catcs`, "current configspec") if !dest_lb
 exit if !dest_lb
 
