@@ -213,11 +213,18 @@ class Project
 		puts ("will execute git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
 		Log.write_log("will execute git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
 		system("git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
-		
+		t1 = Time.now
 		versions.each do |ver|			
 			pvers = Version.is("#{@name}/#{ver}") #mcu-8.3.2\8.3.2.1.1			
 			pvers.migrate(repo,View.is(view_name))
 		end 
+		t2 = Time.now
+		t=t2-t1
+		t=vt2-vt1
+		mm, ss = t.divmod(60)           
+		hh, mm = mm.divmod(60)          
+		puts "Project #{@name} import OK; duration: %d:%d:%d seconds" % [hh, mm, ss]
+		Log.write_log("Project #{@name} import OK; duration: %d:%d:%d seconds" % [hh, mm, ss])
 	end
 	
 end  #Projectf

@@ -35,14 +35,13 @@ command :version do |c|
 	c.summary = ''
 	c.description = ''
 	c.example 'description', 'command example'
-	# TODO: huh?
-	c.option '-x VERSION', String, 'Specify a version eg:mcu-7.6.1/7.6.1.1.0'
+	c.option '--versionname VERSION', String, 'Specify a version eg:mcu-7.6.1/7.6.1.1.0'
 	c.option '--gitdir DIR',String, 'Git repository Location'
 	c.option '--viewname VIEWNAME',String, 'original clearcase view'
 
 	c.action do |args, options|		
 		
-		pversion = options.x
+		pversion = options.versionname
 		pversion.gsub!('\\','/')
 		
 		gitRepoFolder = ENV['GITDIR'] if ENV['GITDIR']
@@ -68,29 +67,53 @@ command :project do |c|
 	c.option '--viewname VIEWNAME',String, 'original clearcase view'
 
 	c.action do |args, options|
-		t1 = Time.now
+		
 		proj = options.proj
 		gitRepoFolder = ENV['GITDIR'] if ENV['GITDIR']
-		gitRepoFolder = options.gitdir if options.gitdir
-		Log.error_log ("no git folder specified") if !gitRepoFolder
+		gitRepoFolder = options.gitdir if options.gitdir		
 		viewName = ENV['VIEWNAME'] if ENV['VIEWNAME']
 		viewName = options.viewname if options.viewname
-		Log.error_log ("no view name specified") if !viewName		
 		p = Confetti1::Import.Project(proj)
 		repo = Confetti1::Import.GitRepo(gitRepoFolder, viewName)
 		p.migrate(repo,viewName)
+		
+	end
+end
+
+
+command :all do |c|
+	c.syntax = 'import all [options]'
+	c.summary = ''
+	c.description = ''
+	c.example 'description', 'command example'
+	c.option '--gitdir DIR',String, 'Git repository Location'
+	c.option '--viewname VIEWNAME',String, 'original clearcase view'
+
+	c.action do |args, options|
+		t1 = Time.now
+		gitRepoFolder = ENV['GITDIR'] if ENV['GITDIR']
+		gitRepoFolder = options.gitdir if options.gitdir
+		viewName = ENV['VIEWNAME'] if ENV['VIEWNAME']
+		viewName = options.viewname if options.viewname
+		repo = Confetti1::Import.GitRepo(gitRepoFolder, viewName)		
+		
+		import_order = File.expand_path(File.join("..", "..", "..","..","importwf.txt"), __FILE__)
+		text=File.open(import_order).read
+		text.each_line do |line|
+			proj=line.split(";")[0]
+			origin=line.split(";"){1}
+			p = Confetti1::Import.Project(proj)
+			p.migrate(repo,viewName,origin)
+		end
+		
+		
 		t2 = Time.now
 		t=t2-t1
 		t=vt2-vt1
 		mm, ss = t.divmod(60)           
 		hh, mm = mm.divmod(60)          
 		puts "Project #{proj} import OK; duration: %d:%d:%d seconds" % [hh, mm, ss]
-		Log.write_log("Version #{proj} import OK; duration: %d:%d:%d seconds" % [hh, mm, ss])
+		Log.write_log("Complete view import OK; duration: %d:%d:%d seconds" % [hh, mm, ss])
 	end
 end
 
-#----------------------------------------------------------------------------------------------
-
-# TODO: add command for "ALL"
-
-#----------------------------------------------------------------------------------------------
