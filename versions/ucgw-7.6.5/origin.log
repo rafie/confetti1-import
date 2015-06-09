@@ -1,4 +1,8 @@
-from label mcu_7.5.0.16.1 on branch dora-7.2_int_br
+from label ucgw_7.6.5.1.0 on branch mcu_7.6.5_int_br
+to label ucgw_7.6.0.24.4 on branch mcu_7.6_CS1_int_br
+to label ucgw_7.6.0.23.2 on branch mcu_7.6_int_br
+to label mcu_7.5.1.4.0 on branch dora-7.5.1_int_br
+to label 7.5.0.11.0 on branch dora-7.2_int_br
 to label 7.1.0.73.0 on branch mcu-7.1_int_br (*)
 to label 7.0.0.0.35 on branch mcu_7.0_int_br (*)
 to label 7.0.0.0.3 on branch odeds_DoraBase_Merge_5.5_br
