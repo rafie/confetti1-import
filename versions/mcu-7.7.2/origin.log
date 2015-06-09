@@ -1,4 +1,4 @@
-from label dora_7.7.0.1.0 on branch mcucs_7.7.x.x.x_br
+from label dora_7.7.2.0.1 on branch mcucs_7.7.x.x.x_br
 to label dora_7.6.0.6.0 on branch mcucs_7.6.x.x.x_br
 to label elite_7.6.0.1.0 on branch mcucs-7.5.1.x.x_br
 to label 7.5.1.10.8 on branch dora-7.5.1_int_br

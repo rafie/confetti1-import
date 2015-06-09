@@ -1,6 +1,7 @@
 require 'yaml'
 require 'Bento'
 require 'fileutils'
+require 'logger'
 
 module Confetti1
 module Import
@@ -32,9 +33,10 @@ class Version
 	end
 	
 	def migrate(repo,view)
+		
 		view.configspec=@cspec
 		ignore = File.read(File.join(repo.location,".git", "info", "exclude"))
-		vt1 = Time.now
+		chrono = Timer.go
 		@cspec.vobs.each do |vob|	
 			unless ignore.include? vob	
 				vobname=vob
@@ -52,12 +54,10 @@ class Version
 		puts "committing version #{@version_name}..."
 		Log.write_log("committing version #{@version_name}...")
 		repo.commit("migrated from clearcase",@tag)
-		vt2 = Time.now
-		t=vt2-vt1
-		mm, ss = t.divmod(60)           
-		hh, mm = mm.divmod(60)          
-		puts "Version #{@version_name} import OK; duration: %d:%d:%d seconds" % [hh, mm, ss]
-		Log.write_log("Version #{@version_name} import OK; duration: %d:%d:%d seconds" % [hh, mm, ss])
+		chrono.stop
+		        
+		puts "Version #{@version_name} import OK in #{chrono.to_s}"
+		Log.write_log("Version #{@version_name} import OK in #{chrono.to_s}"
 	end
 	
 end
@@ -71,30 +71,46 @@ class View
 	members :view_name, :configspec
 	
 	def is(name)
+		@view_name=ENV['VIEWNAME'] if name.nil?
 		@view_name=name
+		Log.error_log ("no view name specified") if @view_name.nil?
 	end
 	
 	def view_name
 		@view_name
 	end
 	
-	def configspec=(repo)
-		@configspec = repo
+	def configspec=(configspec)
+		@configspec = configspec
 		@configspec.vobs.each do |vob|
-				unless File.directory?("m:/#{@view_name}#{vob}")
-					vn=vob
-					vn[0]="\\"
-					puts "VOB #{vn} must be mounted...please wait..."
-					Log.write_log("VOB #{vn} must be mounted...please wait...")
-					cmd = System.command("cleartool mount #{vn}")
-					unless cmd.ok?
-						Log.error_log("Mounting error, import failed!" )					
-					end				
-					puts "VOB #{vn} mounted"
-					Log.write_log("VOB #{vn} mounted")
-				end
+			unless File.directory?("m:/#{@view_name}#{vob}")
+				puts "VOB #{vob} must be mounted...please wait..."
+				Log.write_log("VOB #{vob} must be mounted...please wait...")
+				cmd = System.command("cleartool mount #{vob}")
+				unless cmd.ok?
+					Log.error_log("Mounting error, import failed!" )					
+				end				
+				puts "VOB #{vob} mounted"
+				Log.write_log("VOB #{vob} mounted")
+			end
 		end
 			cmd = System.command("cleartool setcs -tag #{@view_name} #{@configspec.cspecfile}")
+	end
+	
+	def migrate(repo)
+		chrono=Timer.go
+		
+		import_order = File.expand_path("../../../../importwf.txt", __FILE__)
+		text=File.open(import_order).read
+		text.each_line do |proj|
+			origin = File.read(File.expand_path("../../../../versions/#{proj}/origin", __FILE__))			
+			p = Confetti1::Import.Project(proj)
+			p.migrate(repo,@view_name,origin)
+		end
+		
+		chrono.stop        
+		puts "view import OK in #{chrono.to_s}"
+		Log.write_log("Complete view import OK in #{chrono.to_s}")
 	end
 
 end
@@ -108,8 +124,8 @@ class ConfigSpec
 	members :cspecfile, :vobs
 	
 	def is(cspecfile)
-		@cspecfile=cspecfile		
-		cspec_parse()		
+		@cspecfile = cspecfile
+		cspec_parse
 	end
 	
 	def vobs
@@ -121,11 +137,14 @@ class ConfigSpec
 	end
 	
 	def cspec_parse
-		out = IO.readlines(@cspecfile)
-		out.reject! { |c| c[0,7]!="element" }
-		out.shift
-		@vobs = Array.new(out.length)		
-		out.each_with_index {|val, index| @vobs[index]=val.squeeze(" ").split(" ")[1].chomp('...').chop }
+		@vobs = []
+		IO.readlines(@cspecfile).each do |line|
+			line.gsub!('\\', '/')
+			next if ! line =~ /element\s+\/([^\/]+)\/...\s+(\S+)/ # element /vob/... label
+			vob = $1
+			label = $2
+			@vobs << "\\#{vob}"
+		end
 	end
 end
 
@@ -138,8 +157,10 @@ class GitRepo
 	members :repoLocation
 
 	def is(repoLocation, viewName)
-		Log.error_log ("no git folder specified") if !repoLocation
-		Log.error_log ("no view name specified") if !viewName
+		repoLocation=ENV['GITDIR'] if repoLocation.nil?
+		viewName=ENV['VIEWNAME'] if viewName.nil?
+		Log.error_log ("no git folder specified") if repoLocation.nil?
+		Log.error_log ("no view name specified") if viewName.nil?
 		@repoLocation = repoLocation
 
 	end
@@ -149,9 +170,7 @@ class GitRepo
 	end
 	
 	def create(repoLocation, viewName)
-		Log.error_log("no git folder specified") if !repoLocation		
-		Log.error_log ("no view name specified") if !viewName
-		@repoLocation = repoLocation
+		is(repoLocation, viewName)
 		system("git --git-dir=#{repoLocation}/.git --work-tree=m:/#{viewName} init")
 		system("git commit --allow-empty -m \"initial commit\"")
 		add_ignore_list()
@@ -178,9 +197,8 @@ class GitRepo
 	end
 	
 	def add_ignore_list
-		file_path = File.expand_path(File.join("..", "..", "..","..","exclude"), __FILE__)
+		file_path = File.expand_path("../../../../exclude", __FILE__)
 		destination_folder = "#{@repoLocation}/.git/info/"
-		# TODO: is cp_r required? cp enough?
 		FileUtils.cp_r(file_path, destination_folder, :remove_destination => true)
 	end
 	
@@ -213,18 +231,16 @@ class Project
 		puts ("will execute git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
 		Log.write_log("will execute git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
 		system("git --git-dir=#{repo.location}/.git symbolic-ref HEAD refs/heads/#{@name}")
-		t1 = Time.now
+		chrono = Timer.go
 		versions.each do |ver|			
 			pvers = Version.is("#{@name}/#{ver}") #mcu-8.3.2\8.3.2.1.1			
 			pvers.migrate(repo,View.is(view_name))
-		end 
-		t2 = Time.now
-		t=t2-t1
-		t=vt2-vt1
-		mm, ss = t.divmod(60)           
-		hh, mm = mm.divmod(60)          
-		puts "Project #{@name} import OK; duration: %d:%d:%d seconds" % [hh, mm, ss]
-		Log.write_log("Project #{@name} import OK; duration: %d:%d:%d seconds" % [hh, mm, ss])
+		end
+		
+		# TODO: implement Timer
+		chrono.stop
+		puts "Project #{@name} import OK in #{chrono.to_s}"
+		Log.write_log("Project #{@name} import OK in #{chrono.to_s}")
 	end
 	
 end  #Projectf
@@ -232,24 +248,52 @@ end  #Projectf
 #----------------------------------------------------------------------------------------------
 
 class Log
-	
+	@@log = nil
 	def self.write_log(message)
-		File.open('C:/Temp/confetti-migration.log', 'a') { |file| file.puts(Time.now.inspect + " " + message) }
+		# TODO: c:/temp is not robust. Let's use Ruby's Logger class
+		logfile=File.expand_path("../../../log/logfile.log", __FILE__)
+		logger = Logger.new(logfile)
+		logger.info(message) 
+		logger.close
 	end
 	def self.error_log(message)
+		errfile=File.expand_path("../../../log/errfile.log", __FILE__)
 		begin
 			raise message 
-		rescue Exception => e
-		  self.class.write_log(e.message)
-		  self.class.write_log(e.backtrace.join("\n"))		  
+		rescue Exception => e		
+			logger = Logger.new(errfile)
+			logger.error(e.message) 
+			logger.error(e.backtrace.join("\n"))	
+			logger.close	  
 		ensure
-		  puts "error, see c:/temp/confetti-migration.log for details"
+		  puts "error, see #{errfile} for details"
 		  exit
 		end
 	end
 end
 
 #----------------------------------------------------------------------------------------------
-
+class Timer
+	include Bento::Class
+	constructors :go
+	members :start, :end
+	def go
+		@start=Time.now
+	end
+	def stop
+		@end=Time.now
+		@end-@start
+	end
+	def to_s
+		#Time.at(@end-@start).gmtime.strftime("%H:%M:%S.%L")
+		mm, ss = (@end-@start).divmod(60)           
+		hh, mm = mm.divmod(60)           
+		dd, hh = hh.divmod(24)  
+		str="%d : %d : %d" % [hh, mm, ss]
+		str = "#{dd} days " + str if dd>0
+		str		
+	end
+end
+#----------------------------------------------------------------------------------------------
 end # Import
 end # Confetti1

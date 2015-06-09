@@ -1,4 +1,0 @@
-#!/usr/bin/env ruby
-
-require 'confetti1/import'
-Confetti1::Import.main(ARGV)
