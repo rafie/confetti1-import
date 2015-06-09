@@ -54,10 +54,12 @@ class Version
 		puts "committing version #{@version_name}..."
 		Log.write_log("committing version #{@version_name}...")
 		repo.commit("migrated from clearcase",@tag)
+
 		chrono.stop
 		        
 		puts "Version #{@version_name} import OK in #{chrono.to_s}"
 		Log.write_log("Version #{@version_name} import OK in #{chrono.to_s}"
+
 	end
 	
 end
