@@ -7,6 +7,7 @@ module Confetti1
 module Import
 
 #----------------------------------------------------------------------------------------------
+
 class Version
 	include Bento::Class
 
@@ -14,14 +15,14 @@ class Version
 	members :version_name, :cspecfile, :cspec, :tag
 	
 	def is(name)
-	@version_name=name.gsub('\\','/')
-	@tag=@version_name.split("/")[-2]
-	
-	endoftag=@version_name.split("/").last.split(".")[-2, 2].join(".")
-	
-	@tag << endoftag
-	@cspecfile=File.expand_path(File.join("..", "..", "..","..","versions",name,"configspec.txt"), __FILE__)
-	@cspec=ConfigSpec.is(@cspecfile)
+		@version_name=name.gsub('\\','/')
+		@tag=@version_name.split("/")[-2]
+		
+		endoftag=@version_name.split("/").last.split(".")[-2, 2].join(".")
+		
+		@tag << endoftag
+		@cspecfile=File.expand_path(File.join("..", "..", "..","..","versions",name,"configspec.txt"), __FILE__)
+		@cspec=ConfigSpec.is(@cspecfile)
 	end
 	
 	def cspecfile
@@ -33,7 +34,6 @@ class Version
 	end
 	
 	def migrate(repo,view)
-		
 		view.configspec=@cspec
 		ignore = File.read(File.join(repo.location,".git", "info", "exclude"))
 		chrono = Timer.go
@@ -215,15 +215,15 @@ class Project
 		@name = name
 		@path=File.expand_path(File.join("..", "..", "..","versions",@name))
 		Dir.chdir(@path) do
-			@arr_ver=Dir["*"].reject{|o| not File.directory?(o)}
+			@arr_ver = Dir["*"].reject{|o| not File.directory?(o)}
 		end		
-		@arr_ver=@arr_ver.map {|x| x.split('.').map{|y| y.to_i}}.sort.map {|x| x.join('.')}
+		@arr_ver = @arr_ver.map {|x| x.split('.').map{|y| y.to_i}}.sort.map {|x| x.join('.')}
 	end
 	
-	def versions		
-		@arr_ver
+	def versions
+		@arr_ver.each { |ver| yield Version(ver) }
 	end
-	
+
 	def migrate(repo,view_name,origin=nil)
 		puts ("will execute git --git-dir=#{repo.location}/.git branch #{@name} #{origin}" )
 		Log.write_log("will execute git --git-dir=#{repo.location}/.git branch #{@name} #{origin}")
@@ -247,8 +247,24 @@ end  #Projectf
 
 #----------------------------------------------------------------------------------------------
 
+class Projects
+	include Enumerable
+
+	def each
+		import_order_file = File.expand_path("../../../../importwf.txt", __FILE__)
+		projects_list = File.open(import_order_file).read
+		projects_list.each_line do |proj_name|
+			yield Project(proj_name)
+		end
+	end
+
+end # Projects
+
+#----------------------------------------------------------------------------------------------
+
 class Log
 	@@log = nil
+
 	def self.write_log(message)
 		# TODO: c:/temp is not robust. Let's use Ruby's Logger class
 		logfile=File.expand_path("../../../log/logfile.log", __FILE__)
@@ -256,6 +272,7 @@ class Log
 		logger.info(message) 
 		logger.close
 	end
+
 	def self.error_log(message)
 		errfile=File.expand_path("../../../log/errfile.log", __FILE__)
 		begin
@@ -273,17 +290,22 @@ class Log
 end
 
 #----------------------------------------------------------------------------------------------
+
 class Timer
 	include Bento::Class
+
 	constructors :go
 	members :start, :end
+
 	def go
 		@start=Time.now
 	end
+
 	def stop
 		@end=Time.now
 		@end-@start
 	end
+
 	def to_s
 		#Time.at(@end-@start).gmtime.strftime("%H:%M:%S.%L")
 		mm, ss = (@end-@start).divmod(60)           
